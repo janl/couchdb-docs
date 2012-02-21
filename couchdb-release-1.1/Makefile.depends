@@ -1,0 +1,17 @@
+couchdb-release-1.1.xml: ./../common/docbuilddate.xml \
+		Makefile
+
+couchdb-release-1.1-ready.xml: ./../common/docbuilddate.xml \
+		Makefile
+
+couchdb-release-1.1-ready-online.xml: ./../common/docbuilddate.xml \
+		Makefile
+
+BASE_TARGET_IMAGES = 
+
+XML_SOURCES = ./../common/docbuilddate.xml \
+	./couchdb-release-1.1.xml
+
+XML_BASE_SOURCES = ./../common/docbuilddate \
+	./couchdb-release-1.1
+
