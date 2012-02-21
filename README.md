@@ -72,3 +72,5 @@ configured documents into the directory specified in the Makefile
 (PUBLISH_DIR)
 
 ## License
+
+Creative Commons 3.0.
