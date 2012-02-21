@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>10.5.&nbsp;DELETE /_config/section/key</title>
+<link href="epub.css" type="text/css" rel="stylesheet" />
+<meta content="DocBook XSL Stylesheets V1.76.1" name="generator" />
+</head>
+<body>
+<div class="section" title="10.5.&nbsp;DELETE /_config/section/key">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-api-config_config-section-key_delete" />10.5.&nbsp;<code class="literal">DELETE /_config/section/key</code>
+</h1>
+</div>
+</div>
+</div>
+<div class="informaltable">
+<table summary="URL API DELETE /_config/section/key" border="1">
+<colgroup>
+<col class="field" width="33%" />
+<col class="info" width="33%" />
+<col class="addinfo" width="34%" />
+</colgroup>
+<tbody>
+<tr>
+<td>
+<span class="bold">
+<strong>Method</strong>
+</span>
+</td>
+<td colspan="2">
+<code class="literal">DELETE /_config/section/key</code>
+</td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Request</strong>
+</span>
+</td>
+<td colspan="2">
+ None
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Response</strong>
+</span>
+</td>
+<td colspan="2">
+ Previous value
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Admin Privileges Required</strong>
+</span>
+</td>
+<td colspan="2">no</td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Query Arguments</strong>
+</span>
+</td>
+<td>
+<span class="bold">
+<strong>Argument</strong>
+</span>
+</td>
+<td>
+<code class="literal">rev</code>
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Description</strong>
+</span>
+</td>
+<td>
+ Current revision of the document for validation
+ </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Optional</strong>
+</span>
+</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Type</strong>
+</span>
+</td>
+<td>string</td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>HTTP Headers</strong>
+</span>
+</td>
+<td>
+<span class="bold">
+<strong>Header</strong>
+</span>
+</td>
+<td>
+<code class="literal">If-Match</code>
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Description</strong>
+</span>
+</td>
+<td>Current revision of the document for validation</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Optional</strong>
+</span>
+</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td colspan="3">
+<span class="bold">
+<strong>Return Codes</strong>
+</span>
+</td>
+</tr>
+<tr>
+<td>409</td>
+<td colspan="2">
+ Supplied revision is incorrect or missing
+ </td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+      Deletes a configuration value. The returned JSON will be the value
+      of the configuration parameter before it was deleted. For example,
+      to delete the UUID parameter:
+    </p>
+<pre class="programlisting">DELETE http://couchdb:5984/_config/uuids/algorithm
+Content-Type: application/json</pre>
+<p>
+      The returned value is the last configured UUID function:
+    </p>
+<pre class="programlisting">"random"</pre>
+</div>
+</body>
+</html>

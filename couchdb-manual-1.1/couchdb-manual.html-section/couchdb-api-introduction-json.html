@@ -1,0 +1,51 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>4.3.&nbsp;JSON Basics</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-api-basics.html" title="Chapter&nbsp;4.&nbsp;CouchDB API"><link rel="prev" href="couchdb-api-introduction-request-header-response.html" title="4.2.2.&nbsp;Response Headers"><link rel="next" href="couchdb-api-introduction-returncodes.html" title="4.4.&nbsp;HTTP Status Codes"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">4.3.&nbsp;JSON Basics</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-api-introduction-request-header-response.html">Prev</a>&nbsp;</td><th align="center" width="60%">Chapter&nbsp;4.&nbsp;CouchDB API</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-introduction-returncodes.html">Next</a></td></tr></table><hr></div><div class="section" title="4.3.&nbsp;JSON Basics"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-api-introduction-json"></a>4.3.&nbsp;JSON Basics</h2></div></div></div><p>
+      The majority of requests and responses to CouchDB use the
+      JavaScript Object Notation (JSON) for formatting the content and
+      structure of the data and responses.
+    </p><p>
+      JSON is used because it is the simplest and easiest to use
+      solution for working with data within a web browser, as JSON
+      structures can be evaluated and used as JavaScript objects within
+      the web browser environment. JSON also integrates with the
+      server-side JavaScript used within CouchDB.
+    </p><p>
+      JSON supports the same basic types as supported by JavaScript,
+      these are:
+    </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+          Number (either integer or floating-point).
+        </p></li><li class="listitem"><p>
+          String; this should be enclosed by double-quotes and supports
+          Unicode characters and backslash escaping. For example:
+        </p><pre class="programlisting">"A String"</pre></li><li class="listitem"><p>
+          Boolean - a <code class="literal">true</code> or
+          <code class="literal">false</code> value. You can use these strings
+          directly. For example:
+        </p><pre class="programlisting">{ "value": true}</pre></li><li class="listitem"><p>
+          Array - a list of values enclosed in square brackets. For
+          example:
+        </p><pre class="programlisting">["one", "two", "three"]</pre></li><li class="listitem"><p>
+          Object - a set of key/value pairs (i.e. an associative array,
+          or hash). The key must be a string, but the value can be any
+          of the supported JSON values. For example:
+        </p><pre class="programlisting">{
+   "servings" : 4,
+   "subtitle" : "Easy to make in advance, and then cook when ready",
+   "cooktime" : 60,
+   "title" : "Chicken Coriander"
+}</pre><p>
+          In CouchDB, the JSON object is used to represent a variety of
+          structures, including the main CouchDB document.
+        </p></li></ul></div><p>
+      Parsing JSON into a JavaScript object is supported through the
+      <code class="literal">eval()</code> function in JavaScript, or through
+      various libraries that will perform the parsing of the content
+      into a JavaScript object for you. Libraries for parsing and
+      generating JSON are available in many languages, including Perl,
+      Python, Ruby, Erlang and others.
+    </p><div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Warning</h3><p>
+        Care should be taken to ensure that your JSON structures are
+        valid, invalid structures will cause CouchDB to return an HTTP
+        status code of 500 (server error). See
+        <a class="xref" href="couchdb-api-introduction-returncodes.html#couchdb-api-introduction-returncode-500">HTTP               Status Code 500</a>
+        .
+      </p></div></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-api-introduction-request-header-response.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-api-basics.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-introduction-returncodes.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">4.2.2.&nbsp;Response Headers&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;4.4.&nbsp;HTTP Status Codes</td></tr></table></div></body></html>

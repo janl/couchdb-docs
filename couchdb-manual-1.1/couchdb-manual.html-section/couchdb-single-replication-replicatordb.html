@@ -1,0 +1,21 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>3.1.&nbsp;Replicator Database</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-single-replication.html" title="Chapter&nbsp;3.&nbsp;Replication"><link rel="prev" href="couchdb-single-replication.html" title="Chapter&nbsp;3.&nbsp;Replication"><link rel="next" href="couchdb-single-replication-replicatordb-basics.html" title="3.1.1.&nbsp;Basics"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">3.1.&nbsp;Replicator Database</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-single-replication.html">Prev</a>&nbsp;</td><th align="center" width="60%">Chapter&nbsp;3.&nbsp;Replication</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-single-replication-replicatordb-basics.html">Next</a></td></tr></table><hr></div><div class="section" title="3.1.&nbsp;Replicator Database"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-single-replication-replicatordb"></a>3.1.&nbsp;Replicator Database</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="couchdb-single-replication-replicatordb-basics.html">3.1.1. Basics</a></span></dt><dt><span class="section"><a href="couchdb-single-replication-replicatordb-docsame.html">3.1.2. Documents describing the same replication</a></span></dt><dt><span class="section"><a href="couchdb-single-replication-replicatordb-cancel.html">3.1.3. Canceling replications</a></span></dt><dt><span class="section"><a href="couchdb-single-replication-replicatordb-restart.html">3.1.4. Server restart</a></span></dt><dt><span class="section"><a href="couchdb-single-replication-replicatordb-changing.html">3.1.5. Changing the Replicator Database</a></span></dt><dt><span class="section"><a href="couchdb-single-replication-replicatordb-replicating.html">3.1.6. Replicating the replicator database</a></span></dt><dt><span class="section"><a href="couchdb-single-replication-replicatordb-delegations.html">3.1.7. Delegations</a></span></dt></dl></div><p>
+      A database where you
+      <code class="literal">PUT</code>/<code class="literal">POST</code> documents to
+      trigger replications and you <code class="literal">DELETE</code> to cancel
+      ongoing replications. These documents have exactly the same
+      content as the JSON objects we used to <code class="literal">POST</code> to
+      <code class="literal">_replicate</code> (fields <code class="literal">source</code>,
+      <code class="literal">target</code>, <code class="literal">create_target</code>,
+      <code class="literal">continuous</code>, <code class="literal">doc_ids</code>,
+      <code class="literal">filter</code>, <code class="literal">query_params</code>.
+    </p><p>
+      Replication documents can have a user defined
+      <code class="literal">_id</code>. Design documents (and
+      <code class="literal">_local</code> documents) added to the replicator
+      database are ignored.
+    </p><p>
+      The default name of this database is
+      <code class="literal">_replicator</code>. The name can be changed in the
+      <code class="filename">local.ini</code> configuration, section
+      <code class="literal">[replicator]</code>, parameter <code class="literal">db</code>.
+    </p></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-single-replication.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-single-replication.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-single-replication-replicatordb-basics.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">Chapter&nbsp;3.&nbsp;Replication&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;3.1.1.&nbsp;Basics</td></tr></table></div></body></html>

@@ -1,0 +1,720 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>6.2.&nbsp;GET /db/doc</title>
+<link href="epub.css" type="text/css" rel="stylesheet" />
+<meta content="DocBook XSL Stylesheets V1.76.1" name="generator" />
+</head>
+<body>
+<div class="section" title="6.2.&nbsp;GET /db/doc">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-api-dbdoc_db-doc_get" />6.2.&nbsp;<code class="literal">GET /db/doc</code>
+</h1>
+</div>
+</div>
+</div>
+<div class="informaltable">
+<table summary="URL API GET /db/doc" border="1">
+<colgroup>
+<col class="field" width="33%" />
+<col class="info" width="33%" />
+<col class="addinfo" width="34%" />
+</colgroup>
+<tbody>
+<tr>
+<td>
+<span class="bold">
+<strong>Method</strong>
+</span>
+</td>
+<td colspan="2">
+<code class="literal">GET /db/doc</code>
+</td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Request</strong>
+</span>
+</td>
+<td colspan="2">
+ None
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Response</strong>
+</span>
+</td>
+<td colspan="2">
+ Returns the JSON for the document
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Admin Privileges Required</strong>
+</span>
+</td>
+<td colspan="2">no</td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Query Arguments</strong>
+</span>
+</td>
+<td>
+<span class="bold">
+<strong>Argument</strong>
+</span>
+</td>
+<td>
+<code class="literal">conflicts</code>
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Description</strong>
+</span>
+</td>
+<td>
+ Returns the conflict tree for the document.
+ </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Optional</strong>
+</span>
+</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Type</strong>
+</span>
+</td>
+<td>boolean</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Default</strong>
+</span>
+</td>
+<td>false</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Supported Values</strong>
+</span>
+</td>
+<td class="auto-generated">&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<code class="literal">true</code>
+</td>
+<td>Includes the revisions</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Argument</strong>
+</span>
+</td>
+<td>
+<code class="literal">rev</code>
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Description</strong>
+</span>
+</td>
+<td>
+ Specify the revision to return
+ </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Optional</strong>
+</span>
+</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Type</strong>
+</span>
+</td>
+<td>string</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Supported Values</strong>
+</span>
+</td>
+<td class="auto-generated">&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<code class="literal">true</code>
+</td>
+<td>Includes the revisions</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Argument</strong>
+</span>
+</td>
+<td>
+<code class="literal">revs</code>
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Description</strong>
+</span>
+</td>
+<td>
+ Return a list of the revisions for the document
+ </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Optional</strong>
+</span>
+</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Type</strong>
+</span>
+</td>
+<td>boolean</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Argument</strong>
+</span>
+</td>
+<td>
+<code class="literal">revs_info</code>
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Description</strong>
+</span>
+</td>
+<td>
+ Return a list of detailed revision information for the
+ document
+ </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Optional</strong>
+</span>
+</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Type</strong>
+</span>
+</td>
+<td>boolean</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Supported Values</strong>
+</span>
+</td>
+<td class="auto-generated">&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<code class="literal">true</code>
+</td>
+<td>Includes the revisions</td>
+</tr>
+<tr>
+<td colspan="3">
+<span class="bold">
+<strong>Return Codes</strong>
+</span>
+</td>
+</tr>
+<tr>
+<td>201</td>
+<td colspan="2">
+ Document created
+ </td>
+</tr>
+<tr>
+<td>400</td>
+<td colspan="2">
+ The format of the request or revision was invalid
+ </td>
+</tr>
+<tr>
+<td>404</td>
+<td colspan="2">
+ The specified document or revision cannot be found, or has been
+ deleted
+ </td>
+</tr>
+<tr>
+<td>409</td>
+<td colspan="2">
+ Conflict - a document with the specified document ID already
+ exists
+ </td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+      Returns the specified <code class="literal">doc</code> from the specified
+      <code class="literal">db</code>. For example, to retrieve the document with
+      the id <code class="literal">FishStew</code> you would send the following
+      request:
+    </p>
+<pre class="programlisting">GET http://couchdb:5984/recipes/FishStew
+Content-Type: application/json
+Accept: application/json</pre>
+<p>
+      The returned JSON is the JSON of the document, including the
+      document ID and revision number:
+    </p>
+<pre class="programlisting">{
+   "_id" : "FishStew",
+   "_rev" : "3-a1a9b39ee3cc39181b796a69cb48521c",
+   "servings" : 4,
+   "subtitle" : "Delicious with a green salad",
+   "title" : "Irish Fish Stew"
+}</pre>
+<p>
+      Unless you request a specific revision, the latest revision of the
+      document will always be returned.
+    </p>
+<div class="section" title="6.2.1.&nbsp;Attachments">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="couchdb-api-dbdoc_db-doc_get-attachments" />6.2.1.&nbsp;Attachments</h2>
+</div>
+</div>
+</div>
+<p>
+        If the document includes attachments, then the returned
+        structure will contain a summary of the attachments associatd
+        with the document, but not the attachment data itself.
+      </p>
+<p>
+        The JSON for the returned document will include the
+        <code class="literal">_attachments</code> field, with one or more
+        attachment definitions. For example:
+      </p>
+<pre class="programlisting">{
+   "_id" : "FishStew",
+   "servings" : 4,
+   "subtitle" : "Delicious with fresh bread",
+   "title" : "Fish Stew"
+   "_attachments" : {
+      "styling.css" : {
+         "stub" : true,
+         "content-type" : "text/css",
+         "length" : 783426,
+         },
+   },
+}</pre>
+<p>
+        The format of the returned JSON is shown in the table below:
+      </p>
+<div class="table">
+<a id="table-couchdb-api-dbdoc-returneddocumentattachments" />
+<p class="title">
+<strong>Table&nbsp;6.4.&nbsp;
+ Returned Document with Attachments
+ </strong>
+</p>
+<div class="table-contents">
+<table summary="
+ Returned Document with Attachments
+ " border="1">
+<colgroup>
+<col class="item" width="30%" />
+<col class="desc" width="70%" />
+</colgroup>
+<tbody>
+<tr>
+<td>
+<span class="bold">
+<strong>Field</strong>
+</span>
+</td>
+<td>
+<span class="bold">
+<strong>Description</strong>
+</span>
+</td>
+</tr>
+<tr>
+<td>
+<code class="literal">_id</code> (optional) </td>
+<td>
+ Document ID
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">_rev</code> (optional) </td>
+<td>
+ Revision ID (when updating an existing document)
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">_attachments</code> (optional) </td>
+<td>
+ Document Attachment
+ </td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">filename</code>  </td>
+<td>
+ Attachment
+ </td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">content_type</code>  </td>
+<td>
+ MIME Content type string
+ </td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">length</code>  </td>
+<td>
+ Length (bytes) of the attachment data
+ </td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">revpos</code>  </td>
+<td>
+ Revision where this attachment exists
+ </td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">stub</code>  </td>
+<td>
+ Indicates whether the attachment is a stub
+ </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="section" title="6.2.2.&nbsp;Getting a List of Revisions">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="couchdb-api-dbdoc_db-doc_get-revs" />6.2.2.&nbsp;Getting a List of Revisions</h2>
+</div>
+</div>
+</div>
+<p>
+        You can obtain a list of the revisions for a given document by
+        adding the <code class="literal">revs=true</code> parameter to the request
+        URL. For example:
+      </p>
+<pre class="programlisting">GET http://couchdb:5984/recipes/FishStew?revs=true
+Accept: application/json</pre>
+<p>
+        The returned JSON structure includes the original document,
+        including a <code class="literal">_revisions</code> structure that
+        includes the revision information:
+      </p>
+<pre class="programlisting">{
+   "servings" : 4,
+   "subtitle" : "Delicious with a green salad",
+   "_id" : "FishStew",
+   "title" : "Irish Fish Stew",
+   "_revisions" : {
+      "ids" : [
+         "a1a9b39ee3cc39181b796a69cb48521c",
+         "7c4740b4dcf26683e941d6641c00c39d",
+         "9c65296036141e575d32ba9c034dd3ee"
+      ],
+      "start" : 3
+   },
+   "_rev" : "3-a1a9b39ee3cc39181b796a69cb48521c"
+}</pre>
+<div class="table">
+<a id="table-couchdb-api-dbdoc-document_with_revs" />
+<p class="title">
+<strong>Table&nbsp;6.5.&nbsp;
+ Returned CouchDB Document with Revision Info
+ </strong>
+</p>
+<div class="table-contents">
+<table summary="
+ Returned CouchDB Document with Revision Info
+ " border="1">
+<colgroup>
+<col class="item" width="30%" />
+<col class="desc" width="70%" />
+</colgroup>
+<tbody>
+<tr>
+<td>
+<span class="bold">
+<strong>Field</strong>
+</span>
+</td>
+<td>
+<span class="bold">
+<strong>Description</strong>
+</span>
+</td>
+</tr>
+<tr>
+<td>
+<code class="literal">_id</code> (optional) </td>
+<td>
+ Document ID
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">_rev</code> (optional) </td>
+<td>
+ Revision ID (when updating an existing document)
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">_revisions</code>  </td>
+<td>
+ CouchDB Document Revisions
+ </td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">ids</code> <code class="literal">[array]</code> </td>
+<td>
+ Array of valid revision IDs, in reverse order (latest first)
+ </td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">start</code>  </td>
+<td>
+ Prefix number for the latest revision
+ </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="section" title="6.2.3.&nbsp;Obtaining an Extended Revision History">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="couchdb-api-dbdoc_db-doc_get-revsextended" />6.2.3.&nbsp;Obtaining an Extended Revision History</h2>
+</div>
+</div>
+</div>
+<p>
+        You can get additional information about the revisions for a
+        given document by supplying the <code class="literal">revs_info</code>
+        argument to the query:
+      </p>
+<pre class="programlisting">GET http://couchdb:5984/recipes/FishStew?revs_info=true
+Accept: application/json</pre>
+<p>
+        This returns extended revision information, including the
+        availability and status of each revision:
+      </p>
+<pre class="programlisting">{
+   "servings" : 4,
+   "subtitle" : "Delicious with a green salad",
+   "_id" : "FishStew",
+   "_revs_info" : [
+      {
+         "status" : "available",
+         "rev" : "3-a1a9b39ee3cc39181b796a69cb48521c"
+      },
+      {
+         "status" : "available",
+         "rev" : "2-7c4740b4dcf26683e941d6641c00c39d"
+      },
+      {
+         "status" : "available",
+         "rev" : "1-9c65296036141e575d32ba9c034dd3ee"
+      }
+   ],
+   "title" : "Irish Fish Stew",
+   "_rev" : "3-a1a9b39ee3cc39181b796a69cb48521c"
+}</pre>
+<div class="table">
+<a id="table-couchdb-api-dbdoc-document_with_revs_info" />
+<p class="title">
+<strong>Table&nbsp;6.6.&nbsp;
+ Returned CouchDB Document with Detailed Revision Info
+ </strong>
+</p>
+<div class="table-contents">
+<table summary="
+ Returned CouchDB Document with Detailed Revision Info
+ " border="1">
+<colgroup>
+<col class="item" width="30%" />
+<col class="desc" width="70%" />
+</colgroup>
+<tbody>
+<tr>
+<td>
+<span class="bold">
+<strong>Field</strong>
+</span>
+</td>
+<td>
+<span class="bold">
+<strong>Description</strong>
+</span>
+</td>
+</tr>
+<tr>
+<td>
+<code class="literal">_id</code> (optional) </td>
+<td>
+ Document ID
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">_rev</code> (optional) </td>
+<td>
+ Revision ID (when updating an existing document)
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">_revs_info</code> <code class="literal">[array]</code> </td>
+<td>
+ CouchDB Document Extended Revision Info
+ </td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">rev</code>  </td>
+<td>
+ Full revision string
+ </td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">status</code>  </td>
+<td>
+ Status of the revision
+ </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="section" title="6.2.4.&nbsp;Obtaining a Specific Revision">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="couchdb-api-dbdoc_db-doc_get-specrev" />6.2.4.&nbsp;Obtaining a Specific Revision</h2>
+</div>
+</div>
+</div>
+<p>
+        To get a specific revision, use the <code class="literal">rev</code>
+        argument to the request, and specify the full revision number:
+      </p>
+<pre class="programlisting">GET http://couchdb:5984/recipes/FishStew?rev=2-7c4740b4dcf26683e941d6641c00c39d
+Accept: application/json</pre>
+<p>
+        The specified revision of the document will be returned,
+        including a <code class="literal">_rev</code> field specifying the
+        revision that was requested:
+      </p>
+<pre class="programlisting">{
+   "_id" : "FishStew",
+   "_rev" : "2-7c4740b4dcf26683e941d6641c00c39d",
+   "servings" : 4,
+   "subtitle" : "Delicious with a green salad",
+   "title" : "Fish Stew"
+}</pre>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>5.5.&nbsp;POST /db/_compact</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-api-db.html" title="Chapter&nbsp;5.&nbsp;CouchDB API Server Database Methods"><link rel="prev" href="couchdb-api-db_db-changes_get-filters.html" title="5.4.1.&nbsp;Filtering"><link rel="next" href="couchdb-api-db_db-compact-design-doc_post.html" title="5.6.&nbsp;POST /db/_compact/design-doc"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">5.5.&nbsp;<code class="literal">POST /db/_compact</code></th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-api-db_db-changes_get-filters.html">Prev</a>&nbsp;</td><th align="center" width="60%">Chapter&nbsp;5.&nbsp;CouchDB API Server Database Methods</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-db_db-compact-design-doc_post.html">Next</a></td></tr></table><hr></div><div class="section" title="5.5.&nbsp;POST /db/_compact"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-api-db_db-compact_post"></a>5.5.&nbsp;<code class="literal">POST /db/_compact</code></h2></div></div></div><div class="informaltable"><table summary="URL API POST /db/_compact" border="1"><colgroup><col class="field" width="33%"><col class="info" width="33%"><col class="addinfo" width="34%"></colgroup><tbody><tr><td><span class="bold"><strong>Method</strong></span></td><td colspan="2"><code class="literal">POST /db/_compact</code></td></tr><tr><td><span class="bold"><strong>Request</strong></span></td><td colspan="2">
+ None
+ </td></tr><tr><td><span class="bold"><strong>Response</strong></span></td><td colspan="2">
+ JSON success statement
+ </td></tr><tr><td><span class="bold"><strong>Admin Privileges Required</strong></span></td><td colspan="2">no</td></tr><tr><td colspan="3"><span class="bold"><strong>Return Codes</strong></span></td></tr><tr><td>202</td><td colspan="2">
+ Compaction request has been accepted
+ </td></tr><tr><td>404</td><td colspan="2">
+ The requested content could not be found. The returned content
+ will include further information, as a JSON object, if available.
+ </td></tr></tbody></table></div><p>
+      Request compaction of the specified database. Compaction
+      compresses the disk database file by performing the following
+      operations:
+    </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+          Writes a new version of the database file, removing any unused
+          sections from the new version during write. Because a new file
+          is temporary created for this purpose, you will need twice the
+          current storage space of the specified database in order for
+          the compaction routine to complete.
+        </p></li><li class="listitem"><p>
+          Removes old revisions of documents from the database, up to
+          the per-database limit specified by the
+          <code class="literal">_revs_limit</code> database parameter. See
+          <a class="xref" href="couchdb-api-db_db_get.html" title="5.1.&nbsp;GET /db">Section&nbsp;5.1, &ldquo;<code class="literal">GET /db</code>&rdquo;</a> .
+        </p></li></ul></div><p>
+      Compaction can only be requested on an individual database; you
+      cannot compact all the databases for a CouchDB instance. The
+      compaction process runs as a background process.
+    </p><p>
+      You can determine if the compaction process is operating on a
+      database by obtaining the database meta information, the
+      <code class="literal">compact_running</code> value of the returned database
+      structure will be set to true. See
+      <a class="xref" href="couchdb-api-db_db_get.html" title="5.1.&nbsp;GET /db">Section&nbsp;5.1, &ldquo;<code class="literal">GET /db</code>&rdquo;</a> .
+    </p><p>
+      You can also obtain a list of running processes to determine
+      whether compaction is currently running. See
+      <a class="xref" href="couchdb-api-misc_active-tasks_get.html" title="9.2.&nbsp;GET /_active_tasks">Section&nbsp;9.2, &ldquo;<code class="literal">GET /_active_tasks</code>&rdquo;</a>.
+    </p></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-api-db_db-changes_get-filters.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-api-db.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-db_db-compact-design-doc_post.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">5.4.1.&nbsp;Filtering&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;5.6.&nbsp;<code class="literal">POST /db/_compact/design-doc</code></td></tr></table></div></body></html>

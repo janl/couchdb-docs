@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>4.5.&nbsp;CouchDB API Overview</title>
+<link href="epub.css" type="text/css" rel="stylesheet" />
+<meta content="DocBook XSL Stylesheets V1.76.1" name="generator" />
+</head>
+<body>
+<div class="section" title="4.5.&nbsp;CouchDB API Overview">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-api-overview" />4.5.&nbsp;CouchDB API Overview</h1>
+</div>
+</div>
+</div>
+<p>
+      The components of the API URL path help determine the part of the
+      CouchDB server that is being accessed. The result is the structure
+      of the URL request both identifies and effectively describes the
+      area of the database you are accessing.
+    </p>
+<p>
+      As with all URLs, the individual components are separated by a
+      forward slash.
+    </p>
+<p>
+      As a general rule, URL components and JSON fields starting with
+      the <code class="literal">_</code> (underscore) character represent a
+      special component or entity within the server or returned object.
+      For example, the URL fragment <code class="literal">/_all_dbs</code> gets a
+      list of all of the databases in a CouchDB instance.
+    </p>
+<p>
+      The remainder of the URL API structure can be divided up according
+      to the URL structure. The different sections are divided as
+      follows:
+    </p>
+<div class="itemizedlist">
+<ul class="itemizedlist">
+<li class="listitem">
+<p>
+          <code class="literal">/db</code>
+        </p>
+<p>
+          Database methods, related to adding, updating or deleting
+          databases, and setting database parameters and operations. For
+          more detailed information, see
+          <a class="xref" href="ch05.html" title="Chapter&nbsp;5.&nbsp;CouchDB API Server Database Methods">Chapter&nbsp;5, <em>CouchDB API Server Database Methods</em>
+</a> .
+        </p>
+</li>
+<li class="listitem">
+<p>
+          <code class="literal">/db/doc</code>
+        </p>
+<p>
+          Document methods, those that create, store, update or delete
+          CouchDB documents and their attachments. For more information,
+          see <a class="xref" href="ch06.html" title="Chapter&nbsp;6.&nbsp;CouchDB API Server Document Methods">Chapter&nbsp;6, <em>CouchDB API Server Document Methods</em>
+</a>.
+        </p>
+</li>
+<li class="listitem">
+<p>
+          <code class="literal">/db/_local/local-doc</code>
+        </p>
+<p>
+          Document methods, those that create, store, update or delete
+          CouchDB documents only within the local database. Local
+          documents are not synchronized with other databases. For more
+          information, see
+          <a class="xref" href="ch07.html" title="Chapter&nbsp;7.&nbsp;CouchDB API Server Local (non-replicating) Document Methods">Chapter&nbsp;7, <em>CouchDB API Server Local (non-replicating) Document Methods</em>
+</a>.
+        </p>
+</li>
+<li class="listitem">
+<p>
+          <code class="literal">/db/_design/design-doc</code>
+        </p>
+<p>
+          Design documents provide the methods and structure for
+          recovering information from a CouchDB database in the form of
+          views, shows and lists. For more information, see
+          <a class="xref" href="ch08.html" title="Chapter&nbsp;8.&nbsp;CouchDB API Server Design Document Methods">Chapter&nbsp;8, <em>CouchDB API Server Design Document Methods</em>
+</a>.
+        </p>
+</li>
+<li class="listitem">
+<p>
+          <code class="literal">/_special</code>
+        </p>
+<p>
+          Special methods that obtain or set information about the
+          CouchDB instance, including methods for configuring
+          replication, accessing the logs, and generate Universally
+          Unique IDs (UUIDs). For more information, see
+          <a class="xref" href="ch09.html" title="Chapter&nbsp;9.&nbsp;CouchDB API Server Miscellaneous Methods">Chapter&nbsp;9, <em>CouchDB API Server Miscellaneous Methods</em>
+</a>.
+        </p>
+</li>
+<li class="listitem">
+<p>
+          <code class="literal">/_config</code>
+        </p>
+<p>
+          Methods for getting, and settings, CouchDB configuration
+          parameters. For more information, see
+          <a class="xref" href="ch09.html" title="Chapter&nbsp;9.&nbsp;CouchDB API Server Miscellaneous Methods">Chapter&nbsp;9, <em>CouchDB API Server Miscellaneous Methods</em>
+</a>.
+        </p>
+</li>
+</ul>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,601 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Chapter&nbsp;6.&nbsp;CouchDB API Server Document Methods</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="index.html" title="CouchDB 1.1 Manual"><link rel="prev" href="couchdb-api-db.html" title="Chapter&nbsp;5.&nbsp;CouchDB API Server Database Methods"><link rel="next" href="couchdb-api-localdb.html" title="Chapter&nbsp;7.&nbsp;CouchDB API Server Local (non-replicating) Document Methods"><meta name="date" content="2012-02-21T20:10:18+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter&nbsp;6.&nbsp;CouchDB API Server Document Methods</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-api-db.html">Prev</a>&nbsp;</td><th align="center" width="60%">&nbsp;</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-localdb.html">Next</a></td></tr></table><hr></div><div class="chapter" title="Chapter&nbsp;6.&nbsp;CouchDB API Server Document Methods"><div class="titlepage"><div><div><h2 class="title"><a name="couchdb-api-dbdoc"></a>Chapter&nbsp;6.&nbsp;CouchDB API Server Document Methods</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db_post">6.1. <code class="literal">POST /db</code></a></span></dt><dd><dl><dt><span class="section"><a href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db_post-docid">6.1.1. Specifying the Document ID</a></span></dt><dt><span class="section"><a href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db_batchmode">6.1.2. Batch Mode Writes</a></span></dt><dt><span class="section"><a href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db-doc-attachments">6.1.3. Including Attachments</a></span></dt></dl></dd><dt><span class="section"><a href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db-doc_get">6.2. <code class="literal">GET /db/doc</code></a></span></dt><dd><dl><dt><span class="section"><a href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db-doc_get-attachments">6.2.1. Attachments</a></span></dt><dt><span class="section"><a href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db-doc_get-revs">6.2.2. Getting a List of Revisions</a></span></dt><dt><span class="section"><a href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db-doc_get-revsextended">6.2.3. Obtaining an Extended Revision History</a></span></dt><dt><span class="section"><a href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db-doc_get-specrev">6.2.4. Obtaining a Specific Revision</a></span></dt></dl></dd><dt><span class="section"><a href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db-doc_head">6.3. <code class="literal">HEAD /db/doc</code></a></span></dt><dt><span class="section"><a href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db-doc_put">6.4. <code class="literal">PUT /db/doc</code></a></span></dt><dd><dl><dt><span class="section"><a href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db-doc_put-update">6.4.1. Updating an Existing Document</a></span></dt></dl></dd><dt><span class="section"><a href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db-doc_delete">6.5. <code class="literal">DELETE /db/doc</code></a></span></dt><dt><span class="section"><a href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db-doc_copy">6.6. <code class="literal">COPY /db/doc</code></a></span></dt><dd><dl><dt><span class="section"><a href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db-doc_copy-simple">6.6.1. Copying a Document</a></span></dt><dt><span class="section"><a href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db-doc_copy-specrev">6.6.2. Copying from a Specific Revision</a></span></dt><dt><span class="section"><a href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db-doc_copy-existing">6.6.3. Copying to an Existing Document</a></span></dt></dl></dd><dt><span class="section"><a href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db-doc-attachment_get">6.7. <code class="literal">GET /db/doc/attachment</code></a></span></dt><dt><span class="section"><a href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db-doc-attachment_put">6.8. <code class="literal">PUT /db/doc/attachment</code></a></span></dt><dd><dl><dt><span class="section"><a href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db-doc-attachment_put-existing">6.8.1. Updating an Existing Attachment</a></span></dt></dl></dd><dt><span class="section"><a href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db-doc-attachment_delete">6.9. <code class="literal">DELETE /db/doc/attachment</code></a></span></dt></dl></div><p>
+    The CouchDB API Server Document methods detail how to create, read,
+    update and delete documents within a database.
+  </p><p>
+    A list of the available methods and URL paths are provided below:
+  </p><div class="table"><a name="table-couchdb-api-dbdoc-summary"></a><p class="title"><b>Table&nbsp;6.1.&nbsp;Document API Calls</b></p><div class="table-contents"><table summary="Document API Calls" border="1"><colgroup><col class="method" width="33%"><col class="path" width="33%"><col class="desc" width="34%"></colgroup><thead><tr><th>Method</th><th>Path</th><th>Description</th></tr></thead><tbody><tr><td><code class="literal">POST</code></td><td><code class="literal">/db</code></td><td><a class="link" href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db_post" title="6.1.&nbsp;POST /db">
+ Create a new document
+ </a></td></tr><tr><td><code class="literal">GET</code></td><td><code class="literal">/db/doc</code></td><td><a class="link" href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db-doc_get" title="6.2.&nbsp;GET /db/doc">
+ Returns the latest revision of the document
+ </a></td></tr><tr><td><code class="literal">HEAD</code></td><td><code class="literal">/db/doc</code></td><td><a class="link" href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db-doc_head" title="6.3.&nbsp;HEAD /db/doc">
+ Returns bare information in the HTTP Headers for the document
+ </a></td></tr><tr><td><code class="literal">PUT</code></td><td><code class="literal">/db/doc</code></td><td><a class="link" href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db-doc_put" title="6.4.&nbsp;PUT /db/doc">
+ Inserts a new document, or new version of an existing document
+ </a></td></tr><tr><td><code class="literal">DELETE</code></td><td><code class="literal">/db/doc</code></td><td><a class="link" href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db-doc_delete" title="6.5.&nbsp;DELETE /db/doc">
+ Deletes the document
+ </a></td></tr><tr><td><code class="literal">COPY</code></td><td><code class="literal">/db/doc</code></td><td><a class="link" href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db-doc_copy" title="6.6.&nbsp;COPY /db/doc">
+ Copies the document
+ </a></td></tr><tr><td><code class="literal">GET</code></td><td><code class="literal">/db/doc/attachment</code></td><td><a class="link" href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db-doc-attachment_get" title="6.7.&nbsp;GET /db/doc/attachment">
+ Gets the attachment of a document
+ </a></td></tr><tr><td><code class="literal">PUT</code></td><td><code class="literal">/db/doc/attachment</code></td><td><a class="link" href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db-doc-attachment_put" title="6.8.&nbsp;PUT /db/doc/attachment">
+ Adds an attachment of a document
+ </a></td></tr><tr><td><code class="literal">DELETE</code></td><td><code class="literal">/db/doc/attachment</code></td><td><a class="link" href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db-doc-attachment_delete" title="6.9.&nbsp;DELETE /db/doc/attachment">
+ Deletes an attachment of a document
+ </a></td></tr></tbody></table></div></div><br class="table-break"><div class="section" title="6.1.&nbsp;POST /db"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-api-dbdoc_db_post"></a>6.1.&nbsp;<code class="literal">POST /db</code></h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db_post-docid">6.1.1. Specifying the Document ID</a></span></dt><dt><span class="section"><a href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db_batchmode">6.1.2. Batch Mode Writes</a></span></dt><dt><span class="section"><a href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db-doc-attachments">6.1.3. Including Attachments</a></span></dt></dl></div><div class="informaltable"><table summary="URL API POST /db" border="1"><colgroup><col class="field" width="33%"><col class="info" width="33%"><col class="addinfo" width="34%"></colgroup><tbody><tr><td><span class="bold"><strong>Method</strong></span></td><td colspan="2"><code class="literal">POST /db</code></td></tr><tr><td><span class="bold"><strong>Request</strong></span></td><td colspan="2">
+ JSON of the new document
+ </td></tr><tr><td><span class="bold"><strong>Response</strong></span></td><td colspan="2">
+ JSON with the committed document information
+ </td></tr><tr><td><span class="bold"><strong>Admin Privileges Required</strong></span></td><td colspan="2">no</td></tr><tr><td><span class="bold"><strong>Query Arguments</strong></span></td><td><span class="bold"><strong>Argument</strong></span></td><td><code class="literal">batch</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>
+ Allow document store request to be batched with others
+ </td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>yes</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Type</strong></span></td><td>string</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Supported Values</strong></span></td><td class="auto-generated">&nbsp;</td></tr><tr><td>&nbsp;</td><td><code class="literal">ok</code></td><td>Enable</td></tr><tr><td colspan="3"><span class="bold"><strong>Return Codes</strong></span></td></tr><tr><td>201</td><td colspan="2">
+ Document has been created successfully
+ </td></tr><tr><td>409</td><td colspan="2">
+ Conflict - a document with the specified document ID already
+ exists
+ </td></tr></tbody></table></div><p>
+      Create a new document in the specified database, using the
+      supplied JSON document structure. If the JSON structure includes
+      the <code class="literal">_id</code> field, then the document will be
+      created with the specified document ID. If the
+      <code class="literal">_id</code> field is not specified, a new unique ID
+      will be generated.
+    </p><p>
+      For example, you can generate a new document with a generated UUID
+      using the following request:
+    </p><pre class="programlisting">POST http://couchdb:5984/recipes/
+Content-Type: application/json
+
+{
+   "servings" : 4,
+   "subtitle" : "Delicious with fresh bread",
+   "title" : "Fish Stew"
+}</pre><p>
+      The return JSON will specify the automatically enerated ID and
+      revision information:
+    </p><pre class="programlisting">{
+   "id" : "64575eef70ab90a2b8d55fc09e00440d",
+   "ok" : true,
+   "rev" : "1-9c65296036141e575d32ba9c034dd3ee"
+}</pre><div class="section" title="6.1.1.&nbsp;Specifying the Document ID"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-api-dbdoc_db_post-docid"></a>6.1.1.&nbsp;Specifying the Document ID</h3></div></div></div><p>
+        The document ID can be specified by including the
+        <code class="literal">_id</code> field in the JSON of the submitted
+        record. The following request will create the same document with
+        the ID <code class="literal">FishStew</code>:
+      </p><pre class="programlisting">POST http://couchdb:5984/recipes/
+Content-Type: application/json
+
+{
+   "_id" : "FishStew",
+   "servings" : 4,
+   "subtitle" : "Delicious with fresh bread",
+   "title" : "Fish Stew"
+}</pre><p>
+        The structure of the submitted document is as shown in the table
+        below:
+      </p><div class="table"><a name="table-couchdb-api-json-document"></a><p class="title"><b>Table&nbsp;6.2.&nbsp;
+ CouchDB Document
+ </b></p><div class="table-contents"><table summary="
+ CouchDB Document
+ " border="1"><colgroup><col class="item" width="30%"><col class="desc" width="70%"></colgroup><tbody><tr><td><span class="bold"><strong>Field</strong></span></td><td><span class="bold"><strong>Description</strong></span></td></tr><tr><td><code class="literal">_id</code> (optional) </td><td>
+ Document ID
+ </td></tr><tr><td><code class="literal">_rev</code> (optional) </td><td>
+ Revision ID (when updating an existing document)
+ </td></tr></tbody></table></div></div><br class="table-break"><p>
+        In either case, the returned JSON will specify the document ID,
+        revision ID, and status message:
+      </p><pre class="programlisting">{
+   "id" : "FishStew",
+   "ok" : true,
+   "rev" : "1-9c65296036141e575d32ba9c034dd3ee"
+}</pre></div><div class="section" title="6.1.2.&nbsp;Batch Mode Writes"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-api-dbdoc_db_batchmode"></a>6.1.2.&nbsp;Batch Mode Writes</h3></div></div></div><p>
+        You can write documents to the database at a higher rate by
+        using the batch option. This collects document writes together
+        in memory (on a user-by-user basis) before they are committed to
+        disk. This increases the risk of the documents not being stored
+        in the event of a failure, since the documents are not written
+        to disk immediately.
+      </p><p>
+        To use the batched mode, append the <code class="literal">batch=ok</code>
+        query argument to the URL of the <code class="literal">PUT</code> or
+        <code class="literal">POST</code> request. The CouchDB server will respond
+        with a 202 HTTP response code immediately.
+      </p></div><div class="section" title="6.1.3.&nbsp;Including Attachments"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-api-dbdoc_db-doc-attachments"></a>6.1.3.&nbsp;Including Attachments</h3></div></div></div><p>
+        You can include one or more attachments with a given document by
+        incorporating the attachment information within the JSON of the
+        document. This provides a simpler alternative to loading
+        documents with attachments than making a separate call (see
+        <a class="xref" href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db-doc-attachment_put" title="6.8.&nbsp;PUT /db/doc/attachment">Section&nbsp;6.8, &ldquo;<code class="literal">PUT /db/doc/attachment</code>&rdquo;</a>).
+      </p><div class="table"><a name="table-couchdb-api-dbdoc-documentattachments"></a><p class="title"><b>Table&nbsp;6.3.&nbsp;
+ Document with Attachments
+ </b></p><div class="table-contents"><table summary="
+ Document with Attachments
+ " border="1"><colgroup><col class="item" width="30%"><col class="desc" width="70%"></colgroup><tbody><tr><td><span class="bold"><strong>Field</strong></span></td><td><span class="bold"><strong>Description</strong></span></td></tr><tr><td><code class="literal">_id</code> (optional) </td><td>
+ Document ID
+ </td></tr><tr><td><code class="literal">_rev</code> (optional) </td><td>
+ Revision ID (when updating an existing document)
+ </td></tr><tr><td><code class="literal">_attachments</code> (optional) </td><td>
+ Document Attachment
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">filename</code>  </td><td>
+ Attachment information
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">content_type</code>  </td><td>
+ MIME Content type string
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">data</code>  </td><td>
+ File attachment content, Base64 encoded
+ </td></tr></tbody></table></div></div><br class="table-break"><p>
+        The <code class="literal">filename</code> will be the attachment name. For
+        example, when sending the JSON structure below:
+      </p><pre class="programlisting">{
+   "_id" : "FishStew",
+   "servings" : 4,
+   "subtitle" : "Delicious with fresh bread",
+   "title" : "Fish Stew"
+   "_attachments" : {
+      "styling.css" : {
+         "content-type" : "text/css",
+         "data" : "cCB7IGZvbnQtc2l6ZTogMTJwdDsgfQo=",
+         },
+   },
+}</pre><p>
+        The attachment <code class="literal">styling.css</code> can be accessed
+        using <code class="literal">/recipes/FishStew/styling.css</code>. For more
+        information on attachments, see
+        <a class="xref" href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db-doc-attachment_get" title="6.7.&nbsp;GET /db/doc/attachment">Section&nbsp;6.7, &ldquo;<code class="literal">GET /db/doc/attachment</code>&rdquo;</a>.
+      </p><p>
+        The document data embedded in to the structure must be encoded
+        using base64.
+      </p></div></div><div class="section" title="6.2.&nbsp;GET /db/doc"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-api-dbdoc_db-doc_get"></a>6.2.&nbsp;<code class="literal">GET /db/doc</code></h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db-doc_get-attachments">6.2.1. Attachments</a></span></dt><dt><span class="section"><a href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db-doc_get-revs">6.2.2. Getting a List of Revisions</a></span></dt><dt><span class="section"><a href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db-doc_get-revsextended">6.2.3. Obtaining an Extended Revision History</a></span></dt><dt><span class="section"><a href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db-doc_get-specrev">6.2.4. Obtaining a Specific Revision</a></span></dt></dl></div><div class="informaltable"><table summary="URL API GET /db/doc" border="1"><colgroup><col class="field" width="33%"><col class="info" width="33%"><col class="addinfo" width="34%"></colgroup><tbody><tr><td><span class="bold"><strong>Method</strong></span></td><td colspan="2"><code class="literal">GET /db/doc</code></td></tr><tr><td><span class="bold"><strong>Request</strong></span></td><td colspan="2">
+ None
+ </td></tr><tr><td><span class="bold"><strong>Response</strong></span></td><td colspan="2">
+ Returns the JSON for the document
+ </td></tr><tr><td><span class="bold"><strong>Admin Privileges Required</strong></span></td><td colspan="2">no</td></tr><tr><td><span class="bold"><strong>Query Arguments</strong></span></td><td><span class="bold"><strong>Argument</strong></span></td><td><code class="literal">conflicts</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>
+ Returns the conflict tree for the document.
+ </td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>yes</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Type</strong></span></td><td>boolean</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Default</strong></span></td><td>false</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Supported Values</strong></span></td><td class="auto-generated">&nbsp;</td></tr><tr><td>&nbsp;</td><td><code class="literal">true</code></td><td>Includes the revisions</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Argument</strong></span></td><td><code class="literal">rev</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>
+ Specify the revision to return
+ </td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>yes</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Type</strong></span></td><td>string</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Supported Values</strong></span></td><td class="auto-generated">&nbsp;</td></tr><tr><td>&nbsp;</td><td><code class="literal">true</code></td><td>Includes the revisions</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Argument</strong></span></td><td><code class="literal">revs</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>
+ Return a list of the revisions for the document
+ </td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>yes</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Type</strong></span></td><td>boolean</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Argument</strong></span></td><td><code class="literal">revs_info</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>
+ Return a list of detailed revision information for the
+ document
+ </td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>yes</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Type</strong></span></td><td>boolean</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Supported Values</strong></span></td><td class="auto-generated">&nbsp;</td></tr><tr><td>&nbsp;</td><td><code class="literal">true</code></td><td>Includes the revisions</td></tr><tr><td colspan="3"><span class="bold"><strong>Return Codes</strong></span></td></tr><tr><td>201</td><td colspan="2">
+ Document created
+ </td></tr><tr><td>400</td><td colspan="2">
+ The format of the request or revision was invalid
+ </td></tr><tr><td>404</td><td colspan="2">
+ The specified document or revision cannot be found, or has been
+ deleted
+ </td></tr><tr><td>409</td><td colspan="2">
+ Conflict - a document with the specified document ID already
+ exists
+ </td></tr></tbody></table></div><p>
+      Returns the specified <code class="literal">doc</code> from the specified
+      <code class="literal">db</code>. For example, to retrieve the document with
+      the id <code class="literal">FishStew</code> you would send the following
+      request:
+    </p><pre class="programlisting">GET http://couchdb:5984/recipes/FishStew
+Content-Type: application/json
+Accept: application/json</pre><p>
+      The returned JSON is the JSON of the document, including the
+      document ID and revision number:
+    </p><pre class="programlisting">{
+   "_id" : "FishStew",
+   "_rev" : "3-a1a9b39ee3cc39181b796a69cb48521c",
+   "servings" : 4,
+   "subtitle" : "Delicious with a green salad",
+   "title" : "Irish Fish Stew"
+}</pre><p>
+      Unless you request a specific revision, the latest revision of the
+      document will always be returned.
+    </p><div class="section" title="6.2.1.&nbsp;Attachments"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-api-dbdoc_db-doc_get-attachments"></a>6.2.1.&nbsp;Attachments</h3></div></div></div><p>
+        If the document includes attachments, then the returned
+        structure will contain a summary of the attachments associatd
+        with the document, but not the attachment data itself.
+      </p><p>
+        The JSON for the returned document will include the
+        <code class="literal">_attachments</code> field, with one or more
+        attachment definitions. For example:
+      </p><pre class="programlisting">{
+   "_id" : "FishStew",
+   "servings" : 4,
+   "subtitle" : "Delicious with fresh bread",
+   "title" : "Fish Stew"
+   "_attachments" : {
+      "styling.css" : {
+         "stub" : true,
+         "content-type" : "text/css",
+         "length" : 783426,
+         },
+   },
+}</pre><p>
+        The format of the returned JSON is shown in the table below:
+      </p><div class="table"><a name="table-couchdb-api-dbdoc-returneddocumentattachments"></a><p class="title"><b>Table&nbsp;6.4.&nbsp;
+ Returned Document with Attachments
+ </b></p><div class="table-contents"><table summary="
+ Returned Document with Attachments
+ " border="1"><colgroup><col class="item" width="30%"><col class="desc" width="70%"></colgroup><tbody><tr><td><span class="bold"><strong>Field</strong></span></td><td><span class="bold"><strong>Description</strong></span></td></tr><tr><td><code class="literal">_id</code> (optional) </td><td>
+ Document ID
+ </td></tr><tr><td><code class="literal">_rev</code> (optional) </td><td>
+ Revision ID (when updating an existing document)
+ </td></tr><tr><td><code class="literal">_attachments</code> (optional) </td><td>
+ Document Attachment
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">filename</code>  </td><td>
+ Attachment
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">content_type</code>  </td><td>
+ MIME Content type string
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">length</code>  </td><td>
+ Length (bytes) of the attachment data
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">revpos</code>  </td><td>
+ Revision where this attachment exists
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">stub</code>  </td><td>
+ Indicates whether the attachment is a stub
+ </td></tr></tbody></table></div></div><br class="table-break"></div><div class="section" title="6.2.2.&nbsp;Getting a List of Revisions"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-api-dbdoc_db-doc_get-revs"></a>6.2.2.&nbsp;Getting a List of Revisions</h3></div></div></div><p>
+        You can obtain a list of the revisions for a given document by
+        adding the <code class="literal">revs=true</code> parameter to the request
+        URL. For example:
+      </p><pre class="programlisting">GET http://couchdb:5984/recipes/FishStew?revs=true
+Accept: application/json</pre><p>
+        The returned JSON structure includes the original document,
+        including a <code class="literal">_revisions</code> structure that
+        includes the revision information:
+      </p><pre class="programlisting">{
+   "servings" : 4,
+   "subtitle" : "Delicious with a green salad",
+   "_id" : "FishStew",
+   "title" : "Irish Fish Stew",
+   "_revisions" : {
+      "ids" : [
+         "a1a9b39ee3cc39181b796a69cb48521c",
+         "7c4740b4dcf26683e941d6641c00c39d",
+         "9c65296036141e575d32ba9c034dd3ee"
+      ],
+      "start" : 3
+   },
+   "_rev" : "3-a1a9b39ee3cc39181b796a69cb48521c"
+}</pre><div class="table"><a name="table-couchdb-api-dbdoc-document_with_revs"></a><p class="title"><b>Table&nbsp;6.5.&nbsp;
+ Returned CouchDB Document with Revision Info
+ </b></p><div class="table-contents"><table summary="
+ Returned CouchDB Document with Revision Info
+ " border="1"><colgroup><col class="item" width="30%"><col class="desc" width="70%"></colgroup><tbody><tr><td><span class="bold"><strong>Field</strong></span></td><td><span class="bold"><strong>Description</strong></span></td></tr><tr><td><code class="literal">_id</code> (optional) </td><td>
+ Document ID
+ </td></tr><tr><td><code class="literal">_rev</code> (optional) </td><td>
+ Revision ID (when updating an existing document)
+ </td></tr><tr><td><code class="literal">_revisions</code>  </td><td>
+ CouchDB Document Revisions
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">ids</code> <code class="literal">[array]</code> </td><td>
+ Array of valid revision IDs, in reverse order (latest first)
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">start</code>  </td><td>
+ Prefix number for the latest revision
+ </td></tr></tbody></table></div></div><br class="table-break"></div><div class="section" title="6.2.3.&nbsp;Obtaining an Extended Revision History"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-api-dbdoc_db-doc_get-revsextended"></a>6.2.3.&nbsp;Obtaining an Extended Revision History</h3></div></div></div><p>
+        You can get additional information about the revisions for a
+        given document by supplying the <code class="literal">revs_info</code>
+        argument to the query:
+      </p><pre class="programlisting">GET http://couchdb:5984/recipes/FishStew?revs_info=true
+Accept: application/json</pre><p>
+        This returns extended revision information, including the
+        availability and status of each revision:
+      </p><pre class="programlisting">{
+   "servings" : 4,
+   "subtitle" : "Delicious with a green salad",
+   "_id" : "FishStew",
+   "_revs_info" : [
+      {
+         "status" : "available",
+         "rev" : "3-a1a9b39ee3cc39181b796a69cb48521c"
+      },
+      {
+         "status" : "available",
+         "rev" : "2-7c4740b4dcf26683e941d6641c00c39d"
+      },
+      {
+         "status" : "available",
+         "rev" : "1-9c65296036141e575d32ba9c034dd3ee"
+      }
+   ],
+   "title" : "Irish Fish Stew",
+   "_rev" : "3-a1a9b39ee3cc39181b796a69cb48521c"
+}</pre><div class="table"><a name="table-couchdb-api-dbdoc-document_with_revs_info"></a><p class="title"><b>Table&nbsp;6.6.&nbsp;
+ Returned CouchDB Document with Detailed Revision Info
+ </b></p><div class="table-contents"><table summary="
+ Returned CouchDB Document with Detailed Revision Info
+ " border="1"><colgroup><col class="item" width="30%"><col class="desc" width="70%"></colgroup><tbody><tr><td><span class="bold"><strong>Field</strong></span></td><td><span class="bold"><strong>Description</strong></span></td></tr><tr><td><code class="literal">_id</code> (optional) </td><td>
+ Document ID
+ </td></tr><tr><td><code class="literal">_rev</code> (optional) </td><td>
+ Revision ID (when updating an existing document)
+ </td></tr><tr><td><code class="literal">_revs_info</code> <code class="literal">[array]</code> </td><td>
+ CouchDB Document Extended Revision Info
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">rev</code>  </td><td>
+ Full revision string
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">status</code>  </td><td>
+ Status of the revision
+ </td></tr></tbody></table></div></div><br class="table-break"></div><div class="section" title="6.2.4.&nbsp;Obtaining a Specific Revision"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-api-dbdoc_db-doc_get-specrev"></a>6.2.4.&nbsp;Obtaining a Specific Revision</h3></div></div></div><p>
+        To get a specific revision, use the <code class="literal">rev</code>
+        argument to the request, and specify the full revision number:
+      </p><pre class="programlisting">GET http://couchdb:5984/recipes/FishStew?rev=2-7c4740b4dcf26683e941d6641c00c39d
+Accept: application/json</pre><p>
+        The specified revision of the document will be returned,
+        including a <code class="literal">_rev</code> field specifying the
+        revision that was requested:
+      </p><pre class="programlisting">{
+   "_id" : "FishStew",
+   "_rev" : "2-7c4740b4dcf26683e941d6641c00c39d",
+   "servings" : 4,
+   "subtitle" : "Delicious with a green salad",
+   "title" : "Fish Stew"
+}</pre></div></div><div class="section" title="6.3.&nbsp;HEAD /db/doc"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-api-dbdoc_db-doc_head"></a>6.3.&nbsp;<code class="literal">HEAD /db/doc</code></h2></div></div></div><div class="informaltable"><table summary="URL API HEAD /db/doc" border="1"><colgroup><col class="field" width="33%"><col class="info" width="33%"><col class="addinfo" width="34%"></colgroup><tbody><tr><td><span class="bold"><strong>Method</strong></span></td><td colspan="2"><code class="literal">HEAD /db/doc</code></td></tr><tr><td><span class="bold"><strong>Request</strong></span></td><td colspan="2">
+ None
+ </td></tr><tr><td><span class="bold"><strong>Response</strong></span></td><td colspan="2">
+ None
+ </td></tr><tr><td><span class="bold"><strong>Admin Privileges Required</strong></span></td><td colspan="2">no</td></tr><tr><td><span class="bold"><strong>Query Arguments</strong></span></td><td><span class="bold"><strong>Argument</strong></span></td><td><code class="literal">rev</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>
+ Specify the revision to return
+ </td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>yes</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Type</strong></span></td><td>string</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Argument</strong></span></td><td><code class="literal">revs</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>
+ Return a list of the revisions for the document
+ </td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>yes</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Type</strong></span></td><td>boolean</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Argument</strong></span></td><td><code class="literal">revs_info</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>
+ Return a list of detailed revision information for the
+ document
+ </td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>yes</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Type</strong></span></td><td>boolean</td></tr><tr><td colspan="3"><span class="bold"><strong>Return Codes</strong></span></td></tr><tr><td>404</td><td colspan="2">
+ The specified document or revision cannot be found, or has been
+ deleted
+ </td></tr></tbody></table></div><p>
+      Returns the HTTP Headers containing a minimal amount of
+      information about the specified document. The method supports the
+      same query arguments as the <code class="literal">GET</code> method, but
+      only the header information (including document size, and the
+      revision as an ETag), is returned. For example, a simple
+      <code class="literal">HEAD</code> request:
+    </p><pre class="programlisting">HEAD http://couchdb:5984/recipes/FishStew
+Content-Type: application/json</pre><p>
+      Returns the following HTTP Headers:
+    </p><pre class="programlisting">HTTP/1.1 200 OK
+Server: CouchDB/1.0.1 (Erlang OTP/R13B)
+Etag: "7-a19a1a5ecd946dad70e85233ba039ab2"
+Date: Fri, 05 Nov 2010 14:54:43 GMT
+Content-Type: text/plain;charset=utf-8
+Content-Length: 136
+Cache-Control: must-revalidate</pre><p>
+      The <code class="literal">Etag</code> header shows the current revision for
+      the requested document, and the <code class="literal">Content-Length</code>
+      specifies the length of the data, if the document were requested
+      in full.
+    </p><p>
+      Adding any of the query arguments (as supported by
+      <a class="link" href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db-doc_get" title="6.2.&nbsp;GET /db/doc"><code class="literal">GET</code></a>
+      method), then the resulting HTTP Headers will correspond to what
+      would be returned. Note that the current revision is not returned
+      when the <code class="literal">refs_info</code> argument is used. For
+      example:
+    </p><pre class="programlisting">HTTP/1.1 200 OK
+Server: CouchDB/1.0.1 (Erlang OTP/R13B)
+Date: Fri, 05 Nov 2010 14:57:16 GMT
+Content-Type: text/plain;charset=utf-8
+Content-Length: 609
+Cache-Control: must-revalidate</pre></div><div class="section" title="6.4.&nbsp;PUT /db/doc"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-api-dbdoc_db-doc_put"></a>6.4.&nbsp;<code class="literal">PUT /db/doc</code></h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db-doc_put-update">6.4.1. Updating an Existing Document</a></span></dt></dl></div><div class="informaltable"><table summary="URL API PUT /db/doc" border="1"><colgroup><col class="field" width="33%"><col class="info" width="33%"><col class="addinfo" width="34%"></colgroup><tbody><tr><td><span class="bold"><strong>Method</strong></span></td><td colspan="2"><code class="literal">PUT /db/doc</code></td></tr><tr><td><span class="bold"><strong>Request</strong></span></td><td colspan="2">
+ JSON of the new document, or updated version of the existed
+ document
+ </td></tr><tr><td><span class="bold"><strong>Response</strong></span></td><td colspan="2">
+ JSON of the document ID and revision
+ </td></tr><tr><td><span class="bold"><strong>Admin Privileges Required</strong></span></td><td colspan="2">no</td></tr><tr><td><span class="bold"><strong>Query Arguments</strong></span></td><td><span class="bold"><strong>Argument</strong></span></td><td><code class="literal">batch</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>
+ Allow document store request to be batched with others
+ </td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>yes</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Type</strong></span></td><td>string</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Supported Values</strong></span></td><td class="auto-generated">&nbsp;</td></tr><tr><td>&nbsp;</td><td><code class="literal">ok</code></td><td>Enable</td></tr><tr><td><span class="bold"><strong>HTTP Headers</strong></span></td><td><span class="bold"><strong>Header</strong></span></td><td><code class="literal">If-Match</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>Current revision of the document for validation</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>yes</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td colspan="3"><span class="bold"><strong>Return Codes</strong></span></td></tr><tr><td>201</td><td colspan="2">
+ Document has been created successfully
+ </td></tr><tr><td>202</td><td colspan="2">
+ Document accepted for writing (batch mode)
+ </td></tr></tbody></table></div><p>
+      The <code class="literal">PUT</code> method creates a new named document, or
+      creates a new revision of the existing document. Unlike the
+      <a class="link" href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db_post" title="6.1.&nbsp;POST /db"><code class="literal">POST</code></a>
+      method, you must specify the document ID in the request URL.
+    </p><p>
+      For example, to create the docment <code class="literal">FishStew</code>,
+      you would send the following request:
+    </p><pre class="programlisting">PUT http://couchdb:5984/recipes/FishStew
+Content-Type: application/json
+
+{
+  "servings" : 4,
+  "subtitle" : "Delicious with fresh bread",
+  "title" : "Fish Stew"
+}</pre><p>
+      The return type is JSON of the status, document ID,and revision
+      number:
+    </p><pre class="programlisting">{
+   "id" : "FishStew",
+   "ok" : true,
+   "rev" : "1-9c65296036141e575d32ba9c034dd3ee"
+}</pre><div class="section" title="6.4.1.&nbsp;Updating an Existing Document"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-api-dbdoc_db-doc_put-update"></a>6.4.1.&nbsp;Updating an Existing Document</h3></div></div></div><p>
+        To update an existing document you must specify the current
+        revision number within the <code class="literal">_rev</code> parameter.
+        For example:
+      </p><pre class="programlisting">PUT http://couchdb:5984/recipes/FishStew
+Content-Type: application/json
+
+{
+  "_rev" : "1-9c65296036141e575d32ba9c034dd3ee",
+  "servings" : 4,
+  "subtitle" : "Delicious with fresh salad",
+  "title" : "Fish Stew"
+}</pre><p>
+        Alternatively, you can supply the current revision number in the
+        <code class="literal">If-Match</code> HTTP header of the request. For
+        example:
+      </p><pre class="programlisting">PUT http://couchdb:5984/recipes/FishStew
+If-Match: 2-d953b18035b76f2a5b1d1d93f25d3aea
+Content-Type: application/json
+
+{
+   "servings" : 4,
+   "subtitle" : "Delicious with fresh salad",
+   "title" : "Fish Stew"
+}</pre><p>
+        The JSON returned will include the updated revision number:
+      </p><pre class="programlisting">{
+   "id" : "FishStew99",
+   "ok" : true,
+   "rev" : "2-d953b18035b76f2a5b1d1d93f25d3aea"
+}</pre><p>
+        For information on batched writes, which can provide improved
+        performance, see
+        <a class="xref" href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db_batchmode" title="6.1.2.&nbsp;Batch Mode Writes">Section&nbsp;6.1.2, &ldquo;Batch Mode Writes&rdquo;</a>.
+      </p></div></div><div class="section" title="6.5.&nbsp;DELETE /db/doc"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-api-dbdoc_db-doc_delete"></a>6.5.&nbsp;<code class="literal">DELETE /db/doc</code></h2></div></div></div><div class="informaltable"><table summary="URL API DELETE /db/doc" border="1"><colgroup><col class="field" width="33%"><col class="info" width="33%"><col class="addinfo" width="34%"></colgroup><tbody><tr><td><span class="bold"><strong>Method</strong></span></td><td colspan="2"><code class="literal">DELETE /db/doc</code></td></tr><tr><td><span class="bold"><strong>Request</strong></span></td><td colspan="2">
+ None
+ </td></tr><tr><td><span class="bold"><strong>Response</strong></span></td><td colspan="2">
+ JSON of the deleted revision
+ </td></tr><tr><td><span class="bold"><strong>Admin Privileges Required</strong></span></td><td colspan="2">no</td></tr><tr><td><span class="bold"><strong>Query Arguments</strong></span></td><td><span class="bold"><strong>Argument</strong></span></td><td><code class="literal">rev</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>
+ Current revision of the document for validation
+ </td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>yes</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Type</strong></span></td><td>string</td></tr><tr><td><span class="bold"><strong>HTTP Headers</strong></span></td><td><span class="bold"><strong>Header</strong></span></td><td><code class="literal">If-Match</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>Current revision of the document for validation</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>yes</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td colspan="3"><span class="bold"><strong>Return Codes</strong></span></td></tr><tr><td>409</td><td colspan="2">
+ Revision is missing, invalid or not the latest
+ </td></tr></tbody></table></div><p>
+      Deletes the specified document from the database. You must supply
+      the current (latest) revision, either by using the
+      <code class="literal">rev</code> parameter to specify the revision:
+    </p><pre class="programlisting">DELETE http://couchdb:5984/recipes/FishStew?rev=3-a1a9b39ee3cc39181b796a69cb48521c
+Content-Type: application/json</pre><p>
+      Alternatively, you can use ETags with the
+      <code class="literal">If-Match</code> field:
+    </p><pre class="programlisting">DELETE http://couchdb:5984/recipes/FishStew
+If-Match: 3-a1a9b39ee3cc39181b796a69cb48521c
+Content-Type: application/json</pre><p>
+      The returned JSON contains the document ID, revision and status:
+    </p><pre class="programlisting">{
+   "id" : "FishStew",
+   "ok" : true,
+   "rev" : "4-2719fd41187c60762ff584761b714cfb"
+}</pre><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+        Note that deletion of a record increments the revision number.
+        The use of a revision for deletion of the record allows
+        replication of the database to correctly track the deletion in
+        synchronized copies.
+      </p></div></div><div class="section" title="6.6.&nbsp;COPY /db/doc"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-api-dbdoc_db-doc_copy"></a>6.6.&nbsp;<code class="literal">COPY /db/doc</code></h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db-doc_copy-simple">6.6.1. Copying a Document</a></span></dt><dt><span class="section"><a href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db-doc_copy-specrev">6.6.2. Copying from a Specific Revision</a></span></dt><dt><span class="section"><a href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db-doc_copy-existing">6.6.3. Copying to an Existing Document</a></span></dt></dl></div><div class="informaltable"><table summary="URL API COPY /db/doc" border="1"><colgroup><col class="field" width="33%"><col class="info" width="33%"><col class="addinfo" width="34%"></colgroup><tbody><tr><td><span class="bold"><strong>Method</strong></span></td><td colspan="2"><code class="literal">COPY /db/doc</code></td></tr><tr><td><span class="bold"><strong>Request</strong></span></td><td colspan="2">
+ None
+ </td></tr><tr><td><span class="bold"><strong>Response</strong></span></td><td colspan="2">
+ JSON of the new document and revision
+ </td></tr><tr><td><span class="bold"><strong>Admin Privileges Required</strong></span></td><td colspan="2">no</td></tr><tr><td><span class="bold"><strong>Query Arguments</strong></span></td><td><span class="bold"><strong>Argument</strong></span></td><td><code class="literal">rev</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>
+ Revision to copy from
+ </td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>yes</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Type</strong></span></td><td>string</td></tr><tr><td><span class="bold"><strong>HTTP Headers</strong></span></td><td><span class="bold"><strong>Header</strong></span></td><td><code class="literal">Destination</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>Destination document (and optional revision)</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>no</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td colspan="3"><span class="bold"><strong>Return Codes</strong></span></td></tr><tr><td>201</td><td colspan="2">
+ Document has been copied and created successfully
+ </td></tr><tr><td>409</td><td colspan="2">
+ Conflict (target document already exists)
+ </td></tr></tbody></table></div><p>
+      The <code class="literal">COPY</code> command (which is non-standard HTTP)
+      copies an existing document to a new or existing document.
+    </p><p>
+      The source document is specified on the request line, with the
+      <code class="literal">Destination</code> HTTP Header of the request
+      specifying the target document.
+    </p><div class="section" title="6.6.1.&nbsp;Copying a Document"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-api-dbdoc_db-doc_copy-simple"></a>6.6.1.&nbsp;Copying a Document</h3></div></div></div><p>
+        You can copy the latest version of a document to a new document
+        by specifying the current document and target document:
+      </p><pre class="programlisting">COPY http://couchdb:5984/recipes/FishStew
+Content-Type: application/json
+Destination: IrishFishStew</pre><p>
+        The above request copies the document
+        <code class="literal">FishStew</code> to the new document
+        <code class="literal">IrishFishStew</code>. The response is the ID and
+        revision of the new document.
+      </p><pre class="programlisting">{
+   "id" : "IrishFishStew",
+   "rev" : "1-9c65296036141e575d32ba9c034dd3ee"
+}</pre></div><div class="section" title="6.6.2.&nbsp;Copying from a Specific Revision"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-api-dbdoc_db-doc_copy-specrev"></a>6.6.2.&nbsp;Copying from a Specific Revision</h3></div></div></div><p>
+        To copy <span class="emphasis"><em>from</em></span> a specific version, use the
+        <code class="literal">rev</code> argument to the query string:
+      </p><pre class="programlisting">COPY http://couchdb:5984/recipes/FishStew?rev=5-acfd32d233f07cea4b4f37daaacc0082
+Content-Type: application/json
+Destination: IrishFishStew</pre><p>
+        The new document will be created using the information in the
+        specified revision of the source document.
+      </p></div><div class="section" title="6.6.3.&nbsp;Copying to an Existing Document"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-api-dbdoc_db-doc_copy-existing"></a>6.6.3.&nbsp;Copying to an Existing Document</h3></div></div></div><p>
+        To copy to an existing document, you must specify the current
+        revision string for the target document, using the
+        <code class="literal">rev</code> parameter to the
+        <code class="literal">Destination</code> HTTP Header string. For example:
+      </p><pre class="programlisting">COPY http://couchdb:5984/recipes/FishStew
+Content-Type: application/json
+Destination: IrishFishStew?rev=1-9c65296036141e575d32ba9c034dd3ee</pre><p>
+        The return value will be the new revision of the copied
+        document:
+      </p><pre class="programlisting">{
+   "id" : "IrishFishStew",
+   "rev" : "2-55b6a1b251902a2c249b667dab1c6692"
+}</pre></div></div><div class="section" title="6.7.&nbsp;GET /db/doc/attachment"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-api-dbdoc_db-doc-attachment_get"></a>6.7.&nbsp;<code class="literal">GET /db/doc/attachment</code></h2></div></div></div><div class="informaltable"><table summary="URL API GET /db/doc/attachment" border="1"><colgroup><col class="field" width="33%"><col class="info" width="33%"><col class="addinfo" width="34%"></colgroup><tbody><tr><td><span class="bold"><strong>Method</strong></span></td><td colspan="2"><code class="literal">GET /db/doc/attachment</code></td></tr><tr><td><span class="bold"><strong>Request</strong></span></td><td colspan="2">
+ None
+ </td></tr><tr><td><span class="bold"><strong>Response</strong></span></td><td colspan="2">
+ Returns the document data
+ </td></tr><tr><td><span class="bold"><strong>Admin Privileges Required</strong></span></td><td colspan="2">no</td></tr></tbody></table></div><p>
+      Returns the file attachment <code class="literal">attachment</code>
+      associated with the document <code class="literal">doc</code>. The raw data
+      of the associated attachment is returned (just as if you were
+      accessing a static file. The returned HTTP
+      <code class="literal">Content-type</code> will be the same as the content
+      type set when the document attachment was submitted into the
+      database.
+    </p></div><div class="section" title="6.8.&nbsp;PUT /db/doc/attachment"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-api-dbdoc_db-doc-attachment_put"></a>6.8.&nbsp;<code class="literal">PUT /db/doc/attachment</code></h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db-doc-attachment_put-existing">6.8.1. Updating an Existing Attachment</a></span></dt></dl></div><div class="informaltable"><table summary="URL API PUT /db/doc/attachment" border="1"><colgroup><col class="field" width="33%"><col class="info" width="33%"><col class="addinfo" width="34%"></colgroup><tbody><tr><td><span class="bold"><strong>Method</strong></span></td><td colspan="2"><code class="literal">PUT /db/doc/attachment</code></td></tr><tr><td><span class="bold"><strong>Request</strong></span></td><td colspan="2">
+ Raw document data
+ </td></tr><tr><td><span class="bold"><strong>Response</strong></span></td><td colspan="2">
+ JSON document status
+ </td></tr><tr><td><span class="bold"><strong>Admin Privileges Required</strong></span></td><td colspan="2">no</td></tr><tr><td><span class="bold"><strong>Query Arguments</strong></span></td><td><span class="bold"><strong>Argument</strong></span></td><td><code class="literal">rev</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>
+ Current document revision
+ </td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>no</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Type</strong></span></td><td>string</td></tr><tr><td><span class="bold"><strong>HTTP Headers</strong></span></td><td><span class="bold"><strong>Header</strong></span></td><td><code class="literal">Content-Length</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>Length (bytes) of the attachment being uploaded</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>no</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Header</strong></span></td><td><code class="literal">Content-Type</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>MIME type for the uploaded attachment</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>no</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Header</strong></span></td><td><code class="literal">If-Match</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>Current revision of the document for validation</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>yes</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td colspan="3"><span class="bold"><strong>Return Codes</strong></span></td></tr><tr><td>201</td><td colspan="2">
+ Attachment has been accepted
+ </td></tr></tbody></table></div><p>
+      Upload the supplied content as an attachment to the specified
+      document (<code class="literal">doc</code>). The
+      <code class="literal">attachment</code> name provided must be a URL encoded
+      string. You must also supply either the <code class="literal">rev</code>
+      query argument or the <code class="literal">If-Match</code> HTTP header for
+      validation, and the HTTP headers (to set the attacment content
+      type). The content type is used when the attachment is requested
+      as the corresponding content-type in the returned document header.
+    </p><p>
+      For example, you could upload a simple text document using the
+      following request:
+    </p><pre class="programlisting">PUT http://couchdb:5984/recipes/FishStew/basic?rev=8-a94cb7e50ded1e06f943be5bfbddf8ca
+Content-Length: 10
+Content-Type: text/plain
+
+Roast it</pre><p>
+      Or by using the <code class="literal">If-Match</code> HTTP header:
+    </p><pre class="programlisting">PUT http://couchdb:5984/recipes/FishStew/basic
+If-Match: 8-a94cb7e50ded1e06f943be5bfbddf8ca
+Content-Length: 10
+Content-Type: text/plain
+
+Roast it</pre><p>
+      The returned JSON contains the new document information:
+    </p><pre class="programlisting">{
+   "id" : "FishStew",
+   "ok" : true,
+   "rev" : "9-247bb19a41bfd9bfdaf5ee6e2e05be74"
+}</pre><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+        Uploading an attachment updates the corresponding document
+        revision. Revisions are tracked for the parent document, not
+        individual attachments.
+      </p></div><div class="section" title="6.8.1.&nbsp;Updating an Existing Attachment"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-api-dbdoc_db-doc-attachment_put-existing"></a>6.8.1.&nbsp;Updating an Existing Attachment</h3></div></div></div><p>
+        Uploading an attachment using an existing attachment name will
+        update the corresponding stored content of the database. Since
+        you must supply the revision information to add an attachment to
+        a document, this serves as validation to update the existing
+        attachment.
+      </p></div></div><div class="section" title="6.9.&nbsp;DELETE /db/doc/attachment"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-api-dbdoc_db-doc-attachment_delete"></a>6.9.&nbsp;<code class="literal">DELETE /db/doc/attachment</code></h2></div></div></div><div class="informaltable"><table summary="URL API DELETE /db/doc/attachment" border="1"><colgroup><col class="field" width="33%"><col class="info" width="33%"><col class="addinfo" width="34%"></colgroup><tbody><tr><td><span class="bold"><strong>Method</strong></span></td><td colspan="2"><code class="literal">DELETE /db/doc/attachment</code></td></tr><tr><td><span class="bold"><strong>Request</strong></span></td><td colspan="2">
+ None
+ </td></tr><tr><td><span class="bold"><strong>Response</strong></span></td><td colspan="2">
+ JSON status
+ </td></tr><tr><td><span class="bold"><strong>Admin Privileges Required</strong></span></td><td colspan="2">no</td></tr><tr><td><span class="bold"><strong>Query Arguments</strong></span></td><td><span class="bold"><strong>Argument</strong></span></td><td><code class="literal">rev</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>
+ Revision of the document to be deleted
+ </td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>no</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Type</strong></span></td><td>string</td></tr><tr><td><span class="bold"><strong>HTTP Headers</strong></span></td><td><span class="bold"><strong>Header</strong></span></td><td><code class="literal">If-Match</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>Current revision of the document for validation</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>yes</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td colspan="3"><span class="bold"><strong>Return Codes</strong></span></td></tr><tr><td>200</td><td colspan="2">
+ Attachment deleted successfully
+ </td></tr><tr><td>409</td><td colspan="2">
+ Supplied revision is incorrect or missing
+ </td></tr></tbody></table></div><p>
+      Deletes the attachment <code class="literal">attachment</code> to the
+      specified <code class="literal">doc</code>. You must supply the
+      <code class="literal">rev</code> argument with the current revision to
+      delete the attachment.
+    </p><p>
+      For example to delete the attachment <code class="literal">basic</code> from
+      the recipe <code class="literal">FishStew</code>:
+    </p><pre class="programlisting">DELETE http://couchdb:5984/recipes/FishStew/basic?rev=9-247bb19a41bfd9bfdaf5ee6e2e05be74
+Content-Type: application/json</pre><p>
+      The returned JSON contains the updated revision information:
+    </p><pre class="programlisting">{
+   "id" : "FishStew",
+   "ok" : true,
+   "rev" : "10-561bf6b1e27615cee83d1f48fa65dd3e"
+}</pre></div></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-api-db.html">Prev</a>&nbsp;</td><td align="center" width="20%">&nbsp;</td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-localdb.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">Chapter&nbsp;5.&nbsp;CouchDB API Server Database Methods&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;Chapter&nbsp;7.&nbsp;CouchDB API Server Local (non-replicating) Document Methods</td></tr></table></div></body></html>

@@ -1,0 +1,80 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>3.1.1.&nbsp;Basics</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-single-replication-replicatordb.html" title="3.1.&nbsp;Replicator Database"><link rel="prev" href="couchdb-single-replication-replicatordb.html" title="3.1.&nbsp;Replicator Database"><link rel="next" href="couchdb-single-replication-replicatordb-docsame.html" title="3.1.2.&nbsp;Documents describing the same replication"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">3.1.1.&nbsp;Basics</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-single-replication-replicatordb.html">Prev</a>&nbsp;</td><th align="center" width="60%">3.1.&nbsp;Replicator Database</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-single-replication-replicatordb-docsame.html">Next</a></td></tr></table><hr></div><div class="section" title="3.1.1.&nbsp;Basics"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-single-replication-replicatordb-basics"></a>3.1.1.&nbsp;Basics</h3></div></div></div><p>
+        Let's say you PUT the following document into _replicator:
+      </p><pre class="programlisting">{
+    "_id": "my_rep",
+    "source":  "http://myserver.com:5984/foo",
+    "target":  "bar",
+    "create_target":  true
+}</pre><p>
+        In the couch log you'll see 2 entries like these:
+      </p><pre class="programlisting">[Thu, 17 Feb 2011 19:43:59 GMT] [info] [&lt;0.291.0&gt;] Document `my_rep` triggered replication `c0ebe9256695ff083347cbf95f93e280+create_target`
+[Thu, 17 Feb 2011 19:44:37 GMT] [info] [&lt;0.124.0&gt;] Replication `c0ebe9256695ff083347cbf95f93e280+create_target` finished (triggered by document `my_rep`)</pre><p>
+        As soon as the replication is triggered, the document will be
+        updated by CouchDB with 3 new fields:
+      </p><pre class="programlisting">{
+    "_id": "my_rep",
+    "source":  "http://myserver.com:5984/foo",
+    "target":  "bar",
+    "create_target":  true,
+    "_replication_id":  "c0ebe9256695ff083347cbf95f93e280",
+    "_replication_state":  "triggered",
+    "_replication_state_time":  1297974122
+}</pre><p>
+        Special fields set by the replicator start with the prefix
+        <code class="literal">_replication_</code>.
+      </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+            <code class="literal">_replication_id</code>
+          </p><p>
+            The ID internally assigned to the replication. This is also
+            the ID exposed by <code class="literal">/_active_tasks</code>.
+          </p></li><li class="listitem"><p>
+            <code class="literal">_replication_state</code>
+          </p><p>
+            The current state of the replication.
+          </p></li><li class="listitem"><p>
+            <code class="literal">_replication_state_time</code>
+          </p><p>
+            A Unix timestamp (number of seconds since 1 Jan 1970) that
+            tells us when the current replication state (marked in
+            <code class="literal">_replication_state</code>) was set.
+          </p></li></ul></div><p>
+        When the replication finishes, it will update the
+        <code class="literal">_replication_state</code> field (and
+        <code class="literal">_replication_state_time</code>) with the value
+        <code class="literal">completed</code>, so the document will look like:
+      </p><pre class="programlisting">{
+    "_id": "my_rep",
+    "source":  "http://myserver.com:5984/foo",
+    "target":  "bar",
+    "create_target":  true,
+    "_replication_id":  "c0ebe9256695ff083347cbf95f93e280",
+    "_replication_state":  "completed",
+    "_replication_state_time":  1297974122
+}</pre><p>
+        When an error happens during replication, the
+        <code class="literal">_replication_state</code> field is set to
+        <code class="literal">error</code> (and
+        <code class="literal">_replication_state</code> gets updated of course).
+      </p><p>
+        When you PUT/POST a document to the
+        <code class="literal">_replicator</code> database, CouchDB will attempt to
+        start the replication up to 10 times (configurable under
+        <code class="literal">[replicator]</code>, parameter
+        <code class="literal">max_replication_retry_count</code>). If it fails on
+        the first attempt, it waits 5 seconds before doing a second
+        attempt. If the second attempt fails, it waits 10 seconds before
+        doing a third attempt. If the third attempt fails, it waits 20
+        seconds before doing a fourth attempt (each attempt doubles the
+        previous wait period). When an attempt fails, the Couch log will
+        show you something like:
+      </p><pre class="programlisting">[error] [&lt;0.149.0&gt;] Error starting replication `67c1bb92010e7abe35d7d629635f18b6+create_target` (document `my_rep_2`): {db_not_found,&lt;&lt;"could not open http://myserver:5986/foo/"&gt;&gt;</pre><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+          The <code class="literal">_replication_state</code> field is only set to
+          <code class="literal">error</code> when all the attempts were
+          unsuccessful.
+        </p></div><p>
+        There are only 3 possible values for the
+        <code class="literal">_replication_state</code> field:
+        <code class="literal">triggered</code>, <code class="literal">completed</code> and
+        <code class="literal">error</code>. Continuous replications never get
+        their state set to <code class="literal">completed</code>.
+      </p></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-single-replication-replicatordb.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-single-replication-replicatordb.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-single-replication-replicatordb-docsame.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">3.1.&nbsp;Replicator Database&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;3.1.2.&nbsp;Documents describing the same replication</td></tr></table></div></body></html>

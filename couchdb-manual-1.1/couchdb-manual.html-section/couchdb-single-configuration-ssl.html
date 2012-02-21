@@ -1,0 +1,65 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>12.8.&nbsp;Configuring SSL Network Sockets</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-single-configuration.html" title="Chapter&nbsp;12.&nbsp;Configuring CouchDB"><link rel="prev" href="couchdb-single-configuration-vhost.html" title="12.7.&nbsp;vhosts definitions"><link rel="next" href="couchdb-single-config-options.html" title="12.9.&nbsp;CouchDB Configuration Options"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">12.8.&nbsp;Configuring SSL Network Sockets</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-single-configuration-vhost.html">Prev</a>&nbsp;</td><th align="center" width="60%">Chapter&nbsp;12.&nbsp;Configuring CouchDB</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-single-config-options.html">Next</a></td></tr></table><hr></div><div class="section" title="12.8.&nbsp;Configuring SSL Network Sockets"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-single-configuration-ssl"></a>12.8.&nbsp;Configuring SSL Network Sockets</h2></div></div></div><p>
+      SSL configuration in CouchDB was designed to be as easy as
+      possible. All you need is two files; a certificate and a private
+      key. If you bought an official SSL certificate from a certificate
+      authority, both should be in your possession already.
+    </p><p>
+      If you just want to try this out and don't want to pay anything
+      upfront, you can create a self-signed certificate. Everything will
+      work the same, but clients will get a warning about an insecure
+      certificate.
+    </p><p>
+      You will need the OpenSSL command line tool installed. It probably
+      already is.
+    </p><pre class="programlisting">shell&gt; <strong class="userinput"><code>mkdir cert &amp;&amp; cd cert</code></strong>
+shell&gt; <strong class="userinput"><code>openssl genrsa &gt; privkey.pem</code></strong>
+shell&gt; <strong class="userinput"><code>openssl req -new -x509 -key privkey.pem -out mycert.pem -days 1095</code></strong>
+shell&gt; <strong class="userinput"><code>ls</code></strong>
+mycert.pem privkey.pem</pre><p>
+      Now, you need to edit CouchDB's configuration, either by editing
+      your <code class="filename">local.ini</code> file or using the
+      <code class="literal">/_config</code> API calls or the configuration screen
+      in Futon. Here is what you need to do in
+      <code class="filename">local.ini</code>, you can infer what needs doing in
+      the other places.
+    </p><p>
+      Be sure to make these edits. Under <code class="literal">[daemons]</code>
+      you should see:
+    </p><pre class="programlisting">; enable SSL support by uncommenting the following line and supply the PEM's below.
+; the default ssl port CouchDB listens on is 6984
+;httpsd = {couch_httpd, start_link, [https]}</pre><p>
+      Here uncomment the last line:
+    </p><pre class="programlisting">httpsd = {couch_httpd, start_link, [https]}</pre><p>
+      Next, under <code class="literal">[ssl]</code> you will see:
+    </p><pre class="programlisting">;cert_file = /full/path/to/server_cert.pem
+;key_file = /full/path/to/server_key.pem</pre><p>
+      Uncomment and adjust the paths so it matches your system's paths:
+    </p><pre class="programlisting">cert_file = /home/jan/cert/mycert.pem
+key_file = /home/jan/cert/privkey.pem</pre><p>
+      For more information please read
+      <a class="ulink" href="http://www.openssl.org/docs/HOWTO/certificates.txt" target="_top">http://www.openssl.org/docs/HOWTO/certificates.txt</a>.
+    </p><p>
+      Now start (or restart) CouchDB. You should be able to connect to
+      it using HTTPS on port 6984:
+    </p><pre class="programlisting">shell&gt; <strong class="userinput"><code>curl https://127.0.0.1:6984/</code></strong>
+curl: (60) SSL certificate problem, verify that the CA cert is OK. Details:
+error:14090086:SSL routines:SSL3_GET_SERVER_CERTIFICATE:certificate verify failed
+More details here: http://curl.haxx.se/docs/sslcerts.html
+
+curl performs SSL certificate verification by default, using a "bundle"
+of Certificate Authority (CA) public keys (CA certs). If the default
+bundle file isn't adequate, you can specify an alternate file
+using the --cacert option.
+If this HTTPS server uses a certificate signed by a CA represented in
+the bundle, the certificate verification probably failed due to a
+problem with the certificate (it might be expired, or the name might
+not match the domain name in the URL).
+If you'd like to turn off curl's verification of the certificate, use
+the -k (or --insecure) option.</pre><p>
+      Oh no what happened?! &mdash; Remember, clients will notify their
+      users that your certificate is self signed.
+      <span class="command"><strong>curl</strong></span> is the client in this case and it notifies
+      you. Luckily you trust yourself (don't you?) and you can specify
+      the <code class="option">-k</code> option as the message reads:
+    </p><pre class="programlisting">shell&gt; <strong class="userinput"><code>curl -k https://127.0.0.1:6984/</code></strong>
+{"couchdb":"Welcome","version":"1.1.0"}</pre></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-single-configuration-vhost.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-single-configuration.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-single-config-options.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">12.7.&nbsp;<code class="literal">vhosts</code> definitions&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;12.9.&nbsp;CouchDB Configuration Options</td></tr></table></div></body></html>

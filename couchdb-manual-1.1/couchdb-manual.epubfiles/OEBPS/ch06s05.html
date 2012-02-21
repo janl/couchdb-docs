@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>6.5.&nbsp;DELETE /db/doc</title>
+<link href="epub.css" type="text/css" rel="stylesheet" />
+<meta content="DocBook XSL Stylesheets V1.76.1" name="generator" />
+</head>
+<body>
+<div class="section" title="6.5.&nbsp;DELETE /db/doc">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-api-dbdoc_db-doc_delete" />6.5.&nbsp;<code class="literal">DELETE /db/doc</code>
+</h1>
+</div>
+</div>
+</div>
+<div class="informaltable">
+<table summary="URL API DELETE /db/doc" border="1">
+<colgroup>
+<col class="field" width="33%" />
+<col class="info" width="33%" />
+<col class="addinfo" width="34%" />
+</colgroup>
+<tbody>
+<tr>
+<td>
+<span class="bold">
+<strong>Method</strong>
+</span>
+</td>
+<td colspan="2">
+<code class="literal">DELETE /db/doc</code>
+</td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Request</strong>
+</span>
+</td>
+<td colspan="2">
+ None
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Response</strong>
+</span>
+</td>
+<td colspan="2">
+ JSON of the deleted revision
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Admin Privileges Required</strong>
+</span>
+</td>
+<td colspan="2">no</td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Query Arguments</strong>
+</span>
+</td>
+<td>
+<span class="bold">
+<strong>Argument</strong>
+</span>
+</td>
+<td>
+<code class="literal">rev</code>
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Description</strong>
+</span>
+</td>
+<td>
+ Current revision of the document for validation
+ </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Optional</strong>
+</span>
+</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Type</strong>
+</span>
+</td>
+<td>string</td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>HTTP Headers</strong>
+</span>
+</td>
+<td>
+<span class="bold">
+<strong>Header</strong>
+</span>
+</td>
+<td>
+<code class="literal">If-Match</code>
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Description</strong>
+</span>
+</td>
+<td>Current revision of the document for validation</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Optional</strong>
+</span>
+</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td colspan="3">
+<span class="bold">
+<strong>Return Codes</strong>
+</span>
+</td>
+</tr>
+<tr>
+<td>409</td>
+<td colspan="2">
+ Revision is missing, invalid or not the latest
+ </td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+      Deletes the specified document from the database. You must supply
+      the current (latest) revision, either by using the
+      <code class="literal">rev</code> parameter to specify the revision:
+    </p>
+<pre class="programlisting">DELETE http://couchdb:5984/recipes/FishStew?rev=3-a1a9b39ee3cc39181b796a69cb48521c
+Content-Type: application/json</pre>
+<p>
+      Alternatively, you can use ETags with the
+      <code class="literal">If-Match</code> field:
+    </p>
+<pre class="programlisting">DELETE http://couchdb:5984/recipes/FishStew
+If-Match: 3-a1a9b39ee3cc39181b796a69cb48521c
+Content-Type: application/json</pre>
+<p>
+      The returned JSON contains the document ID, revision and status:
+    </p>
+<pre class="programlisting">{
+   "id" : "FishStew",
+   "ok" : true,
+   "rev" : "4-2719fd41187c60762ff584761b714cfb"
+}</pre>
+<div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Note</h3>
+<p>
+        Note that deletion of a record increments the revision number.
+        The use of a revision for deletion of the record allows
+        replication of the database to correctly track the deletion in
+        synchronized copies.
+      </p>
+</div>
+</div>
+</body>
+</html>

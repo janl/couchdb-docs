@@ -1,0 +1,149 @@
+<!DOCTYPE ncx PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1">
+<head>
+<meta name="dtb:uid" content="_couchdb-release-1.1" />
+</head>
+<docTitle>
+<text>CouchDB Release 1.1 Feature Guide</text>
+</docTitle>
+<navMap>
+<navPoint id="N10001" playOrder="1">
+<navLabel>
+<text>CouchDB Release 1.1 Feature Guide</text>
+</navLabel>
+<content src="index.html" />
+<navPoint id="N10015" playOrder="2">
+<navLabel>
+<text>1. Upgrading to CouchDB 1.1</text>
+</navLabel>
+<content src="index.html#couchdb-release-1.1-upgrading" />
+</navPoint>
+<navPoint id="N10020" playOrder="3">
+<navLabel>
+<text>2. Replicator Database</text>
+</navLabel>
+<content src="ar01s02.html" />
+<navPoint id="N10060" playOrder="4">
+<navLabel>
+<text>2.1. Basics</text>
+</navLabel>
+<content src="ar01s02.html#couchdb-release-1.1-replicatordb-basics" />
+</navPoint>
+<navPoint id="N100D3" playOrder="5">
+<navLabel>
+<text>2.2. Documents describing the same replication</text>
+</navLabel>
+<content src="ar01s02.html#couchdb-release-1.1-replicatordb-docsame" />
+</navPoint>
+<navPoint id="N10107" playOrder="6">
+<navLabel>
+<text>2.3. Canceling replications</text>
+</navLabel>
+<content src="ar01s02.html#couchdb-release-1.1-replicatordb-cancel" />
+</navPoint>
+<navPoint id="N1011B" playOrder="7">
+<navLabel>
+<text>2.4. Server restart</text>
+</navLabel>
+<content src="ar01s02.html#couchdb-release-1.1-replicatordb-restart" />
+</navPoint>
+<navPoint id="N10136" playOrder="8">
+<navLabel>
+<text>2.5. Changing the Replicator Database</text>
+</navLabel>
+<content src="ar01s02.html#couchdb-release-1.1-replicatordb-changing" />
+</navPoint>
+<navPoint id="N1015E" playOrder="9">
+<navLabel>
+<text>2.6. Replicating the replicator database</text>
+</navLabel>
+<content src="ar01s02.html#couchdb-release-1.1-replicatordb-replicating" />
+</navPoint>
+<navPoint id="N10171" playOrder="10">
+<navLabel>
+<text>2.7. Delegations</text>
+</navLabel>
+<content src="ar01s02.html#couchdb-release-1.1-replicatordb-delegations" />
+</navPoint>
+</navPoint>
+<navPoint id="N101A5" playOrder="11">
+<navLabel>
+<text>3. Native SSL Support</text>
+</navLabel>
+<content src="ar01s03.html" />
+</navPoint>
+<navPoint id="N101FC" playOrder="12">
+<navLabel>
+<text>4. HTTP Range Requests</text>
+</navLabel>
+<content src="ar01s04.html" />
+</navPoint>
+<navPoint id="N10234" playOrder="13">
+<navLabel>
+<text>5. HTTP Proxying</text>
+</navLabel>
+<content src="ar01s05.html" />
+</navPoint>
+<navPoint id="N10291" playOrder="14">
+<navLabel>
+<text>6. Added CommonJS support to map functions</text>
+</navLabel>
+<content src="ar01s06.html" />
+</navPoint>
+<navPoint id="N102BA" playOrder="15">
+<navLabel>
+<text>7. More granular ETag support for views</text>
+</navLabel>
+<content src="ar01s07.html" />
+</navPoint>
+<navPoint id="N102C5" playOrder="16">
+<navLabel>
+<text>8. Added built-in filters for _changes: _doc_ids and _design.</text>
+</navLabel>
+<content src="ar01s08.html" />
+</navPoint>
+<navPoint id="N102E0" playOrder="17">
+<navLabel>
+<text>9. Allow wildcards in vhosts definitions</text>
+</navLabel>
+<content src="ar01s09.html" />
+</navPoint>
+<navPoint id="N102EC" playOrder="18">
+<navLabel>
+<text>10. OS Daemons</text>
+</navLabel>
+<content src="ar01s10.html" />
+</navPoint>
+<navPoint id="N10314" playOrder="19">
+<navLabel>
+<text>11. Stale views and update_after</text>
+</navLabel>
+<content src="ar01s11.html" />
+</navPoint>
+<navPoint id="N10327" playOrder="20">
+<navLabel>
+<text>12. Socket Options Configuration Setting</text>
+</navLabel>
+<content src="ar01s12.html" />
+</navPoint>
+<navPoint id="N1033B" playOrder="21">
+<navLabel>
+<text>13. Server Options Configuration Setting</text>
+</navLabel>
+<content src="ar01s13.html" />
+</navPoint>
+<navPoint id="N1034C" playOrder="22">
+<navLabel>
+<text>14. Improved Error Messages</text>
+</navLabel>
+<content src="ar01s14.html" />
+</navPoint>
+<navPoint id="N10360" playOrder="23">
+<navLabel>
+<text>15. Multiple micro-optimizations when reading data.</text>
+</navLabel>
+<content src="ar01s15.html" />
+</navPoint>
+</navPoint>
+</navMap>
+</ncx>

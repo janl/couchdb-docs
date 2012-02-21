@@ -1,0 +1,106 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>5.4.&nbsp;GET /db/_changes</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-api-db.html" title="Chapter&nbsp;5.&nbsp;CouchDB API Server Database Methods"><link rel="prev" href="couchdb-api-db_db_delete.html" title="5.3.&nbsp;DELETE /db"><link rel="next" href="couchdb-api-db_db-changes_get-filters.html" title="5.4.1.&nbsp;Filtering"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">5.4.&nbsp;<code class="literal">GET /db/_changes</code></th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-api-db_db_delete.html">Prev</a>&nbsp;</td><th align="center" width="60%">Chapter&nbsp;5.&nbsp;CouchDB API Server Database Methods</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-db_db-changes_get-filters.html">Next</a></td></tr></table><hr></div><div class="section" title="5.4.&nbsp;GET /db/_changes"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-api-db_db-changes_get"></a>5.4.&nbsp;<code class="literal">GET /db/_changes</code></h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="couchdb-api-db_db-changes_get-filters.html">5.4.1. Filtering</a></span></dt></dl></div><div class="informaltable"><table summary="URL API GET /db/_changes" border="1"><colgroup><col class="field" width="33%"><col class="info" width="33%"><col class="addinfo" width="34%"></colgroup><tbody><tr><td><span class="bold"><strong>Method</strong></span></td><td colspan="2"><code class="literal">GET /db/_changes</code></td></tr><tr><td><span class="bold"><strong>Request</strong></span></td><td colspan="2">
+ None
+ </td></tr><tr><td><span class="bold"><strong>Response</strong></span></td><td colspan="2">
+ JSON of the changes to the database
+ </td></tr><tr><td><span class="bold"><strong>Admin Privileges Required</strong></span></td><td colspan="2">no</td></tr><tr><td><span class="bold"><strong>Query Arguments</strong></span></td><td><span class="bold"><strong>Argument</strong></span></td><td><code class="literal">doc_ids</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>
+ Specify the list of documents IDs to be filtered
+ </td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>yes</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Type</strong></span></td><td>json</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Default</strong></span></td><td>none</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Argument</strong></span></td><td><code class="literal">feed</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>
+ Type of feed
+ </td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>yes</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Type</strong></span></td><td>string</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Default</strong></span></td><td>normal</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Supported Values</strong></span></td><td class="auto-generated">&nbsp;</td></tr><tr><td>&nbsp;</td><td><code class="literal">continuous</code></td><td>Continuous (non-polling) mode</td></tr><tr><td>&nbsp;</td><td><code class="literal">longpoll</code></td><td>Long polling mode</td></tr><tr><td>&nbsp;</td><td><code class="literal">normal</code></td><td>Normal mode</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Argument</strong></span></td><td><code class="literal">filter</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>
+ Filter function from a design document to get updates
+ </td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>yes</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Type</strong></span></td><td>string</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Default</strong></span></td><td>none</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Supported Values</strong></span></td><td class="auto-generated">&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Argument</strong></span></td><td><code class="literal">heartbeat</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>
+ Period after which an empty line is sent during longpoll or
+ continuous
+ </td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>yes</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Type</strong></span></td><td>numeric</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Default</strong></span></td><td>60000</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Quantity</strong></span></td><td>milliseconds</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Argument</strong></span></td><td><code class="literal">include_docs</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>
+ Include the document with the result
+ </td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>yes</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Type</strong></span></td><td>boolean</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Default</strong></span></td><td>false</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Argument</strong></span></td><td><code class="literal">limit</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>
+ Maximum number of rows rows to return
+ </td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>yes</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Type</strong></span></td><td>numeric</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Default</strong></span></td><td>none</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Argument</strong></span></td><td><code class="literal">since</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>
+ Start the results from changes immediately after the
+ specified sequence number
+ </td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>yes</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Type</strong></span></td><td>numeric</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Default</strong></span></td><td>0</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Argument</strong></span></td><td><code class="literal">timeout</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>
+ Maximum period to wait before the response is sent
+ </td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>yes</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Type</strong></span></td><td>numeric</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Default</strong></span></td><td>60000</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Quantity</strong></span></td><td>milliseconds</td></tr></tbody></table></div><p>
+      Obtains a list of the changes made to the database. This can be
+      used to monitor for update and modifications to the database for
+      post processing or synchronization. There are three different
+      types of supported changes feeds, poll, longpoll, and continuous.
+      All requests are poll requests by default. You can select any feed
+      type explicitly using the <code class="literal">feed</code> query argument.
+    </p><p>
+      </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+            <span class="bold"><strong>Poll</strong></span>
+          </p><p>
+            With polling you can request the changes that have occured
+            since a specific sequence number. This returns the JSON
+            structure containing the changed document information. When
+            you perform a poll change request, only the changes since
+            the specific sequence number are returned. For example, the
+            query
+          </p><pre class="programlisting">DELETE http://couchdb:5984/recipes/_changes
+Content-Type: application/json</pre><p>
+            Will get all of the changes in the database. You can request
+            a starting point using the <code class="literal">since</code> query
+            argument and specifying the sequence number. You will need
+            to record the latest sequence number in your client and then
+            use this when making another request as the new value to the
+            <code class="literal">since</code> parameter.
+          </p></li><li class="listitem"><p>
+            <span class="bold"><strong>Longpoll</strong></span>
+          </p><p>
+            With long polling the request to the server will remain open
+            until a change is made on the database, when the changes
+            will be reported, and then the connection will close. The
+            long poll is useful when you want to monitor for changes for
+            a specific purpose without wanting to monitoring
+            continuously for changes.
+          </p><p>
+            Because the wait for a change can be significant you can set
+            a timeout before the connection is automatically closed (the
+            <code class="literal">timeout</code> argument). You can also set a
+            heartbeat interval (using the <code class="literal">heartbeat</code>
+            query argument), which sends a newline to keep the
+            connection open.
+          </p></li><li class="listitem"><p>
+            <span class="bold"><strong>Continuous</strong></span>
+          </p><p>
+            Continuous sends all new changes back to the client
+            immediately, without closing the connection. In continuous
+            mode the format of the changes is slightly different to
+            accommodate the continuous nature while ensuring that the
+            JSON output is still valid for each change notification.
+          </p><p>
+            As with the longpoll feed type you can set both the timeout
+            and heartbeat intervals to ensure that the connection is
+            kept open for new changesand updates.
+          </p></li></ul></div><p>
+    </p><p>
+      The return structure for <code class="literal">normal</code> and
+      <code class="literal">longpoll</code> modes is a JSON array of changes
+      objects, and the last update sequence number. The structure is
+      described in the following table.
+    </p><div class="table"><a name="table-couchdb-api-db_db-json-changes"></a><p class="title"><b>Table&nbsp;5.3.&nbsp;
+ Changes information for a database
+ </b></p><div class="table-contents"><table summary="
+ Changes information for a database
+ " border="1"><colgroup><col class="item" width="30%"><col class="desc" width="70%"></colgroup><tbody><tr><td><span class="bold"><strong>Field</strong></span></td><td><span class="bold"><strong>Description</strong></span></td></tr><tr><td><code class="literal">last_seq</code>  </td><td>
+ Last change sequence number
+ </td></tr><tr><td><code class="literal">results</code> <code class="literal">[array]</code> </td><td>
+ Changes made to a database
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">changes</code> <code class="literal">[array]</code> </td><td>
+ List of changes, field-by-field, for this document
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">id</code>  </td><td>
+ Document ID
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">seq</code>  </td><td>
+ Update sequence number
+ </td></tr></tbody></table></div></div><br class="table-break"><p>
+      The return format for <code class="literal">continuous</code> mode the
+      server sends a CRLF (carriage-return, linefeed) delimited line for
+      each change. Each line contains the
+      <a class="link" href="couchdb-api-db_db-changes_get.html#table-couchdb-api-db_db-json-changes" title="Table&nbsp;5.3.&nbsp; Changes information for a database">JSON
+      object</a>.
+    </p><p>
+      You can also request the full contents of each document change
+      (instead of just the change notification) by using the
+      <code class="literal">include_docs</code> parameter.
+    </p></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-api-db_db_delete.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-api-db.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-db_db-changes_get-filters.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">5.3.&nbsp;<code class="literal">DELETE /db</code>&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;5.4.1.&nbsp;Filtering</td></tr></table></div></body></html>

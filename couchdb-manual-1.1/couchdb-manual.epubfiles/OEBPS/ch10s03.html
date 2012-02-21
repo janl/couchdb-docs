@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>10.3.&nbsp;GET /_config/section/key</title>
+<link href="epub.css" type="text/css" rel="stylesheet" />
+<meta content="DocBook XSL Stylesheets V1.76.1" name="generator" />
+</head>
+<body>
+<div class="section" title="10.3.&nbsp;GET /_config/section/key">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-api-config_config-section-key_get" />10.3.&nbsp;<code class="literal">GET /_config/section/key</code>
+</h1>
+</div>
+</div>
+</div>
+<div class="informaltable">
+<table summary="URL API GET /_config/section/key" border="1">
+<colgroup>
+<col class="field" width="33%" />
+<col class="info" width="33%" />
+<col class="addinfo" width="34%" />
+</colgroup>
+<tbody>
+<tr>
+<td>
+<span class="bold">
+<strong>Method</strong>
+</span>
+</td>
+<td colspan="2">
+<code class="literal">GET /_config/section/key</code>
+</td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Request</strong>
+</span>
+</td>
+<td colspan="2">
+ None
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Response</strong>
+</span>
+</td>
+<td colspan="2">
+ Value of the specified key/section
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Admin Privileges Required</strong>
+</span>
+</td>
+<td colspan="2">no</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+      Gets a single configuration value from within a specific
+      configuration section. For example, to obtain the current log
+      level:
+    </p>
+<pre class="programlisting">GET http://couchdb:5984/_config/log/level
+Accept: application/json</pre>
+<p>
+      Returns the string of the log level:
+    </p>
+<pre class="programlisting">"info"</pre>
+<div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Note</h3>
+<p>
+        The returned value will be the JSON of the value, which may be a
+        string or numeric value, or an array or object. Some client
+        environments may not parse simple strings or numeric values as
+        valid JSON.
+      </p>
+</div>
+</div>
+</body>
+</html>

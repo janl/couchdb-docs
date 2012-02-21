@@ -1,0 +1,30 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>2.1.&nbsp;HTTP Range Requests</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-single-features.html" title="Chapter&nbsp;2.&nbsp;Features and Functionality"><link rel="prev" href="couchdb-single-features.html" title="Chapter&nbsp;2.&nbsp;Features and Functionality"><link rel="next" href="couchdb-single-features-proxying.html" title="2.2.&nbsp;HTTP Proxying"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">2.1.&nbsp;HTTP Range Requests</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-single-features.html">Prev</a>&nbsp;</td><th align="center" width="60%">Chapter&nbsp;2.&nbsp;Features and Functionality</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-single-features-proxying.html">Next</a></td></tr></table><hr></div><div class="section" title="2.1.&nbsp;HTTP Range Requests"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-single-features-httprange"></a>2.1.&nbsp;HTTP Range Requests</h2></div></div></div><p>
+      HTTP allows you to specify byte ranges for requests. This allows
+      the implementation of resumable downloads and skippable audio and
+      video streams alike. The following example uses a text file to
+      make the range request process easier.
+    </p><pre class="programlisting">shell&gt; <strong class="userinput"><code>cat file.txt</code></strong>
+My hovercraft is full of eels!</pre><p>
+      Uploading this as an attachment to a <code class="literal">text</code>
+      database using <span class="command"><strong>curl</strong></span>:
+    </p><pre class="programlisting">shell&gt; <strong class="userinput"><code>curl -X PUT http://127.0.0.1:5984/test/doc/file.txt \
+    -H "Content-Type: application/octet-stream" -d@file.txt</code></strong>
+{"ok":true,"id":"doc","rev":"1-287a28fa680ae0c7fb4729bf0c6e0cf2"}</pre><p>
+      Requesting the whole file works as normal:
+    </p><pre class="programlisting">shell&gt; <strong class="userinput"><code>curl -X GET http://127.0.0.1:5984/test/doc/file.txt</code></strong>
+My hovercraft is full of eels!</pre><p>
+      But to retrieve only the first 13 bytes using
+      <span class="command"><strong>curl</strong></span>:
+    </p><pre class="programlisting">shell&gt; <strong class="userinput"><code>curl -X GET http://127.0.0.1:5984/test/doc/file.txt -H "Range: bytes=0-12"</code></strong>
+My hovercraft</pre><p>
+      HTTP supports many ways to specify single and even multiple byte
+      rangers. See
+      <a class="ulink" href="http://tools.ietf.org/html/rfc2616#section-14.27" target="_top">RFC
+      2616</a>.
+    </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+        Databases that have been created with CouchDB 1.0.2 or earlier
+        will support range requests in 1.1.0, but they are using a
+        less-optimal algorithm. If you plan to make heavy use of this
+        feature, make sure to compact your database with CouchDB 1.1.0
+        to take advantage of a better algorithm to find byte ranges.
+      </p></div></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-single-features.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-single-features.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-single-features-proxying.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">Chapter&nbsp;2.&nbsp;Features and Functionality&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;2.2.&nbsp;HTTP Proxying</td></tr></table></div></body></html>

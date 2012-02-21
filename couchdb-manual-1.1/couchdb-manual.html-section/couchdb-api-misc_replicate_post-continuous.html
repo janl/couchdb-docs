@@ -1,0 +1,28 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>9.5.4.&nbsp;Continuous Replication</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-api-misc_replicate_post.html" title="9.5.&nbsp;POST /_replicate"><link rel="prev" href="couchdb-api-misc_replicate_post-single.html" title="9.5.3.&nbsp;Single Replication"><link rel="next" href="couchdb-api-misc_replicate_post-cancel.html" title="9.5.5.&nbsp;Canceling Continuous Replication"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">9.5.4.&nbsp;Continuous Replication</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-api-misc_replicate_post-single.html">Prev</a>&nbsp;</td><th align="center" width="60%">9.5.&nbsp;<code class="literal">POST /_replicate</code></th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-misc_replicate_post-cancel.html">Next</a></td></tr></table><hr></div><div class="section" title="9.5.4.&nbsp;Continuous Replication"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-api-misc_replicate_post-continuous"></a>9.5.4.&nbsp;Continuous Replication</h3></div></div></div><p>
+        Synchronization of a database with the previously noted methods
+        happens only once, at the time the replicate request is made. To
+        have the target database permanently replicated from the source,
+        you must set the <code class="literal">continuous</code> field of the JSON
+        object within the request to true.
+      </p><p>
+        With continuous replication changes in the source database are
+        replicated to the target database in perpetuity until you
+        specifically request that replication ceases.
+      </p><pre class="programlisting">POST http://couchdb:5984/_replicate
+Content-Type: application/json
+Accept: application/json
+
+{
+   "continuous" : true
+   "source" : "recipes",
+   "target" : "http://couchdb-remote:5984/recipes",
+}</pre><p>
+        Changes will be replicated between the two databases as long as
+        a network connection is available between the two instances.
+      </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+          Two keep two databases synchronized with each other, you need
+          to set replication in both directions; that is, you must
+          replicate from <code class="literal">databasea</code> to
+          <code class="literal">databaseb</code>, and separately from
+          <code class="literal">databaseb</code> to <code class="literal">databasea</code>.
+        </p></div></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-api-misc_replicate_post-single.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-api-misc_replicate_post.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-misc_replicate_post-cancel.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">9.5.3.&nbsp;Single Replication&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;9.5.5.&nbsp;Canceling Continuous Replication</td></tr></table></div></body></html>

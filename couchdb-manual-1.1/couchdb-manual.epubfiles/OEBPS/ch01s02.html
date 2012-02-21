@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>1.2.&nbsp;Using curl</title>
+<link href="epub.css" type="text/css" rel="stylesheet" />
+<meta content="DocBook XSL Stylesheets V1.76.1" name="generator" />
+</head>
+<body>
+<div class="section" title="1.2.&nbsp;Using curl">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-single-introduction-curl" />1.2.&nbsp;Using <span class="command">
+<strong>curl</strong>
+</span>
+</h1>
+</div>
+</div>
+</div>
+<p>
+      The <span class="command">
+<strong>curl</strong>
+</span> utility is a command line tool
+      available on Unix, Linux, Mac OS X and Windows and many other
+      platforms. <span class="command">
+<strong>curl</strong>
+</span> provides easy access to the
+      HTTP protocol (among others) directly from the command-line and is
+      therefore an ideal way of interacting with CouchDB
+      over the HTTP REST API.
+    </p>
+<p>
+      For simple <code class="literal">GET</code> requests you can supply the URL
+      of the request. For example, to get the database information:
+    </p>
+<pre class="programlisting">shell&gt; <strong class="userinput">
+<code>curl http://127.0.0.1:5984</code>
+</strong>
+</pre>
+<p>
+      This returns the database information (formatted in the output
+      below for clarity):
+    </p>
+<pre class="programlisting">{
+   "modules" : {
+      "geocouch" : "7fd793c10f3aa667a1088a937398bc5b51472b7f"
+   },
+   "couchdb" : "Welcome",
+   "version" : "1.1.0",
+}</pre>
+<div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Note</h3>
+<p>
+        For some URLs, especially those that include special characters
+        such as ampersand, exclamation mark, or question mark, you
+        should quote the URL you are specifying on the command line. For
+        example:
+      </p>
+<pre class="programlisting">shell&gt; <strong class="userinput">
+<code>curl 'http://couchdb:5984/_uuids?count=5'</code>
+</strong>
+</pre>
+</div>
+<p>
+      You can explicitly set the HTTP command using the
+      <code class="option">-X</code> command line option. For example, when
+      creating a database, you set the name of the database in the URL
+      you send using a PUT request:
+    </p>
+<pre class="programlisting">shell&gt; <strong class="userinput">
+<code>curl -X PUT http://127.0.0.1:5984/demo</code>
+</strong>
+{"ok":true}</pre>
+<p>
+      But to obtain the database information you use a
+      <code class="literal">GET</code> request (with the return information
+      formatted for clarity):
+    </p>
+<pre class="programlisting">shell&gt; <strong class="userinput">
+<code>curl -X GET http://127.0.0.1:5984/demo</code>
+</strong>
+{
+   "compact_running" : false,
+   "doc_count" : 0,
+   "db_name" : "demo",
+   "purge_seq" : 0,
+   "committed_update_seq" : 0,
+   "doc_del_count" : 0,
+   "disk_format_version" : 5,
+   "update_seq" : 0,
+   "instance_start_time" : "1306421773496000",
+   "disk_size" : 79
+}</pre>
+<p>
+      For certain operations, you must specify the content type of
+      request, which you do by specifying the
+      <code class="literal">Content-Type</code> header using the
+      <code class="option">-H</code> command-line option:
+    </p>
+<pre class="programlisting">shell&gt; <strong class="userinput">
+<code>curl -H 'Content-type: application/json' http://127.0.0.1:5984/_uuids</code>
+</strong>
+</pre>
+<p>
+      You can also submit 'payload' data, that is, data in the body of
+      the HTTP request using the <code class="option">-d</code> option. This is
+      useful if you need to submit JSON structures, for example document
+      data, as part of the request. For example, to submit a simple
+      document to the <code class="literal">demo</code> database:
+    </p>
+<pre class="programlisting">shell&gt; <strong class="userinput">
+<code>curl -H 'Content-type: application/json' \
+     -X POST http://127.0.0.1:5984/demo \
+     -d '{"company": "Example, Inc."}'</code>
+</strong>
+{"ok":true,"id":"8843faaf0b831d364278331bc3001bd8",
+ "rev":"1-33b9fbce46930280dab37d672bbc8bb9"}</pre>
+<p>
+      In the above example, the argument after the <code class="option">-d</code>
+      option is the JSON of the document we want to submit.
+    </p>
+<p>
+      The document can be accessed by using the automatically generated
+      document ID that was returned:
+    </p>
+<pre class="programlisting">shell&gt; <strong class="userinput">
+<code>curl -X GET http://127.0.0.1:5984/demo/8843faaf0b831d364278331bc3001bd8</code>
+</strong>
+{"_id":"8843faaf0b831d364278331bc3001bd8",
+ "_rev":"1-33b9fbce46930280dab37d672bbc8bb9",
+ "company":"Example, Inc."}</pre>
+<p>
+      The API samples in the <a class="xref" href="ch04.html" title="Chapter&nbsp;4.&nbsp;CouchDB API">Chapter&nbsp;4, <em>CouchDB API</em>
+</a> show
+      the HTTP command, URL and any payload information that needs to be
+      submitted (and the expected return value). All of these examples
+      can be reproduced using <span class="command">
+<strong>curl</strong>
+</span> with the
+      command-line examples shown above.
+    </p>
+</div>
+</body>
+</html>

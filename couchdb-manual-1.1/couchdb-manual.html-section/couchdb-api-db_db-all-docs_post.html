@@ -1,0 +1,44 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>5.13.&nbsp;POST /db/_all_docs</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-api-db.html" title="Chapter&nbsp;5.&nbsp;CouchDB API Server Database Methods"><link rel="prev" href="couchdb-api-db_db-all-docs_get.html" title="5.12.&nbsp;GET /db/_all_docs"><link rel="next" href="couchdb-api-db_db-missing-revs_post.html" title="5.14.&nbsp;POST /db/_missing_revs"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">5.13.&nbsp;<code class="literal">POST /db/_all_docs</code></th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-api-db_db-all-docs_get.html">Prev</a>&nbsp;</td><th align="center" width="60%">Chapter&nbsp;5.&nbsp;CouchDB API Server Database Methods</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-db_db-missing-revs_post.html">Next</a></td></tr></table><hr></div><div class="section" title="5.13.&nbsp;POST /db/_all_docs"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-api-db_db-all-docs_post"></a>5.13.&nbsp;<code class="literal">POST /db/_all_docs</code></h2></div></div></div><div class="informaltable"><table summary="URL API POST /db/_all_docs" border="1"><colgroup><col class="field" width="33%"><col class="info" width="33%"><col class="addinfo" width="34%"></colgroup><tbody><tr><td><span class="bold"><strong>Method</strong></span></td><td colspan="2"><code class="literal">POST /db/_all_docs</code></td></tr><tr><td><span class="bold"><strong>Request</strong></span></td><td colspan="2">
+ JSON of the document IDs you want included
+ </td></tr><tr><td><span class="bold"><strong>Response</strong></span></td><td colspan="2">
+ JSON of the returned view
+ </td></tr><tr><td><span class="bold"><strong>Admin Privileges Required</strong></span></td><td colspan="2">no</td></tr></tbody></table></div><p>
+      The <code class="literal">POST</code> to <code class="literal">_all_docs</code> allows
+      to specify multiple keys to be selected from the database. This
+      enables you to request multiple documents in a single request, in
+      place of multiple
+      <a class="xref" href="couchdb-api-dbdoc_db-doc_get.html" title="6.2.&nbsp;GET /db/doc">Section&nbsp;6.2, &ldquo;<code class="literal">GET /db/doc</code>&rdquo;</a> requests.
+    </p><p>
+      The request body should contain a list of the keys to be returned
+      as an array to a <code class="literal">keys</code> object. For example:
+    </p><div class="formalcodebox"><div class="formalcodebox-title">HTTP Request</div><pre class="programlisting">POST http://couchdb:5984/recipes/_all_docs
+User-Agent: MyApp/0.1 libwww-perl/5.837
+
+{
+   "keys" : [
+      "Zingylemontart",
+      "Yogurtraita"
+   ]
+}</pre></div><p>
+      The return JSON is the all documents structure, but with only the
+      selected keys in the output:
+    </p><div class="formalcodebox"><div class="formalcodebox-title">HTTP Response</div><pre class="programlisting">{
+   "total_rows" : 2666,
+   "rows" : [
+      {
+         "value" : {
+            "rev" : "1-a3544d296de19e6f5b932ea77d886942"
+         },
+         "id" : "Zingylemontart",
+         "key" : "Zingylemontart"
+      },
+      {
+         "value" : {
+            "rev" : "1-91635098bfe7d40197a1b98d7ee085fc"
+         },
+         "id" : "Yogurtraita",
+         "key" : "Yogurtraita"
+      }
+   ],
+   "offset" : 0
+}</pre></div></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-api-db_db-all-docs_get.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-api-db.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-db_db-missing-revs_post.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">5.12.&nbsp;<code class="literal">GET /db/_all_docs</code>&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;5.14.&nbsp;<code class="literal">POST /db/_missing_revs</code></td></tr></table></div></body></html>

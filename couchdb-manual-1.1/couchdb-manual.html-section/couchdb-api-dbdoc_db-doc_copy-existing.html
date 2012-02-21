@@ -1,0 +1,14 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>6.6.3.&nbsp;Copying to an Existing Document</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-api-dbdoc_db-doc_copy.html" title="6.6.&nbsp;COPY /db/doc"><link rel="prev" href="couchdb-api-dbdoc_db-doc_copy-specrev.html" title="6.6.2.&nbsp;Copying from a Specific Revision"><link rel="next" href="couchdb-api-dbdoc_db-doc-attachment_get.html" title="6.7.&nbsp;GET /db/doc/attachment"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">6.6.3.&nbsp;Copying to an Existing Document</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-api-dbdoc_db-doc_copy-specrev.html">Prev</a>&nbsp;</td><th align="center" width="60%">6.6.&nbsp;<code class="literal">COPY /db/doc</code></th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-dbdoc_db-doc-attachment_get.html">Next</a></td></tr></table><hr></div><div class="section" title="6.6.3.&nbsp;Copying to an Existing Document"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-api-dbdoc_db-doc_copy-existing"></a>6.6.3.&nbsp;Copying to an Existing Document</h3></div></div></div><p>
+        To copy to an existing document, you must specify the current
+        revision string for the target document, using the
+        <code class="literal">rev</code> parameter to the
+        <code class="literal">Destination</code> HTTP Header string. For example:
+      </p><pre class="programlisting">COPY http://couchdb:5984/recipes/FishStew
+Content-Type: application/json
+Destination: IrishFishStew?rev=1-9c65296036141e575d32ba9c034dd3ee</pre><p>
+        The return value will be the new revision of the copied
+        document:
+      </p><pre class="programlisting">{
+   "id" : "IrishFishStew",
+   "rev" : "2-55b6a1b251902a2c249b667dab1c6692"
+}</pre></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-api-dbdoc_db-doc_copy-specrev.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-api-dbdoc_db-doc_copy.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-dbdoc_db-doc-attachment_get.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">6.6.2.&nbsp;Copying from a Specific Revision&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;6.7.&nbsp;<code class="literal">GET /db/doc/attachment</code></td></tr></table></div></body></html>

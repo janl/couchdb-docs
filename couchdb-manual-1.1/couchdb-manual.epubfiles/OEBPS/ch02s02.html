@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>2.2.&nbsp;HTTP Proxying</title>
+<link href="epub.css" type="text/css" rel="stylesheet" />
+<meta content="DocBook XSL Stylesheets V1.76.1" name="generator" />
+</head>
+<body>
+<div class="section" title="2.2.&nbsp;HTTP Proxying">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-single-features-proxying" />2.2.&nbsp;HTTP Proxying</h1>
+</div>
+</div>
+</div>
+<p>
+      The HTTP proxy feature makes it easy to map and redirect different
+      content through your CouchDB URL. The proxy works by mapping a
+      pathname and passing all content after that prefix through to the
+      configured proxy address.
+    </p>
+<p>
+      Configuration of the proxy redirect is handled through the
+      <code class="literal">[httpd_global_handlers]</code> section of the CouchDB
+      configuration file (typically <code class="filename">local.ini</code>). The
+      format is:
+    </p>
+<pre class="programlisting">[httpd_global_handlers]
+PREFIX = {couch_httpd_proxy, handle_proxy_req, &lt;&lt;"DESTINATION"&gt;&gt;}</pre>
+<p>
+      Where:
+    </p>
+<div class="itemizedlist">
+<ul class="itemizedlist">
+<li class="listitem">
+<p>
+          <code class="literal">PREFIX</code>
+        </p>
+<p>
+          Is the string that will be matched. The string can be any
+          valid qualifier, although to ensure that existing database
+          names are not overridden by a proxy configuration, you can use
+          an underscore prefix.
+        </p>
+</li>
+<li class="listitem">
+<p>
+          <code class="literal">DESTINATION</code>
+        </p>
+<p>
+          The fully-qualified URL to which the request should be sent.
+          The destination must include the <code class="literal">http</code>
+          prefix. The content is used verbatim in the original request,
+          so you can also forward to servers on different ports and to
+          specific paths on the target host.
+        </p>
+</li>
+</ul>
+</div>
+<p>
+      The proxy process then translates requests of the form:
+    </p>
+<pre class="programlisting">http://couchdb:5984/PREFIX/path</pre>
+<p>
+      To:
+    </p>
+<pre class="programlisting">DESTINATION/path</pre>
+<div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Note</h3>
+<p>
+        Everything after <code class="literal">PREFIX</code> including the
+        required forward slash will be appended to the
+        <code class="literal">DESTINATION</code>.
+      </p>
+</div>
+<p>
+      The response is then communicated back to the original client.
+    </p>
+<p>
+      For example, the following configuration:
+    </p>
+<pre class="programlisting">_google = {couch_httpd_proxy, handle_proxy_req, &lt;&lt;"http://www.google.com"&gt;&gt;}</pre>
+<p>
+      Would forward all requests for
+      <code class="literal">http://couchdb:5984/_google</code> to the Google
+      website.
+    </p>
+<p>
+      The service can also be used to forward to related CouchDB
+      services, such as Lucene:
+    </p>
+<pre class="programlisting">[httpd_global_handlers]
+_fti = {couch_httpd_proxy, handle_proxy_req, &lt;&lt;"http://127.0.0.1:5985"&gt;&gt;}</pre>
+<div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Note</h3>
+<p>
+        The proxy service is basic. If the request is not identified by
+        the <code class="literal">DESTINATION</code>, or the remainder of the
+        <code class="literal">PATH</code> specification is incomplete, the
+        original request URL is interpreted as if the
+        <code class="literal">PREFIX</code> component of that URL does not exist.
+      </p>
+<p>
+        For example, requesting
+        <code class="literal">http://couchdb:5984/_intranet/media</code> when
+        <code class="filename">/media</code> on the proxy destination does not
+        exist, will cause the request URL to be interpreted as
+        <code class="literal">http://couchdb:5984/media</code>. Care should be
+        taken to ensure that both requested URLs and destination URLs
+        are able to cope
+      </p>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>10.&nbsp;OS Daemons</title>
+<link href="epub.css" type="text/css" rel="stylesheet" />
+<meta content="DocBook XSL Stylesheets V1.76.1" name="generator" />
+</head>
+<body>
+<div class="section" title="10.&nbsp;OS Daemons">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-release-1.1-osprocess" />10.&nbsp;OS Daemons</h1>
+</div>
+</div>
+</div>
+<p>
+      CouchDB now supports starting external processes. The support is
+      simple and enables CouchDB to start each configured OS daemon. If
+      the daemon stops at any point, CouchDB will restart it (with
+      protection to ensure regularly failing daemons are not repeatedly
+      restarted).
+    </p>
+<p>
+      The daemon starting process is one-to-one; for each each
+      configured daemon in the configuration file, CouchDB will start
+      exactly one instance. If you need to run multiple instances, then
+      you must create separate individual configurations. Daemons are
+      configured within the <code class="literal">[os_daemons]</code> section of
+      your configuration file (<code class="filename">local.ini</code>). The
+      format of each configured daemon is:
+    </p>
+<pre class="programlisting">NAME = PATH ARGS</pre>
+<p>
+      Where <code class="literal">NAME</code> is an arbitrary (and unique) name to
+      identify the daemon; <code class="literal">PATH</code> is the full path to
+      the daemon to be executed; <code class="literal">ARGS</code> are any
+      required arguments to the daemon.
+    </p>
+<p>
+      For example:
+    </p>
+<pre class="programlisting">[os_daemons]
+basic_responder = /usr/local/bin/responsder.js</pre>
+<p>
+      There is no interactivity between CouchDB and the running process,
+      but you can use the OS Daemons service to create new HTTP servers
+      and responders and then use the new proxy service to redirect
+      requests and output to the CouchDB managed service. For more
+      information on proxying, see
+      <a class="xref" href="ar01s05.html" title="5.&nbsp;HTTP Proxying">Section&nbsp;5, &ldquo;HTTP Proxying&rdquo;</a>. For further
+      background on the OS Daemon service, see
+      <a class="ulink" href="http://davispj.com/2010/09/26/new-couchdb-externals-api.html">CouchDB
+      Externals API</a>
+    </p>
+</div>
+</body>
+</html>

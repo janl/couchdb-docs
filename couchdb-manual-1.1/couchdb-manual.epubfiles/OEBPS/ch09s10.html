@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>9.10.&nbsp;GET /favicon.ico</title>
+<link href="epub.css" type="text/css" rel="stylesheet" />
+<meta content="DocBook XSL Stylesheets V1.76.1" name="generator" />
+</head>
+<body>
+<div class="section" title="9.10.&nbsp;GET /favicon.ico">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-api-misc_favicon_get" />9.10.&nbsp;<code class="literal">GET /favicon.ico</code>
+</h1>
+</div>
+</div>
+</div>
+<div class="informaltable">
+<table summary="URL API GET /favicon.ico" border="1">
+<colgroup>
+<col class="field" width="33%" />
+<col class="info" width="33%" />
+<col class="addinfo" width="34%" />
+</colgroup>
+<tbody>
+<tr>
+<td>
+<span class="bold">
+<strong>Method</strong>
+</span>
+</td>
+<td colspan="2">
+<code class="literal">GET /favicon.ico</code>
+</td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Request</strong>
+</span>
+</td>
+<td colspan="2">
+ None
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Response</strong>
+</span>
+</td>
+<td colspan="2">
+ Binary content for the favicon.ico site icon
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Admin Privileges Required</strong>
+</span>
+</td>
+<td colspan="2">no</td>
+</tr>
+<tr>
+<td colspan="3">
+<span class="bold">
+<strong>Return Codes</strong>
+</span>
+</td>
+</tr>
+<tr>
+<td>200</td>
+<td colspan="2">
+ Request completed successfully.
+ </td>
+</tr>
+<tr>
+<td>404</td>
+<td colspan="2">
+ The requested content could not be found. The returned content
+ will include further information, as a JSON object, if available.
+ </td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+      Returns the site icon. The return <code class="literal">Content-type</code>
+      header is <code class="literal">image/x-icon</code>, and the content stream
+      is the image data.
+    </p>
+</div>
+</body>
+</html>

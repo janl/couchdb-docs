@@ -1,0 +1,50 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>9.9.&nbsp;GET /_uuids</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-api-misc.html" title="Chapter&nbsp;9.&nbsp;CouchDB API Server Miscellaneous Methods"><link rel="prev" href="couchdb-api-misc_utils_get.html" title="9.8.&nbsp;GET /_utils"><link rel="next" href="couchdb-api-misc_favicon_get.html" title="9.10.&nbsp;GET /favicon.ico"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">9.9.&nbsp;<code class="literal">GET /_uuids</code></th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-api-misc_utils_get.html">Prev</a>&nbsp;</td><th align="center" width="60%">Chapter&nbsp;9.&nbsp;CouchDB API Server Miscellaneous Methods</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-misc_favicon_get.html">Next</a></td></tr></table><hr></div><div class="section" title="9.9.&nbsp;GET /_uuids"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-api-misc_uuids_get"></a>9.9.&nbsp;<code class="literal">GET /_uuids</code></h2></div></div></div><div class="informaltable"><table summary="URL API GET /_uuids" border="1"><colgroup><col class="field" width="33%"><col class="info" width="33%"><col class="addinfo" width="34%"></colgroup><tbody><tr><td><span class="bold"><strong>Method</strong></span></td><td colspan="2"><code class="literal">GET /_uuids</code></td></tr><tr><td><span class="bold"><strong>Request</strong></span></td><td colspan="2">
+ None
+ </td></tr><tr><td><span class="bold"><strong>Response</strong></span></td><td colspan="2">
+ List of UUIDs
+ </td></tr><tr><td><span class="bold"><strong>Admin Privileges Required</strong></span></td><td colspan="2">no</td></tr><tr><td><span class="bold"><strong>Query Arguments</strong></span></td><td><span class="bold"><strong>Argument</strong></span></td><td><code class="literal">count</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>
+ Number of UUIDs to return
+ </td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>yes</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Type</strong></span></td><td>numeric</td></tr><tr><td colspan="3"><span class="bold"><strong>Return Codes</strong></span></td></tr><tr><td>200</td><td colspan="2">
+ Request completed successfully.
+ </td></tr></tbody></table></div><p>
+      Requests one or more Universally Unique Identifiers (UUIDs) from
+      the CouchDB instance. The response is a JSON object providing a
+      list of UUIDs. For example:
+    </p><pre class="programlisting">{
+   "uuids" : [
+      "7e4b5a14b22ec1cf8e58b9cdd0000da3"
+   ]
+}</pre><p>
+      You can use the <code class="literal">count</code> argument to specify the
+      number of UUIDs to be returned. For example:
+    </p><pre class="programlisting">GET http://couchdb:5984/_uuids?count=5</pre><p>
+      Returns:
+    </p><pre class="programlisting">{
+   "uuids" : [
+      "c9df0cdf4442f993fc5570225b405a80",
+      "c9df0cdf4442f993fc5570225b405bd2",
+      "c9df0cdf4442f993fc5570225b405e42",
+      "c9df0cdf4442f993fc5570225b4061a0",
+      "c9df0cdf4442f993fc5570225b406a20"
+   ]
+}</pre><p>
+      The UUID type is determined by the UUID type setting in the
+      CouchDB configuration. See
+      <a class="xref" href="couchdb-api-config_config-section-key_put.html" title="10.4.&nbsp;PUT /_config/section/key">Section&nbsp;10.4, &ldquo;<code class="literal">PUT /_config/section/key</code>&rdquo;</a>.
+    </p><p>
+      For example, changing the UUID type to <code class="literal">random</code>:
+    </p><pre class="programlisting">PUT http://couchdb:5984/_config/uuids/algorithm
+Content-Type: application/json
+Accept: */*
+
+"random"</pre><p>
+      When obtaining a list of UUIDs:
+    </p><pre class="programlisting">{
+   "uuids" : [
+      "031aad7b469956cf2826fcb2a9260492",
+      "6ec875e15e6b385120938df18ee8e496",
+      "cff9e881516483911aa2f0e98949092d",
+      "b89d37509d39dd712546f9510d4a9271",
+      "2e0dbf7f6c4ad716f21938a016e4e59f"
+   ]
+}</pre></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-api-misc_utils_get.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-api-misc.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-misc_favicon_get.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">9.8.&nbsp;<code class="literal">GET /_utils</code>&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;9.10.&nbsp;<code class="literal">GET /favicon.ico</code></td></tr></table></div></body></html>

@@ -1,0 +1,959 @@
+<!DOCTYPE ncx PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1">
+<head>
+<meta name="dtb:uid" content="_couchdb-1-1" />
+</head>
+<docTitle>
+<text>CouchDB 1.1 Manual</text>
+</docTitle>
+<navMap>
+<navPoint id="N10001" playOrder="1">
+<navLabel>
+<text>CouchDB 1.1 Manual</text>
+</navLabel>
+<content src="index.html" />
+<navPoint id="N10013" playOrder="2">
+<navLabel>
+<text>1. Introduction</text>
+</navLabel>
+<content src="ch01.html" />
+<navPoint id="N10027" playOrder="3">
+<navLabel>
+<text>1.1. Using Futon</text>
+</navLabel>
+<content src="ch01.html#couchdb-single-introduction-futon" />
+<navPoint id="N1009E" playOrder="4">
+<navLabel>
+<text>1.1.1. Managing Databases and Documents</text>
+</navLabel>
+<content src="ch01.html#couchdb-single-introduction-futon-dbdocs" />
+</navPoint>
+<navPoint id="N10123" playOrder="5">
+<navLabel>
+<text>1.1.2. Configuring Replication</text>
+</navLabel>
+<content src="ch01.html#couchdb-single-introduction-futon-replication" />
+</navPoint>
+</navPoint>
+<navPoint id="N1016D" playOrder="6">
+<navLabel>
+<text>1.2. Using curl</text>
+</navLabel>
+<content src="ch01s02.html" />
+</navPoint>
+</navPoint>
+<navPoint id="N101E7" playOrder="7">
+<navLabel>
+<text>2. Features and Functionality</text>
+</navLabel>
+<content src="ch02.html" />
+<navPoint id="N101ED" playOrder="8">
+<navLabel>
+<text>2.1. HTTP Range Requests</text>
+</navLabel>
+<content src="ch02.html#couchdb-single-features-httprange" />
+</navPoint>
+<navPoint id="N1022A" playOrder="9">
+<navLabel>
+<text>2.2. HTTP Proxying</text>
+</navLabel>
+<content src="ch02s02.html" />
+</navPoint>
+<navPoint id="N1029A" playOrder="10">
+<navLabel>
+<text>2.3. CommonJS support for map functions</text>
+</navLabel>
+<content src="ch02s03.html" />
+</navPoint>
+<navPoint id="N102D6" playOrder="11">
+<navLabel>
+<text>2.4. Granular ETag support</text>
+</navLabel>
+<content src="ch02s04.html" />
+</navPoint>
+</navPoint>
+<navPoint id="N102E2" playOrder="12">
+<navLabel>
+<text>3. Replication</text>
+</navLabel>
+<content src="ch03.html" />
+<navPoint id="N102E8" playOrder="13">
+<navLabel>
+<text>3.1. Replicator Database</text>
+</navLabel>
+<content src="ch03.html#couchdb-single-replication-replicatordb" />
+<navPoint id="N1033A" playOrder="14">
+<navLabel>
+<text>3.1.1. Basics</text>
+</navLabel>
+<content src="ch03.html#couchdb-single-replication-replicatordb-basics" />
+</navPoint>
+<navPoint id="N103C8" playOrder="15">
+<navLabel>
+<text>3.1.2. Documents describing the same replication</text>
+</navLabel>
+<content src="ch03.html#couchdb-single-replication-replicatordb-docsame" />
+</navPoint>
+<navPoint id="N1040A" playOrder="16">
+<navLabel>
+<text>3.1.3. Canceling replications</text>
+</navLabel>
+<content src="ch03.html#couchdb-single-replication-replicatordb-cancel" />
+</navPoint>
+<navPoint id="N10422" playOrder="17">
+<navLabel>
+<text>3.1.4. Server restart</text>
+</navLabel>
+<content src="ch03.html#couchdb-single-replication-replicatordb-restart" />
+</navPoint>
+<navPoint id="N10443" playOrder="18">
+<navLabel>
+<text>3.1.5. Changing the Replicator Database</text>
+</navLabel>
+<content src="ch03.html#couchdb-single-replication-replicatordb-changing" />
+</navPoint>
+<navPoint id="N10474" playOrder="19">
+<navLabel>
+<text>3.1.6. Replicating the replicator database</text>
+</navLabel>
+<content src="ch03.html#couchdb-single-replication-replicatordb-replicating" />
+</navPoint>
+<navPoint id="N10488" playOrder="20">
+<navLabel>
+<text>3.1.7. Delegations</text>
+</navLabel>
+<content src="ch03.html#couchdb-single-replication-replicatordb-delegations" />
+</navPoint>
+</navPoint>
+</navPoint>
+<navPoint id="N104C8" playOrder="21">
+<navLabel>
+<text>4. CouchDB API</text>
+</navLabel>
+<content src="ch04.html" />
+<navPoint id="N104EE" playOrder="22">
+<navLabel>
+<text>4.1. Request Format and Responses</text>
+</navLabel>
+<content src="ch04.html#couchdb-api-introduction-requests" />
+</navPoint>
+<navPoint id="N10549" playOrder="23">
+<navLabel>
+<text>4.2. HTTP Headers</text>
+</navLabel>
+<content src="ch04s02.html" />
+<navPoint id="N1054F" playOrder="24">
+<navLabel>
+<text>4.2.1. Request Headers</text>
+</navLabel>
+<content src="ch04s02.html#couchdb-api-introduction-request-header-request" />
+</navPoint>
+<navPoint id="N105CC" playOrder="25">
+<navLabel>
+<text>4.2.2. Response Headers</text>
+</navLabel>
+<content src="ch04s02.html#couchdb-api-introduction-request-header-response" />
+</navPoint>
+</navPoint>
+<navPoint id="N1060B" playOrder="26">
+<navLabel>
+<text>4.3. JSON Basics</text>
+</navLabel>
+<content src="ch04s03.html" />
+</navPoint>
+<navPoint id="N10647" playOrder="27">
+<navLabel>
+<text>4.4. HTTP Status Codes</text>
+</navLabel>
+<content src="ch04s04.html" />
+</navPoint>
+<navPoint id="N10704" playOrder="28">
+<navLabel>
+<text>4.5. CouchDB API Overview</text>
+</navLabel>
+<content src="ch04s05.html" />
+</navPoint>
+</navPoint>
+<navPoint id="N10761" playOrder="29">
+<navLabel>
+<text>5. CouchDB API Server Database Methods</text>
+</navLabel>
+<content src="ch05.html" />
+<navPoint id="N10898" playOrder="30">
+<navLabel>
+<text>5.1. GET /db</text>
+</navLabel>
+<content src="ch05.html#couchdb-api-db_db_get" />
+</navPoint>
+<navPoint id="N10976" playOrder="31">
+<navLabel>
+<text>5.2. PUT /db</text>
+</navLabel>
+<content src="ch05s02.html" />
+</navPoint>
+<navPoint id="N10A18" playOrder="32">
+<navLabel>
+<text>5.3. DELETE /db</text>
+</navLabel>
+<content src="ch05s03.html" />
+</navPoint>
+<navPoint id="N10A85" playOrder="33">
+<navLabel>
+<text>5.4. GET /db/_changes</text>
+</navLabel>
+<content src="ch05s04.html" />
+<navPoint id="N10D21" playOrder="34">
+<navLabel>
+<text>5.4.1. Filtering</text>
+</navLabel>
+<content src="ch05s04.html#couchdb-api-db_db-changes_get-filters" />
+</navPoint>
+</navPoint>
+<navPoint id="N10D4E" playOrder="35">
+<navLabel>
+<text>5.5. POST /db/_compact</text>
+</navLabel>
+<content src="ch05s05.html" />
+</navPoint>
+<navPoint id="N10DCB" playOrder="36">
+<navLabel>
+<text>5.6. POST /db/_compact/design-doc</text>
+</navLabel>
+<content src="ch05s06.html" />
+</navPoint>
+<navPoint id="N10E38" playOrder="37">
+<navLabel>
+<text>5.7. POST /db/_view_cleanup</text>
+</navLabel>
+<content src="ch05s07.html" />
+</navPoint>
+<navPoint id="N10E8A" playOrder="38">
+<navLabel>
+<text>5.8. POST /db/_ensure_full_commit</text>
+</navLabel>
+<content src="ch05s08.html" />
+</navPoint>
+<navPoint id="N10EF5" playOrder="39">
+<navLabel>
+<text>5.9. POST /db/_bulk_docs</text>
+</navLabel>
+<content src="ch05s09.html" />
+<navPoint id="N10FA4" playOrder="40">
+<navLabel>
+<text>5.9.1. Inserting Documents in Bulk</text>
+</navLabel>
+<content src="ch05s09.html#couchdb-api-db_db-bulk-docs_post-insert" />
+</navPoint>
+<navPoint id="N10FBE" playOrder="41">
+<navLabel>
+<text>5.9.2. Updating Documents in Bulk</text>
+</navLabel>
+<content src="ch05s09.html#couchdb-api-db_db-bulk-docs_post-update" />
+</navPoint>
+<navPoint id="N10FE2" playOrder="42">
+<navLabel>
+<text>5.9.3. Bulk Documents Transaction Semantics</text>
+</navLabel>
+<content src="ch05s09.html#couchdb-api-db_db-bulk-docs_post-commit" />
+</navPoint>
+<navPoint id="N11058" playOrder="43">
+<navLabel>
+<text>5.9.4. Bulk Document Validation and Conflict Errors</text>
+</navLabel>
+<content src="ch05s09.html#couchdb-api-db_db-bulk-docs_post-errors" />
+</navPoint>
+</navPoint>
+<navPoint id="N110E2" playOrder="44">
+<navLabel>
+<text>5.10. POST /db/_temp_view</text>
+</navLabel>
+<content src="ch05s10.html" />
+</navPoint>
+<navPoint id="N1113B" playOrder="45">
+<navLabel>
+<text>5.11. POST /db/_purge</text>
+</navLabel>
+<content src="ch05s11.html" />
+<navPoint id="N1119C" playOrder="46">
+<navLabel>
+<text>5.11.1. Updating Indexes</text>
+</navLabel>
+<content src="ch05s11.html#couchdb-api-db_db-purge_post-indexrebuild" />
+</navPoint>
+</navPoint>
+<navPoint id="N111A6" playOrder="47">
+<navLabel>
+<text>5.12. GET /db/_all_docs</text>
+</navLabel>
+<content src="ch05s12.html" />
+</navPoint>
+<navPoint id="N114CE" playOrder="48">
+<navLabel>
+<text>5.13. POST /db/_all_docs</text>
+</navLabel>
+<content src="ch05s13.html" />
+</navPoint>
+<navPoint id="N11533" playOrder="49">
+<navLabel>
+<text>5.14. POST /db/_missing_revs</text>
+</navLabel>
+<content src="ch05s14.html" />
+</navPoint>
+<navPoint id="N1157B" playOrder="50">
+<navLabel>
+<text>5.15. POST /db/_revs_diff</text>
+</navLabel>
+<content src="ch05s15.html" />
+</navPoint>
+<navPoint id="N115C3" playOrder="51">
+<navLabel>
+<text>5.16. GET /db/_security</text>
+</navLabel>
+<content src="ch05s16.html" />
+</navPoint>
+<navPoint id="N11687" playOrder="52">
+<navLabel>
+<text>5.17. PUT /db/_security</text>
+</navLabel>
+<content src="ch05s17.html" />
+</navPoint>
+<navPoint id="N116DA" playOrder="53">
+<navLabel>
+<text>5.18. GET /db/_revs_limit</text>
+</navLabel>
+<content src="ch05s18.html" />
+</navPoint>
+<navPoint id="N1172F" playOrder="54">
+<navLabel>
+<text>5.19. PUT /db/_revs_limit</text>
+</navLabel>
+<content src="ch05s19.html" />
+</navPoint>
+</navPoint>
+<navPoint id="N11788" playOrder="55">
+<navLabel>
+<text>6. CouchDB API Server Document Methods</text>
+</navLabel>
+<content src="ch06.html" />
+<navPoint id="N11829" playOrder="56">
+<navLabel>
+<text>6.1. POST /db</text>
+</navLabel>
+<content src="ch06.html#couchdb-api-dbdoc_db_post" />
+<navPoint id="N118CD" playOrder="57">
+<navLabel>
+<text>6.1.1. Specifying the Document ID</text>
+</navLabel>
+<content src="ch06.html#couchdb-api-dbdoc_db_post-docid" />
+</navPoint>
+<navPoint id="N1191B" playOrder="58">
+<navLabel>
+<text>6.1.2. Batch Mode Writes</text>
+</navLabel>
+<content src="ch06.html#couchdb-api-dbdoc_db_batchmode" />
+</navPoint>
+<navPoint id="N1192F" playOrder="59">
+<navLabel>
+<text>6.1.3. Including Attachments</text>
+</navLabel>
+<content src="ch06.html#couchdb-api-dbdoc_db-doc-attachments" />
+</navPoint>
+</navPoint>
+<navPoint id="N119A9" playOrder="60">
+<navLabel>
+<text>6.2. GET /db/doc</text>
+</navLabel>
+<content src="ch06s02.html" />
+<navPoint id="N11AF5" playOrder="61">
+<navLabel>
+<text>6.2.1. Attachments</text>
+</navLabel>
+<content src="ch06s02.html#couchdb-api-dbdoc_db-doc_get-attachments" />
+</navPoint>
+<navPoint id="N11B71" playOrder="62">
+<navLabel>
+<text>6.2.2. Getting a List of Revisions</text>
+</navLabel>
+<content src="ch06s02.html#couchdb-api-dbdoc_db-doc_get-revs" />
+</navPoint>
+<navPoint id="N11BDB" playOrder="63">
+<navLabel>
+<text>6.2.3. Obtaining an Extended Revision History</text>
+</navLabel>
+<content src="ch06s02.html#couchdb-api-dbdoc_db-doc_get-revsextended" />
+</navPoint>
+<navPoint id="N11C41" playOrder="64">
+<navLabel>
+<text>6.2.4. Obtaining a Specific Revision</text>
+</navLabel>
+<content src="ch06s02.html#couchdb-api-dbdoc_db-doc_get-specrev" />
+</navPoint>
+</navPoint>
+<navPoint id="N11C57" playOrder="65">
+<navLabel>
+<text>6.3. HEAD /db/doc</text>
+</navLabel>
+<content src="ch06s03.html" />
+</navPoint>
+<navPoint id="N11D46" playOrder="66">
+<navLabel>
+<text>6.4. PUT /db/doc</text>
+</navLabel>
+<content src="ch06s04.html" />
+<navPoint id="N11E0E" playOrder="67">
+<navLabel>
+<text>6.4.1. Updating an Existing Document</text>
+</navLabel>
+<content src="ch06s04.html#couchdb-api-dbdoc_db-doc_put-update" />
+</navPoint>
+</navPoint>
+<navPoint id="N11E2E" playOrder="68">
+<navLabel>
+<text>6.5. DELETE /db/doc</text>
+</navLabel>
+<content src="ch06s05.html" />
+</navPoint>
+<navPoint id="N11EE1" playOrder="69">
+<navLabel>
+<text>6.6. COPY /db/doc</text>
+</navLabel>
+<content src="ch06s06.html" />
+<navPoint id="N11F8D" playOrder="70">
+<navLabel>
+<text>6.6.1. Copying a Document</text>
+</navLabel>
+<content src="ch06s06.html#couchdb-api-dbdoc_db-doc_copy-simple" />
+</navPoint>
+<navPoint id="N11FA3" playOrder="71">
+<navLabel>
+<text>6.6.2. Copying from a Specific Revision</text>
+</navLabel>
+<content src="ch06s06.html#couchdb-api-dbdoc_db-doc_copy-specrev" />
+</navPoint>
+<navPoint id="N11FB5" playOrder="72">
+<navLabel>
+<text>6.6.3. Copying to an Existing Document</text>
+</navLabel>
+<content src="ch06s06.html#couchdb-api-dbdoc_db-doc_copy-existing" />
+</navPoint>
+</navPoint>
+<navPoint id="N11FCB" playOrder="73">
+<navLabel>
+<text>6.7. GET /db/doc/attachment</text>
+</navLabel>
+<content src="ch06s07.html" />
+</navPoint>
+<navPoint id="N1201E" playOrder="74">
+<navLabel>
+<text>6.8. PUT /db/doc/attachment</text>
+</navLabel>
+<content src="ch06s08.html" />
+<navPoint id="N1211B" playOrder="75">
+<navLabel>
+<text>6.8.1. Updating an Existing Attachment</text>
+</navLabel>
+<content src="ch06s08.html#couchdb-api-dbdoc_db-doc-attachment_put-existing" />
+</navPoint>
+</navPoint>
+<navPoint id="N12121" playOrder="76">
+<navLabel>
+<text>6.9. DELETE /db/doc/attachment</text>
+</navLabel>
+<content src="ch06s09.html" />
+</navPoint>
+</navPoint>
+<navPoint id="N121E1" playOrder="77">
+<navLabel>
+<text>7. CouchDB API Server Local (non-replicating) Document Methods</text>
+</navLabel>
+<content src="ch07.html" />
+<navPoint id="N12250" playOrder="78">
+<navLabel>
+<text>7.1. GET /db/_local/local-doc</text>
+</navLabel>
+<content src="ch07.html#couchdb-api-localdb_db-local-localdoc_get" />
+</navPoint>
+<navPoint id="N1233C" playOrder="79">
+<navLabel>
+<text>7.2. PUT /db/_local/local-doc</text>
+</navLabel>
+<content src="ch07s02.html" />
+</navPoint>
+<navPoint id="N12394" playOrder="80">
+<navLabel>
+<text>7.3. DELETE /db/_local/local-doc</text>
+</navLabel>
+<content src="ch07s03.html" />
+</navPoint>
+<navPoint id="N12432" playOrder="81">
+<navLabel>
+<text>7.4. COPY /db/_local/local-doc</text>
+</navLabel>
+<content src="ch07s04.html" />
+</navPoint>
+</navPoint>
+<navPoint id="N124C2" playOrder="82">
+<navLabel>
+<text>8. CouchDB API Server Design Document Methods</text>
+</navLabel>
+<content src="ch08.html" />
+<navPoint id="N125E7" playOrder="83">
+<navLabel>
+<text>8.1. GET /db/_design/design-doc</text>
+</navLabel>
+<content src="ch08.html#couchdb-api-design_db-design-designdoc_get" />
+</navPoint>
+<navPoint id="N126DF" playOrder="84">
+<navLabel>
+<text>8.2. PUT /db/_design/design-doc</text>
+</navLabel>
+<content src="ch08s02.html" />
+</navPoint>
+<navPoint id="N1278B" playOrder="85">
+<navLabel>
+<text>8.3. DELETE /db/_design/design-doc</text>
+</navLabel>
+<content src="ch08s03.html" />
+</navPoint>
+<navPoint id="N12839" playOrder="86">
+<navLabel>
+<text>8.4. COPY /db/_design/design-doc</text>
+</navLabel>
+<content src="ch08s04.html" />
+<navPoint id="N128D3" playOrder="87">
+<navLabel>
+<text>8.4.1. Copying a Design Document</text>
+</navLabel>
+<content src="ch08s04.html#couchdb-api-design_db-design-designdoc_copy-simple" />
+</navPoint>
+<navPoint id="N128EC" playOrder="88">
+<navLabel>
+<text>8.4.2. Copying from a Specific Revision</text>
+</navLabel>
+<content src="ch08s04.html#couchdb-api-design_db-design-designdoc_copy-specrev" />
+</navPoint>
+<navPoint id="N128FE" playOrder="89">
+<navLabel>
+<text>8.4.3. Copying to an Existing Design Document</text>
+</navLabel>
+<content src="ch08s04.html#couchdb-api-design_db-design-designdoc_copy-existing" />
+</navPoint>
+</navPoint>
+<navPoint id="N12914" playOrder="90">
+<navLabel>
+<text>8.5. GET /db/_design/design-doc/attachment</text>
+</navLabel>
+<content src="ch08s05.html" />
+</navPoint>
+<navPoint id="N1296A" playOrder="91">
+<navLabel>
+<text>8.6. PUT /db/_design/design-doc/attachment</text>
+</navLabel>
+<content src="ch08s06.html" />
+</navPoint>
+<navPoint id="N12A20" playOrder="92">
+<navLabel>
+<text>8.7. DELETE /db/_design/design-doc/attachment</text>
+</navLabel>
+<content src="ch08s07.html" />
+</navPoint>
+<navPoint id="N12ADC" playOrder="93">
+<navLabel>
+<text>8.8. GET /db/_design/design-doc/_info</text>
+</navLabel>
+<content src="ch08s08.html" />
+</navPoint>
+<navPoint id="N12BC0" playOrder="94">
+<navLabel>
+<text>8.9. GET /db/_design/design-doc/_view/view-name</text>
+</navLabel>
+<content src="ch08s09.html" />
+<navPoint id="N12E95" playOrder="95">
+<navLabel>
+<text>8.9.1. Querying Views and Indexes</text>
+</navLabel>
+<content src="ch08s09.html#couchdb-api-design_db-design-designdoc-view-viewname_get-indexes" />
+</navPoint>
+<navPoint id="N12EFA" playOrder="96">
+<navLabel>
+<text>8.9.2. Sorting Returned Rows</text>
+</navLabel>
+<content src="ch08s09.html#couchdb-api-design_db-design-designdoc-view-viewname_get-sorting" />
+</navPoint>
+<navPoint id="N12F78" playOrder="97">
+<navLabel>
+<text>8.9.3. Specifying Start and End Values</text>
+</navLabel>
+<content src="ch08s09.html#couchdb-api-design_db-design-designdoc-view-viewname_get-ranges" />
+</navPoint>
+<navPoint id="N12F89" playOrder="98">
+<navLabel>
+<text>8.9.4. Using Limits and Skipping Rows</text>
+</navLabel>
+<content src="ch08s09.html#couchdb-api-design_db-design-designdoc-view-viewname_get-limit" />
+</navPoint>
+<navPoint id="N12F8F" playOrder="99">
+<navLabel>
+<text>8.9.5. View Reduction and Grouping</text>
+</navLabel>
+<content src="ch08s09.html#couchdb-api-design_db-design-designdoc-view-viewname_get-reduction" />
+</navPoint>
+</navPoint>
+<navPoint id="N12F95" playOrder="100">
+<navLabel>
+<text>8.10. POST /db/_design/design-doc/_view/view-name</text>
+</navLabel>
+<content src="ch08s10.html" />
+<navPoint id="N13289" playOrder="101">
+<navLabel>
+<text>8.10.1. Multi-document Fetching</text>
+</navLabel>
+<content src="ch08s10.html#couchdb-api-design_db-design-designdoc-view-viewname_post-multidoc" />
+</navPoint>
+</navPoint>
+<navPoint id="N132AA" playOrder="102">
+<navLabel>
+<text>8.11. POST /db/_design/design-doc/_show/show-name</text>
+</navLabel>
+<content src="ch08s11.html" />
+</navPoint>
+<navPoint id="N1333B" playOrder="103">
+<navLabel>
+<text>8.12. POST /db/_design/design-doc/_show/show-name/doc</text>
+</navLabel>
+<content src="ch08s12.html" />
+</navPoint>
+<navPoint id="N13381" playOrder="104">
+<navLabel>
+<text>8.13. GET /db/_design/design-doc/_list/list-name/other-design-doc/view-name</text>
+</navLabel>
+<content src="ch08s13.html" />
+</navPoint>
+<navPoint id="N133C6" playOrder="105">
+<navLabel>
+<text>8.14. POST /db/_design/design-doc/_list/list-name/other-design-doc/view-name</text>
+</navLabel>
+<content src="ch08s14.html" />
+</navPoint>
+<navPoint id="N1340B" playOrder="106">
+<navLabel>
+<text>8.15. GET /db/_design/design-doc/_list/list-name/view-name</text>
+</navLabel>
+<content src="ch08s15.html" />
+</navPoint>
+<navPoint id="N13450" playOrder="107">
+<navLabel>
+<text>8.16. POST /db/_design/design-doc/_list/list-name/view-name</text>
+</navLabel>
+<content src="ch08s16.html" />
+</navPoint>
+<navPoint id="N13495" playOrder="108">
+<navLabel>
+<text>8.17. PUT /db/_design/design-doc/_update/updatename/doc</text>
+</navLabel>
+<content src="ch08s17.html" />
+</navPoint>
+<navPoint id="N134DA" playOrder="109">
+<navLabel>
+<text>8.18. POST /db/_design/design-doc/_update/updatename</text>
+</navLabel>
+<content src="ch08s18.html" />
+</navPoint>
+<navPoint id="N1351F" playOrder="110">
+<navLabel>
+<text>8.19. ALL /db/_design/design-doc/_rewrite/rewrite-name/anything</text>
+</navLabel>
+<content src="ch08s19.html" />
+</navPoint>
+</navPoint>
+<navPoint id="N13564" playOrder="111">
+<navLabel>
+<text>9. CouchDB API Server Miscellaneous Methods</text>
+</navLabel>
+<content src="ch09.html" />
+<navPoint id="N13612" playOrder="112">
+<navLabel>
+<text>9.1. GET /</text>
+</navLabel>
+<content src="ch09.html#couchdb-api-misc_root_get" />
+</navPoint>
+<navPoint id="N1366D" playOrder="113">
+<navLabel>
+<text>9.2. GET /_active_tasks</text>
+</navLabel>
+<content src="ch09s02.html" />
+</navPoint>
+<navPoint id="N13743" playOrder="114">
+<navLabel>
+<text>9.3. GET /_all_dbs</text>
+</navLabel>
+<content src="ch09s03.html" />
+</navPoint>
+<navPoint id="N137A3" playOrder="115">
+<navLabel>
+<text>9.4. GET /_log</text>
+</navLabel>
+<content src="ch09s04.html" />
+</navPoint>
+<navPoint id="N13879" playOrder="116">
+<navLabel>
+<text>9.5. POST /_replicate</text>
+</navLabel>
+<content src="ch09s05.html" />
+<navPoint id="N13946" playOrder="117">
+<navLabel>
+<text>9.5.1. Replication Operation</text>
+</navLabel>
+<content src="ch09s05.html#couchdb-api-misc_replicate_post-operation" />
+</navPoint>
+<navPoint id="N1396D" playOrder="118">
+<navLabel>
+<text>9.5.2. Specifying the Source and Target Database</text>
+</navLabel>
+<content src="ch09s05.html#couchdb-api-misc_replicate_post-sourcetarget" />
+</navPoint>
+<navPoint id="N1399B" playOrder="119">
+<navLabel>
+<text>9.5.3. Single Replication</text>
+</navLabel>
+<content src="ch09s05.html#couchdb-api-misc_replicate_post-single" />
+</navPoint>
+<navPoint id="N13A68" playOrder="120">
+<navLabel>
+<text>9.5.4. Continuous Replication</text>
+</navLabel>
+<content src="ch09s05.html#couchdb-api-misc_replicate_post-continuous" />
+</navPoint>
+<navPoint id="N13A8C" playOrder="121">
+<navLabel>
+<text>9.5.5. Canceling Continuous Replication</text>
+</navLabel>
+<content src="ch09s05.html#couchdb-api-misc_replicate_post-cancel" />
+</navPoint>
+</navPoint>
+<navPoint id="N13AA6" playOrder="122">
+<navLabel>
+<text>9.6. POST /_restart</text>
+</navLabel>
+<content src="ch09s06.html" />
+</navPoint>
+<navPoint id="N13B07" playOrder="123">
+<navLabel>
+<text>9.7. GET /_stats</text>
+</navLabel>
+<content src="ch09s07.html" />
+</navPoint>
+<navPoint id="N13D2A" playOrder="124">
+<navLabel>
+<text>9.8. GET /_utils</text>
+</navLabel>
+<content src="ch09s08.html" />
+</navPoint>
+<navPoint id="N13D71" playOrder="125">
+<navLabel>
+<text>9.9. GET /_uuids</text>
+</navLabel>
+<content src="ch09s09.html" />
+</navPoint>
+<navPoint id="N13E0F" playOrder="126">
+<navLabel>
+<text>9.10. GET /favicon.ico</text>
+</navLabel>
+<content src="ch09s10.html" />
+</navPoint>
+</navPoint>
+<navPoint id="N13E73" playOrder="127">
+<navLabel>
+<text>10. CouchDB API Server Configuration Methods</text>
+</navLabel>
+<content src="ch10.html" />
+<navPoint id="N13EDD" playOrder="128">
+<navLabel>
+<text>10.1. GET /_config</text>
+</navLabel>
+<content src="ch10.html#couchdb-api-config_config_get" />
+</navPoint>
+<navPoint id="N13F2E" playOrder="129">
+<navLabel>
+<text>10.2. GET /_config/section</text>
+</navLabel>
+<content src="ch10s02.html" />
+</navPoint>
+<navPoint id="N13F7D" playOrder="130">
+<navLabel>
+<text>10.3. GET /_config/section/key</text>
+</navLabel>
+<content src="ch10s03.html" />
+</navPoint>
+<navPoint id="N13FCF" playOrder="131">
+<navLabel>
+<text>10.4. PUT /_config/section/key</text>
+</navLabel>
+<content src="ch10s04.html" />
+</navPoint>
+<navPoint id="N1403A" playOrder="132">
+<navLabel>
+<text>10.5. DELETE /_config/section/key</text>
+</navLabel>
+<content src="ch10s05.html" />
+</navPoint>
+</navPoint>
+<navPoint id="N140DD" playOrder="133">
+<navLabel>
+<text>11. CouchDB API Server Authentication Methods</text>
+</navLabel>
+<content src="ch11.html" />
+</navPoint>
+<navPoint id="N14161" playOrder="134">
+<navLabel>
+<text>12. Configuring CouchDB</text>
+</navLabel>
+<content src="ch12.html" />
+<navPoint id="N14167" playOrder="135">
+<navLabel>
+<text>12.1. CouchDB Configuration Files</text>
+</navLabel>
+<content src="ch12.html#couchdb-single-configuration-files" />
+</navPoint>
+<navPoint id="N1416D" playOrder="136">
+<navLabel>
+<text>12.2. Configuration File Locations</text>
+</navLabel>
+<content src="ch12s02.html" />
+</navPoint>
+<navPoint id="N141AF" playOrder="137">
+<navLabel>
+<text>12.3. MochiWeb Server Options</text>
+</navLabel>
+<content src="ch12s03.html" />
+</navPoint>
+<navPoint id="N141C4" playOrder="138">
+<navLabel>
+<text>12.4. OS Daemons</text>
+</navLabel>
+<content src="ch12s04.html" />
+</navPoint>
+<navPoint id="N141F3" playOrder="139">
+<navLabel>
+<text>12.5. Update Notifications</text>
+</navLabel>
+<content src="ch12s05.html" />
+</navPoint>
+<navPoint id="N141F9" playOrder="140">
+<navLabel>
+<text>12.6. Socket Options Configuration Setting</text>
+</navLabel>
+<content src="ch12s06.html" />
+</navPoint>
+<navPoint id="N14210" playOrder="141">
+<navLabel>
+<text>12.7. vhosts definitions</text>
+</navLabel>
+<content src="ch12s07.html" />
+</navPoint>
+<navPoint id="N14221" playOrder="142">
+<navLabel>
+<text>12.8. Configuring SSL Network Sockets</text>
+</navLabel>
+<content src="ch12s08.html" />
+</navPoint>
+<navPoint id="N14287" playOrder="143">
+<navLabel>
+<text>12.9. CouchDB Configuration Options</text>
+</navLabel>
+<content src="ch12s09.html" />
+<navPoint id="N14313" playOrder="144">
+<navLabel>
+<text>12.9.1. attachments Configuration Options</text>
+</navLabel>
+<content src="ch12s09.html#couchdb-single-config-options_attachments" />
+</navPoint>
+<navPoint id="N14347" playOrder="145">
+<navLabel>
+<text>12.9.2. couchdb Configuration Options</text>
+</navLabel>
+<content src="ch12s09.html#couchdb-single-config-options_couchdb" />
+</navPoint>
+<navPoint id="N143AC" playOrder="146">
+<navLabel>
+<text>12.9.3. daemons Configuration Options</text>
+</navLabel>
+<content src="ch12s09.html#couchdb-single-config-options_daemons" />
+</navPoint>
+<navPoint id="N14418" playOrder="147">
+<navLabel>
+<text>12.9.4. httpd_db_handlers Configuration Options</text>
+</navLabel>
+<content src="ch12s09.html#couchdb-single-config-options_httpd_db_handlers" />
+</navPoint>
+<navPoint id="N14461" playOrder="148">
+<navLabel>
+<text>12.9.5. couch_httpd_auth Configuration Options</text>
+</navLabel>
+<content src="ch12s09.html#couchdb-single-config-options_couch_httpd_auth" />
+</navPoint>
+<navPoint id="N144AA" playOrder="149">
+<navLabel>
+<text>12.9.6. httpd Configuration Options</text>
+</navLabel>
+<content src="ch12s09.html#couchdb-single-config-options_httpd" />
+</navPoint>
+<navPoint id="N1450F" playOrder="150">
+<navLabel>
+<text>12.9.7. httpd_design_handlers Configuration Options</text>
+</navLabel>
+<content src="ch12s09.html#couchdb-single-config-options_httpd_design_handlers" />
+</navPoint>
+<navPoint id="N1455F" playOrder="151">
+<navLabel>
+<text>12.9.8. httpd_global_handlers Configuration Options</text>
+</navLabel>
+<content src="ch12s09.html#couchdb-single-config-options_httpd_global_handlers" />
+</navPoint>
+<navPoint id="N145E0" playOrder="152">
+<navLabel>
+<text>12.9.9. log Configuration Options</text>
+</navLabel>
+<content src="ch12s09.html#couchdb-single-config-options_log" />
+</navPoint>
+<navPoint id="N1461B" playOrder="153">
+<navLabel>
+<text>12.9.10. query_servers Configuration Options</text>
+</navLabel>
+<content src="ch12s09.html#couchdb-single-config-options_query_servers" />
+</navPoint>
+<navPoint id="N14648" playOrder="154">
+<navLabel>
+<text>12.9.11. query_server_config Configuration Options</text>
+</navLabel>
+<content src="ch12s09.html#couchdb-single-config-options_query_server_config" />
+</navPoint>
+<navPoint id="N14675" playOrder="155">
+<navLabel>
+<text>12.9.12. replicator Configuration Options</text>
+</navLabel>
+<content src="ch12s09.html#couchdb-single-config-options_replicator" />
+</navPoint>
+<navPoint id="N146A9" playOrder="156">
+<navLabel>
+<text>12.9.13. stats Configuration Options</text>
+</navLabel>
+<content src="ch12s09.html#couchdb-single-config-options_stats" />
+</navPoint>
+<navPoint id="N146DD" playOrder="157">
+<navLabel>
+<text>12.9.14. uuids Configuration Options</text>
+</navLabel>
+<content src="ch12s09.html#couchdb-single-config-options_uuids" />
+</navPoint>
+</navPoint>
+</navPoint>
+<navPoint id="N1470A" playOrder="158">
+<navLabel>
+<text>A. JSON Structure Reference</text>
+</navLabel>
+<content src="apa.html" />
+</navPoint>
+</navPoint>
+</navMap>
+</ncx>

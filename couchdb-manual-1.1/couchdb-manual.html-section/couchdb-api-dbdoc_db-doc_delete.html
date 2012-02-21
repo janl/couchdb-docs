@@ -1,0 +1,30 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>6.5.&nbsp;DELETE /db/doc</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-api-dbdoc.html" title="Chapter&nbsp;6.&nbsp;CouchDB API Server Document Methods"><link rel="prev" href="couchdb-api-dbdoc_db-doc_put-update.html" title="6.4.1.&nbsp;Updating an Existing Document"><link rel="next" href="couchdb-api-dbdoc_db-doc_copy.html" title="6.6.&nbsp;COPY /db/doc"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">6.5.&nbsp;<code class="literal">DELETE /db/doc</code></th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-api-dbdoc_db-doc_put-update.html">Prev</a>&nbsp;</td><th align="center" width="60%">Chapter&nbsp;6.&nbsp;CouchDB API Server Document Methods</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-dbdoc_db-doc_copy.html">Next</a></td></tr></table><hr></div><div class="section" title="6.5.&nbsp;DELETE /db/doc"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-api-dbdoc_db-doc_delete"></a>6.5.&nbsp;<code class="literal">DELETE /db/doc</code></h2></div></div></div><div class="informaltable"><table summary="URL API DELETE /db/doc" border="1"><colgroup><col class="field" width="33%"><col class="info" width="33%"><col class="addinfo" width="34%"></colgroup><tbody><tr><td><span class="bold"><strong>Method</strong></span></td><td colspan="2"><code class="literal">DELETE /db/doc</code></td></tr><tr><td><span class="bold"><strong>Request</strong></span></td><td colspan="2">
+ None
+ </td></tr><tr><td><span class="bold"><strong>Response</strong></span></td><td colspan="2">
+ JSON of the deleted revision
+ </td></tr><tr><td><span class="bold"><strong>Admin Privileges Required</strong></span></td><td colspan="2">no</td></tr><tr><td><span class="bold"><strong>Query Arguments</strong></span></td><td><span class="bold"><strong>Argument</strong></span></td><td><code class="literal">rev</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>
+ Current revision of the document for validation
+ </td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>yes</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Type</strong></span></td><td>string</td></tr><tr><td><span class="bold"><strong>HTTP Headers</strong></span></td><td><span class="bold"><strong>Header</strong></span></td><td><code class="literal">If-Match</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>Current revision of the document for validation</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>yes</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td colspan="3"><span class="bold"><strong>Return Codes</strong></span></td></tr><tr><td>409</td><td colspan="2">
+ Revision is missing, invalid or not the latest
+ </td></tr></tbody></table></div><p>
+      Deletes the specified document from the database. You must supply
+      the current (latest) revision, either by using the
+      <code class="literal">rev</code> parameter to specify the revision:
+    </p><pre class="programlisting">DELETE http://couchdb:5984/recipes/FishStew?rev=3-a1a9b39ee3cc39181b796a69cb48521c
+Content-Type: application/json</pre><p>
+      Alternatively, you can use ETags with the
+      <code class="literal">If-Match</code> field:
+    </p><pre class="programlisting">DELETE http://couchdb:5984/recipes/FishStew
+If-Match: 3-a1a9b39ee3cc39181b796a69cb48521c
+Content-Type: application/json</pre><p>
+      The returned JSON contains the document ID, revision and status:
+    </p><pre class="programlisting">{
+   "id" : "FishStew",
+   "ok" : true,
+   "rev" : "4-2719fd41187c60762ff584761b714cfb"
+}</pre><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+        Note that deletion of a record increments the revision number.
+        The use of a revision for deletion of the record allows
+        replication of the database to correctly track the deletion in
+        synchronized copies.
+      </p></div></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-api-dbdoc_db-doc_put-update.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-api-dbdoc.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-dbdoc_db-doc_copy.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">6.4.1.&nbsp;Updating an Existing Document&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;6.6.&nbsp;<code class="literal">COPY /db/doc</code></td></tr></table></div></body></html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Chapter&nbsp;4.&nbsp;CouchDB API</title>
+<link href="epub.css" type="text/css" rel="stylesheet" />
+<meta content="DocBook XSL Stylesheets V1.76.1" name="generator" />
+</head>
+<body>
+<div class="chapter" title="Chapter&nbsp;4.&nbsp;CouchDB API">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-api-basics" />Chapter&nbsp;4.&nbsp;CouchDB API</h1>
+</div>
+</div>
+</div>
+<p>
+    The CouchDB API is the primary method of interfacing to a CouchDB
+    instance. Requests are made using HTTP and requests are used to
+    request information from the database, store new data, and perform
+    views and formatting of the information stored within the documents.
+  </p>
+<p>
+    Requests to the API can be categorised by the different areas of the
+    CouchDB system that you are accessing, and the HTTP method used to
+    send the request. Different methods imply different operations, for
+    example retrieval of information from the database is typically
+    handled by the <code class="literal">GET</code> operation, while updates are
+    handled by either a <code class="literal">POST</code> or
+    <code class="literal">PUT</code> request. There are some differences between
+    the information that must be supplied for the different methods. For
+    a guide to the basic HTTP methods and request structure, see
+    <a class="xref" href="ch04.html#couchdb-api-introduction-requests" title="4.1.&nbsp;Request Format and Responses">Section&nbsp;4.1, &ldquo;Request Format and Responses&rdquo;</a>.
+  </p>
+<p>
+    For nearly all operations, the submitted data, and the returned data
+    structure, is defined within a JavaScript Object Notation (JSON)
+    object. Basic information on the content and data types for JSON are
+    provided in <a class="xref" href="ch04s03.html" title="4.3.&nbsp;JSON Basics">Section&nbsp;4.3, &ldquo;JSON Basics&rdquo;</a>.
+  </p>
+<p>
+    Errors when accessing the CouchDB API are reported using standard
+    HTTP Status Codes. A guide to the generic codes returned by CouchDB
+    are provided in
+    <a class="xref" href="ch04s04.html" title="4.4.&nbsp;HTTP Status Codes">Section&nbsp;4.4, &ldquo;HTTP Status Codes&rdquo;</a>.
+  </p>
+<p>
+    When accessing specific areas of the CouchDB API, specific
+    information and examples on the HTTP methods and request, JSON
+    structures, and error codes are provided. For a guide to the
+    different areas of the API, see
+    <a class="xref" href="ch04s05.html" title="4.5.&nbsp;CouchDB API Overview">Section&nbsp;4.5, &ldquo;CouchDB API Overview&rdquo;</a>.
+  </p>
+<div class="section" title="4.1.&nbsp;Request Format and Responses">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-api-introduction-requests" />4.1.&nbsp;Request Format and Responses</h1>
+</div>
+</div>
+</div>
+<p>
+      CouchDB supports the following HTTP request methods:
+    </p>
+<div class="itemizedlist">
+<ul class="itemizedlist">
+<li class="listitem">
+<p>
+          <code class="literal">GET</code>
+        </p>
+<p>
+          Request the specified item. As with normal HTTP requests, the
+          format of the URL defines what is returned. With CouchDB this
+          can include static items, database documents, and
+          configuration and statistical information. In most cases the
+          information is returned in the form of a JSON document.
+        </p>
+</li>
+<li class="listitem">
+<p>
+          <code class="literal">HEAD</code>
+        </p>
+<p>
+          The <code class="literal">HEAD</code> method is used to get the HTTP
+          header of a <code class="literal">GET</code> request without the body of
+          the response.
+        </p>
+</li>
+<li class="listitem">
+<p>
+          <code class="literal">POST</code>
+        </p>
+<p>
+          Upload data. Within CouchDB <code class="literal">POST</code> is used to
+          set values, including uploading documents, setting document
+          values, and starting certain administration commands.
+        </p>
+</li>
+<li class="listitem">
+<p>
+          <code class="literal">PUT</code>
+        </p>
+<p>
+          Used to put a specified resource. In CouchDB
+          <code class="literal">PUT</code> is used to create new objects,
+          including databases, documents, views and design documents.
+        </p>
+</li>
+<li class="listitem">
+<p>
+          <code class="literal">DELETE</code>
+        </p>
+<p>
+          Deletes the specified resource, including documents, views,
+          and design documents.
+        </p>
+</li>
+<li class="listitem">
+<p>
+          <code class="literal">COPY</code>
+        </p>
+<p>
+          A special method that can be used to copy documents and
+          objects.
+        </p>
+</li>
+</ul>
+</div>
+<p>
+      If you use the an unsupported HTTP request type with a URL that
+      does not support the specified type, a 405 error will be returned,
+      listing the supported HTTP methods. For example:
+    </p>
+<pre class="programlisting">{
+    "error":"method_not_allowed",
+    "reason":"Only GET,HEAD allowed"
+}</pre>
+<p>
+      The CouchDB design document API and the functions when returning
+      HTML (for example as part of a show or list) enables you to
+      include custom HTTP headers through the <code class="literal">headers</code>
+      block of the return object. For more information, see
+      <a class="xref" href="">???</a>.
+    </p>
+</div>
+</div>
+</body>
+</html>

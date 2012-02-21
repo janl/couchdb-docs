@@ -1,0 +1,35 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>4.2.2.&nbsp;Response Headers</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-api-introduction-request-header.html" title="4.2.&nbsp;HTTP Headers"><link rel="prev" href="couchdb-api-introduction-request-header-request.html" title="4.2.1.&nbsp;Request Headers"><link rel="next" href="couchdb-api-introduction-json.html" title="4.3.&nbsp;JSON Basics"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">4.2.2.&nbsp;Response Headers</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-api-introduction-request-header-request.html">Prev</a>&nbsp;</td><th align="center" width="60%">4.2.&nbsp;HTTP Headers</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-introduction-json.html">Next</a></td></tr></table><hr></div><div class="section" title="4.2.2.&nbsp;Response Headers"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-api-introduction-request-header-response"></a>4.2.2.&nbsp;Response Headers</h3></div></div></div><p>
+        Response headers are returned by the server when sending back
+        content and include a number of different header fields, many of
+        which are standard HTTP response header and have no significance
+        to CouchDB operation. The list of response headers important to
+        CouchDB are listed below.
+      </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+            <code class="literal">Content-type</code>
+          </p><p>
+            Specifies the MIME type of the returned data. For most
+            request, the returned MIME type is
+            <code class="literal">text/plain</code>. All text is encoded in
+            Unicode (UTF-8), and this is explicitly stated in the
+            returned <code class="literal">Content-type</code>, as
+            <code class="literal">text/plain;charset=utf-8</code>.
+          </p></li><li class="listitem"><p>
+            <code class="literal">Cache-control</code>
+          </p><p>
+            The cache control HTTP response header provides a suggestion
+            for client caching mechanisms on how to treat the returned
+            information. CouchDB typically returns the
+            <code class="literal">must-revalidate</code>, which indicates that the
+            information should be revalidated if possible. This is used
+            to ensure that the dynamic nature of the content is
+            correctly updated.
+          </p></li><li class="listitem"><p>
+            <code class="literal">Content-length</code>
+          </p><p>
+            The length (in bytes) of the returned content.
+          </p></li><li class="listitem"><p>
+            <code class="literal">Etag</code>
+          </p><p>
+            The <code class="literal">Etag</code> HTTP header field is used to
+            show the revision for a document.
+          </p></li></ul></div></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-api-introduction-request-header-request.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-api-introduction-request-header.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-introduction-json.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">4.2.1.&nbsp;Request Headers&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;4.3.&nbsp;JSON Basics</td></tr></table></div></body></html>

@@ -1,0 +1,17 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>1.&nbsp;Upgrading to CouchDB 1.1</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB Release 1.1 Feature Guide"><link rel="up" href="index.html" title="CouchDB Release 1.1 Feature Guide"><link rel="prev" href="index.html" title="CouchDB Release 1.1 Feature Guide"><link rel="next" href="couchb-release-1.1-replicatordb.html" title="2.&nbsp;Replicator Database"><meta name="date" content="2012-02-21T20:09:25+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">1.&nbsp;Upgrading to CouchDB 1.1</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="index.html">Prev</a>&nbsp;</td><th align="center" width="60%">&nbsp;</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchb-release-1.1-replicatordb.html">Next</a></td></tr></table><hr></div><div class="section" title="1.&nbsp;Upgrading to CouchDB 1.1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-release-1.1-upgrading"></a>1.&nbsp;Upgrading to CouchDB 1.1</h2></div></div></div><p>
+      You can upgrade your existing CouchDB 1.0.x installation to
+      CouchDB 1.1 without any specific steps or migration. When you run
+      CouchDB 1.1 the existing data and index files will be opened and
+      used as normal.
+    </p><p>
+      The first time you run a compaction routine on your database
+      within CouchDB 1.1, the data structure and indexes will be updated
+      to the new version of the CouchDB database format that can only be
+      read by CouchDB 1.1 and later. This step is not reversable. Once
+      the data files have been updated and migrated to the new version
+      the data files will no longer work with a CouchDB 1.0.x release.
+    </p><div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Warning</h3><p>
+        If you want to retain support for openein gthe data files in
+        CouchDB 1.0.x you must back up your data files before performing
+        the upgrade and compaction process.
+      </p></div></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="index.html">Prev</a>&nbsp;</td><td align="center" width="20%">&nbsp;</td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchb-release-1.1-replicatordb.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">CouchDB Release 1.1 Feature Guide&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;2.&nbsp;Replicator Database</td></tr></table></div></body></html>

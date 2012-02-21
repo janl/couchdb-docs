@@ -1,0 +1,71 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>4.2.1.&nbsp;Request Headers</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-api-introduction-request-header.html" title="4.2.&nbsp;HTTP Headers"><link rel="prev" href="couchdb-api-introduction-request-header.html" title="4.2.&nbsp;HTTP Headers"><link rel="next" href="couchdb-api-introduction-request-header-response.html" title="4.2.2.&nbsp;Response Headers"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">4.2.1.&nbsp;Request Headers</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-api-introduction-request-header.html">Prev</a>&nbsp;</td><th align="center" width="60%">4.2.&nbsp;HTTP Headers</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-introduction-request-header-response.html">Next</a></td></tr></table><hr></div><div class="section" title="4.2.1.&nbsp;Request Headers"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-api-introduction-request-header-request"></a>4.2.1.&nbsp;Request Headers</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+            <code class="literal">Content-type</code>
+          </p><p>
+            Specifies the content type of the information being supplied
+            within the request. The specification uses MIME type
+            specifications. For the majority of requests this will be
+            JSON (<code class="literal">application/json</code>). For some
+            settings the MIME type will be plain text. When uploading
+            attachments it should be the corresponding MIME type for the
+            attachment or binary
+            (<code class="literal">application/octet-stream</code>).
+          </p><p>
+            The use of the <code class="literal">Content-type</code> on a request
+            is highly recommended.
+          </p></li><li class="listitem"><p>
+            <code class="literal">Accept</code>
+          </p><p>
+            Specifies the list of accepted data types to be returned by
+            the server (i.e. that are accepted/understandable by the
+            client). The format should be a list of one or more MIME
+            types, separated by colons.
+          </p><p>
+            For the majority of requests the definition should be for
+            JSON data (<code class="literal">application/json</code>). For
+            attachments you can either specify the MIME type explicitly,
+            or use <code class="literal">*/*</code> to specify that all file types
+            are supported. If the <code class="literal">Accept</code> header is
+            not supplied, then the <code class="literal">*/*</code> MIME type is
+            assumed (i.e. client accepts all formats).
+          </p><p>
+            The use of <code class="literal">Accept</code> in queries for CouchDB
+            is not required, but is highly recommended as it helps to
+            ensure that the data returned can be processed by the
+            client.
+          </p><p>
+            If you specify a data type using the
+            <code class="literal">Accept</code> header, CouchDB will honor the
+            specified type in the <code class="literal">Content-type</code> header
+            field returned. For example, if you explicitly request
+            <code class="literal">application/json</code> in the
+            <code class="literal">Accept</code> of a request, the returned HTTP
+            headers will use the value in the returned
+            <code class="literal">Content-type</code> field.
+          </p><p>
+            For example, when sending a request without an explicit
+            <code class="literal">Accept</code> header, or when specifying
+            <code class="literal">*/*</code>:
+          </p><pre class="programlisting">GET /recipes HTTP/1.1
+Host: couchdb:5984
+Accept: */*</pre><p>
+            The returned headers are:
+          </p><pre class="programlisting">Server: CouchDB/1.0.1 (Erlang OTP/R13B)
+Date: Thu, 13 Jan 2011 13:39:34 GMT
+Content-Type: text/plain;charset=utf-8
+Content-Length: 227
+Cache-Control: must-revalidate</pre><p>
+            Note that the returned content type is
+            <code class="literal">text/plain</code> even though the information
+            returned by the request is in JSON format.
+          </p><p>
+            Explicitly specifying the <code class="literal">Accept</code> header:
+          </p><pre class="programlisting">GET /recipes HTTP/1.1
+Host: couchdb:5984
+Accept: application/json</pre><p>
+            The headers returned include the
+            <code class="literal">application/json</code> content type:
+          </p><pre class="programlisting">Server: CouchDB/1.0.1 (Erlang OTP/R13B)
+Date: Thu, 13 Jan 2011 13:40:11 GMT
+Content-Type: application/json
+Content-Length: 227
+Cache-Control: must-revalidate</pre></li></ul></div></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-api-introduction-request-header.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-api-introduction-request-header.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-introduction-request-header-response.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">4.2.&nbsp;HTTP Headers&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;4.2.2.&nbsp;Response Headers</td></tr></table></div></body></html>

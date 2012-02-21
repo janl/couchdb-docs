@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>12.2.&nbsp;Configuration File Locations</title>
+<link href="epub.css" type="text/css" rel="stylesheet" />
+<meta content="DocBook XSL Stylesheets V1.76.1" name="generator" />
+</head>
+<body>
+<div class="section" title="12.2.&nbsp;Configuration File Locations">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-single-configuration-files-locations" />12.2.&nbsp;Configuration File Locations</h1>
+</div>
+</div>
+</div>
+<p>
+      CouchDB reads files from the following locations, in the following
+      order.
+    </p>
+<div class="orderedlist">
+<ol class="orderedlist">
+<li class="listitem">
+<p>
+          <code class="filename">PREFIX/default.ini</code>
+        </p>
+</li>
+<li class="listitem">
+<p>
+          <code class="filename">PREFIX/default.d/*</code>
+        </p>
+</li>
+<li class="listitem">
+<p>
+          <code class="filename">PREFIX/local.ini</code>
+        </p>
+</li>
+<li class="listitem">
+<p>
+          <code class="filename">PREFIX/local.d/*</code>
+        </p>
+</li>
+</ol>
+</div>
+<p>
+      Settings in successive documents override the settings in earlier
+      entries. For example, setting the <code class="literal">bind_address</code>
+      parameter in <code class="filename">local.ini</code> would override any
+      setting in <code class="literal">default.ini</code>.
+    </p>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p>
+        The <code class="filename">default.ini</code> file may be overwritten
+        during an upgrade or re-installation, so localised changes
+        should be made to the <code class="filename">local.ini</code> file or
+        files within the <code class="filename">local.d</code> directory.
+      </p>
+</div>
+</div>
+</body>
+</html>

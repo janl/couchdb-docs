@@ -1,0 +1,61 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>1.1.&nbsp;Using Futon</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-single-introduction.html" title="Chapter&nbsp;1.&nbsp;Introduction"><link rel="prev" href="couchdb-single-introduction.html" title="Chapter&nbsp;1.&nbsp;Introduction"><link rel="next" href="couchdb-single-introduction-futon-dbdocs.html" title="1.1.1.&nbsp;Managing Databases and Documents"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">1.1.&nbsp;Using Futon</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-single-introduction.html">Prev</a>&nbsp;</td><th align="center" width="60%">Chapter&nbsp;1.&nbsp;Introduction</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-single-introduction-futon-dbdocs.html">Next</a></td></tr></table><hr></div><div class="section" title="1.1.&nbsp;Using Futon"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-single-introduction-futon"></a>1.1.&nbsp;Using Futon</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="couchdb-single-introduction-futon-dbdocs.html">1.1.1. Managing Databases and Documents</a></span></dt><dt><span class="section"><a href="couchdb-single-introduction-futon-replication.html">1.1.2. Configuring Replication</a></span></dt></dl></div><p>
+      Futon is a native web-based interface built into CouchDB. It provides a basic interface to the majority of the
+      functionality, including the ability to create, update, delete and
+      view documents and views, provides access to the configuration
+      parameters, and an interface for initiating replication.
+    </p><p>
+      The default view is the <span class="guilabel">Overview</span> page which
+      provides you with a list of the databases. The basic structure of
+      the page is consistent regardless of the section you are in. The
+      main panel on the left provides the main interface to the
+      databases, configuration or replication systems. The side panel on
+      the right provides navigation to the main areas of Futon
+      interface:
+    </p><div class="figure"><a name="fig-ccouchdb-single-introduction-futon-overview"></a><p class="title"><b>Figure&nbsp;1.1.&nbsp;Futon Overview</b></p><div class="figure-contents"><div class="mediaobject"><table cellpadding="0" cellspacing="0" summary="manufactured viewport for HTML img" border="0" width="100%"><tr><td><img width="100%" src="images/futon-overview.png" height="100%" alt="Futon Overview"></td></tr></table></div></div></div><br class="figure-break"><p>
+      The main sections are:
+    </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+          <span class="guibutton">Overview</span>
+        </p><p>
+          The main overview page, which provides a list of the databases
+          and provides the interface for querying the database and
+          creating and updating documents. See
+          <a class="xref" href="couchdb-single-introduction-futon-dbdocs.html" title="1.1.1.&nbsp;Managing Databases and Documents">Section&nbsp;1.1.1, &ldquo;Managing Databases and Documents&rdquo;</a>.
+        </p></li><li class="listitem"><p>
+          <span class="guibutton">Configuration</span>
+        </p><p>
+          An interface into the configuration of your CouchDB installation. The interface allows you to edit the
+          different configurable parameters. For more details on
+          configuration, see
+          <a class="xref" href="couchdb-single-configuration.html" title="Chapter&nbsp;12.&nbsp;Configuring CouchDB">Chapter&nbsp;12, <i>Configuring CouchDB</i></a>.
+        </p></li><li class="listitem"><p>
+          <span class="guibutton">Replicator</span>
+        </p><p>
+          An interface to the replication system, enabling you to
+          initiate replication between local and remote databases. See
+          <a class="xref" href="couchdb-single-introduction-futon-replication.html" title="1.1.2.&nbsp;Configuring Replication">Section&nbsp;1.1.2, &ldquo;Configuring Replication&rdquo;</a>.
+        </p></li><li class="listitem"><p>
+          <span class="guibutton">Status</span>
+        </p><p>
+          Displays a list of the running background tasks on the server.
+          Background tasks include view index building, compaction and
+          replication. The <span class="guibutton">Status</span> page is an
+          interface to the
+          <a class="link" href="couchdb-api-misc_active-tasks_get.html" title="9.2.&nbsp;GET /_active_tasks">Active
+          Tasks</a> API call. See
+          <a class="xref" href="couchdb-api-misc_active-tasks_get.html" title="9.2.&nbsp;GET /_active_tasks">Section&nbsp;9.2, &ldquo;<code class="literal">GET /_active_tasks</code>&rdquo;</a>.
+        </p></li><li class="listitem"><p>
+          <span class="guibutton">Verify Installation</span>
+        </p><p>
+          The <span class="guibutton">Verify Installation</span> allows you to
+          check whether all of the components of your CouchDB installation are correctly installed.
+        </p></li><li class="listitem"><p>
+          <span class="guibutton">Test Suite</span>
+        </p><p>
+          The <span class="guibutton">Test Suite</span> section allows you to
+          run the built-in test suite. This executes a number of test
+          routines entirely within your browser to test the API and
+          functionality of your CouchDB installation. If
+          you select this page, you can run the tests by using the
+          <span class="guibutton">Run All</span> button. This will execute all
+          the tests, which may take some time.
+        </p></li></ul></div></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-single-introduction.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-single-introduction.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-single-introduction-futon-dbdocs.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">Chapter&nbsp;1.&nbsp;Introduction&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;1.1.1.&nbsp;Managing Databases and Documents</td></tr></table></div></body></html>

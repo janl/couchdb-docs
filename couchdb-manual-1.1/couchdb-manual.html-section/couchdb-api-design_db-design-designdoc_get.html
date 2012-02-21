@@ -1,0 +1,37 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>8.1.&nbsp;GET /db/_design/design-doc</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-api-design.html" title="Chapter&nbsp;8.&nbsp;CouchDB API Server Design Document Methods"><link rel="prev" href="couchdb-api-design.html" title="Chapter&nbsp;8.&nbsp;CouchDB API Server Design Document Methods"><link rel="next" href="couchdb-api-design_db-design-designdoc_put.html" title="8.2.&nbsp;PUT /db/_design/design-doc"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">8.1.&nbsp;<code class="literal">GET /db/_design/design-doc</code></th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-api-design.html">Prev</a>&nbsp;</td><th align="center" width="60%">Chapter&nbsp;8.&nbsp;CouchDB API Server Design Document Methods</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-design_db-design-designdoc_put.html">Next</a></td></tr></table><hr></div><div class="section" title="8.1.&nbsp;GET /db/_design/design-doc"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-api-design_db-design-designdoc_get"></a>8.1.&nbsp;<code class="literal">GET /db/_design/design-doc</code></h2></div></div></div><div class="informaltable"><table summary="URL API GET /db/_design/design-doc" border="1"><colgroup><col class="field" width="33%"><col class="info" width="33%"><col class="addinfo" width="34%"></colgroup><tbody><tr><td><span class="bold"><strong>Method</strong></span></td><td colspan="2"><code class="literal">GET /db/_design/design-doc</code></td></tr><tr><td><span class="bold"><strong>Request</strong></span></td><td colspan="2">
+ None
+ </td></tr><tr><td><span class="bold"><strong>Response</strong></span></td><td colspan="2">
+ JSON of the existing design document
+ </td></tr><tr><td><span class="bold"><strong>Admin Privileges Required</strong></span></td><td colspan="2">no</td></tr><tr><td><span class="bold"><strong>Query Arguments</strong></span></td><td><span class="bold"><strong>Argument</strong></span></td><td><code class="literal">rev</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>
+ Specify the revision to return
+ </td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>yes</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Type</strong></span></td><td>string</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Argument</strong></span></td><td><code class="literal">revs</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>
+ Return a list of the revisions for the document
+ </td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>yes</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Type</strong></span></td><td>boolean</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Supported Values</strong></span></td><td class="auto-generated">&nbsp;</td></tr><tr><td>&nbsp;</td><td><code class="literal">true</code></td><td>Includes the revisions</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Argument</strong></span></td><td><code class="literal">revs_info</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>
+ Return a list of detailed revision information for the
+ document
+ </td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>yes</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Type</strong></span></td><td>boolean</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Supported Values</strong></span></td><td class="auto-generated">&nbsp;</td></tr><tr><td>&nbsp;</td><td><code class="literal">true</code></td><td>Includes the revisions</td></tr></tbody></table></div><p>
+      Returns the specified design document,
+      <code class="literal">design-doc</code> from the specified
+      <code class="literal">db</code>. For example, to retrieve the design
+      document <code class="literal">recipes</code> you would send the following
+      request:
+    </p><pre class="programlisting">GET http://couchdb:5984/recipes/_design/recipes
+Content-Type: application/json</pre><p>
+      The returned string will be the JSON of the design document:
+    </p><pre class="programlisting">{
+   "_id" : "_design/recipes",
+   "_rev" : "5-39f56a392b86bbee57e2138921346406"
+   "language" : "javascript",
+   "views" : {
+      "by_recipe" : {
+         "map" : "function(doc) { if (doc.title != null) emit(doc.title, doc) }"
+      },
+   },
+}</pre><p>
+      A list of the revisions can be obtained by using the
+      <code class="literal">revs</code> query argument, or an extended list of
+      revisions using the <code class="literal">revs_info</code> query argument.
+      This operates in the same way as for other documents. Fur further
+      examples, see
+      <a class="xref" href="couchdb-api-dbdoc_db-doc_get.html" title="6.2.&nbsp;GET /db/doc">Section&nbsp;6.2, &ldquo;<code class="literal">GET /db/doc</code>&rdquo;</a>.
+    </p></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-api-design.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-api-design.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-design_db-design-designdoc_put.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">Chapter&nbsp;8.&nbsp;CouchDB API Server Design Document Methods&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;8.2.&nbsp;<code class="literal">PUT /db/_design/design-doc</code></td></tr></table></div></body></html>

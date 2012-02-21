@@ -1,0 +1,32 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>5.9.&nbsp;POST /db/_bulk_docs</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-api-db.html" title="Chapter&nbsp;5.&nbsp;CouchDB API Server Database Methods"><link rel="prev" href="couchdb-api-db_db-ensure-full-commit_post.html" title="5.8.&nbsp;POST /db/_ensure_full_commit"><link rel="next" href="couchdb-api-db_db-bulk-docs_post-insert.html" title="5.9.1.&nbsp;Inserting Documents in Bulk"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">5.9.&nbsp;<code class="literal">POST /db/_bulk_docs</code></th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-api-db_db-ensure-full-commit_post.html">Prev</a>&nbsp;</td><th align="center" width="60%">Chapter&nbsp;5.&nbsp;CouchDB API Server Database Methods</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-db_db-bulk-docs_post-insert.html">Next</a></td></tr></table><hr></div><div class="section" title="5.9.&nbsp;POST /db/_bulk_docs"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-api-db_db-bulk-docs_post"></a>5.9.&nbsp;<code class="literal">POST /db/_bulk_docs</code></h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="couchdb-api-db_db-bulk-docs_post-insert.html">5.9.1. Inserting Documents in Bulk</a></span></dt><dt><span class="section"><a href="couchdb-api-db_db-bulk-docs_post-update.html">5.9.2. Updating Documents in Bulk</a></span></dt><dt><span class="section"><a href="couchdb-api-db_db-bulk-docs_post-commit.html">5.9.3. Bulk Documents Transaction Semantics</a></span></dt><dt><span class="section"><a href="couchdb-api-db_db-bulk-docs_post-errors.html">5.9.4. Bulk Document Validation and Conflict Errors</a></span></dt></dl></div><div class="informaltable"><table summary="URL API POST /db/_bulk_docs" border="1"><colgroup><col class="field" width="33%"><col class="info" width="33%"><col class="addinfo" width="34%"></colgroup><tbody><tr><td><span class="bold"><strong>Method</strong></span></td><td colspan="2"><code class="literal">POST /db/_bulk_docs</code></td></tr><tr><td><span class="bold"><strong>Request</strong></span></td><td colspan="2">
+ JSON of the docs and updates to be applied
+ </td></tr><tr><td><span class="bold"><strong>Response</strong></span></td><td colspan="2">
+ JSON of updated documents
+ </td></tr><tr><td><span class="bold"><strong>Admin Privileges Required</strong></span></td><td colspan="2">no</td></tr><tr><td colspan="3"><span class="bold"><strong>Return Codes</strong></span></td></tr><tr><td>201</td><td colspan="2">
+ Document(s) have been created or updated
+ </td></tr></tbody></table></div><p>
+      The bulk document API allows you to create and update multiple
+      documents at the same time within a single request. The basic
+      operation is similar to creating or updating a single document,
+      except that you batch the document structure and information and .
+      When creating new documents the document ID is optional. For
+      updating existing documents, you must provide the document ID,
+      revision information, and new document values.
+    </p><p>
+      For both inserts and updates the basic structure of the JSON is
+      the same:
+    </p><div class="table"><a name="table-couchdb-api-db_db-bulk-docs-json"></a><p class="title"><b>Table&nbsp;5.4.&nbsp;
+ Bulk Documents
+ </b></p><div class="table-contents"><table summary="
+ Bulk Documents
+ " border="1"><colgroup><col class="item" width="30%"><col class="desc" width="70%"></colgroup><tbody><tr><td><span class="bold"><strong>Field</strong></span></td><td><span class="bold"><strong>Description</strong></span></td></tr><tr><td><code class="literal">all_or_nothing</code> (optional) </td><td>
+ Sets the database commit mode to use all-or-nothing semantics
+ </td></tr><tr><td><code class="literal">docs</code> <code class="literal">[array]</code> </td><td>
+ Bulk Documents Document
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">_id</code> (optional) </td><td>
+ Document ID
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">_rev</code> (optional) </td><td>
+ Revision ID (when updating an existing document)
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">_deleted</code> (optional) </td><td>
+ Whether the document should be deleted
+ </td></tr></tbody></table></div></div><br class="table-break"></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-api-db_db-ensure-full-commit_post.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-api-db.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-db_db-bulk-docs_post-insert.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">5.8.&nbsp;<code class="literal">POST /db/_ensure_full_commit</code>&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;5.9.1.&nbsp;Inserting Documents in Bulk</td></tr></table></div></body></html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>4.3.&nbsp;JSON Basics</title>
+<link href="epub.css" type="text/css" rel="stylesheet" />
+<meta content="DocBook XSL Stylesheets V1.76.1" name="generator" />
+</head>
+<body>
+<div class="section" title="4.3.&nbsp;JSON Basics">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-api-introduction-json" />4.3.&nbsp;JSON Basics</h1>
+</div>
+</div>
+</div>
+<p>
+      The majority of requests and responses to CouchDB use the
+      JavaScript Object Notation (JSON) for formatting the content and
+      structure of the data and responses.
+    </p>
+<p>
+      JSON is used because it is the simplest and easiest to use
+      solution for working with data within a web browser, as JSON
+      structures can be evaluated and used as JavaScript objects within
+      the web browser environment. JSON also integrates with the
+      server-side JavaScript used within CouchDB.
+    </p>
+<p>
+      JSON supports the same basic types as supported by JavaScript,
+      these are:
+    </p>
+<div class="itemizedlist">
+<ul class="itemizedlist">
+<li class="listitem">
+<p>
+          Number (either integer or floating-point).
+        </p>
+</li>
+<li class="listitem">
+<p>
+          String; this should be enclosed by double-quotes and supports
+          Unicode characters and backslash escaping. For example:
+        </p>
+<pre class="programlisting">"A String"</pre>
+</li>
+<li class="listitem">
+<p>
+          Boolean - a <code class="literal">true</code> or
+          <code class="literal">false</code> value. You can use these strings
+          directly. For example:
+        </p>
+<pre class="programlisting">{ "value": true}</pre>
+</li>
+<li class="listitem">
+<p>
+          Array - a list of values enclosed in square brackets. For
+          example:
+        </p>
+<pre class="programlisting">["one", "two", "three"]</pre>
+</li>
+<li class="listitem">
+<p>
+          Object - a set of key/value pairs (i.e. an associative array,
+          or hash). The key must be a string, but the value can be any
+          of the supported JSON values. For example:
+        </p>
+<pre class="programlisting">{
+   "servings" : 4,
+   "subtitle" : "Easy to make in advance, and then cook when ready",
+   "cooktime" : 60,
+   "title" : "Chicken Coriander"
+}</pre>
+<p>
+          In CouchDB, the JSON object is used to represent a variety of
+          structures, including the main CouchDB document.
+        </p>
+</li>
+</ul>
+</div>
+<p>
+      Parsing JSON into a JavaScript object is supported through the
+      <code class="literal">eval()</code> function in JavaScript, or through
+      various libraries that will perform the parsing of the content
+      into a JavaScript object for you. Libraries for parsing and
+      generating JSON are available in many languages, including Perl,
+      Python, Ruby, Erlang and others.
+    </p>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p>
+        Care should be taken to ensure that your JSON structures are
+        valid, invalid structures will cause CouchDB to return an HTTP
+        status code of 500 (server error). See
+        <a class="xref" href="ch04s04.html#couchdb-api-introduction-returncode-500">HTTP               Status Code 500</a>
+        .
+      </p>
+</div>
+</div>
+</body>
+</html>

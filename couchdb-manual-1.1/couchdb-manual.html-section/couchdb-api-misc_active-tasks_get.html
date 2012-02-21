@@ -1,0 +1,47 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>9.2.&nbsp;GET /_active_tasks</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-api-misc.html" title="Chapter&nbsp;9.&nbsp;CouchDB API Server Miscellaneous Methods"><link rel="prev" href="couchdb-api-misc_root_get.html" title="9.1.&nbsp;GET /"><link rel="next" href="couchdb-api-misc_all-dbs_get.html" title="9.3.&nbsp;GET /_all_dbs"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">9.2.&nbsp;<code class="literal">GET /_active_tasks</code></th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-api-misc_root_get.html">Prev</a>&nbsp;</td><th align="center" width="60%">Chapter&nbsp;9.&nbsp;CouchDB API Server Miscellaneous Methods</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-misc_all-dbs_get.html">Next</a></td></tr></table><hr></div><div class="section" title="9.2.&nbsp;GET /_active_tasks"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-api-misc_active-tasks_get"></a>9.2.&nbsp;<code class="literal">GET /_active_tasks</code></h2></div></div></div><div class="informaltable"><table summary="URL API GET /_active_tasks" border="1"><colgroup><col class="field" width="33%"><col class="info" width="33%"><col class="addinfo" width="34%"></colgroup><tbody><tr><td><span class="bold"><strong>Method</strong></span></td><td colspan="2"><code class="literal">GET /_active_tasks</code></td></tr><tr><td><span class="bold"><strong>Request</strong></span></td><td colspan="2">
+ None
+ </td></tr><tr><td><span class="bold"><strong>Response</strong></span></td><td colspan="2">
+ List of running tasks, including the task type, name, status and
+ process ID
+ </td></tr><tr><td><span class="bold"><strong>Admin Privileges Required</strong></span></td><td colspan="2">no</td></tr><tr><td colspan="3"><span class="bold"><strong>Return Codes</strong></span></td></tr><tr><td>200</td><td colspan="2">
+ Request completed successfully.
+ </td></tr></tbody></table></div><p>
+      You can obtain a list of active tasks by using the
+      <code class="literal">/_active_tasks</code> URL. The result is a JSON array
+      of the currently running tasks, with each task being described
+      with a single object. For example:
+    </p><pre class="programlisting">[
+   {
+    "pid" : "&lt;0.11599.0&gt;",
+    "status" : "Copied 0 of 18369 changes (0%)",
+    "task" : "recipes",
+    "type" : "Database Compaction"
+    }
+]</pre><p>
+      The returned structure includes the following fields for each
+      task:
+    </p><div class="table"><a name="table-couchdb-api-misc-active-tasks-json"></a><p class="title"><b>Table&nbsp;9.2.&nbsp;
+ List of Active Tasks
+ </b></p><div class="table-contents"><table summary="
+ List of Active Tasks
+ " border="1"><colgroup><col class="item" width="30%"><col class="desc" width="70%"></colgroup><tbody><tr><td><span class="bold"><strong>Field</strong></span></td><td><span class="bold"><strong>Description</strong></span></td></tr><tr><td><code class="literal">tasks</code> <code class="literal">[array]</code> </td><td>
+ Active Task
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">pid</code>  </td><td>
+ Process ID
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">status</code>  </td><td>
+ Task status message
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">task</code>  </td><td>
+ Task name
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">type</code>  </td><td>
+ Operation Type
+ </td></tr></tbody></table></div></div><br class="table-break"><p>
+      For operation type, valid values include:
+    </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+          <code class="literal">Database Compaction</code>
+        </p></li><li class="listitem"><p>
+          <code class="literal">Replication</code>
+        </p></li><li class="listitem"><p>
+          <code class="literal">View Group Compaction</code>
+        </p></li><li class="listitem"><p>
+          <code class="literal">View Group Indexer</code>
+        </p></li></ul></div></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-api-misc_root_get.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-api-misc.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-misc_all-dbs_get.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">9.1.&nbsp;<code class="literal">GET /</code>&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;9.3.&nbsp;<code class="literal">GET /_all_dbs</code></td></tr></table></div></body></html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>9.6.&nbsp;POST /_restart</title>
+<link href="epub.css" type="text/css" rel="stylesheet" />
+<meta content="DocBook XSL Stylesheets V1.76.1" name="generator" />
+</head>
+<body>
+<div class="section" title="9.6.&nbsp;POST /_restart">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-api-misc_restart_post" />9.6.&nbsp;<code class="literal">POST /_restart</code>
+</h1>
+</div>
+</div>
+</div>
+<div class="informaltable">
+<table summary="URL API POST /_restart" border="1">
+<colgroup>
+<col class="field" width="33%" />
+<col class="info" width="33%" />
+<col class="addinfo" width="34%" />
+</colgroup>
+<tbody>
+<tr>
+<td>
+<span class="bold">
+<strong>Method</strong>
+</span>
+</td>
+<td colspan="2">
+<code class="literal">POST /_restart</code>
+</td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Request</strong>
+</span>
+</td>
+<td colspan="2">
+ None
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Response</strong>
+</span>
+</td>
+<td colspan="2">
+ JSON status message
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Admin Privileges Required</strong>
+</span>
+</td>
+<td colspan="2">yes</td>
+</tr>
+<tr>
+<td colspan="3">
+<span class="bold">
+<strong>Return Codes</strong>
+</span>
+</td>
+</tr>
+<tr>
+<td>201</td>
+<td colspan="2">
+ Document created successfully.
+ </td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+      Restarts the CouchDB instance. You must be authenticated as a user
+      with administration privileges for this to work.
+    </p>
+<p>
+      For example:
+    </p>
+<pre class="programlisting">POST http://admin:password@couchdb:5984/_restart</pre>
+<p>
+      The return value (if the server has not already restarted) is a
+      JSON status object indicating that the request has been received:
+    </p>
+<pre class="programlisting">{
+   "ok" : true,
+}</pre>
+<p>
+      If the server has already restarted, the header may be returned,
+      but no actual data is contained in the response.
+    </p>
+</div>
+</body>
+</html>

@@ -1,0 +1,401 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Chapter&nbsp;4.&nbsp;CouchDB API</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="index.html" title="CouchDB 1.1 Manual"><link rel="prev" href="couchdb-single-replication.html" title="Chapter&nbsp;3.&nbsp;Replication"><link rel="next" href="couchdb-api-db.html" title="Chapter&nbsp;5.&nbsp;CouchDB API Server Database Methods"><meta name="date" content="2012-02-21T20:10:18+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter&nbsp;4.&nbsp;CouchDB API</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-single-replication.html">Prev</a>&nbsp;</td><th align="center" width="60%">&nbsp;</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-db.html">Next</a></td></tr></table><hr></div><div class="chapter" title="Chapter&nbsp;4.&nbsp;CouchDB API"><div class="titlepage"><div><div><h2 class="title"><a name="couchdb-api-basics"></a>Chapter&nbsp;4.&nbsp;CouchDB API</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="couchdb-api-basics.html#couchdb-api-introduction-requests">4.1. Request Format and Responses</a></span></dt><dt><span class="section"><a href="couchdb-api-basics.html#couchdb-api-introduction-request-header">4.2. HTTP Headers</a></span></dt><dd><dl><dt><span class="section"><a href="couchdb-api-basics.html#couchdb-api-introduction-request-header-request">4.2.1. Request Headers</a></span></dt><dt><span class="section"><a href="couchdb-api-basics.html#couchdb-api-introduction-request-header-response">4.2.2. Response Headers</a></span></dt></dl></dd><dt><span class="section"><a href="couchdb-api-basics.html#couchdb-api-introduction-json">4.3. JSON Basics</a></span></dt><dt><span class="section"><a href="couchdb-api-basics.html#couchdb-api-introduction-returncodes">4.4. HTTP Status Codes</a></span></dt><dt><span class="section"><a href="couchdb-api-basics.html#couchdb-api-overview">4.5. CouchDB API Overview</a></span></dt></dl></div><p>
+    The CouchDB API is the primary method of interfacing to a CouchDB
+    instance. Requests are made using HTTP and requests are used to
+    request information from the database, store new data, and perform
+    views and formatting of the information stored within the documents.
+  </p><p>
+    Requests to the API can be categorised by the different areas of the
+    CouchDB system that you are accessing, and the HTTP method used to
+    send the request. Different methods imply different operations, for
+    example retrieval of information from the database is typically
+    handled by the <code class="literal">GET</code> operation, while updates are
+    handled by either a <code class="literal">POST</code> or
+    <code class="literal">PUT</code> request. There are some differences between
+    the information that must be supplied for the different methods. For
+    a guide to the basic HTTP methods and request structure, see
+    <a class="xref" href="couchdb-api-basics.html#couchdb-api-introduction-requests" title="4.1.&nbsp;Request Format and Responses">Section&nbsp;4.1, &ldquo;Request Format and Responses&rdquo;</a>.
+  </p><p>
+    For nearly all operations, the submitted data, and the returned data
+    structure, is defined within a JavaScript Object Notation (JSON)
+    object. Basic information on the content and data types for JSON are
+    provided in <a class="xref" href="couchdb-api-basics.html#couchdb-api-introduction-json" title="4.3.&nbsp;JSON Basics">Section&nbsp;4.3, &ldquo;JSON Basics&rdquo;</a>.
+  </p><p>
+    Errors when accessing the CouchDB API are reported using standard
+    HTTP Status Codes. A guide to the generic codes returned by CouchDB
+    are provided in
+    <a class="xref" href="couchdb-api-basics.html#couchdb-api-introduction-returncodes" title="4.4.&nbsp;HTTP Status Codes">Section&nbsp;4.4, &ldquo;HTTP Status Codes&rdquo;</a>.
+  </p><p>
+    When accessing specific areas of the CouchDB API, specific
+    information and examples on the HTTP methods and request, JSON
+    structures, and error codes are provided. For a guide to the
+    different areas of the API, see
+    <a class="xref" href="couchdb-api-basics.html#couchdb-api-overview" title="4.5.&nbsp;CouchDB API Overview">Section&nbsp;4.5, &ldquo;CouchDB API Overview&rdquo;</a>.
+  </p><div class="section" title="4.1.&nbsp;Request Format and Responses"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-api-introduction-requests"></a>4.1.&nbsp;Request Format and Responses</h2></div></div></div><p>
+      CouchDB supports the following HTTP request methods:
+    </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+          <code class="literal">GET</code>
+        </p><p>
+          Request the specified item. As with normal HTTP requests, the
+          format of the URL defines what is returned. With CouchDB this
+          can include static items, database documents, and
+          configuration and statistical information. In most cases the
+          information is returned in the form of a JSON document.
+        </p></li><li class="listitem"><p>
+          <code class="literal">HEAD</code>
+        </p><p>
+          The <code class="literal">HEAD</code> method is used to get the HTTP
+          header of a <code class="literal">GET</code> request without the body of
+          the response.
+        </p></li><li class="listitem"><p>
+          <code class="literal">POST</code>
+        </p><p>
+          Upload data. Within CouchDB <code class="literal">POST</code> is used to
+          set values, including uploading documents, setting document
+          values, and starting certain administration commands.
+        </p></li><li class="listitem"><p>
+          <code class="literal">PUT</code>
+        </p><p>
+          Used to put a specified resource. In CouchDB
+          <code class="literal">PUT</code> is used to create new objects,
+          including databases, documents, views and design documents.
+        </p></li><li class="listitem"><p>
+          <code class="literal">DELETE</code>
+        </p><p>
+          Deletes the specified resource, including documents, views,
+          and design documents.
+        </p></li><li class="listitem"><p>
+          <code class="literal">COPY</code>
+        </p><p>
+          A special method that can be used to copy documents and
+          objects.
+        </p></li></ul></div><p>
+      If you use the an unsupported HTTP request type with a URL that
+      does not support the specified type, a 405 error will be returned,
+      listing the supported HTTP methods. For example:
+    </p><pre class="programlisting">{
+    "error":"method_not_allowed",
+    "reason":"Only GET,HEAD allowed"
+}</pre><p>
+      The CouchDB design document API and the functions when returning
+      HTML (for example as part of a show or list) enables you to
+      include custom HTTP headers through the <code class="literal">headers</code>
+      block of the return object. For more information, see
+      <a class="xref" href="">???</a>.
+    </p></div><div class="section" title="4.2.&nbsp;HTTP Headers"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-api-introduction-request-header"></a>4.2.&nbsp;HTTP Headers</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="couchdb-api-basics.html#couchdb-api-introduction-request-header-request">4.2.1. Request Headers</a></span></dt><dt><span class="section"><a href="couchdb-api-basics.html#couchdb-api-introduction-request-header-response">4.2.2. Response Headers</a></span></dt></dl></div><p>
+      Because CouchDB uses HTTP for all communication, you need to
+      ensure that the correct HTTP headers are supplied (and processed
+      on retrieval) so that you get the right format and encoding.
+      Different environments and clients will be more or less strict on
+      the effect of these HTTP headers (especially when not present).
+      Where possible you should be as specific as possible.
+    </p><div class="section" title="4.2.1.&nbsp;Request Headers"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-api-introduction-request-header-request"></a>4.2.1.&nbsp;Request Headers</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+            <code class="literal">Content-type</code>
+          </p><p>
+            Specifies the content type of the information being supplied
+            within the request. The specification uses MIME type
+            specifications. For the majority of requests this will be
+            JSON (<code class="literal">application/json</code>). For some
+            settings the MIME type will be plain text. When uploading
+            attachments it should be the corresponding MIME type for the
+            attachment or binary
+            (<code class="literal">application/octet-stream</code>).
+          </p><p>
+            The use of the <code class="literal">Content-type</code> on a request
+            is highly recommended.
+          </p></li><li class="listitem"><p>
+            <code class="literal">Accept</code>
+          </p><p>
+            Specifies the list of accepted data types to be returned by
+            the server (i.e. that are accepted/understandable by the
+            client). The format should be a list of one or more MIME
+            types, separated by colons.
+          </p><p>
+            For the majority of requests the definition should be for
+            JSON data (<code class="literal">application/json</code>). For
+            attachments you can either specify the MIME type explicitly,
+            or use <code class="literal">*/*</code> to specify that all file types
+            are supported. If the <code class="literal">Accept</code> header is
+            not supplied, then the <code class="literal">*/*</code> MIME type is
+            assumed (i.e. client accepts all formats).
+          </p><p>
+            The use of <code class="literal">Accept</code> in queries for CouchDB
+            is not required, but is highly recommended as it helps to
+            ensure that the data returned can be processed by the
+            client.
+          </p><p>
+            If you specify a data type using the
+            <code class="literal">Accept</code> header, CouchDB will honor the
+            specified type in the <code class="literal">Content-type</code> header
+            field returned. For example, if you explicitly request
+            <code class="literal">application/json</code> in the
+            <code class="literal">Accept</code> of a request, the returned HTTP
+            headers will use the value in the returned
+            <code class="literal">Content-type</code> field.
+          </p><p>
+            For example, when sending a request without an explicit
+            <code class="literal">Accept</code> header, or when specifying
+            <code class="literal">*/*</code>:
+          </p><pre class="programlisting">GET /recipes HTTP/1.1
+Host: couchdb:5984
+Accept: */*</pre><p>
+            The returned headers are:
+          </p><pre class="programlisting">Server: CouchDB/1.0.1 (Erlang OTP/R13B)
+Date: Thu, 13 Jan 2011 13:39:34 GMT
+Content-Type: text/plain;charset=utf-8
+Content-Length: 227
+Cache-Control: must-revalidate</pre><p>
+            Note that the returned content type is
+            <code class="literal">text/plain</code> even though the information
+            returned by the request is in JSON format.
+          </p><p>
+            Explicitly specifying the <code class="literal">Accept</code> header:
+          </p><pre class="programlisting">GET /recipes HTTP/1.1
+Host: couchdb:5984
+Accept: application/json</pre><p>
+            The headers returned include the
+            <code class="literal">application/json</code> content type:
+          </p><pre class="programlisting">Server: CouchDB/1.0.1 (Erlang OTP/R13B)
+Date: Thu, 13 Jan 2011 13:40:11 GMT
+Content-Type: application/json
+Content-Length: 227
+Cache-Control: must-revalidate</pre></li></ul></div></div><div class="section" title="4.2.2.&nbsp;Response Headers"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-api-introduction-request-header-response"></a>4.2.2.&nbsp;Response Headers</h3></div></div></div><p>
+        Response headers are returned by the server when sending back
+        content and include a number of different header fields, many of
+        which are standard HTTP response header and have no significance
+        to CouchDB operation. The list of response headers important to
+        CouchDB are listed below.
+      </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+            <code class="literal">Content-type</code>
+          </p><p>
+            Specifies the MIME type of the returned data. For most
+            request, the returned MIME type is
+            <code class="literal">text/plain</code>. All text is encoded in
+            Unicode (UTF-8), and this is explicitly stated in the
+            returned <code class="literal">Content-type</code>, as
+            <code class="literal">text/plain;charset=utf-8</code>.
+          </p></li><li class="listitem"><p>
+            <code class="literal">Cache-control</code>
+          </p><p>
+            The cache control HTTP response header provides a suggestion
+            for client caching mechanisms on how to treat the returned
+            information. CouchDB typically returns the
+            <code class="literal">must-revalidate</code>, which indicates that the
+            information should be revalidated if possible. This is used
+            to ensure that the dynamic nature of the content is
+            correctly updated.
+          </p></li><li class="listitem"><p>
+            <code class="literal">Content-length</code>
+          </p><p>
+            The length (in bytes) of the returned content.
+          </p></li><li class="listitem"><p>
+            <code class="literal">Etag</code>
+          </p><p>
+            The <code class="literal">Etag</code> HTTP header field is used to
+            show the revision for a document.
+          </p></li></ul></div></div></div><div class="section" title="4.3.&nbsp;JSON Basics"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-api-introduction-json"></a>4.3.&nbsp;JSON Basics</h2></div></div></div><p>
+      The majority of requests and responses to CouchDB use the
+      JavaScript Object Notation (JSON) for formatting the content and
+      structure of the data and responses.
+    </p><p>
+      JSON is used because it is the simplest and easiest to use
+      solution for working with data within a web browser, as JSON
+      structures can be evaluated and used as JavaScript objects within
+      the web browser environment. JSON also integrates with the
+      server-side JavaScript used within CouchDB.
+    </p><p>
+      JSON supports the same basic types as supported by JavaScript,
+      these are:
+    </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+          Number (either integer or floating-point).
+        </p></li><li class="listitem"><p>
+          String; this should be enclosed by double-quotes and supports
+          Unicode characters and backslash escaping. For example:
+        </p><pre class="programlisting">"A String"</pre></li><li class="listitem"><p>
+          Boolean - a <code class="literal">true</code> or
+          <code class="literal">false</code> value. You can use these strings
+          directly. For example:
+        </p><pre class="programlisting">{ "value": true}</pre></li><li class="listitem"><p>
+          Array - a list of values enclosed in square brackets. For
+          example:
+        </p><pre class="programlisting">["one", "two", "three"]</pre></li><li class="listitem"><p>
+          Object - a set of key/value pairs (i.e. an associative array,
+          or hash). The key must be a string, but the value can be any
+          of the supported JSON values. For example:
+        </p><pre class="programlisting">{
+   "servings" : 4,
+   "subtitle" : "Easy to make in advance, and then cook when ready",
+   "cooktime" : 60,
+   "title" : "Chicken Coriander"
+}</pre><p>
+          In CouchDB, the JSON object is used to represent a variety of
+          structures, including the main CouchDB document.
+        </p></li></ul></div><p>
+      Parsing JSON into a JavaScript object is supported through the
+      <code class="literal">eval()</code> function in JavaScript, or through
+      various libraries that will perform the parsing of the content
+      into a JavaScript object for you. Libraries for parsing and
+      generating JSON are available in many languages, including Perl,
+      Python, Ruby, Erlang and others.
+    </p><div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Warning</h3><p>
+        Care should be taken to ensure that your JSON structures are
+        valid, invalid structures will cause CouchDB to return an HTTP
+        status code of 500 (server error). See
+        <a class="xref" href="couchdb-api-basics.html#couchdb-api-introduction-returncode-500">HTTP               Status Code 500</a>
+        .
+      </p></div></div><div class="section" title="4.4.&nbsp;HTTP Status Codes"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-api-introduction-returncodes"></a>4.4.&nbsp;HTTP Status Codes</h2></div></div></div><p>
+      With the interface to CouchDB working through HTTP, error codes
+      and statuses are reported using a combination of the HTTP status
+      code number, and corresponding data in the body of the response
+      data.
+    </p><p>
+      A list of the error codes returned by CouchDB, and generic
+      descriptions of the related errors are provided below. The meaning
+      of different status codes for specific request types are provided
+      in the corresponding API call reference.
+    </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><a name="couchdb-api-introduction-returncode-200"></a>
+          <code class="literal">200 - OK</code>
+        </p><p>
+          Request completed successfully.
+        </p></li><li class="listitem"><p><a name="couchdb-api-introduction-returncode-201"></a>
+          <code class="literal">201 - Created</code>
+        </p><p>
+          Document created successfully.
+        </p></li><li class="listitem"><p><a name="couchdb-api-introduction-returncode-202"></a>
+          <code class="literal">202 - Accepted</code>
+        </p><p>
+          Request has been accepted, but the corresponding operation may
+          not have completed. This is used for background operations,
+          such as database compaction.
+        </p></li><li class="listitem"><p><a name="couchdb-api-introduction-returncode-304"></a>
+          <code class="literal">304 - Not Modified</code>
+        </p><p>
+          The additional content requested has not been modified. This
+          is used with the ETag system to identify the version of
+          information returned.
+        </p></li><li class="listitem"><p><a name="couchdb-api-introduction-returncode-400"></a>
+          <code class="literal">400 - Bad Request</code>
+        </p><p>
+          Bad request structure. The error can indicate an error with
+          the request URL, path or headers. Differences in the supplied
+          MD5 hash and content also trigger this error, as this may
+          indicate message corruption.
+        </p></li><li class="listitem"><p><a name="couchdb-api-introduction-returncode-401"></a>
+          <code class="literal">401 - Unauthorized</code>
+        </p><p>
+          The item requested was not available using the supplied
+          authorization, or authorization was not supplied.
+        </p></li><li class="listitem"><p><a name="couchdb-api-introduction-returncode-403"></a>
+          <code class="literal">403 - Forbidden</code>
+        </p><p>
+          The requested item or operation is forbidden.
+        </p></li><li class="listitem"><p><a name="couchdb-api-introduction-returncode-404"></a>
+          <code class="literal">404 - Not Found</code>
+        </p><p>
+          The requested content could not be found. The content will
+          include further information, as a JSON object, if available.
+          The structure will contain two keys, <code class="literal">error</code>
+          and <code class="literal">reason</code>. For example:
+        </p><pre class="programlisting">{"error":"not_found","reason":"no_db_file"}</pre></li><li class="listitem"><p><a name="couchdb-api-introduction-returncode-405"></a>
+          <code class="literal">405 - Resource Not Allowed</code>
+        </p><p>
+          A request was made using an invalid HTTP request type for the
+          URL requested. For example, you have requested a
+          <code class="literal">PUT</code> when a <code class="literal">POST</code> is
+          required. Errors of this type can also triggered by invalid
+          URL strings.
+        </p></li><li class="listitem"><p><a name="couchdb-api-introduction-returncode-406"></a>
+          <code class="literal">406 - Not Acceptable</code>
+        </p><p>
+          The requested content type is not supported by the server.
+        </p></li><li class="listitem"><p><a name="couchdb-api-introduction-returncode-409"></a>
+          <code class="literal">409 - Conflict</code>
+        </p><p>
+          Request resulted in an update conflict.
+        </p></li><li class="listitem"><p><a name="couchdb-api-introduction-returncode-412"></a>
+          <code class="literal">412 - Precondition Failed</code>
+        </p><p>
+          The request headers from the client and the capabilities of
+          the server do not match.
+        </p></li><li class="listitem"><p><a name="couchdb-api-introduction-returncode-415"></a>
+          <code class="literal">415 - Bad Content Type</code>
+        </p><p>
+          The content types supported, and the content type of the
+          information being requested or submitted indicate that the
+          content type is not supported.
+        </p></li><li class="listitem"><p><a name="couchdb-api-introduction-returncode-416"></a>
+          <code class="literal">416 - Requested Range Not Satisfiable</code>
+        </p><p>
+          The range specified in the request header cannot be satisfied
+          by the server.
+        </p></li><li class="listitem"><p><a name="couchdb-api-introduction-returncode-417"></a>
+          <code class="literal">417 - Expectation Failed</code>
+        </p><p>
+          When sending documents in bulk, the bulk load operation
+          failed.
+        </p></li><li class="listitem"><p><a name="couchdb-api-introduction-returncode-500"></a>
+          <code class="literal">500 - Internal Server Error</code>
+        </p><p>
+          The request was invalid, either because the supplied JSON was
+          invalid, or invalid information was supplied as part of the
+          request.
+        </p></li></ul></div></div><div class="section" title="4.5.&nbsp;CouchDB API Overview"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-api-overview"></a>4.5.&nbsp;CouchDB API Overview</h2></div></div></div><p>
+      The components of the API URL path help determine the part of the
+      CouchDB server that is being accessed. The result is the structure
+      of the URL request both identifies and effectively describes the
+      area of the database you are accessing.
+    </p><p>
+      As with all URLs, the individual components are separated by a
+      forward slash.
+    </p><p>
+      As a general rule, URL components and JSON fields starting with
+      the <code class="literal">_</code> (underscore) character represent a
+      special component or entity within the server or returned object.
+      For example, the URL fragment <code class="literal">/_all_dbs</code> gets a
+      list of all of the databases in a CouchDB instance.
+    </p><p>
+      The remainder of the URL API structure can be divided up according
+      to the URL structure. The different sections are divided as
+      follows:
+    </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+          <code class="literal">/db</code>
+        </p><p>
+          Database methods, related to adding, updating or deleting
+          databases, and setting database parameters and operations. For
+          more detailed information, see
+          <a class="xref" href="couchdb-api-db.html" title="Chapter&nbsp;5.&nbsp;CouchDB API Server Database Methods">Chapter&nbsp;5, <i>CouchDB API Server Database Methods</i></a> .
+        </p></li><li class="listitem"><p>
+          <code class="literal">/db/doc</code>
+        </p><p>
+          Document methods, those that create, store, update or delete
+          CouchDB documents and their attachments. For more information,
+          see <a class="xref" href="couchdb-api-dbdoc.html" title="Chapter&nbsp;6.&nbsp;CouchDB API Server Document Methods">Chapter&nbsp;6, <i>CouchDB API Server Document Methods</i></a>.
+        </p></li><li class="listitem"><p>
+          <code class="literal">/db/_local/local-doc</code>
+        </p><p>
+          Document methods, those that create, store, update or delete
+          CouchDB documents only within the local database. Local
+          documents are not synchronized with other databases. For more
+          information, see
+          <a class="xref" href="couchdb-api-localdb.html" title="Chapter&nbsp;7.&nbsp;CouchDB API Server Local (non-replicating) Document Methods">Chapter&nbsp;7, <i>CouchDB API Server Local (non-replicating) Document Methods</i></a>.
+        </p></li><li class="listitem"><p>
+          <code class="literal">/db/_design/design-doc</code>
+        </p><p>
+          Design documents provide the methods and structure for
+          recovering information from a CouchDB database in the form of
+          views, shows and lists. For more information, see
+          <a class="xref" href="couchdb-api-design.html" title="Chapter&nbsp;8.&nbsp;CouchDB API Server Design Document Methods">Chapter&nbsp;8, <i>CouchDB API Server Design Document Methods</i></a>.
+        </p></li><li class="listitem"><p>
+          <code class="literal">/_special</code>
+        </p><p>
+          Special methods that obtain or set information about the
+          CouchDB instance, including methods for configuring
+          replication, accessing the logs, and generate Universally
+          Unique IDs (UUIDs). For more information, see
+          <a class="xref" href="couchdb-api-misc.html" title="Chapter&nbsp;9.&nbsp;CouchDB API Server Miscellaneous Methods">Chapter&nbsp;9, <i>CouchDB API Server Miscellaneous Methods</i></a>.
+        </p></li><li class="listitem"><p>
+          <code class="literal">/_config</code>
+        </p><p>
+          Methods for getting, and settings, CouchDB configuration
+          parameters. For more information, see
+          <a class="xref" href="couchdb-api-misc.html" title="Chapter&nbsp;9.&nbsp;CouchDB API Server Miscellaneous Methods">Chapter&nbsp;9, <i>CouchDB API Server Miscellaneous Methods</i></a>.
+        </p></li></ul></div></div></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-single-replication.html">Prev</a>&nbsp;</td><td align="center" width="20%">&nbsp;</td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-db.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">Chapter&nbsp;3.&nbsp;Replication&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;Chapter&nbsp;5.&nbsp;CouchDB API Server Database Methods</td></tr></table></div></body></html>

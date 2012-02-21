@@ -1,0 +1,155 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>8.9.2.&nbsp;Sorting Returned Rows</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-api-design_db-design-designdoc-view-viewname_get.html" title="8.9.&nbsp;GET /db/_design/design-doc/_view/view-name"><link rel="prev" href="couchdb-api-design_db-design-designdoc-view-viewname_get-indexes.html" title="8.9.1.&nbsp;Querying Views and Indexes"><link rel="next" href="couchdb-api-design_db-design-designdoc-view-viewname_get-ranges.html" title="8.9.3.&nbsp;Specifying Start and End Values"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">8.9.2.&nbsp;Sorting Returned Rows</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-api-design_db-design-designdoc-view-viewname_get-indexes.html">Prev</a>&nbsp;</td><th align="center" width="60%">8.9.&nbsp;<code class="literal">GET /db/_design/design-doc/_view/view-name</code></th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-design_db-design-designdoc-view-viewname_get-ranges.html">Next</a></td></tr></table><hr></div><div class="section" title="8.9.2.&nbsp;Sorting Returned Rows"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-api-design_db-design-designdoc-view-viewname_get-sorting"></a>8.9.2.&nbsp;Sorting Returned Rows</h3></div></div></div><p>
+        Each element within the returned array is sorted using native
+        UTF-8 sorting according to the contents of the key portion of
+        the emitted content. The basic order of output is as follows:
+      </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+            <code class="literal">null</code>
+          </p></li><li class="listitem"><p>
+            <code class="literal">false</code>
+          </p></li><li class="listitem"><p>
+            <code class="literal">true</code>
+          </p></li><li class="listitem"><p>
+            Numbers
+          </p></li><li class="listitem"><p>
+            Text (case sensitive, lowercase first)
+          </p></li><li class="listitem"><p>
+            Arrays (according to the values of each element, in order)
+          </p></li><li class="listitem"><p>
+            Objects (according to the values of keys, in key order)
+          </p></li></ul></div><p>
+        You can reverse the order of the returned view information by
+        using the <code class="literal">descending</code> query value set to true.
+        For example, Retrieving the list of recipes using the
+        <code class="literal">by_title</code> (limited to 5 records) view:
+      </p><pre class="programlisting">{
+   "offset" : 0,
+   "rows" : [
+      {
+         "id" : "3-tiersalmonspinachandavocadoterrine",
+         "key" : "3-tier salmon, spinach and avocado terrine",
+         "value" : [
+            null,
+            "3-tier salmon, spinach and avocado terrine"
+         ]
+      },
+      {
+         "id" : "Aberffrawcake",
+         "key" : "Aberffraw cake",
+         "value" : [
+            null,
+            "Aberffraw cake"
+         ]
+      },
+      {
+         "id" : "Adukiandorangecasserole-microwave",
+         "key" : "Aduki and orange casserole - microwave",
+         "value" : [
+            null,
+            "Aduki and orange casserole - microwave"
+         ]
+      },
+      {
+         "id" : "Aioli-garlicmayonnaise",
+         "key" : "Aioli - garlic mayonnaise",
+         "value" : [
+            null,
+            "Aioli - garlic mayonnaise"
+         ]
+      },
+      {
+         "id" : "Alabamapeanutchicken",
+         "key" : "Alabama peanut chicken",
+         "value" : [
+            null,
+            "Alabama peanut chicken"
+         ]
+      }
+   ],
+   "total_rows" : 2667
+}</pre><p>
+        Requesting the same in descending order will reverse the entire
+        view content. For example the request
+      </p><pre class="programlisting">GET http://couchdb:5984/recipes/_design/recipes/_view/by_title?limit=5&amp;descending=true
+Accept: application/json
+Content-Type: application/json</pre><p>
+        Returns the last 5 records from the view:
+      </p><pre class="programlisting">{
+   "offset" : 0,
+   "rows" : [
+      {
+         "id" : "Zucchiniinagrodolcesweet-sourcourgettes",
+         "key" : "Zucchini in agrodolce (sweet-sour courgettes)",
+         "value" : [
+            null,
+            "Zucchini in agrodolce (sweet-sour courgettes)"
+         ]
+      },
+      {
+         "id" : "Zingylemontart",
+         "key" : "Zingy lemon tart",
+         "value" : [
+            null,
+            "Zingy lemon tart"
+         ]
+      },
+      {
+         "id" : "Zestyseafoodavocado",
+         "key" : "Zesty seafood avocado",
+         "value" : [
+            null,
+            "Zesty seafood avocado"
+         ]
+      },
+      {
+         "id" : "Zabaglione",
+         "key" : "Zabaglione",
+         "value" : [
+            null,
+            "Zabaglione"
+         ]
+      },
+      {
+         "id" : "Yogurtraita",
+         "key" : "Yogurt raita",
+         "value" : [
+            null,
+            "Yogurt raita"
+         ]
+      }
+   ],
+   "total_rows" : 2667
+}</pre><p>
+        The sorting direction is applied before the filtering applied
+        using the <code class="literal">startkey</code> and
+        <code class="literal">endkey</code> query arguments. For example the
+        following query:
+      </p><pre class="programlisting">GET http://couchdb:5984/recipes/_design/recipes/_view/by_ingredient?startkey=%22carrots%22&amp;endkey=%22egg%22
+Accept: application/json
+Content-Type: application/json</pre><p>
+        Will operate correctly when listing all the matching entries
+        between <span class="quote">&ldquo;<span class="quote">carrots</span>&rdquo;</span> and <code class="literal">egg</code>. If
+        the order of output is reversed with the
+        <code class="literal">descending</code> query argument, the view request
+        will return no entries:
+      </p><pre class="programlisting">GET http://couchdb:5984/recipes/_design/recipes/_view/by_ingredient?descending=true&amp;startkey=%22carrots%22&amp;endkey=%22egg%22
+Accept: application/json
+Content-Type: application/json</pre><p>
+        The returned result is empty:
+      </p><pre class="programlisting">{
+   "total_rows" : 26453,
+   "rows" : [],
+   "offset" : 21882
+}</pre><p>
+        The results will be empty because the entries in the view are
+        reversed before the key filter is applied, and therefore the
+        <code class="literal">endkey</code> of <span class="quote">&ldquo;<span class="quote">egg</span>&rdquo;</span> will be seen
+        before the <code class="literal">startkey</code> of
+        <span class="quote">&ldquo;<span class="quote">carrots</span>&rdquo;</span>, resulting in an empty list.
+      </p><p>
+        Instead, you should reverse the values supplied to the
+        <code class="literal">startkey</code> and <code class="literal">endkey</code>
+        parameters to match the descending sorting applied to the keys.
+        Changing the previous example to:
+      </p><pre class="programlisting">GET http://couchdb:5984/recipes/_design/recipes/_view/by_ingredient?descending=true&amp;startkey=%22egg%22&amp;endkey=%22carrots%22
+Accept: application/json
+Content-Type: application/json</pre></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-api-design_db-design-designdoc-view-viewname_get-indexes.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-api-design_db-design-designdoc-view-viewname_get.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-design_db-design-designdoc-view-viewname_get-ranges.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">8.9.1.&nbsp;Querying Views and Indexes&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;8.9.3.&nbsp;Specifying Start and End Values</td></tr></table></div></body></html>

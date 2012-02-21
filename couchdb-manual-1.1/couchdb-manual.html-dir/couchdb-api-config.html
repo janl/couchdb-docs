@@ -1,0 +1,204 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Chapter&nbsp;10.&nbsp;CouchDB API Server Configuration Methods</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="index.html" title="CouchDB 1.1 Manual"><link rel="prev" href="couchdb-api-misc.html" title="Chapter&nbsp;9.&nbsp;CouchDB API Server Miscellaneous Methods"><link rel="next" href="couchdb-api-auth.html" title="Chapter&nbsp;11.&nbsp;CouchDB API Server Authentication Methods"><meta name="date" content="2012-02-21T20:10:18+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter&nbsp;10.&nbsp;CouchDB API Server Configuration Methods</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-api-misc.html">Prev</a>&nbsp;</td><th align="center" width="60%">&nbsp;</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-auth.html">Next</a></td></tr></table><hr></div><div class="chapter" title="Chapter&nbsp;10.&nbsp;CouchDB API Server Configuration Methods"><div class="titlepage"><div><div><h2 class="title"><a name="couchdb-api-config"></a>Chapter&nbsp;10.&nbsp;CouchDB API Server Configuration Methods</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="couchdb-api-config.html#couchdb-api-config_config_get">10.1. <code class="literal">GET /_config</code></a></span></dt><dt><span class="section"><a href="couchdb-api-config.html#couchdb-api-config_config-section_get">10.2. <code class="literal">GET /_config/section</code></a></span></dt><dt><span class="section"><a href="couchdb-api-config.html#couchdb-api-config_config-section-key_get">10.3. <code class="literal">GET /_config/section/key</code></a></span></dt><dt><span class="section"><a href="couchdb-api-config.html#couchdb-api-config_config-section-key_put">10.4. <code class="literal">PUT /_config/section/key</code></a></span></dt><dt><span class="section"><a href="couchdb-api-config.html#couchdb-api-config_config-section-key_delete">10.5. <code class="literal">DELETE /_config/section/key</code></a></span></dt></dl></div><p>
+    The CouchDB API Server Configuration Methods provide an interface to
+    query and update the various configuration values within a running
+    CouchDB instance.
+  </p><p>
+    A list of the available methods and URL paths are provided below:
+  </p><div class="table"><a name="table-couchdb-api-config-summary"></a><p class="title"><b>Table&nbsp;10.1.&nbsp;Configuration API Calls</b></p><div class="table-contents"><table summary="Configuration API Calls" border="1"><colgroup><col class="method" width="33%"><col class="path" width="33%"><col class="desc" width="34%"></colgroup><thead><tr><th>Method</th><th>Path</th><th>Description</th></tr></thead><tbody><tr><td><code class="literal">GET</code></td><td><code class="literal">/_config</code></td><td><a class="link" href="couchdb-api-config.html#couchdb-api-config_config_get" title="10.1.&nbsp;GET /_config">
+ Obtain a list of the entire server configuration
+ </a></td></tr><tr><td><code class="literal">GET</code></td><td><code class="literal">/_config/section</code></td><td><a class="link" href="couchdb-api-config.html#couchdb-api-config_config-section_get" title="10.2.&nbsp;GET /_config/section">
+ Get all the configuration values for the specified section
+ </a></td></tr><tr><td><code class="literal">GET</code></td><td><code class="literal">/_config/section/key</code></td><td><a class="link" href="couchdb-api-config.html#couchdb-api-config_config-section-key_get" title="10.3.&nbsp;GET /_config/section/key">
+ Get a specific section/configuration value
+ </a></td></tr><tr><td><code class="literal">PUT</code></td><td><code class="literal">/_config/section/key</code></td><td><a class="link" href="couchdb-api-config.html#couchdb-api-config_config-section-key_put" title="10.4.&nbsp;PUT /_config/section/key">
+ Set the specified configuration value
+ </a></td></tr><tr><td><code class="literal">DELETE</code></td><td><code class="literal">/_config/section/key</code></td><td><a class="link" href="couchdb-api-config.html#couchdb-api-config_config-section-key_delete" title="10.5.&nbsp;DELETE /_config/section/key">
+ Delete the current setting
+ </a></td></tr></tbody></table></div></div><br class="table-break"><div class="section" title="10.1.&nbsp;GET /_config"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-api-config_config_get"></a>10.1.&nbsp;<code class="literal">GET /_config</code></h2></div></div></div><div class="informaltable"><table summary="URL API GET /_config" border="1"><colgroup><col class="field" width="33%"><col class="info" width="33%"><col class="addinfo" width="34%"></colgroup><tbody><tr><td><span class="bold"><strong>Method</strong></span></td><td colspan="2"><code class="literal">GET /_config</code></td></tr><tr><td><span class="bold"><strong>Request</strong></span></td><td colspan="2">
+ None
+ </td></tr><tr><td><span class="bold"><strong>Response</strong></span></td><td colspan="2">
+ Returns a structure configuration name and value pairs,
+ organized by section
+ </td></tr><tr><td><span class="bold"><strong>Admin Privileges Required</strong></span></td><td colspan="2">no</td></tr></tbody></table></div><p>
+      Returns the entire CouchDB server configuration as a JSON
+      structure. The structure is organized by different configuration
+      sections, with individual values.
+    </p><p>
+      For example, to get the configuration for a server:
+    </p><pre class="programlisting">GET http://couchdb:5984/_config
+Accept: application/json</pre><p>
+      The response is the JSON structure:
+    </p><pre class="programlisting">{
+   "query_server_config" : {
+      "reduce_limit" : "true"
+   },
+   "couchdb" : {
+      "os_process_timeout" : "5000",
+      "max_attachment_chunk_size" : "4294967296",
+      "max_document_size" : "4294967296",
+      "uri_file" : "/var/lib/couchdb/couch.uri",
+      "max_dbs_open" : "100",
+      "view_index_dir" : "/var/lib/couchdb",
+      "util_driver_dir" : "/usr/lib64/couchdb/erlang/lib/couch-1.0.1/priv/lib",
+      "database_dir" : "/var/lib/couchdb",
+      "delayed_commits" : "true"
+   },
+   "attachments" : {
+      "compressible_types" : "text/*, application/javascript, application/json,  application/xml",
+      "compression_level" : "8"
+   },
+   "uuids" : {
+      "algorithm" : "utc_random"
+   },
+   "daemons" : {
+      "view_manager" : "{couch_view, start_link, []}",
+      "auth_cache" : "{couch_auth_cache, start_link, []}",
+      "uuids" : "{couch_uuids, start, []}",
+      "stats_aggregator" : "{couch_stats_aggregator, start, []}",
+      "query_servers" : "{couch_query_servers, start_link, []}",
+      "httpd" : "{couch_httpd, start_link, []}",
+      "stats_collector" : "{couch_stats_collector, start, []}",
+      "db_update_notifier" : "{couch_db_update_notifier_sup, start_link, []}",
+      "external_manager" : "{couch_external_manager, start_link, []}"
+   },
+   "stats" : {
+      "samples" : "[0, 60, 300, 900]",
+      "rate" : "1000"
+   },
+   "httpd" : {
+      "vhost_global_handlers" : "_utils, _uuids, _session, _oauth, _users",
+      "secure_rewrites" : "true",
+      "authentication_handlers" : "{couch_httpd_oauth, oauth_authentication_handler},
+                                   {couch_httpd_auth, cookie_authentication_handler},
+                                   {couch_httpd_auth, default_authentication_handler}",
+      "port" : "5984",
+      "default_handler" : "{couch_httpd_db, handle_request}",
+      "allow_jsonp" : "false",
+      "bind_address" : "192.168.0.2",
+      "max_connections" : "2048"
+   },
+   "query_servers" : {
+      "javascript" : "/usr/bin/couchjs /usr/share/couchdb/server/main.js"
+   },
+   "couch_httpd_auth" : {
+      "authentication_db" : "_users",
+      "require_valid_user" : "false",
+      "authentication_redirect" : "/_utils/session.html",
+      "timeout" : "600",
+      "auth_cache_size" : "50"
+   },
+   "httpd_db_handlers" : {
+      "_design" : "{couch_httpd_db, handle_design_req}",
+      "_compact" : "{couch_httpd_db, handle_compact_req}",
+      "_view_cleanup" : "{couch_httpd_db, handle_view_cleanup_req}",
+      "_temp_view" : "{couch_httpd_view, handle_temp_view_req}",
+      "_changes" : "{couch_httpd_db, handle_changes_req}"
+   },
+   "replicator" : {
+      "max_http_sessions" : "10",
+      "max_http_pipeline_size" : "10"
+   },
+   "log" : {
+      "include_sasl" : "true",
+      "level" : "info",
+      "file" : "/var/log/couchdb/couch.log"
+   },
+   "httpd_design_handlers" : {
+      "_update" : "{couch_httpd_show, handle_doc_update_req}",
+      "_show" : "{couch_httpd_show, handle_doc_show_req}",
+      "_info" : "{couch_httpd_db,   handle_design_info_req}",
+      "_list" : "{couch_httpd_show, handle_view_list_req}",
+      "_view" : "{couch_httpd_view, handle_view_req}",
+      "_rewrite" : "{couch_httpd_rewrite, handle_rewrite_req}"
+   },
+   "httpd_global_handlers" : {
+      "_replicate" : "{couch_httpd_misc_handlers, handle_replicate_req}",
+      "/" : "{couch_httpd_misc_handlers, handle_welcome_req, &lt;&lt;\"Welcome\"&gt;&gt;}",
+      "_config" : "{couch_httpd_misc_handlers, handle_config_req}",
+      "_utils" : "{couch_httpd_misc_handlers, handle_utils_dir_req, \"/usr/share/couchdb/www\"}",
+      "_active_tasks" : "{couch_httpd_misc_handlers, handle_task_status_req}",
+      "_session" : "{couch_httpd_auth, handle_session_req}",
+      "_log" : "{couch_httpd_misc_handlers, handle_log_req}",
+      "favicon.ico" : "{couch_httpd_misc_handlers, handle_favicon_req, \"/usr/share/couchdb/www\"}",
+      "_all_dbs" : "{couch_httpd_misc_handlers, handle_all_dbs_req}",
+      "_oauth" : "{couch_httpd_oauth, handle_oauth_req}",
+      "_restart" : "{couch_httpd_misc_handlers, handle_restart_req}",
+      "_uuids" : "{couch_httpd_misc_handlers, handle_uuids_req}",
+      "_stats" : "{couch_httpd_stats_handlers, handle_stats_req}"
+   }
+}</pre></div><div class="section" title="10.2.&nbsp;GET /_config/section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-api-config_config-section_get"></a>10.2.&nbsp;<code class="literal">GET /_config/section</code></h2></div></div></div><div class="informaltable"><table summary="URL API GET /_config/section" border="1"><colgroup><col class="field" width="33%"><col class="info" width="33%"><col class="addinfo" width="34%"></colgroup><tbody><tr><td><span class="bold"><strong>Method</strong></span></td><td colspan="2"><code class="literal">GET /_config/section</code></td></tr><tr><td><span class="bold"><strong>Request</strong></span></td><td colspan="2">
+ None
+ </td></tr><tr><td><span class="bold"><strong>Response</strong></span></td><td colspan="2">
+ All the configuration values within a specified section
+ </td></tr><tr><td><span class="bold"><strong>Admin Privileges Required</strong></span></td><td colspan="2">no</td></tr></tbody></table></div><p>
+      Gets the configuration structure for a single section. For
+      example, to retrieve the CouchDB configuration section values:
+    </p><pre class="programlisting">GET http://couchdb:5984/_config/couchdb
+Accept: application/json</pre><p>
+      The returned JSON contains just the configuration values for this
+      section:
+    </p><pre class="programlisting">{
+   "os_process_timeout" : "5000",
+   "max_attachment_chunk_size" : "4294967296",
+   "max_document_size" : "4294967296",
+   "uri_file" : "/var/lib/couchdb/couch.uri",
+   "max_dbs_open" : "100",
+   "view_index_dir" : "/var/lib/couchdb",
+   "util_driver_dir" : "/usr/lib64/couchdb/erlang/lib/couch-1.0.1/priv/lib",
+   "database_dir" : "/var/lib/couchdb",
+   "delayed_commits" : "true"
+}</pre></div><div class="section" title="10.3.&nbsp;GET /_config/section/key"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-api-config_config-section-key_get"></a>10.3.&nbsp;<code class="literal">GET /_config/section/key</code></h2></div></div></div><div class="informaltable"><table summary="URL API GET /_config/section/key" border="1"><colgroup><col class="field" width="33%"><col class="info" width="33%"><col class="addinfo" width="34%"></colgroup><tbody><tr><td><span class="bold"><strong>Method</strong></span></td><td colspan="2"><code class="literal">GET /_config/section/key</code></td></tr><tr><td><span class="bold"><strong>Request</strong></span></td><td colspan="2">
+ None
+ </td></tr><tr><td><span class="bold"><strong>Response</strong></span></td><td colspan="2">
+ Value of the specified key/section
+ </td></tr><tr><td><span class="bold"><strong>Admin Privileges Required</strong></span></td><td colspan="2">no</td></tr></tbody></table></div><p>
+      Gets a single configuration value from within a specific
+      configuration section. For example, to obtain the current log
+      level:
+    </p><pre class="programlisting">GET http://couchdb:5984/_config/log/level
+Accept: application/json</pre><p>
+      Returns the string of the log level:
+    </p><pre class="programlisting">"info"</pre><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+        The returned value will be the JSON of the value, which may be a
+        string or numeric value, or an array or object. Some client
+        environments may not parse simple strings or numeric values as
+        valid JSON.
+      </p></div></div><div class="section" title="10.4.&nbsp;PUT /_config/section/key"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-api-config_config-section-key_put"></a>10.4.&nbsp;<code class="literal">PUT /_config/section/key</code></h2></div></div></div><div class="informaltable"><table summary="URL API PUT /_config/section/key" border="1"><colgroup><col class="field" width="33%"><col class="info" width="33%"><col class="addinfo" width="34%"></colgroup><tbody><tr><td><span class="bold"><strong>Method</strong></span></td><td colspan="2"><code class="literal">PUT /_config/section/key</code></td></tr><tr><td><span class="bold"><strong>Request</strong></span></td><td colspan="2">
+ Value structure
+ </td></tr><tr><td><span class="bold"><strong>Response</strong></span></td><td colspan="2">
+ Previous value
+ </td></tr><tr><td><span class="bold"><strong>Admin Privileges Required</strong></span></td><td colspan="2">no</td></tr><tr><td colspan="3"><span class="bold"><strong>Return Codes</strong></span></td></tr><tr><td>200</td><td colspan="2">
+ Configuration option updated successfully
+ </td></tr><tr><td>500</td><td colspan="2">
+ Error setting configuration
+ </td></tr></tbody></table></div><p>
+      Updates a configuration value. The new value should be supplied in
+      the request body in the corresponding JSON format. For example, if
+      you are setting a string value, you must supply a valid JSON
+      string.
+    </p><p>
+      For example, to set the function used to generate UUIDs by the
+      <code class="literal">GET /_uuids</code> API call to use the
+      <code class="literal">utc_random</code> generator:
+    </p><pre class="programlisting">PUT http://couchdb:5984/_config/uuids/algorithm
+Content-Type: application/json
+
+"utc_random"</pre><p>
+      The return value will be empty, with the response code indicating
+      the success or failure of the configuration setting.
+    </p></div><div class="section" title="10.5.&nbsp;DELETE /_config/section/key"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-api-config_config-section-key_delete"></a>10.5.&nbsp;<code class="literal">DELETE /_config/section/key</code></h2></div></div></div><div class="informaltable"><table summary="URL API DELETE /_config/section/key" border="1"><colgroup><col class="field" width="33%"><col class="info" width="33%"><col class="addinfo" width="34%"></colgroup><tbody><tr><td><span class="bold"><strong>Method</strong></span></td><td colspan="2"><code class="literal">DELETE /_config/section/key</code></td></tr><tr><td><span class="bold"><strong>Request</strong></span></td><td colspan="2">
+ None
+ </td></tr><tr><td><span class="bold"><strong>Response</strong></span></td><td colspan="2">
+ Previous value
+ </td></tr><tr><td><span class="bold"><strong>Admin Privileges Required</strong></span></td><td colspan="2">no</td></tr><tr><td><span class="bold"><strong>Query Arguments</strong></span></td><td><span class="bold"><strong>Argument</strong></span></td><td><code class="literal">rev</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>
+ Current revision of the document for validation
+ </td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>yes</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Type</strong></span></td><td>string</td></tr><tr><td><span class="bold"><strong>HTTP Headers</strong></span></td><td><span class="bold"><strong>Header</strong></span></td><td><code class="literal">If-Match</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>Current revision of the document for validation</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>yes</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td colspan="3"><span class="bold"><strong>Return Codes</strong></span></td></tr><tr><td>409</td><td colspan="2">
+ Supplied revision is incorrect or missing
+ </td></tr></tbody></table></div><p>
+      Deletes a configuration value. The returned JSON will be the value
+      of the configuration parameter before it was deleted. For example,
+      to delete the UUID parameter:
+    </p><pre class="programlisting">DELETE http://couchdb:5984/_config/uuids/algorithm
+Content-Type: application/json</pre><p>
+      The returned value is the last configured UUID function:
+    </p><pre class="programlisting">"random"</pre></div></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-api-misc.html">Prev</a>&nbsp;</td><td align="center" width="20%">&nbsp;</td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-auth.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">Chapter&nbsp;9.&nbsp;CouchDB API Server Miscellaneous Methods&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;Chapter&nbsp;11.&nbsp;CouchDB API Server Authentication Methods</td></tr></table></div></body></html>

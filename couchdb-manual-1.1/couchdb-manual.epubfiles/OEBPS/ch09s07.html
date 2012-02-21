@@ -1,0 +1,628 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>9.7.&nbsp;GET /_stats</title>
+<link href="epub.css" type="text/css" rel="stylesheet" />
+<meta content="DocBook XSL Stylesheets V1.76.1" name="generator" />
+</head>
+<body>
+<div class="section" title="9.7.&nbsp;GET /_stats">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-api-misc_stats_get" />9.7.&nbsp;<code class="literal">GET /_stats</code>
+</h1>
+</div>
+</div>
+</div>
+<div class="informaltable">
+<table summary="URL API GET /_stats" border="1">
+<colgroup>
+<col class="field" width="33%" />
+<col class="info" width="33%" />
+<col class="addinfo" width="34%" />
+</colgroup>
+<tbody>
+<tr>
+<td>
+<span class="bold">
+<strong>Method</strong>
+</span>
+</td>
+<td colspan="2">
+<code class="literal">GET /_stats</code>
+</td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Request</strong>
+</span>
+</td>
+<td colspan="2">
+ None
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Response</strong>
+</span>
+</td>
+<td colspan="2">
+ Server statistics
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Admin Privileges Required</strong>
+</span>
+</td>
+<td colspan="2">no</td>
+</tr>
+<tr>
+<td colspan="3">
+<span class="bold">
+<strong>Return Codes</strong>
+</span>
+</td>
+</tr>
+<tr>
+<td>200</td>
+<td colspan="2">
+ Request completed successfully.
+ </td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+      The <code class="literal">_stats</code> method returns a JSON object
+      containting the statistics for the running server. The object is
+      structured with top-level sections collating the statistics for a
+      range of entries, with each individual statistic being easily
+      identified, and the content of each statistic is self-describing.
+      For example, the request time statistics, within the
+      <code class="literal">couchdb</code> section are structured as follows:
+    </p>
+<pre class="programlisting">{
+   "couchdb" : {
+...
+      "request_time" : {
+         "stddev" : "27.509",
+         "min" : "0.333333333333333",
+         "max" : "152",
+         "current" : "400.976",
+         "mean" : "10.837",
+         "sum" : "400.976",
+         "description" : "length of a request inside CouchDB without MochiWeb"
+      },
+...
+    }
+}</pre>
+<p>
+      The fields provide the current, minimum and maximum, and a
+      collection of statistical means and quantities. The quantity in
+      each case is not defined, but the descriptions below provide
+    </p>
+<p>
+      The statistics are divided into the following top-level sections:
+    </p>
+<div class="itemizedlist">
+<ul class="itemizedlist">
+<li class="listitem">
+<p>
+          <code class="literal">couchdb</code>
+        </p>
+<p>
+          Describes statistics specific to the internals of CouchDB.
+        </p>
+<div class="table">
+<a id="N13B75" />
+<p class="title">
+<strong>Table&nbsp;9.5.&nbsp;<code class="literal">couchdb</code> statistics</strong>
+</p>
+<div class="table-contents">
+<table summary="couchdb statistics" border="1">
+<colgroup>
+<col class="stat" width="33%" />
+<col class="desc" width="33%" />
+<col class="unit" width="34%" />
+</colgroup>
+<thead>
+<tr>
+<th>
+                  Statistic ID
+                </th>
+<th>
+                  Description
+                </th>
+<th>
+                  Unit
+                </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="literal">auth_cache_hits</code>
+                </td>
+<td>
+                  Number of authentication cache hits
+                </td>
+<td>
+                  number
+                </td>
+</tr>
+<tr>
+<td>
+<code class="literal">auth_cache_misses</code>
+                </td>
+<td>
+                  Number of authentication cache misses
+                </td>
+<td>
+                  number
+                </td>
+</tr>
+<tr>
+<td>
+<code class="literal">database_reads</code>
+                </td>
+<td>
+                  Number of times a document was read from a database
+                </td>
+<td>
+                  number
+                </td>
+</tr>
+<tr>
+<td>
+<code class="literal">database_writes</code>
+                </td>
+<td>
+                  Number of times a database was changed
+                </td>
+<td>
+                  number
+                </td>
+</tr>
+<tr>
+<td>
+<code class="literal">open_databases</code>
+                </td>
+<td>
+                  Number of open databases
+                </td>
+<td>
+                  number
+                </td>
+</tr>
+<tr>
+<td>
+<code class="literal">open_os_files</code>
+                </td>
+<td>
+                  Number of file descriptors CouchDB has open
+                </td>
+<td>
+                  number
+                </td>
+</tr>
+<tr>
+<td>
+<code class="literal">request_time</code>
+                </td>
+<td>
+                  Length of a request inside CouchDB without MochiWeb
+                </td>
+<td>
+                  milliseconds
+                </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</li>
+<li class="listitem">
+<p>
+          <code class="literal">httpd_request_methods</code>
+        </p>
+<div class="table">
+<a id="N13BD9" />
+<p class="title">
+<strong>Table&nbsp;9.6.&nbsp;<code class="literal">httpd_request_methods</code> statistics</strong>
+</p>
+<div class="table-contents">
+<table summary="httpd_request_methods statistics" border="1">
+<colgroup>
+<col class="stat" width="33%" />
+<col class="desc" width="33%" />
+<col class="unit" width="34%" />
+</colgroup>
+<thead>
+<tr>
+<th>
+                  Statistic ID
+                </th>
+<th>
+                  Description
+                </th>
+<th>
+                  Unit
+                </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="literal">COPY</code>
+                </td>
+<td>
+                  Number of HTTP COPY requests
+                </td>
+<td>
+                  number
+                </td>
+</tr>
+<tr>
+<td>
+<code class="literal">DELETE</code>
+                </td>
+<td>
+                  Number of HTTP DELETE requests
+                </td>
+<td>
+                  number
+                </td>
+</tr>
+<tr>
+<td>
+<code class="literal">GET</code>
+                </td>
+<td>
+                  Number of HTTP GET requests
+                </td>
+<td>
+                  number
+                </td>
+</tr>
+<tr>
+<td>
+<code class="literal">HEAD</code>
+                </td>
+<td>
+                  Number of HTTP HEAD requests
+                </td>
+<td>
+                  number
+                </td>
+</tr>
+<tr>
+<td>
+<code class="literal">POST</code>
+                </td>
+<td>
+                  Number of HTTP POST requests
+                </td>
+<td>
+                  number
+                </td>
+</tr>
+<tr>
+<td>
+<code class="literal">PUT</code>
+                </td>
+<td>
+                  Number of HTTP PUT requests
+                </td>
+<td>
+                  number
+                </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</li>
+<li class="listitem">
+<p>
+          <code class="literal">httpd_status_codes</code>
+        </p>
+<div class="table">
+<a id="N13C33" />
+<p class="title">
+<strong>Table&nbsp;9.7.&nbsp;<code class="literal">httpd_status_codes</code> statistics</strong>
+</p>
+<div class="table-contents">
+<table summary="httpd_status_codes statistics" border="1">
+<colgroup>
+<col class="stat" width="33%" />
+<col class="desc" width="33%" />
+<col class="unit" width="34%" />
+</colgroup>
+<thead>
+<tr>
+<th>
+                  Statistic ID
+                </th>
+<th>
+                  Description
+                </th>
+<th>
+                  Unit
+                </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="literal">200</code>
+                </td>
+<td>
+                  Number of HTTP 200 OK responses
+                </td>
+<td>
+                  number
+                </td>
+</tr>
+<tr>
+<td>
+<code class="literal">201</code>
+                </td>
+<td>
+                  Number of HTTP 201 Created responses
+                </td>
+<td>
+                  number
+                </td>
+</tr>
+<tr>
+<td>
+<code class="literal">202</code>
+                </td>
+<td>
+                  Number of HTTP 202 Accepted responses
+                </td>
+<td>
+                  number
+                </td>
+</tr>
+<tr>
+<td>
+<code class="literal">301</code>
+                </td>
+<td>
+                  Number of HTTP 301 Moved Permanently responses
+                </td>
+<td>
+                  number
+                </td>
+</tr>
+<tr>
+<td>
+<code class="literal">304</code>
+                </td>
+<td>
+                  Number of HTTP 304 Not Modified responses
+                </td>
+<td>
+                  number
+                </td>
+</tr>
+<tr>
+<td>
+<code class="literal">400</code>
+                </td>
+<td>
+                  Number of HTTP 400 Bad Request responses
+                </td>
+<td>
+                  number
+                </td>
+</tr>
+<tr>
+<td>
+<code class="literal">401</code>
+                </td>
+<td>
+                  Number of HTTP 401 Unauthorized responses
+                </td>
+<td>
+                  number
+                </td>
+</tr>
+<tr>
+<td>
+<code class="literal">403</code>
+                </td>
+<td>
+                  Number of HTTP 403 Forbidden responses
+                </td>
+<td>
+                  number
+                </td>
+</tr>
+<tr>
+<td>
+<code class="literal">404</code>
+                </td>
+<td>
+                  Number of HTTP 404 Not Found responses
+                </td>
+<td>
+                  number
+                </td>
+</tr>
+<tr>
+<td>
+<code class="literal">405</code>
+                </td>
+<td>
+                  Number of HTTP 405 Method Not Allowed responses
+                </td>
+<td>
+                  number
+                </td>
+</tr>
+<tr>
+<td>
+<code class="literal">409</code>
+                </td>
+<td>
+                  Number of HTTP 409 Conflict responses
+                </td>
+<td>
+                  number
+                </td>
+</tr>
+<tr>
+<td>
+<code class="literal">412</code>
+                </td>
+<td>
+                  Number of HTTP 412 Precondition Failed responses
+                </td>
+<td>
+                  number
+                </td>
+</tr>
+<tr>
+<td>
+<code class="literal">500</code>
+                </td>
+<td>
+                  Number of HTTP 500 Internal Server Error responses
+                </td>
+<td>
+                  number
+                </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</li>
+<li class="listitem">
+<p>
+          <code class="literal">httpd</code>
+        </p>
+<div class="table">
+<a id="N13CD3" />
+<p class="title">
+<strong>Table&nbsp;9.8.&nbsp;<code class="literal">httpd</code> statistics</strong>
+</p>
+<div class="table-contents">
+<table summary="httpd statistics" border="1">
+<colgroup>
+<col class="stat" width="33%" />
+<col class="desc" width="33%" />
+<col class="unit" width="34%" />
+</colgroup>
+<thead>
+<tr>
+<th>
+                  Statistic ID
+                </th>
+<th>
+                  Description
+                </th>
+<th>
+                  Unit
+                </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="literal">bulk_requests</code>
+                </td>
+<td>
+                  Number of bulk requests
+                </td>
+<td>
+                  number
+                </td>
+</tr>
+<tr>
+<td>
+<code class="literal">clients_requesting_changes</code>
+                </td>
+<td>
+                  Number of clients for continuous _changes
+                </td>
+<td>
+                  number
+                </td>
+</tr>
+<tr>
+<td>
+<code class="literal">requests</code>
+                </td>
+<td>
+                  Number of HTTP requests
+                </td>
+<td>
+                  number
+                </td>
+</tr>
+<tr>
+<td>
+<code class="literal">temporary_view_reads</code>
+                </td>
+<td>
+                  Number of temporary view reads
+                </td>
+<td>
+                  number
+                </td>
+</tr>
+<tr>
+<td>
+<code class="literal">view_reads</code>
+                </td>
+<td>
+                  Number of view reads
+                </td>
+<td>
+                  number
+                </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<p>
+      You can also access individual statistics by quoting the
+      statistics sections and statistic ID as part of the URL path. For
+      example, to get the <code class="literal">request_time</code> statistics,
+      you can use:
+    </p>
+<pre class="programlisting">GET /_stats/couchdb/request_time</pre>
+<p>
+      This returns an entire statistics object, as with the full
+      request, but containining only the request individual statistic.
+      Hence, the returned structure is as follows:
+    </p>
+<pre class="programlisting">{
+   "couchdb" : {
+      "request_time" : {
+         "stddev" : 7454.305,
+         "min" : 1,
+         "max" : 34185,
+         "current" : 34697.803,
+         "mean" : 1652.276,
+         "sum" : 34697.803,
+         "description" : "length of a request inside CouchDB without MochiWeb"
+      }
+   }
+}</pre>
+</div>
+</body>
+</html>

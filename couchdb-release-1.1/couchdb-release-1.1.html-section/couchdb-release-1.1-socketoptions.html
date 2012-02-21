@@ -1,0 +1,14 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>12.&nbsp;Socket Options Configuration Setting</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB Release 1.1 Feature Guide"><link rel="up" href="index.html" title="CouchDB Release 1.1 Feature Guide"><link rel="prev" href="coudhdb-release-1.1-updateafter.html" title="11.&nbsp;Stale views and update_after"><link rel="next" href="couchdb-release-1.1-serveroptions.html" title="13.&nbsp;Server Options Configuration Setting"><meta name="date" content="2012-02-21T20:09:25+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">12.&nbsp;Socket Options Configuration Setting</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="coudhdb-release-1.1-updateafter.html">Prev</a>&nbsp;</td><th align="center" width="60%">&nbsp;</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-release-1.1-serveroptions.html">Next</a></td></tr></table><hr></div><div class="section" title="12.&nbsp;Socket Options Configuration Setting"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-release-1.1-socketoptions"></a>12.&nbsp;Socket Options Configuration Setting</h2></div></div></div><p>
+      The socket options for the listening socket in CouchDB can now be
+      set within the CouchDB configuration file. The setting should be
+      added to the <code class="literal">[httpd]</code> section of the file using
+      the option name <code class="literal">socket_options</code>. The
+      specification is as a list of tuples. For example:
+    </p><pre class="programlisting">[httpd]
+socket_options = [{recbuf, 262144}, {sndbuf, 262144}, {nodelay, true}]</pre><p>
+      The options supported are a subset of full options supported by
+      the TCP/IP stack. A list of the supported options are provided in
+      the
+      <a class="ulink" href="http://www.erlang.org/doc/man/inet.html#setopts-2" target="_top">Erlang
+      inet</a> documentation.
+    </p></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="coudhdb-release-1.1-updateafter.html">Prev</a>&nbsp;</td><td align="center" width="20%">&nbsp;</td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-release-1.1-serveroptions.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">11.&nbsp;Stale views and <code class="literal">update_after</code>&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;13.&nbsp;Server Options Configuration Setting</td></tr></table></div></body></html>

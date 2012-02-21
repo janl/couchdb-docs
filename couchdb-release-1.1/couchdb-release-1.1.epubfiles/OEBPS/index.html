@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>CouchDB Release 1.1 Feature Guide</title>
+<link href="epub.css" type="text/css" rel="stylesheet" />
+<meta content="DocBook XSL Stylesheets V1.76.1" name="generator" />
+<meta name="description" content="This document provides details on the new features introduced in the CouchDB 1.1 release from the CouchDB 1.0.x release series. Last document update: 25 Jan 2012 14:44; Document built: 21 Feb 2012 20:8." />
+</head>
+<body>
+<div class="article" title="CouchDB Release 1.1 Feature Guide">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-release-1.1" />CouchDB Release 1.1 Feature Guide</h1>
+</div>
+<div>
+<div class="abstract" title="Abstract">
+<p class="title">
+<strong>Abstract</strong>
+</p>
+<p>
+        This document provides details on the new features introduced in
+        the CouchDB 1.1 release from the CouchDB 1.0.x release series.
+      </p>
+<p>
+  <span class="emphasis">
+<em>Last document update</em>
+</span>: 25 Jan 2012 14:44;
+  <span class="emphasis">
+<em>Document built</em>
+</span>: 21 Feb 2012 20:8.
+</p>
+</div>
+</div>
+</div>
+<hr />
+</div>
+<div class="section" title="1.&nbsp;Upgrading to CouchDB 1.1">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-release-1.1-upgrading" />1.&nbsp;Upgrading to CouchDB 1.1</h1>
+</div>
+</div>
+</div>
+<p>
+      You can upgrade your existing CouchDB 1.0.x installation to
+      CouchDB 1.1 without any specific steps or migration. When you run
+      CouchDB 1.1 the existing data and index files will be opened and
+      used as normal.
+    </p>
+<p>
+      The first time you run a compaction routine on your database
+      within CouchDB 1.1, the data structure and indexes will be updated
+      to the new version of the CouchDB database format that can only be
+      read by CouchDB 1.1 and later. This step is not reversable. Once
+      the data files have been updated and migrated to the new version
+      the data files will no longer work with a CouchDB 1.0.x release.
+    </p>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p>
+        If you want to retain support for openein gthe data files in
+        CouchDB 1.0.x you must back up your data files before performing
+        the upgrade and compaction process.
+      </p>
+</div>
+</div>
+</div>
+</body>
+</html>

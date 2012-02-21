@@ -1,0 +1,359 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Appendix&nbsp;A.&nbsp;JSON Structure Reference</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="index.html" title="CouchDB 1.1 Manual"><link rel="prev" href="couchdb-single-config-options_uuids.html" title="12.9.14.&nbsp;uuids Configuration Options"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Appendix&nbsp;A.&nbsp;JSON Structure Reference</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-single-config-options_uuids.html">Prev</a>&nbsp;</td><th align="center" width="60%">&nbsp;</th><td align="right" width="20%">&nbsp;</td></tr></table><hr></div><div class="appendix" title="Appendix&nbsp;A.&nbsp;JSON Structure Reference"><div class="titlepage"><div><div><h2 class="title"><a name="couchdb-api-json"></a>Appendix&nbsp;A.&nbsp;JSON Structure Reference</h2></div></div></div><p>
+    The following appendix provides a quick reference to all the JSON
+    structures that you can supply to CouchDB, or get in return to
+    requests.
+  </p><div class="table"><a name="table-couchdb-api-json-summary"></a><p class="title"><b>Table&nbsp;A.1.&nbsp;JSON Structures</b></p><div class="table-contents"><table summary="JSON Structures" border="1"><colgroup><col class="desc" width="100%"></colgroup><thead><tr><th>Description</th></tr></thead><tbody><tr><td><a class="link" href="couchdb-api-json.html#table-couchdb-api-json_all-docs" title="Table&nbsp;A.2.&nbsp; All Database Documents">
+ All Database Documents
+ </a></td></tr><tr><td><a class="link" href="couchdb-api-json.html#table-couchdb-api-json_bulkdocsreturn" title="Table&nbsp;A.3.&nbsp; Bulk Document Response">
+ Bulk Document Response
+ </a></td></tr><tr><td><a class="link" href="couchdb-api-json.html#table-couchdb-api-json_bulkdocs" title="Table&nbsp;A.4.&nbsp; Bulk Documents">
+ Bulk Documents
+ </a></td></tr><tr><td><a class="link" href="couchdb-api-json.html#table-couchdb-api-json_changes" title="Table&nbsp;A.5.&nbsp; Changes information for a database">
+ Changes information for a database
+ </a></td></tr><tr><td><a class="link" href="couchdb-api-json.html#table-couchdb-api-json_document" title="Table&nbsp;A.6.&nbsp; CouchDB Document">
+ CouchDB Document
+ </a></td></tr><tr><td><a class="link" href="couchdb-api-json.html#table-couchdb-api-json_jsonerror" title="Table&nbsp;A.7.&nbsp; CouchDB Error Status">
+ CouchDB Error Status
+ </a></td></tr><tr><td><a class="link" href="couchdb-api-json.html#table-couchdb-api-json_db-info" title="Table&nbsp;A.8.&nbsp; CouchDB database information object">
+ CouchDB database information object
+ </a></td></tr><tr><td><a class="link" href="couchdb-api-json.html#table-couchdb-api-json_design-doc" title="Table&nbsp;A.9.&nbsp; Design Document">
+ Design Document
+ </a></td></tr><tr><td><a class="link" href="couchdb-api-json.html#table-couchdb-api-json_design-doc_info" title="Table&nbsp;A.10.&nbsp; Design Document Information">
+ Design Document Information
+ </a></td></tr><tr><td><a class="link" href="couchdb-api-json.html#table-couchdb-api-json_design-doc_info-spatial" title="Table&nbsp;A.11.&nbsp; Design Document spatial index Information">
+ Design Document spatial index Information
+ </a></td></tr><tr><td><a class="link" href="couchdb-api-json.html#table-couchdb-api-json_document_with_attachments" title="Table&nbsp;A.12.&nbsp; Document with Attachments">
+ Document with Attachments
+ </a></td></tr><tr><td><a class="link" href="couchdb-api-json.html#table-couchdb-api-json_activetasks" title="Table&nbsp;A.13.&nbsp; List of Active Tasks">
+ List of Active Tasks
+ </a></td></tr><tr><td><a class="link" href="couchdb-api-json.html#table-couchdb-api-json_replication" title="Table&nbsp;A.14.&nbsp; Replication Settings">
+ Replication Settings
+ </a></td></tr><tr><td><a class="link" href="couchdb-api-json.html#table-couchdb-api-json_replication-status" title="Table&nbsp;A.15.&nbsp; Replication Status">
+ Replication Status
+ </a></td></tr><tr><td><a class="link" href="couchdb-api-json.html#table-couchdb-api-json_document_with_revs_info" title="Table&nbsp;A.16.&nbsp; Returned CouchDB Document with Detailed Revision Info">
+ Returned CouchDB Document with Detailed Revision Info
+ </a></td></tr><tr><td><a class="link" href="couchdb-api-json.html#table-couchdb-api-json_document_with_revs" title="Table&nbsp;A.17.&nbsp; Returned CouchDB Document with Revision Info">
+ Returned CouchDB Document with Revision Info
+ </a></td></tr><tr><td><a class="link" href="couchdb-api-json.html#table-couchdb-api-json_returneddocument_with_attachments" title="Table&nbsp;A.18.&nbsp; Returned Document with Attachments">
+ Returned Document with Attachments
+ </a></td></tr><tr><td><a class="link" href="couchdb-api-json.html#table-couchdb-api-json_security" title="Table&nbsp;A.19.&nbsp; Security Object">
+ Security Object
+ </a></td></tr></tbody></table></div></div><br class="table-break"><div class="table"><a name="table-couchdb-api-json_all-docs"></a><p class="title"><b>Table&nbsp;A.2.&nbsp;
+ All Database Documents
+ </b></p><div class="table-contents"><table summary="
+ All Database Documents
+ " border="1"><colgroup><col class="item" width="30%"><col class="desc" width="70%"></colgroup><tbody><tr><td><span class="bold"><strong>Field</strong></span></td><td><span class="bold"><strong>Description</strong></span></td></tr><tr><td><code class="literal">offset</code>  </td><td>
+ Offset where the document list started
+ </td></tr><tr><td><code class="literal">rows</code> <code class="literal">[array]</code> </td><td>
+ Array of document object
+ </td></tr><tr><td><code class="literal">total_rows</code>  </td><td>
+ Number of documents in the database/view
+ </td></tr><tr><td><code class="literal">update_seq</code> (optional) </td><td>
+ Current update sequence for the database
+ </td></tr></tbody></table></div></div><br class="table-break"><div class="table"><a name="table-couchdb-api-json_bulkdocsreturn"></a><p class="title"><b>Table&nbsp;A.3.&nbsp;
+ Bulk Document Response
+ </b></p><div class="table-contents"><table summary="
+ Bulk Document Response
+ " border="1"><colgroup><col class="item" width="30%"><col class="desc" width="70%"></colgroup><tbody><tr><td><span class="bold"><strong>Field</strong></span></td><td><span class="bold"><strong>Description</strong></span></td></tr><tr><td><code class="literal">docs</code> <code class="literal">[array]</code> </td><td>
+ Bulk Docs Returned Documents
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">error</code>  </td><td>
+ Error type
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">id</code>  </td><td>
+ Document ID
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">reason</code>  </td><td>
+ Error string with extended reason
+ </td></tr></tbody></table></div></div><br class="table-break"><div class="table"><a name="table-couchdb-api-json_bulkdocs"></a><p class="title"><b>Table&nbsp;A.4.&nbsp;
+ Bulk Documents
+ </b></p><div class="table-contents"><table summary="
+ Bulk Documents
+ " border="1"><colgroup><col class="item" width="30%"><col class="desc" width="70%"></colgroup><tbody><tr><td><span class="bold"><strong>Field</strong></span></td><td><span class="bold"><strong>Description</strong></span></td></tr><tr><td><code class="literal">all_or_nothing</code> (optional) </td><td>
+ Sets the database commit mode to use all-or-nothing semantics
+ </td></tr><tr><td><code class="literal">docs</code> <code class="literal">[array]</code> </td><td>
+ Bulk Documents Document
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">_id</code> (optional) </td><td>
+ Document ID
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">_rev</code> (optional) </td><td>
+ Revision ID (when updating an existing document)
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">_deleted</code> (optional) </td><td>
+ Whether the document should be deleted
+ </td></tr></tbody></table></div></div><br class="table-break"><div class="table"><a name="table-couchdb-api-json_changes"></a><p class="title"><b>Table&nbsp;A.5.&nbsp;
+ Changes information for a database
+ </b></p><div class="table-contents"><table summary="
+ Changes information for a database
+ " border="1"><colgroup><col class="item" width="30%"><col class="desc" width="70%"></colgroup><tbody><tr><td><span class="bold"><strong>Field</strong></span></td><td><span class="bold"><strong>Description</strong></span></td></tr><tr><td><code class="literal">last_seq</code>  </td><td>
+ Last change sequence number
+ </td></tr><tr><td><code class="literal">results</code> <code class="literal">[array]</code> </td><td>
+ Changes made to a database
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">changes</code> <code class="literal">[array]</code> </td><td>
+ List of changes, field-by-field, for this document
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">id</code>  </td><td>
+ Document ID
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">seq</code>  </td><td>
+ Update sequence number
+ </td></tr></tbody></table></div></div><br class="table-break"><div class="table"><a name="table-couchdb-api-json_document"></a><p class="title"><b>Table&nbsp;A.6.&nbsp;
+ CouchDB Document
+ </b></p><div class="table-contents"><table summary="
+ CouchDB Document
+ " border="1"><colgroup><col class="item" width="30%"><col class="desc" width="70%"></colgroup><tbody><tr><td><span class="bold"><strong>Field</strong></span></td><td><span class="bold"><strong>Description</strong></span></td></tr><tr><td><code class="literal">_id</code> (optional) </td><td>
+ Document ID
+ </td></tr><tr><td><code class="literal">_rev</code> (optional) </td><td>
+ Revision ID (when updating an existing document)
+ </td></tr></tbody></table></div></div><br class="table-break"><div class="table"><a name="table-couchdb-api-json_jsonerror"></a><p class="title"><b>Table&nbsp;A.7.&nbsp;
+ CouchDB Error Status
+ </b></p><div class="table-contents"><table summary="
+ CouchDB Error Status
+ " border="1"><colgroup><col class="item" width="30%"><col class="desc" width="70%"></colgroup><tbody><tr><td><span class="bold"><strong>Field</strong></span></td><td><span class="bold"><strong>Description</strong></span></td></tr><tr><td><code class="literal">error</code>  </td><td>
+ Error type
+ </td></tr><tr><td><code class="literal">id</code>  </td><td>
+ Document ID
+ </td></tr><tr><td><code class="literal">reason</code>  </td><td>
+ Error string with extended reason
+ </td></tr></tbody></table></div></div><br class="table-break"><div class="table"><a name="table-couchdb-api-json_db-info"></a><p class="title"><b>Table&nbsp;A.8.&nbsp;
+ CouchDB database information object
+ </b></p><div class="table-contents"><table summary="
+ CouchDB database information object
+ " border="1"><colgroup><col class="item" width="30%"><col class="desc" width="70%"></colgroup><tbody><tr><td><span class="bold"><strong>Field</strong></span></td><td><span class="bold"><strong>Description</strong></span></td></tr><tr><td><code class="literal">committed_update_seq</code>  </td><td>
+ The number of committed update.
+ </td></tr><tr><td><code class="literal">compact_running</code>  </td><td>
+ Set to true if the database compaction routine is operating on
+ this database.
+ </td></tr><tr><td><code class="literal">db_name</code>  </td><td>
+ The name of the database.
+ </td></tr><tr><td><code class="literal">disk_format_version</code>  </td><td>
+ The version of the physical format used for the data when it is
+ stored on disk.
+ </td></tr><tr><td><code class="literal">disk_size</code>  </td><td>
+ Size in bytes of the data as stored on the disk. Views indexes
+ are not included in the calculation.
+ </td></tr><tr><td><code class="literal">doc_count</code>  </td><td>
+ A count of the documents in the specified database.
+ </td></tr><tr><td><code class="literal">doc_del_count</code>  </td><td>
+ Number of deleted documents
+ </td></tr><tr><td><code class="literal">instance_start_time</code>  </td><td>
+ Timestamp of when the database was created, expressed in
+ milliseconds since the epoch.
+ </td></tr><tr><td><code class="literal">purge_seq</code>  </td><td>
+ The number of purge operations on the database.
+ </td></tr><tr><td><code class="literal">update_seq</code>  </td><td>
+ The current number of updates to the database.
+ </td></tr></tbody></table></div></div><br class="table-break"><div class="table"><a name="table-couchdb-api-json_design-doc"></a><p class="title"><b>Table&nbsp;A.9.&nbsp;
+ Design Document
+ </b></p><div class="table-contents"><table summary="
+ Design Document
+ " border="1"><colgroup><col class="item" width="30%"><col class="desc" width="70%"></colgroup><tbody><tr><td><span class="bold"><strong>Field</strong></span></td><td><span class="bold"><strong>Description</strong></span></td></tr><tr><td><code class="literal">_id</code>  </td><td>
+ Design Document ID
+ </td></tr><tr><td><code class="literal">_rev</code>  </td><td>
+ Design Document Revision
+ </td></tr><tr><td><code class="literal">views</code>  </td><td>
+ View
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">viewname</code>  </td><td>
+ View Definition
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">map</code>  </td><td>
+ Map Function for View
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">reduce</code> (optional) </td><td>
+ Reduce Function for View
+ </td></tr></tbody></table></div></div><br class="table-break"><div class="table"><a name="table-couchdb-api-json_design-doc_info"></a><p class="title"><b>Table&nbsp;A.10.&nbsp;
+ Design Document Information
+ </b></p><div class="table-contents"><table summary="
+ Design Document Information
+ " border="1"><colgroup><col class="item" width="30%"><col class="desc" width="70%"></colgroup><tbody><tr><td><span class="bold"><strong>Field</strong></span></td><td><span class="bold"><strong>Description</strong></span></td></tr><tr><td><code class="literal">name</code>  </td><td>
+ Name/ID of Design Document
+ </td></tr><tr><td><code class="literal">view_index</code>  </td><td>
+ View Index
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">compact_running</code>  </td><td>
+ Indicates whether a compaction routine is currently running on
+ the view
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">disk_size</code>  </td><td>
+ Size in bytes of the view as stored on disk
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">language</code>  </td><td>
+ Language for the defined views
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">purge_seq</code>  </td><td>
+ The purge sequence that has been processed
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">signature</code>  </td><td>
+ MD5 signature of the views for the design document
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">update_seq</code>  </td><td>
+ The update sequence of the corresponding database that has been
+ indexed
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">updater_running</code>  </td><td>
+ Indicates if the view is currently being updated
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">waiting_clients</code>  </td><td>
+ Number of clients waiting on views from this design document
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">waiting_commit</code>  </td><td>
+ Indicates if there are outstanding commits to the underlying
+ database that need to processed
+ </td></tr></tbody></table></div></div><br class="table-break"><div class="table"><a name="table-couchdb-api-json_design-doc_info-spatial"></a><p class="title"><b>Table&nbsp;A.11.&nbsp;
+ Design Document spatial index Information
+ </b></p><div class="table-contents"><table summary="
+ Design Document spatial index Information
+ " border="1"><colgroup><col class="item" width="30%"><col class="desc" width="70%"></colgroup><tbody><tr><td><span class="bold"><strong>Field</strong></span></td><td><span class="bold"><strong>Description</strong></span></td></tr><tr><td><code class="literal">name</code>  </td><td>
+ Name/ID of Design Document
+ </td></tr><tr><td><code class="literal">spatial_index</code>  </td><td>
+ View Index
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">compact_running</code>  </td><td>
+ Indicates whether a compaction routine is currently running on
+ the view
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">disk_size</code>  </td><td>
+ Size in bytes of the view as stored on disk
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">language</code>  </td><td>
+ Language for the defined views
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">purge_seq</code>  </td><td>
+ The purge sequence that has been processed
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">signature</code>  </td><td>
+ MD5 signature of the views for the design document
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">update_seq</code>  </td><td>
+ The update sequence of the corresponding database that has been
+ indexed
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">updater_running</code>  </td><td>
+ Indicates if the view is currently being updated
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">waiting_clients</code>  </td><td>
+ Number of clients waiting on views from this design document
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">waiting_commit</code>  </td><td>
+ Indicates if there are outstanding commits to the underlying
+ database that need to processed
+ </td></tr></tbody></table></div></div><br class="table-break"><div class="table"><a name="table-couchdb-api-json_document_with_attachments"></a><p class="title"><b>Table&nbsp;A.12.&nbsp;
+ Document with Attachments
+ </b></p><div class="table-contents"><table summary="
+ Document with Attachments
+ " border="1"><colgroup><col class="item" width="30%"><col class="desc" width="70%"></colgroup><tbody><tr><td><span class="bold"><strong>Field</strong></span></td><td><span class="bold"><strong>Description</strong></span></td></tr><tr><td><code class="literal">_id</code> (optional) </td><td>
+ Document ID
+ </td></tr><tr><td><code class="literal">_rev</code> (optional) </td><td>
+ Revision ID (when updating an existing document)
+ </td></tr><tr><td><code class="literal">_attachments</code> (optional) </td><td>
+ Document Attachment
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">filename</code>  </td><td>
+ Attachment information
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">content_type</code>  </td><td>
+ MIME Content type string
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">data</code>  </td><td>
+ File attachment content, Base64 encoded
+ </td></tr></tbody></table></div></div><br class="table-break"><div class="table"><a name="table-couchdb-api-json_activetasks"></a><p class="title"><b>Table&nbsp;A.13.&nbsp;
+ List of Active Tasks
+ </b></p><div class="table-contents"><table summary="
+ List of Active Tasks
+ " border="1"><colgroup><col class="item" width="30%"><col class="desc" width="70%"></colgroup><tbody><tr><td><span class="bold"><strong>Field</strong></span></td><td><span class="bold"><strong>Description</strong></span></td></tr><tr><td><code class="literal">tasks</code> <code class="literal">[array]</code> </td><td>
+ Active Task
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">pid</code>  </td><td>
+ Process ID
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">status</code>  </td><td>
+ Task status message
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">task</code>  </td><td>
+ Task name
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">type</code>  </td><td>
+ Operation Type
+ </td></tr></tbody></table></div></div><br class="table-break"><div class="table"><a name="table-couchdb-api-json_replication"></a><p class="title"><b>Table&nbsp;A.14.&nbsp;
+ Replication Settings
+ </b></p><div class="table-contents"><table summary="
+ Replication Settings
+ " border="1"><colgroup><col class="item" width="30%"><col class="desc" width="70%"></colgroup><tbody><tr><td><span class="bold"><strong>Field</strong></span></td><td><span class="bold"><strong>Description</strong></span></td></tr><tr><td><code class="literal">cancel</code> (optional) </td><td>
+ Cancels the replication
+ </td></tr><tr><td><code class="literal">continuous</code> (optional) </td><td>
+ Configure the replication to be continuous
+ </td></tr><tr><td><code class="literal">create_target</code> (optional) </td><td>
+ Creates the target database
+ </td></tr><tr><td><code class="literal">doc_ids</code> (optional) </td><td>
+ Array of document IDs to be synchronized
+ </td></tr><tr><td><code class="literal">proxy</code> (optional) </td><td>
+ Address of a proxy server through which replication should occur
+ </td></tr><tr><td><code class="literal">source</code>  </td><td>
+ Source database name or URL
+ </td></tr><tr><td><code class="literal">target</code>  </td><td>
+ Target database name or URL
+ </td></tr></tbody></table></div></div><br class="table-break"><div class="table"><a name="table-couchdb-api-json_replication-status"></a><p class="title"><b>Table&nbsp;A.15.&nbsp;
+ Replication Status
+ </b></p><div class="table-contents"><table summary="
+ Replication Status
+ " border="1"><colgroup><col class="item" width="30%"><col class="desc" width="70%"></colgroup><tbody><tr><td><span class="bold"><strong>Field</strong></span></td><td><span class="bold"><strong>Description</strong></span></td></tr><tr><td><code class="literal">history</code> <code class="literal">[array]</code> </td><td>
+ Replication History
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">doc_write_failures</code>  </td><td>
+ Number of document write failures
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">docs_read</code>  </td><td>
+ Number of documents read
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">docs_written</code>  </td><td>
+ Number of documents written to target
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">end_last_seq</code>  </td><td>
+ Last sequence number in changes stream
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">end_time</code>  </td><td>
+ Date/Time replication operation completed
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">missing_checked</code>  </td><td>
+ Number of missing documents checked
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">missing_found</code>  </td><td>
+ Number of missing documents found
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">recorded_seq</code>  </td><td>
+ Last recorded sequence number
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">session_id</code>  </td><td>
+ Session ID for this replication operation
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">start_last_seq</code>  </td><td>
+ First sequence number in changes stream
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">start_time</code>  </td><td>
+ Date/Time replication operation started
+ </td></tr><tr><td><code class="literal">ok</code>  </td><td>
+ Replication status
+ </td></tr><tr><td><code class="literal">session_id</code>  </td><td>
+ Unique session ID
+ </td></tr><tr><td><code class="literal">source_last_seq</code>  </td><td>
+ Last sequence number read from source database
+ </td></tr></tbody></table></div></div><br class="table-break"><div class="table"><a name="table-couchdb-api-json_document_with_revs_info"></a><p class="title"><b>Table&nbsp;A.16.&nbsp;
+ Returned CouchDB Document with Detailed Revision Info
+ </b></p><div class="table-contents"><table summary="
+ Returned CouchDB Document with Detailed Revision Info
+ " border="1"><colgroup><col class="item" width="30%"><col class="desc" width="70%"></colgroup><tbody><tr><td><span class="bold"><strong>Field</strong></span></td><td><span class="bold"><strong>Description</strong></span></td></tr><tr><td><code class="literal">_id</code> (optional) </td><td>
+ Document ID
+ </td></tr><tr><td><code class="literal">_rev</code> (optional) </td><td>
+ Revision ID (when updating an existing document)
+ </td></tr><tr><td><code class="literal">_revs_info</code> <code class="literal">[array]</code> </td><td>
+ CouchDB Document Extended Revision Info
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">rev</code>  </td><td>
+ Full revision string
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">status</code>  </td><td>
+ Status of the revision
+ </td></tr></tbody></table></div></div><br class="table-break"><div class="table"><a name="table-couchdb-api-json_document_with_revs"></a><p class="title"><b>Table&nbsp;A.17.&nbsp;
+ Returned CouchDB Document with Revision Info
+ </b></p><div class="table-contents"><table summary="
+ Returned CouchDB Document with Revision Info
+ " border="1"><colgroup><col class="item" width="30%"><col class="desc" width="70%"></colgroup><tbody><tr><td><span class="bold"><strong>Field</strong></span></td><td><span class="bold"><strong>Description</strong></span></td></tr><tr><td><code class="literal">_id</code> (optional) </td><td>
+ Document ID
+ </td></tr><tr><td><code class="literal">_rev</code> (optional) </td><td>
+ Revision ID (when updating an existing document)
+ </td></tr><tr><td><code class="literal">_revisions</code>  </td><td>
+ CouchDB Document Revisions
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">ids</code> <code class="literal">[array]</code> </td><td>
+ Array of valid revision IDs, in reverse order (latest first)
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">start</code>  </td><td>
+ Prefix number for the latest revision
+ </td></tr></tbody></table></div></div><br class="table-break"><div class="table"><a name="table-couchdb-api-json_returneddocument_with_attachments"></a><p class="title"><b>Table&nbsp;A.18.&nbsp;
+ Returned Document with Attachments
+ </b></p><div class="table-contents"><table summary="
+ Returned Document with Attachments
+ " border="1"><colgroup><col class="item" width="30%"><col class="desc" width="70%"></colgroup><tbody><tr><td><span class="bold"><strong>Field</strong></span></td><td><span class="bold"><strong>Description</strong></span></td></tr><tr><td><code class="literal">_id</code> (optional) </td><td>
+ Document ID
+ </td></tr><tr><td><code class="literal">_rev</code> (optional) </td><td>
+ Revision ID (when updating an existing document)
+ </td></tr><tr><td><code class="literal">_attachments</code> (optional) </td><td>
+ Document Attachment
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">filename</code>  </td><td>
+ Attachment
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">content_type</code>  </td><td>
+ MIME Content type string
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">length</code>  </td><td>
+ Length (bytes) of the attachment data
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">revpos</code>  </td><td>
+ Revision where this attachment exists
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">stub</code>  </td><td>
+ Indicates whether the attachment is a stub
+ </td></tr></tbody></table></div></div><br class="table-break"><div class="table"><a name="table-couchdb-api-json_security"></a><p class="title"><b>Table&nbsp;A.19.&nbsp;
+ Security Object
+ </b></p><div class="table-contents"><table summary="
+ Security Object
+ " border="1"><colgroup><col class="item" width="30%"><col class="desc" width="70%"></colgroup><tbody><tr><td><span class="bold"><strong>Field</strong></span></td><td><span class="bold"><strong>Description</strong></span></td></tr><tr><td><code class="literal">admins</code>  </td><td>
+ Roles/Users with admin privileges
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">roles</code> <code class="literal">[array]</code> </td><td>
+ List of roles with parent privilege
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">users</code> <code class="literal">[array]</code> </td><td>
+ List of users with parent privilege
+ </td></tr><tr><td><code class="literal">readers</code>  </td><td>
+ Roles/Users with reader privileges
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">roles</code> <code class="literal">[array]</code> </td><td>
+ List of roles with parent privilege
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">users</code> <code class="literal">[array]</code> </td><td>
+ List of users with parent privilege
+ </td></tr></tbody></table></div></div><br class="table-break"></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-single-config-options_uuids.html">Prev</a>&nbsp;</td><td align="center" width="20%">&nbsp;</td><td align="right" width="40%">&nbsp;</td></tr><tr><td valign="top" align="left" width="40%">12.9.14.&nbsp;<code class="literal">uuids</code> Configuration Options&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;</td></tr></table></div></body></html>

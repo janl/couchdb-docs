@@ -1,0 +1,24 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>5.4.1.&nbsp;Filtering</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-api-db_db-changes_get.html" title="5.4.&nbsp;GET /db/_changes"><link rel="prev" href="couchdb-api-db_db-changes_get.html" title="5.4.&nbsp;GET /db/_changes"><link rel="next" href="couchdb-api-db_db-compact_post.html" title="5.5.&nbsp;POST /db/_compact"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">5.4.1.&nbsp;Filtering</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-api-db_db-changes_get.html">Prev</a>&nbsp;</td><th align="center" width="60%">5.4.&nbsp;<code class="literal">GET /db/_changes</code></th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-db_db-compact_post.html">Next</a></td></tr></table><hr></div><div class="section" title="5.4.1.&nbsp;Filtering"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-api-db_db-changes_get-filters"></a>5.4.1.&nbsp;Filtering</h3></div></div></div><p>
+        You can filter the contents of the changes feed in a number of
+        ways. The most basic way is to specify one or more document IDs
+        to the query. This causes the returned structure value to only
+        contain changes for the specified IDs. Note that the value of
+        this query argument should be a JSON formatted array.
+      </p><p>
+        You can also filter the <code class="literal">_changes</code> feed by
+        defining a filter function within a design document. The
+        specification for the filter is the same as for replication
+        filters. You specify the name of the filter function to the
+        <code class="literal">filter</code> parameter, specifying the design
+        document name and filter name. For example:
+      </p><pre class="programlisting">GET /db/_changes?filter=design_doc/filtername</pre><p>
+        The <code class="literal">_changes</code> feed can be used to watch
+        changes to specific document ID's or the list of
+        <code class="literal">_design</code> documents in a database. If the
+        <code class="literal">filters</code> parameter is set to
+        <code class="literal">_doc_ids</code> a list of doc IDs can be passed in
+        the <code class="option">doc_ids</code> parameter as a JSON array.
+      </p><p>
+        For more information, see
+        <a class="xref" href="">???</a>.
+      </p></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-api-db_db-changes_get.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-api-db_db-changes_get.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-db_db-compact_post.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">5.4.&nbsp;<code class="literal">GET /db/_changes</code>&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;5.5.&nbsp;<code class="literal">POST /db/_compact</code></td></tr></table></div></body></html>

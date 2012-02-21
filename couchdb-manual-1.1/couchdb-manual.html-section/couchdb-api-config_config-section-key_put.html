@@ -1,0 +1,24 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>10.4.&nbsp;PUT /_config/section/key</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-api-config.html" title="Chapter&nbsp;10.&nbsp;CouchDB API Server Configuration Methods"><link rel="prev" href="couchdb-api-config_config-section-key_get.html" title="10.3.&nbsp;GET /_config/section/key"><link rel="next" href="couchdb-api-config_config-section-key_delete.html" title="10.5.&nbsp;DELETE /_config/section/key"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">10.4.&nbsp;<code class="literal">PUT /_config/section/key</code></th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-api-config_config-section-key_get.html">Prev</a>&nbsp;</td><th align="center" width="60%">Chapter&nbsp;10.&nbsp;CouchDB API Server Configuration Methods</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-config_config-section-key_delete.html">Next</a></td></tr></table><hr></div><div class="section" title="10.4.&nbsp;PUT /_config/section/key"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-api-config_config-section-key_put"></a>10.4.&nbsp;<code class="literal">PUT /_config/section/key</code></h2></div></div></div><div class="informaltable"><table summary="URL API PUT /_config/section/key" border="1"><colgroup><col class="field" width="33%"><col class="info" width="33%"><col class="addinfo" width="34%"></colgroup><tbody><tr><td><span class="bold"><strong>Method</strong></span></td><td colspan="2"><code class="literal">PUT /_config/section/key</code></td></tr><tr><td><span class="bold"><strong>Request</strong></span></td><td colspan="2">
+ Value structure
+ </td></tr><tr><td><span class="bold"><strong>Response</strong></span></td><td colspan="2">
+ Previous value
+ </td></tr><tr><td><span class="bold"><strong>Admin Privileges Required</strong></span></td><td colspan="2">no</td></tr><tr><td colspan="3"><span class="bold"><strong>Return Codes</strong></span></td></tr><tr><td>200</td><td colspan="2">
+ Configuration option updated successfully
+ </td></tr><tr><td>500</td><td colspan="2">
+ Error setting configuration
+ </td></tr></tbody></table></div><p>
+      Updates a configuration value. The new value should be supplied in
+      the request body in the corresponding JSON format. For example, if
+      you are setting a string value, you must supply a valid JSON
+      string.
+    </p><p>
+      For example, to set the function used to generate UUIDs by the
+      <code class="literal">GET /_uuids</code> API call to use the
+      <code class="literal">utc_random</code> generator:
+    </p><pre class="programlisting">PUT http://couchdb:5984/_config/uuids/algorithm
+Content-Type: application/json
+
+"utc_random"</pre><p>
+      The return value will be empty, with the response code indicating
+      the success or failure of the configuration setting.
+    </p></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-api-config_config-section-key_get.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-api-config.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-config_config-section-key_delete.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">10.3.&nbsp;<code class="literal">GET /_config/section/key</code>&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;10.5.&nbsp;<code class="literal">DELETE /_config/section/key</code></td></tr></table></div></body></html>

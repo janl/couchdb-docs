@@ -1,0 +1,25 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>9.5.1.&nbsp;Replication Operation</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-api-misc_replicate_post.html" title="9.5.&nbsp;POST /_replicate"><link rel="prev" href="couchdb-api-misc_replicate_post.html" title="9.5.&nbsp;POST /_replicate"><link rel="next" href="couchdb-api-misc_replicate_post-sourcetarget.html" title="9.5.2.&nbsp;Specifying the Source and Target Database"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">9.5.1.&nbsp;Replication Operation</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-api-misc_replicate_post.html">Prev</a>&nbsp;</td><th align="center" width="60%">9.5.&nbsp;<code class="literal">POST /_replicate</code></th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-misc_replicate_post-sourcetarget.html">Next</a></td></tr></table><hr></div><div class="section" title="9.5.1.&nbsp;Replication Operation"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-api-misc_replicate_post-operation"></a>9.5.1.&nbsp;Replication Operation</h3></div></div></div><p>
+        The aim of the replication is that at the end of the process,
+        all active documents on the source database are also in the
+        destination database and all documents that were deleted in the
+        source databases are also deleted (if they exist) on the
+        destination database.
+      </p><p>
+        Replication can be described as either push or pull replication:
+      </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+            <span class="emphasis"><em>Pull replication</em></span> is where the
+            <code class="literal">source</code> is the remote CouchDB instance,
+            and the <code class="literal">destination</code> is the local
+            database.
+          </p><p>
+            Pull replication is the most useful solution to use if your
+            source database has a permanent IP address, and your
+            destination (local) database may have a dynamically assigned
+            IP address (for example, through DHCP). This is particularly
+            important if you are replicating to a mobile or other device
+            from a central server.
+          </p></li><li class="listitem"><p>
+            <span class="emphasis"><em>Push replication</em></span> is where the
+            <code class="literal">source</code> is a local database, and
+            <code class="literal">destination</code> is a remote database.
+          </p></li></ul></div></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-api-misc_replicate_post.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-api-misc_replicate_post.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-misc_replicate_post-sourcetarget.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">9.5.&nbsp;<code class="literal">POST /_replicate</code>&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;9.5.2.&nbsp;Specifying the Source and Target Database</td></tr></table></div></body></html>

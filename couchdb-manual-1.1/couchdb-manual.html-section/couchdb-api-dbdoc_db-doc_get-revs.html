@@ -1,0 +1,38 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>6.2.2.&nbsp;Getting a List of Revisions</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-api-dbdoc_db-doc_get.html" title="6.2.&nbsp;GET /db/doc"><link rel="prev" href="couchdb-api-dbdoc_db-doc_get-attachments.html" title="6.2.1.&nbsp;Attachments"><link rel="next" href="couchdb-api-dbdoc_db-doc_get-revsextended.html" title="6.2.3.&nbsp;Obtaining an Extended Revision History"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">6.2.2.&nbsp;Getting a List of Revisions</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-api-dbdoc_db-doc_get-attachments.html">Prev</a>&nbsp;</td><th align="center" width="60%">6.2.&nbsp;<code class="literal">GET /db/doc</code></th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-dbdoc_db-doc_get-revsextended.html">Next</a></td></tr></table><hr></div><div class="section" title="6.2.2.&nbsp;Getting a List of Revisions"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-api-dbdoc_db-doc_get-revs"></a>6.2.2.&nbsp;Getting a List of Revisions</h3></div></div></div><p>
+        You can obtain a list of the revisions for a given document by
+        adding the <code class="literal">revs=true</code> parameter to the request
+        URL. For example:
+      </p><pre class="programlisting">GET http://couchdb:5984/recipes/FishStew?revs=true
+Accept: application/json</pre><p>
+        The returned JSON structure includes the original document,
+        including a <code class="literal">_revisions</code> structure that
+        includes the revision information:
+      </p><pre class="programlisting">{
+   "servings" : 4,
+   "subtitle" : "Delicious with a green salad",
+   "_id" : "FishStew",
+   "title" : "Irish Fish Stew",
+   "_revisions" : {
+      "ids" : [
+         "a1a9b39ee3cc39181b796a69cb48521c",
+         "7c4740b4dcf26683e941d6641c00c39d",
+         "9c65296036141e575d32ba9c034dd3ee"
+      ],
+      "start" : 3
+   },
+   "_rev" : "3-a1a9b39ee3cc39181b796a69cb48521c"
+}</pre><div class="table"><a name="table-couchdb-api-dbdoc-document_with_revs"></a><p class="title"><b>Table&nbsp;6.5.&nbsp;
+ Returned CouchDB Document with Revision Info
+ </b></p><div class="table-contents"><table summary="
+ Returned CouchDB Document with Revision Info
+ " border="1"><colgroup><col class="item" width="30%"><col class="desc" width="70%"></colgroup><tbody><tr><td><span class="bold"><strong>Field</strong></span></td><td><span class="bold"><strong>Description</strong></span></td></tr><tr><td><code class="literal">_id</code> (optional) </td><td>
+ Document ID
+ </td></tr><tr><td><code class="literal">_rev</code> (optional) </td><td>
+ Revision ID (when updating an existing document)
+ </td></tr><tr><td><code class="literal">_revisions</code>  </td><td>
+ CouchDB Document Revisions
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">ids</code> <code class="literal">[array]</code> </td><td>
+ Array of valid revision IDs, in reverse order (latest first)
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">start</code>  </td><td>
+ Prefix number for the latest revision
+ </td></tr></tbody></table></div></div><br class="table-break"></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-api-dbdoc_db-doc_get-attachments.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-api-dbdoc_db-doc_get.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-dbdoc_db-doc_get-revsextended.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">6.2.1.&nbsp;Attachments&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;6.2.3.&nbsp;Obtaining an Extended Revision History</td></tr></table></div></body></html>

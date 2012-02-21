@@ -1,0 +1,19 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>5.11.1.&nbsp;Updating Indexes</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-api-db_db-purge_post.html" title="5.11.&nbsp;POST /db/_purge"><link rel="prev" href="couchdb-api-db_db-purge_post.html" title="5.11.&nbsp;POST /db/_purge"><link rel="next" href="couchdb-api-db_db-all-docs_get.html" title="5.12.&nbsp;GET /db/_all_docs"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">5.11.1.&nbsp;Updating Indexes</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-api-db_db-purge_post.html">Prev</a>&nbsp;</td><th align="center" width="60%">5.11.&nbsp;<code class="literal">POST /db/_purge</code></th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-db_db-all-docs_get.html">Next</a></td></tr></table><hr></div><div class="section" title="5.11.1.&nbsp;Updating Indexes"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-api-db_db-purge_post-indexrebuild"></a>5.11.1.&nbsp;Updating Indexes</h3></div></div></div><p>
+        The number of purges on a database is tracked using a purge
+        sequence. This is used by the view indexer to optimize the
+        updating of views that contain the purged documents.
+      </p><p>
+        When the indexer identifies that the purge sequence on a
+        database has changed, it compares the purge sequence of the
+        database with that stored in the view index. If the difference
+        between the stored sequence and database is sequence is only 1,
+        then the indexer uses a cached list of the most recently purged
+        documents, and then removes these documents from the index
+        individually. This prevents completely rebuilding the index from
+        scratch.
+      </p><p>
+        If the difference between the stored sequence number and current
+        database sequence is greater than 1, then the view index is
+        entirely rebuilt. This is an expensive operation as every
+        document in the database must be examined.
+      </p></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-api-db_db-purge_post.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-api-db_db-purge_post.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-db_db-all-docs_get.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">5.11.&nbsp;<code class="literal">POST /db/_purge</code>&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;5.12.&nbsp;<code class="literal">GET /db/_all_docs</code></td></tr></table></div></body></html>

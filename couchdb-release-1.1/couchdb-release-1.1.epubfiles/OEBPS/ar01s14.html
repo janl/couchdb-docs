@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>14.&nbsp;Improved Error Messages</title>
+<link href="epub.css" type="text/css" rel="stylesheet" />
+<meta content="DocBook XSL Stylesheets V1.76.1" name="generator" />
+</head>
+<body>
+<div class="section" title="14.&nbsp;Improved Error Messages">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-release-1.1-errormessages" />14.&nbsp;Improved Error Messages</h1>
+</div>
+</div>
+</div>
+<p>
+      The errors reported when CouchDB is unable to read a required file
+      have been updated so that explicit information about the files and
+      problem can now be identified from the error message. The errors
+      report file permission access either when reading or writing to
+      configuration and database files.
+    </p>
+<p>
+      The error is raised both through the log file and the error
+      message returned through the API call as a JSON error message. For
+      example, when setting configuration values:
+    </p>
+<pre class="programlisting">shell&gt; <strong class="userinput">
+<code>curl -H 'X-Couch-Persist: true' -X PUT http://couchdb:5984/_config/couchdb/delayed_commits -d '"false"'</code>
+</strong>
+{"error":"file_permission_error","reason":"/etc/couchdb/local.ini"}</pre>
+<p>
+      Errors will always be reported using the
+      <code class="literal">file_permission_error</code> error type.
+    </p>
+<p>
+      During startup permissions errors on key files are also reported
+      in the log with a descriptive error message and file location so
+      that permissions can be fixed before restart.
+    </p>
+</div>
+</body>
+</html>

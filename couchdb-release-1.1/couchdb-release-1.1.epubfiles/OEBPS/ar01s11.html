@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>11.&nbsp;Stale views and update_after</title>
+<link href="epub.css" type="text/css" rel="stylesheet" />
+<meta content="DocBook XSL Stylesheets V1.76.1" name="generator" />
+</head>
+<body>
+<div class="section" title="11.&nbsp;Stale views and update_after">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="coudhdb-release-1.1-updateafter" />11.&nbsp;Stale views and <code class="literal">update_after</code>
+</h1>
+</div>
+</div>
+</div>
+<p>
+      Currently a view request can include the
+      <code class="literal">stale=ok</code> query argument, which allows the
+      contents of a stale view index to be used to produce the view
+      output. In order to trigger a build of the outdated view index, a
+      second view request must be made.
+    </p>
+<p>
+      To simplify this process, the <code class="literal">update_after</code>
+      value can be supplied to the <code class="literal">stale</code> query
+      argument. This triggers a rebuild of the view index after the
+      results of the view have been retrieved.
+    </p>
+</div>
+</body>
+</html>

@@ -1,0 +1,559 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Chapter&nbsp;6.&nbsp;CouchDB API Server Document Methods</title>
+<link href="epub.css" type="text/css" rel="stylesheet" />
+<meta content="DocBook XSL Stylesheets V1.76.1" name="generator" />
+</head>
+<body>
+<div class="chapter" title="Chapter&nbsp;6.&nbsp;CouchDB API Server Document Methods">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-api-dbdoc" />Chapter&nbsp;6.&nbsp;CouchDB API Server Document Methods</h1>
+</div>
+</div>
+</div>
+<p>
+    The CouchDB API Server Document methods detail how to create, read,
+    update and delete documents within a database.
+  </p>
+<p>
+    A list of the available methods and URL paths are provided below:
+  </p>
+<div class="table">
+<a id="table-couchdb-api-dbdoc-summary" />
+<p class="title">
+<strong>Table&nbsp;6.1.&nbsp;Document API Calls</strong>
+</p>
+<div class="table-contents">
+<table summary="Document API Calls" border="1">
+<colgroup>
+<col class="method" width="33%" />
+<col class="path" width="33%" />
+<col class="desc" width="34%" />
+</colgroup>
+<thead>
+<tr>
+<th>Method</th>
+<th>Path</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="literal">POST</code>
+</td>
+<td>
+<code class="literal">/db</code>
+</td>
+<td>
+<a class="link" href="ch06.html#couchdb-api-dbdoc_db_post" title="6.1.&nbsp;POST /db">
+ Create a new document
+ </a>
+</td>
+</tr>
+<tr>
+<td>
+<code class="literal">GET</code>
+</td>
+<td>
+<code class="literal">/db/doc</code>
+</td>
+<td>
+<a class="link" href="ch06s02.html" title="6.2.&nbsp;GET /db/doc">
+ Returns the latest revision of the document
+ </a>
+</td>
+</tr>
+<tr>
+<td>
+<code class="literal">HEAD</code>
+</td>
+<td>
+<code class="literal">/db/doc</code>
+</td>
+<td>
+<a class="link" href="ch06s03.html" title="6.3.&nbsp;HEAD /db/doc">
+ Returns bare information in the HTTP Headers for the document
+ </a>
+</td>
+</tr>
+<tr>
+<td>
+<code class="literal">PUT</code>
+</td>
+<td>
+<code class="literal">/db/doc</code>
+</td>
+<td>
+<a class="link" href="ch06s04.html" title="6.4.&nbsp;PUT /db/doc">
+ Inserts a new document, or new version of an existing document
+ </a>
+</td>
+</tr>
+<tr>
+<td>
+<code class="literal">DELETE</code>
+</td>
+<td>
+<code class="literal">/db/doc</code>
+</td>
+<td>
+<a class="link" href="ch06s05.html" title="6.5.&nbsp;DELETE /db/doc">
+ Deletes the document
+ </a>
+</td>
+</tr>
+<tr>
+<td>
+<code class="literal">COPY</code>
+</td>
+<td>
+<code class="literal">/db/doc</code>
+</td>
+<td>
+<a class="link" href="ch06s06.html" title="6.6.&nbsp;COPY /db/doc">
+ Copies the document
+ </a>
+</td>
+</tr>
+<tr>
+<td>
+<code class="literal">GET</code>
+</td>
+<td>
+<code class="literal">/db/doc/attachment</code>
+</td>
+<td>
+<a class="link" href="ch06s07.html" title="6.7.&nbsp;GET /db/doc/attachment">
+ Gets the attachment of a document
+ </a>
+</td>
+</tr>
+<tr>
+<td>
+<code class="literal">PUT</code>
+</td>
+<td>
+<code class="literal">/db/doc/attachment</code>
+</td>
+<td>
+<a class="link" href="ch06s08.html" title="6.8.&nbsp;PUT /db/doc/attachment">
+ Adds an attachment of a document
+ </a>
+</td>
+</tr>
+<tr>
+<td>
+<code class="literal">DELETE</code>
+</td>
+<td>
+<code class="literal">/db/doc/attachment</code>
+</td>
+<td>
+<a class="link" href="ch06s09.html" title="6.9.&nbsp;DELETE /db/doc/attachment">
+ Deletes an attachment of a document
+ </a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" title="6.1.&nbsp;POST /db">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-api-dbdoc_db_post" />6.1.&nbsp;<code class="literal">POST /db</code>
+</h1>
+</div>
+</div>
+</div>
+<div class="informaltable">
+<table summary="URL API POST /db" border="1">
+<colgroup>
+<col class="field" width="33%" />
+<col class="info" width="33%" />
+<col class="addinfo" width="34%" />
+</colgroup>
+<tbody>
+<tr>
+<td>
+<span class="bold">
+<strong>Method</strong>
+</span>
+</td>
+<td colspan="2">
+<code class="literal">POST /db</code>
+</td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Request</strong>
+</span>
+</td>
+<td colspan="2">
+ JSON of the new document
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Response</strong>
+</span>
+</td>
+<td colspan="2">
+ JSON with the committed document information
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Admin Privileges Required</strong>
+</span>
+</td>
+<td colspan="2">no</td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Query Arguments</strong>
+</span>
+</td>
+<td>
+<span class="bold">
+<strong>Argument</strong>
+</span>
+</td>
+<td>
+<code class="literal">batch</code>
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Description</strong>
+</span>
+</td>
+<td>
+ Allow document store request to be batched with others
+ </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Optional</strong>
+</span>
+</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Type</strong>
+</span>
+</td>
+<td>string</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Supported Values</strong>
+</span>
+</td>
+<td class="auto-generated">&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<code class="literal">ok</code>
+</td>
+<td>Enable</td>
+</tr>
+<tr>
+<td colspan="3">
+<span class="bold">
+<strong>Return Codes</strong>
+</span>
+</td>
+</tr>
+<tr>
+<td>201</td>
+<td colspan="2">
+ Document has been created successfully
+ </td>
+</tr>
+<tr>
+<td>409</td>
+<td colspan="2">
+ Conflict - a document with the specified document ID already
+ exists
+ </td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+      Create a new document in the specified database, using the
+      supplied JSON document structure. If the JSON structure includes
+      the <code class="literal">_id</code> field, then the document will be
+      created with the specified document ID. If the
+      <code class="literal">_id</code> field is not specified, a new unique ID
+      will be generated.
+    </p>
+<p>
+      For example, you can generate a new document with a generated UUID
+      using the following request:
+    </p>
+<pre class="programlisting">POST http://couchdb:5984/recipes/
+Content-Type: application/json
+
+{
+   "servings" : 4,
+   "subtitle" : "Delicious with fresh bread",
+   "title" : "Fish Stew"
+}</pre>
+<p>
+      The return JSON will specify the automatically enerated ID and
+      revision information:
+    </p>
+<pre class="programlisting">{
+   "id" : "64575eef70ab90a2b8d55fc09e00440d",
+   "ok" : true,
+   "rev" : "1-9c65296036141e575d32ba9c034dd3ee"
+}</pre>
+<div class="section" title="6.1.1.&nbsp;Specifying the Document ID">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="couchdb-api-dbdoc_db_post-docid" />6.1.1.&nbsp;Specifying the Document ID</h2>
+</div>
+</div>
+</div>
+<p>
+        The document ID can be specified by including the
+        <code class="literal">_id</code> field in the JSON of the submitted
+        record. The following request will create the same document with
+        the ID <code class="literal">FishStew</code>:
+      </p>
+<pre class="programlisting">POST http://couchdb:5984/recipes/
+Content-Type: application/json
+
+{
+   "_id" : "FishStew",
+   "servings" : 4,
+   "subtitle" : "Delicious with fresh bread",
+   "title" : "Fish Stew"
+}</pre>
+<p>
+        The structure of the submitted document is as shown in the table
+        below:
+      </p>
+<div class="table">
+<a id="table-couchdb-api-json-document" />
+<p class="title">
+<strong>Table&nbsp;6.2.&nbsp;
+ CouchDB Document
+ </strong>
+</p>
+<div class="table-contents">
+<table summary="
+ CouchDB Document
+ " border="1">
+<colgroup>
+<col class="item" width="30%" />
+<col class="desc" width="70%" />
+</colgroup>
+<tbody>
+<tr>
+<td>
+<span class="bold">
+<strong>Field</strong>
+</span>
+</td>
+<td>
+<span class="bold">
+<strong>Description</strong>
+</span>
+</td>
+</tr>
+<tr>
+<td>
+<code class="literal">_id</code> (optional) </td>
+<td>
+ Document ID
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">_rev</code> (optional) </td>
+<td>
+ Revision ID (when updating an existing document)
+ </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>
+        In either case, the returned JSON will specify the document ID,
+        revision ID, and status message:
+      </p>
+<pre class="programlisting">{
+   "id" : "FishStew",
+   "ok" : true,
+   "rev" : "1-9c65296036141e575d32ba9c034dd3ee"
+}</pre>
+</div>
+<div class="section" title="6.1.2.&nbsp;Batch Mode Writes">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="couchdb-api-dbdoc_db_batchmode" />6.1.2.&nbsp;Batch Mode Writes</h2>
+</div>
+</div>
+</div>
+<p>
+        You can write documents to the database at a higher rate by
+        using the batch option. This collects document writes together
+        in memory (on a user-by-user basis) before they are committed to
+        disk. This increases the risk of the documents not being stored
+        in the event of a failure, since the documents are not written
+        to disk immediately.
+      </p>
+<p>
+        To use the batched mode, append the <code class="literal">batch=ok</code>
+        query argument to the URL of the <code class="literal">PUT</code> or
+        <code class="literal">POST</code> request. The CouchDB server will respond
+        with a 202 HTTP response code immediately.
+      </p>
+</div>
+<div class="section" title="6.1.3.&nbsp;Including Attachments">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="couchdb-api-dbdoc_db-doc-attachments" />6.1.3.&nbsp;Including Attachments</h2>
+</div>
+</div>
+</div>
+<p>
+        You can include one or more attachments with a given document by
+        incorporating the attachment information within the JSON of the
+        document. This provides a simpler alternative to loading
+        documents with attachments than making a separate call (see
+        <a class="xref" href="ch06s08.html" title="6.8.&nbsp;PUT /db/doc/attachment">Section&nbsp;6.8, &ldquo;<code class="literal">PUT /db/doc/attachment</code>&rdquo;</a>).
+      </p>
+<div class="table">
+<a id="table-couchdb-api-dbdoc-documentattachments" />
+<p class="title">
+<strong>Table&nbsp;6.3.&nbsp;
+ Document with Attachments
+ </strong>
+</p>
+<div class="table-contents">
+<table summary="
+ Document with Attachments
+ " border="1">
+<colgroup>
+<col class="item" width="30%" />
+<col class="desc" width="70%" />
+</colgroup>
+<tbody>
+<tr>
+<td>
+<span class="bold">
+<strong>Field</strong>
+</span>
+</td>
+<td>
+<span class="bold">
+<strong>Description</strong>
+</span>
+</td>
+</tr>
+<tr>
+<td>
+<code class="literal">_id</code> (optional) </td>
+<td>
+ Document ID
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">_rev</code> (optional) </td>
+<td>
+ Revision ID (when updating an existing document)
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">_attachments</code> (optional) </td>
+<td>
+ Document Attachment
+ </td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">filename</code>  </td>
+<td>
+ Attachment information
+ </td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">content_type</code>  </td>
+<td>
+ MIME Content type string
+ </td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">data</code>  </td>
+<td>
+ File attachment content, Base64 encoded
+ </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>
+        The <code class="literal">filename</code> will be the attachment name. For
+        example, when sending the JSON structure below:
+      </p>
+<pre class="programlisting">{
+   "_id" : "FishStew",
+   "servings" : 4,
+   "subtitle" : "Delicious with fresh bread",
+   "title" : "Fish Stew"
+   "_attachments" : {
+      "styling.css" : {
+         "content-type" : "text/css",
+         "data" : "cCB7IGZvbnQtc2l6ZTogMTJwdDsgfQo=",
+         },
+   },
+}</pre>
+<p>
+        The attachment <code class="literal">styling.css</code> can be accessed
+        using <code class="literal">/recipes/FishStew/styling.css</code>. For more
+        information on attachments, see
+        <a class="xref" href="ch06s07.html" title="6.7.&nbsp;GET /db/doc/attachment">Section&nbsp;6.7, &ldquo;<code class="literal">GET /db/doc/attachment</code>&rdquo;</a>.
+      </p>
+<p>
+        The document data embedded in to the structure must be encoded
+        using base64.
+      </p>
+</div>
+</div>
+</div>
+</body>
+</html>

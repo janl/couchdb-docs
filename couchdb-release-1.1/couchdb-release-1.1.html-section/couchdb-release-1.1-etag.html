@@ -1,0 +1,14 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>7.&nbsp;More granular ETag support for views</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB Release 1.1 Feature Guide"><link rel="up" href="index.html" title="CouchDB Release 1.1 Feature Guide"><link rel="prev" href="couchdb-release-1.1-commonjs.html" title="6.&nbsp;Added CommonJS support to map functions"><link rel="next" href="couchdb-release-1.1-filters.html" title="8.&nbsp;Added built-in filters for _changes: _doc_ids and _design."><meta name="date" content="2012-02-21T20:09:25+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">7.&nbsp;More granular ETag support for views</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-release-1.1-commonjs.html">Prev</a>&nbsp;</td><th align="center" width="60%">&nbsp;</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-release-1.1-filters.html">Next</a></td></tr></table><hr></div><div class="section" title="7.&nbsp;More granular ETag support for views"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-release-1.1-etag"></a>7.&nbsp;More granular ETag support for views</h2></div></div></div><p>
+      ETags have been assigned to a map/reduce group (the collection of
+      views in a single design document). Any change to any of the
+      indexes for those views would generate a new ETag for all view
+      URL's in a single design doc, even if that specific view's results
+      had not changed.
+    </p><p>
+      In CouchDB 1.1 each <code class="literal">_view</code> URL has it's own ETag
+      which only gets updated when changes are made to the database that
+      effect that index. If the index for that specific view does not
+      change, that view keeps the original ETag head (therefore sending
+      back 304 Not Modified more often).
+    </p></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-release-1.1-commonjs.html">Prev</a>&nbsp;</td><td align="center" width="20%">&nbsp;</td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-release-1.1-filters.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">6.&nbsp;Added CommonJS support to map functions&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;8.&nbsp;Added built-in filters for <code class="literal">_changes</code>:
+      <code class="literal">_doc_ids</code> and <code class="literal">_design</code>.</td></tr></table></div></body></html>

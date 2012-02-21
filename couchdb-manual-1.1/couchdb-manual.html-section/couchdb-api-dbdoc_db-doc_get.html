@@ -1,0 +1,43 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>6.2.&nbsp;GET /db/doc</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-api-dbdoc.html" title="Chapter&nbsp;6.&nbsp;CouchDB API Server Document Methods"><link rel="prev" href="couchdb-api-dbdoc_db-doc-attachments.html" title="6.1.3.&nbsp;Including Attachments"><link rel="next" href="couchdb-api-dbdoc_db-doc_get-attachments.html" title="6.2.1.&nbsp;Attachments"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">6.2.&nbsp;<code class="literal">GET /db/doc</code></th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-api-dbdoc_db-doc-attachments.html">Prev</a>&nbsp;</td><th align="center" width="60%">Chapter&nbsp;6.&nbsp;CouchDB API Server Document Methods</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-dbdoc_db-doc_get-attachments.html">Next</a></td></tr></table><hr></div><div class="section" title="6.2.&nbsp;GET /db/doc"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-api-dbdoc_db-doc_get"></a>6.2.&nbsp;<code class="literal">GET /db/doc</code></h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="couchdb-api-dbdoc_db-doc_get-attachments.html">6.2.1. Attachments</a></span></dt><dt><span class="section"><a href="couchdb-api-dbdoc_db-doc_get-revs.html">6.2.2. Getting a List of Revisions</a></span></dt><dt><span class="section"><a href="couchdb-api-dbdoc_db-doc_get-revsextended.html">6.2.3. Obtaining an Extended Revision History</a></span></dt><dt><span class="section"><a href="couchdb-api-dbdoc_db-doc_get-specrev.html">6.2.4. Obtaining a Specific Revision</a></span></dt></dl></div><div class="informaltable"><table summary="URL API GET /db/doc" border="1"><colgroup><col class="field" width="33%"><col class="info" width="33%"><col class="addinfo" width="34%"></colgroup><tbody><tr><td><span class="bold"><strong>Method</strong></span></td><td colspan="2"><code class="literal">GET /db/doc</code></td></tr><tr><td><span class="bold"><strong>Request</strong></span></td><td colspan="2">
+ None
+ </td></tr><tr><td><span class="bold"><strong>Response</strong></span></td><td colspan="2">
+ Returns the JSON for the document
+ </td></tr><tr><td><span class="bold"><strong>Admin Privileges Required</strong></span></td><td colspan="2">no</td></tr><tr><td><span class="bold"><strong>Query Arguments</strong></span></td><td><span class="bold"><strong>Argument</strong></span></td><td><code class="literal">conflicts</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>
+ Returns the conflict tree for the document.
+ </td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>yes</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Type</strong></span></td><td>boolean</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Default</strong></span></td><td>false</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Supported Values</strong></span></td><td class="auto-generated">&nbsp;</td></tr><tr><td>&nbsp;</td><td><code class="literal">true</code></td><td>Includes the revisions</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Argument</strong></span></td><td><code class="literal">rev</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>
+ Specify the revision to return
+ </td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>yes</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Type</strong></span></td><td>string</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Supported Values</strong></span></td><td class="auto-generated">&nbsp;</td></tr><tr><td>&nbsp;</td><td><code class="literal">true</code></td><td>Includes the revisions</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Argument</strong></span></td><td><code class="literal">revs</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>
+ Return a list of the revisions for the document
+ </td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>yes</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Type</strong></span></td><td>boolean</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Argument</strong></span></td><td><code class="literal">revs_info</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>
+ Return a list of detailed revision information for the
+ document
+ </td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>yes</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Type</strong></span></td><td>boolean</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Supported Values</strong></span></td><td class="auto-generated">&nbsp;</td></tr><tr><td>&nbsp;</td><td><code class="literal">true</code></td><td>Includes the revisions</td></tr><tr><td colspan="3"><span class="bold"><strong>Return Codes</strong></span></td></tr><tr><td>201</td><td colspan="2">
+ Document created
+ </td></tr><tr><td>400</td><td colspan="2">
+ The format of the request or revision was invalid
+ </td></tr><tr><td>404</td><td colspan="2">
+ The specified document or revision cannot be found, or has been
+ deleted
+ </td></tr><tr><td>409</td><td colspan="2">
+ Conflict - a document with the specified document ID already
+ exists
+ </td></tr></tbody></table></div><p>
+      Returns the specified <code class="literal">doc</code> from the specified
+      <code class="literal">db</code>. For example, to retrieve the document with
+      the id <code class="literal">FishStew</code> you would send the following
+      request:
+    </p><pre class="programlisting">GET http://couchdb:5984/recipes/FishStew
+Content-Type: application/json
+Accept: application/json</pre><p>
+      The returned JSON is the JSON of the document, including the
+      document ID and revision number:
+    </p><pre class="programlisting">{
+   "_id" : "FishStew",
+   "_rev" : "3-a1a9b39ee3cc39181b796a69cb48521c",
+   "servings" : 4,
+   "subtitle" : "Delicious with a green salad",
+   "title" : "Irish Fish Stew"
+}</pre><p>
+      Unless you request a specific revision, the latest revision of the
+      document will always be returned.
+    </p></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-api-dbdoc_db-doc-attachments.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-api-dbdoc.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-dbdoc_db-doc_get-attachments.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">6.1.3.&nbsp;Including Attachments&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;6.2.1.&nbsp;Attachments</td></tr></table></div></body></html>

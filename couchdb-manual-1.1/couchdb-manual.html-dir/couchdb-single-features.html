@@ -1,0 +1,148 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Chapter&nbsp;2.&nbsp;Features and Functionality</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="index.html" title="CouchDB 1.1 Manual"><link rel="prev" href="couchdb-single-introduction.html" title="Chapter&nbsp;1.&nbsp;Introduction"><link rel="next" href="couchdb-single-replication.html" title="Chapter&nbsp;3.&nbsp;Replication"><meta name="date" content="2012-02-21T20:10:18+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter&nbsp;2.&nbsp;Features and Functionality</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-single-introduction.html">Prev</a>&nbsp;</td><th align="center" width="60%">&nbsp;</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-single-replication.html">Next</a></td></tr></table><hr></div><div class="chapter" title="Chapter&nbsp;2.&nbsp;Features and Functionality"><div class="titlepage"><div><div><h2 class="title"><a name="couchdb-single-features"></a>Chapter&nbsp;2.&nbsp;Features and Functionality</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="couchdb-single-features.html#couchdb-single-features-httprange">2.1. HTTP Range Requests</a></span></dt><dt><span class="section"><a href="couchdb-single-features.html#couchdb-single-features-proxying">2.2. HTTP Proxying</a></span></dt><dt><span class="section"><a href="couchdb-single-features.html#couchdb-single-features-commonjs">2.3. CommonJS support for map functions</a></span></dt><dt><span class="section"><a href="couchdb-single-features.html#couchdb-single-features-etag">2.4. Granular ETag support</a></span></dt></dl></div><p>
+    &nbsp;
+  </p><div class="section" title="2.1.&nbsp;HTTP Range Requests"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-single-features-httprange"></a>2.1.&nbsp;HTTP Range Requests</h2></div></div></div><p>
+      HTTP allows you to specify byte ranges for requests. This allows
+      the implementation of resumable downloads and skippable audio and
+      video streams alike. The following example uses a text file to
+      make the range request process easier.
+    </p><pre class="programlisting">shell&gt; <strong class="userinput"><code>cat file.txt</code></strong>
+My hovercraft is full of eels!</pre><p>
+      Uploading this as an attachment to a <code class="literal">text</code>
+      database using <span class="command"><strong>curl</strong></span>:
+    </p><pre class="programlisting">shell&gt; <strong class="userinput"><code>curl -X PUT http://127.0.0.1:5984/test/doc/file.txt \
+    -H "Content-Type: application/octet-stream" -d@file.txt</code></strong>
+{"ok":true,"id":"doc","rev":"1-287a28fa680ae0c7fb4729bf0c6e0cf2"}</pre><p>
+      Requesting the whole file works as normal:
+    </p><pre class="programlisting">shell&gt; <strong class="userinput"><code>curl -X GET http://127.0.0.1:5984/test/doc/file.txt</code></strong>
+My hovercraft is full of eels!</pre><p>
+      But to retrieve only the first 13 bytes using
+      <span class="command"><strong>curl</strong></span>:
+    </p><pre class="programlisting">shell&gt; <strong class="userinput"><code>curl -X GET http://127.0.0.1:5984/test/doc/file.txt -H "Range: bytes=0-12"</code></strong>
+My hovercraft</pre><p>
+      HTTP supports many ways to specify single and even multiple byte
+      rangers. See
+      <a class="ulink" href="http://tools.ietf.org/html/rfc2616#section-14.27" target="_top">RFC
+      2616</a>.
+    </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+        Databases that have been created with CouchDB 1.0.2 or earlier
+        will support range requests in 1.1.0, but they are using a
+        less-optimal algorithm. If you plan to make heavy use of this
+        feature, make sure to compact your database with CouchDB 1.1.0
+        to take advantage of a better algorithm to find byte ranges.
+      </p></div></div><div class="section" title="2.2.&nbsp;HTTP Proxying"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-single-features-proxying"></a>2.2.&nbsp;HTTP Proxying</h2></div></div></div><p>
+      The HTTP proxy feature makes it easy to map and redirect different
+      content through your CouchDB URL. The proxy works by mapping a
+      pathname and passing all content after that prefix through to the
+      configured proxy address.
+    </p><p>
+      Configuration of the proxy redirect is handled through the
+      <code class="literal">[httpd_global_handlers]</code> section of the CouchDB
+      configuration file (typically <code class="filename">local.ini</code>). The
+      format is:
+    </p><pre class="programlisting">[httpd_global_handlers]
+PREFIX = {couch_httpd_proxy, handle_proxy_req, &lt;&lt;"DESTINATION"&gt;&gt;}</pre><p>
+      Where:
+    </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+          <code class="literal">PREFIX</code>
+        </p><p>
+          Is the string that will be matched. The string can be any
+          valid qualifier, although to ensure that existing database
+          names are not overridden by a proxy configuration, you can use
+          an underscore prefix.
+        </p></li><li class="listitem"><p>
+          <code class="literal">DESTINATION</code>
+        </p><p>
+          The fully-qualified URL to which the request should be sent.
+          The destination must include the <code class="literal">http</code>
+          prefix. The content is used verbatim in the original request,
+          so you can also forward to servers on different ports and to
+          specific paths on the target host.
+        </p></li></ul></div><p>
+      The proxy process then translates requests of the form:
+    </p><pre class="programlisting">http://couchdb:5984/PREFIX/path</pre><p>
+      To:
+    </p><pre class="programlisting">DESTINATION/path</pre><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+        Everything after <code class="literal">PREFIX</code> including the
+        required forward slash will be appended to the
+        <code class="literal">DESTINATION</code>.
+      </p></div><p>
+      The response is then communicated back to the original client.
+    </p><p>
+      For example, the following configuration:
+    </p><pre class="programlisting">_google = {couch_httpd_proxy, handle_proxy_req, &lt;&lt;"http://www.google.com"&gt;&gt;}</pre><p>
+      Would forward all requests for
+      <code class="literal">http://couchdb:5984/_google</code> to the Google
+      website.
+    </p><p>
+      The service can also be used to forward to related CouchDB
+      services, such as Lucene:
+    </p><pre class="programlisting">[httpd_global_handlers]
+_fti = {couch_httpd_proxy, handle_proxy_req, &lt;&lt;"http://127.0.0.1:5985"&gt;&gt;}</pre><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+        The proxy service is basic. If the request is not identified by
+        the <code class="literal">DESTINATION</code>, or the remainder of the
+        <code class="literal">PATH</code> specification is incomplete, the
+        original request URL is interpreted as if the
+        <code class="literal">PREFIX</code> component of that URL does not exist.
+      </p><p>
+        For example, requesting
+        <code class="literal">http://couchdb:5984/_intranet/media</code> when
+        <code class="filename">/media</code> on the proxy destination does not
+        exist, will cause the request URL to be interpreted as
+        <code class="literal">http://couchdb:5984/media</code>. Care should be
+        taken to ensure that both requested URLs and destination URLs
+        are able to cope
+      </p></div></div><div class="section" title="2.3.&nbsp;CommonJS support for map functions"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-single-features-commonjs"></a>2.3.&nbsp;CommonJS support for map functions</h2></div></div></div><p>
+      CommonJS support allows you to use CommonJS notation inside
+      <code class="methodname">map</code> and <code class="methodname">reduce</code>
+      functions, but only of libraries that are stored inside the views
+      part of the design doc.
+    </p><p>
+      So you could continue to access CommonJS code in design_doc.foo,
+      from your list functions etc, but we'd add the ability to require
+      CommonJS modules within map and reduce, but only from
+      <code class="filename">design_doc.views.lib</code>.
+    </p><p>
+      There's no worry here about namespace collisions, as Couch just
+      plucks <code class="literal">views.*.map</code> and
+      <code class="literal">views.*.reduce</code> out of the design doc. So you
+      could have a view called <code class="literal">lib</code> if you wanted, and
+      still have CommonJS stored in <code class="literal">views.lib.sha1</code>
+      and <code class="literal">views.lib.stemmer</code> if you wanted.
+    </p><p>
+      The implementation is simplified by enforcing that CommonJS
+      modules to be used in <code class="methodname">map</code> functions be
+      stored in views.lib.
+    </p><p>
+      A sample design doc (taken from the test suite in Futon) is below:
+    </p><pre class="programlisting">{
+   "views" : {
+      "lib" : {
+         "baz" : "exports.baz = 'bam';",
+         "foo" : {
+            "zoom" : "exports.zoom = 'yeah';",
+            "boom" : "exports.boom = 'ok';",
+            "foo" : "exports.foo = 'bar';"
+         }
+      },
+      "commonjs" : {
+         "map" : "function(doc) { emit(null, require('views/lib/foo/boom').boom)}"
+      }
+   },
+   "_id" : "_design/test"
+}</pre><p>
+      The <code class="literal">require()</code> statement is relative to the
+      design document, but anything loaded form outside of
+      <code class="literal">views/lib</code> will fail.
+    </p></div><div class="section" title="2.4.&nbsp;Granular ETag support"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-single-features-etag"></a>2.4.&nbsp;Granular ETag support</h2></div></div></div><p>
+      ETags have been assigned to a map/reduce group (the collection of
+      views in a single design document). Any change to any of the
+      indexes for those views would generate a new ETag for all view
+      URL's in a single design doc, even if that specific view's results
+      had not changed.
+    </p><p>
+      In CouchDB 1.1 each <code class="literal">_view</code> URL has it's own ETag
+      which only gets updated when changes are made to the database that
+      effect that index. If the index for that specific view does not
+      change, that view keeps the original ETag head (therefore sending
+      back 304 Not Modified more often).
+    </p></div></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-single-introduction.html">Prev</a>&nbsp;</td><td align="center" width="20%">&nbsp;</td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-single-replication.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">Chapter&nbsp;1.&nbsp;Introduction&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;Chapter&nbsp;3.&nbsp;Replication</td></tr></table></div></body></html>

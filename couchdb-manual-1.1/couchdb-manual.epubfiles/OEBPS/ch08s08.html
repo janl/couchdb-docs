@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>8.8.&nbsp;GET /db/_design/design-doc/_info</title>
+<link href="epub.css" type="text/css" rel="stylesheet" />
+<meta content="DocBook XSL Stylesheets V1.76.1" name="generator" />
+</head>
+<body>
+<div class="section" title="8.8.&nbsp;GET /db/_design/design-doc/_info">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-api-design_db-design-designdoc-info_get" />8.8.&nbsp;<code class="literal">GET /db/_design/design-doc/_info</code>
+</h1>
+</div>
+</div>
+</div>
+<div class="informaltable">
+<table summary="URL API GET /db/_design/design-doc/_info" border="1">
+<colgroup>
+<col class="field" width="33%" />
+<col class="info" width="33%" />
+<col class="addinfo" width="34%" />
+</colgroup>
+<tbody>
+<tr>
+<td>
+<span class="bold">
+<strong>Method</strong>
+</span>
+</td>
+<td colspan="2">
+<code class="literal">GET /db/_design/design-doc/_info</code>
+</td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Request</strong>
+</span>
+</td>
+<td colspan="2">
+ None
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Response</strong>
+</span>
+</td>
+<td colspan="2">
+ JSON of the design document information
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Admin Privileges Required</strong>
+</span>
+</td>
+<td colspan="2">no</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+      Obtains information about a given design document, including the
+      index, index size and current status of the design document and
+      associated index information.
+    </p>
+<p>
+      For example, to get the information for the
+      <code class="literal">recipes</code> design document:
+    </p>
+<pre class="programlisting">GET http://couchdb:5984/recipes/_design/recipes/_info
+Content-Type: application/json</pre>
+<p>
+      This returns the following JSON structure:
+    </p>
+<pre class="programlisting">{
+   "name" : "recipes"
+   "view_index" : {
+      "compact_running" : false,
+      "updater_running" : false,
+      "language" : "javascript",
+      "purge_seq" : 10,
+      "waiting_commit" : false,
+      "waiting_clients" : 0,
+      "signature" : "fc65594ee76087a3b8c726caf5b40687",
+      "update_seq" : 375031,
+      "disk_size" : 16491
+   },
+}</pre>
+<p>
+      The individual fields in the returned JSON structure are detailed
+      in
+      <a class="xref" href="ch08s08.html#table-couchdb-api-design_db-designdoc-info-json" title="Table&nbsp;8.3.&nbsp;Design Document Info JSON Contents">Table&nbsp;8.3, &ldquo;Design Document Info JSON Contents&rdquo;</a>.
+    </p>
+<div class="table">
+<a id="table-couchdb-api-design_db-designdoc-info-json" />
+<p class="title">
+<strong>Table&nbsp;8.3.&nbsp;Design Document Info JSON Contents</strong>
+</p>
+<div class="table-contents">
+<table summary="Design Document Info JSON Contents" border="1">
+<colgroup>
+<col class="item" width="30%" />
+<col class="desc" width="70%" />
+</colgroup>
+<tbody>
+<tr>
+<td>
+<span class="bold">
+<strong>Field</strong>
+</span>
+</td>
+<td>
+<span class="bold">
+<strong>Description</strong>
+</span>
+</td>
+</tr>
+<tr>
+<td>
+<code class="literal">name</code>  </td>
+<td>
+ Name/ID of Design Document
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">view_index</code>  </td>
+<td>
+ View Index
+ </td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">compact_running</code>  </td>
+<td>
+ Indicates whether a compaction routine is currently running on
+ the view
+ </td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">disk_size</code>  </td>
+<td>
+ Size in bytes of the view as stored on disk
+ </td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">language</code>  </td>
+<td>
+ Language for the defined views
+ </td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">purge_seq</code>  </td>
+<td>
+ The purge sequence that has been processed
+ </td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">signature</code>  </td>
+<td>
+ MD5 signature of the views for the design document
+ </td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">update_seq</code>  </td>
+<td>
+ The update sequence of the corresponding database that has been
+ indexed
+ </td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">updater_running</code>  </td>
+<td>
+ Indicates if the view is currently being updated
+ </td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">waiting_clients</code>  </td>
+<td>
+ Number of clients waiting on views from this design document
+ </td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">waiting_commit</code>  </td>
+<td>
+ Indicates if there are outstanding commits to the underlying
+ database that need to processed
+ </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</body>
+</html>

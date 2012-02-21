@@ -1,0 +1,52 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>5.16.&nbsp;GET /db/_security</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-api-db.html" title="Chapter&nbsp;5.&nbsp;CouchDB API Server Database Methods"><link rel="prev" href="couchdb-api-db_db-revs-diff_post.html" title="5.15.&nbsp;POST /db/_revs_diff"><link rel="next" href="couchdb-api-db_db-security_put.html" title="5.17.&nbsp;PUT /db/_security"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">5.16.&nbsp;<code class="literal">GET /db/_security</code></th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-api-db_db-revs-diff_post.html">Prev</a>&nbsp;</td><th align="center" width="60%">Chapter&nbsp;5.&nbsp;CouchDB API Server Database Methods</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-db_db-security_put.html">Next</a></td></tr></table><hr></div><div class="section" title="5.16.&nbsp;GET /db/_security"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-api-db_db-security_get"></a>5.16.&nbsp;<code class="literal">GET /db/_security</code></h2></div></div></div><div class="informaltable"><table summary="URL API GET /db/_security" border="1"><colgroup><col class="field" width="33%"><col class="info" width="33%"><col class="addinfo" width="34%"></colgroup><tbody><tr><td><span class="bold"><strong>Method</strong></span></td><td colspan="2"><code class="literal">GET /db/_security</code></td></tr><tr><td><span class="bold"><strong>Request</strong></span></td><td colspan="2">
+ None
+ </td></tr><tr><td><span class="bold"><strong>Response</strong></span></td><td colspan="2">
+ JSON of the security object
+ </td></tr><tr><td><span class="bold"><strong>Admin Privileges Required</strong></span></td><td colspan="2">no</td></tr></tbody></table></div><p>
+      Gets the current secrity object from the specified database. The
+      security object consists of two compulsory elements,
+      <code class="literal">admins</code> and <code class="literal">readers</code>, which
+      are used to specify the list of users and/or roles that have admin
+      and reader rights to the database respectively. Any additional
+      fields in the security object are optional. The entire security
+      object is made available to validation and other internal
+      functions so that the database can control and limit
+      functionality.
+    </p><p>
+      To get the existing security object you would send the following
+      request:
+    </p><pre class="programlisting">{
+   "admins" : {
+      "roles" : [],
+      "names" : [
+         "mc",
+         "slp"
+      ]
+   },
+   "readers" : {
+      "roles" : [],
+      "names" : [
+         "tim",
+         "brian"
+      ]
+   }
+}</pre><div class="table"><a name="table-couchdb-api-db-json-security"></a><p class="title"><b>Table&nbsp;5.8.&nbsp;
+ Security Object
+ </b></p><div class="table-contents"><table summary="
+ Security Object
+ " border="1"><colgroup><col class="item" width="30%"><col class="desc" width="70%"></colgroup><tbody><tr><td><span class="bold"><strong>Field</strong></span></td><td><span class="bold"><strong>Description</strong></span></td></tr><tr><td><code class="literal">admins</code>  </td><td>
+ Roles/Users with admin privileges
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">roles</code> <code class="literal">[array]</code> </td><td>
+ List of roles with parent privilege
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">users</code> <code class="literal">[array]</code> </td><td>
+ List of users with parent privilege
+ </td></tr><tr><td><code class="literal">readers</code>  </td><td>
+ Roles/Users with reader privileges
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">roles</code> <code class="literal">[array]</code> </td><td>
+ List of roles with parent privilege
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">users</code> <code class="literal">[array]</code> </td><td>
+ List of users with parent privilege
+ </td></tr></tbody></table></div></div><br class="table-break"><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+        If the security object for a database has never beent set, then
+        the value returned will be empty.
+      </p></div></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-api-db_db-revs-diff_post.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-api-db.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-db_db-security_put.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">5.15.&nbsp;<code class="literal">POST /db/_revs_diff</code>&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;5.17.&nbsp;<code class="literal">PUT /db/_security</code></td></tr></table></div></body></html>

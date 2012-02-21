@@ -1,0 +1,228 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>9.4.&nbsp;GET /_log</title>
+<link href="epub.css" type="text/css" rel="stylesheet" />
+<meta content="DocBook XSL Stylesheets V1.76.1" name="generator" />
+</head>
+<body>
+<div class="section" title="9.4.&nbsp;GET /_log">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-api-misc_log_get" />9.4.&nbsp;<code class="literal">GET /_log</code>
+</h1>
+</div>
+</div>
+</div>
+<div class="informaltable">
+<table summary="URL API GET /_log" border="1">
+<colgroup>
+<col class="field" width="33%" />
+<col class="info" width="33%" />
+<col class="addinfo" width="34%" />
+</colgroup>
+<tbody>
+<tr>
+<td>
+<span class="bold">
+<strong>Method</strong>
+</span>
+</td>
+<td colspan="2">
+<code class="literal">GET /_log</code>
+</td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Request</strong>
+</span>
+</td>
+<td colspan="2">
+ None
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Response</strong>
+</span>
+</td>
+<td colspan="2">
+ Log content
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Admin Privileges Required</strong>
+</span>
+</td>
+<td colspan="2">no</td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Query Arguments</strong>
+</span>
+</td>
+<td>
+<span class="bold">
+<strong>Argument</strong>
+</span>
+</td>
+<td>
+<code class="literal">bytes</code>
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Description</strong>
+</span>
+</td>
+<td>
+ Bytes to be returned
+ </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Optional</strong>
+</span>
+</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Type</strong>
+</span>
+</td>
+<td>numeric</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Default</strong>
+</span>
+</td>
+<td>1000</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Argument</strong>
+</span>
+</td>
+<td>
+<code class="literal">offset</code>
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Description</strong>
+</span>
+</td>
+<td>
+ Offset in bytes where the log tail should be started
+ </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Optional</strong>
+</span>
+</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Type</strong>
+</span>
+</td>
+<td>numeric</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Default</strong>
+</span>
+</td>
+<td>0</td>
+</tr>
+<tr>
+<td colspan="3">
+<span class="bold">
+<strong>Return Codes</strong>
+</span>
+</td>
+</tr>
+<tr>
+<td>200</td>
+<td colspan="2">
+ Request completed successfully.
+ </td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+      Gets the CouchDB log, equivalent to accessing the local log file
+      of the corresponding CouchDB instance.
+    </p>
+<p>
+      When you request the log, the response is returned as plain
+      (UTF-8) text, with an HTTP <code class="literal">Content-type</code> header
+      as <code class="literal">text/plain</code>.
+    </p>
+<p>
+      For example, the request:
+    </p>
+<pre class="programlisting">GET http://couchdb:5984/_log
+Accept: */*</pre>
+<p>
+      The raw text is returned:
+    </p>
+<pre class="programlisting">[Wed, 27 Oct 2010 10:49:42 GMT] [info] [&lt;0.23338.2&gt;] 192.168.0.2 - - 'PUT' /authdb 401
+
+[Wed, 27 Oct 2010 11:02:19 GMT] [info] [&lt;0.23428.2&gt;] 192.168.0.116 - - 'GET' /recipes/FishStew 200
+
+[Wed, 27 Oct 2010 11:02:19 GMT] [info] [&lt;0.23428.2&gt;] 192.168.0.116 - - 'GET' /_session 200
+
+[Wed, 27 Oct 2010 11:02:19 GMT] [info] [&lt;0.24199.2&gt;] 192.168.0.116 - - 'GET' / 200
+
+[Wed, 27 Oct 2010 13:03:38 GMT] [info] [&lt;0.24207.2&gt;] 192.168.0.116 - - 'GET' /_log?offset=5 200</pre>
+<p>
+      If you want to pick out specific parts of the log information you
+      can use the <code class="literal">bytes</code> argument, which specifies the
+      number of bytes to be returned, and <code class="literal">offset</code>,
+      which specifies where the reading of the log should start, counted
+      back from the end. For example, if you use the following request:
+    </p>
+<pre class="programlisting">GET /_log?bytes=500&amp;offset=2000</pre>
+<p>
+      Reading of the log will start at 2000 bytes from the end of the
+      log, and 500 bytes will be shown.
+    </p>
+</div>
+</body>
+</html>

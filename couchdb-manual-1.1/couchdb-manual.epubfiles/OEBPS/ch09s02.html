@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>9.2.&nbsp;GET /_active_tasks</title>
+<link href="epub.css" type="text/css" rel="stylesheet" />
+<meta content="DocBook XSL Stylesheets V1.76.1" name="generator" />
+</head>
+<body>
+<div class="section" title="9.2.&nbsp;GET /_active_tasks">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-api-misc_active-tasks_get" />9.2.&nbsp;<code class="literal">GET /_active_tasks</code>
+</h1>
+</div>
+</div>
+</div>
+<div class="informaltable">
+<table summary="URL API GET /_active_tasks" border="1">
+<colgroup>
+<col class="field" width="33%" />
+<col class="info" width="33%" />
+<col class="addinfo" width="34%" />
+</colgroup>
+<tbody>
+<tr>
+<td>
+<span class="bold">
+<strong>Method</strong>
+</span>
+</td>
+<td colspan="2">
+<code class="literal">GET /_active_tasks</code>
+</td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Request</strong>
+</span>
+</td>
+<td colspan="2">
+ None
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Response</strong>
+</span>
+</td>
+<td colspan="2">
+ List of running tasks, including the task type, name, status and
+ process ID
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Admin Privileges Required</strong>
+</span>
+</td>
+<td colspan="2">no</td>
+</tr>
+<tr>
+<td colspan="3">
+<span class="bold">
+<strong>Return Codes</strong>
+</span>
+</td>
+</tr>
+<tr>
+<td>200</td>
+<td colspan="2">
+ Request completed successfully.
+ </td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+      You can obtain a list of active tasks by using the
+      <code class="literal">/_active_tasks</code> URL. The result is a JSON array
+      of the currently running tasks, with each task being described
+      with a single object. For example:
+    </p>
+<pre class="programlisting">[
+   {
+    "pid" : "&lt;0.11599.0&gt;",
+    "status" : "Copied 0 of 18369 changes (0%)",
+    "task" : "recipes",
+    "type" : "Database Compaction"
+    }
+]</pre>
+<p>
+      The returned structure includes the following fields for each
+      task:
+    </p>
+<div class="table">
+<a id="table-couchdb-api-misc-active-tasks-json" />
+<p class="title">
+<strong>Table&nbsp;9.2.&nbsp;
+ List of Active Tasks
+ </strong>
+</p>
+<div class="table-contents">
+<table summary="
+ List of Active Tasks
+ " border="1">
+<colgroup>
+<col class="item" width="30%" />
+<col class="desc" width="70%" />
+</colgroup>
+<tbody>
+<tr>
+<td>
+<span class="bold">
+<strong>Field</strong>
+</span>
+</td>
+<td>
+<span class="bold">
+<strong>Description</strong>
+</span>
+</td>
+</tr>
+<tr>
+<td>
+<code class="literal">tasks</code> <code class="literal">[array]</code> </td>
+<td>
+ Active Task
+ </td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">pid</code>  </td>
+<td>
+ Process ID
+ </td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">status</code>  </td>
+<td>
+ Task status message
+ </td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">task</code>  </td>
+<td>
+ Task name
+ </td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">type</code>  </td>
+<td>
+ Operation Type
+ </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>
+      For operation type, valid values include:
+    </p>
+<div class="itemizedlist">
+<ul class="itemizedlist">
+<li class="listitem">
+<p>
+          <code class="literal">Database Compaction</code>
+        </p>
+</li>
+<li class="listitem">
+<p>
+          <code class="literal">Replication</code>
+        </p>
+</li>
+<li class="listitem">
+<p>
+          <code class="literal">View Group Compaction</code>
+        </p>
+</li>
+<li class="listitem">
+<p>
+          <code class="literal">View Group Indexer</code>
+        </p>
+</li>
+</ul>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>5.9.4.&nbsp;Bulk Document Validation and Conflict Errors</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-api-db_db-bulk-docs_post.html" title="5.9.&nbsp;POST /db/_bulk_docs"><link rel="prev" href="couchdb-api-db_db-bulk-docs_post-commit.html" title="5.9.3.&nbsp;Bulk Documents Transaction Semantics"><link rel="next" href="couchdb-api-db_db-temp-view_post.html" title="5.10.&nbsp;POST /db/_temp_view"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">5.9.4.&nbsp;Bulk Document Validation and Conflict Errors</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-api-db_db-bulk-docs_post-commit.html">Prev</a>&nbsp;</td><th align="center" width="60%">5.9.&nbsp;<code class="literal">POST /db/_bulk_docs</code></th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-db_db-temp-view_post.html">Next</a></td></tr></table><hr></div><div class="section" title="5.9.4.&nbsp;Bulk Document Validation and Conflict Errors"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-api-db_db-bulk-docs_post-errors"></a>5.9.4.&nbsp;Bulk Document Validation and Conflict Errors</h3></div></div></div><p>
+        The JSON returned by the <code class="literal">_bulk_docs</code> operation
+        consists of an array of JSON structures, one for each document
+        in the original submission. The returned JSON structure should
+        be examined to ensure that all of the documents submitted in the
+        original request were successfully added to the database.
+      </p><p>
+        The exact structure of the returned information is shown in
+        <a class="xref" href="couchdb-api-db_db-bulk-docs_post-errors.html#table-couchdb-api-db_db-bulk-docs-return-json" title="Table&nbsp;5.6.&nbsp; Bulk Document Response">Table&nbsp;5.6, &ldquo;
+ Bulk Document Response
+ &rdquo;</a>.
+      </p><div class="table"><a name="table-couchdb-api-db_db-bulk-docs-return-json"></a><p class="title"><b>Table&nbsp;5.6.&nbsp;
+ Bulk Document Response
+ </b></p><div class="table-contents"><table summary="
+ Bulk Document Response
+ " border="1"><colgroup><col class="item" width="30%"><col class="desc" width="70%"></colgroup><tbody><tr><td><span class="bold"><strong>Field</strong></span></td><td><span class="bold"><strong>Description</strong></span></td></tr><tr><td><code class="literal">docs</code> <code class="literal">[array]</code> </td><td>
+ Bulk Docs Returned Documents
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">error</code>  </td><td>
+ Error type
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">id</code>  </td><td>
+ Document ID
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">reason</code>  </td><td>
+ Error string with extended reason
+ </td></tr></tbody></table></div></div><br class="table-break"><p>
+        When a document (or document revision) is not correctly comitted
+        to the database because of an error, you should check the
+        <code class="literal">error</code> field to determine error type and
+        course of action. Errors will be one of the following type:
+      </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+            <code class="literal">conflict</code>
+          </p><p>
+            The document as submitted is in conflict. If you used the
+            default bulk transaction mode then the new revision will not
+            have been created and you will need to re-submit the
+            document to the database. If you used
+            <code class="literal">all-or-nothing</code> mode then you will need to
+            manually resolve the conflicted revisions of the document.
+          </p><p>
+            Conflict resolution of documents added using the bulk docs
+            interface is identical to the resolution procedures used
+            when resolving conflict errors during replication.
+          </p></li><li class="listitem"><p>
+            <code class="literal">forbidden</code>
+          </p><p>
+            Entries with this error type indicate that the validation
+            routine applied to the document during submission has
+            returned an error.
+          </p><p>
+            For example, if your validation routine includes the
+            following:
+          </p><pre class="programlisting">throw({forbidden: 'invalid recipe ingredient'});</pre><p>
+            The error returned will be:
+          </p><pre class="programlisting">{
+   "id" : "7f7638c86173eb440b8890839ff35433",
+   "error" : "forbidden",
+   "reason" : "invalid recipe ingredient"
+}</pre><p>
+            For more information, see
+            <a class="xref" href="">???</a>.
+          </p></li></ul></div></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-api-db_db-bulk-docs_post-commit.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-api-db_db-bulk-docs_post.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-db_db-temp-view_post.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">5.9.3.&nbsp;Bulk Documents Transaction Semantics&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;5.10.&nbsp;<code class="literal">POST /db/_temp_view</code></td></tr></table></div></body></html>

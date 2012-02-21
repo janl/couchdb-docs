@@ -1,0 +1,19 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>9.3.&nbsp;GET /_all_dbs</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-api-misc.html" title="Chapter&nbsp;9.&nbsp;CouchDB API Server Miscellaneous Methods"><link rel="prev" href="couchdb-api-misc_active-tasks_get.html" title="9.2.&nbsp;GET /_active_tasks"><link rel="next" href="couchdb-api-misc_log_get.html" title="9.4.&nbsp;GET /_log"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">9.3.&nbsp;<code class="literal">GET /_all_dbs</code></th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-api-misc_active-tasks_get.html">Prev</a>&nbsp;</td><th align="center" width="60%">Chapter&nbsp;9.&nbsp;CouchDB API Server Miscellaneous Methods</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-misc_log_get.html">Next</a></td></tr></table><hr></div><div class="section" title="9.3.&nbsp;GET /_all_dbs"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-api-misc_all-dbs_get"></a>9.3.&nbsp;<code class="literal">GET /_all_dbs</code></h2></div></div></div><div class="informaltable"><table summary="URL API GET /_all_dbs" border="1"><colgroup><col class="field" width="33%"><col class="info" width="33%"><col class="addinfo" width="34%"></colgroup><tbody><tr><td><span class="bold"><strong>Method</strong></span></td><td colspan="2"><code class="literal">GET /_all_dbs</code></td></tr><tr><td><span class="bold"><strong>Request</strong></span></td><td colspan="2">
+ None
+ </td></tr><tr><td><span class="bold"><strong>Response</strong></span></td><td colspan="2">
+ JSON list of DBs
+ </td></tr><tr><td><span class="bold"><strong>Admin Privileges Required</strong></span></td><td colspan="2">no</td></tr><tr><td colspan="3"><span class="bold"><strong>Return Codes</strong></span></td></tr><tr><td>200</td><td colspan="2">
+ Request completed successfully.
+ </td></tr></tbody></table></div><p>
+      Returns a list of all the databases in the CouchDB instance. For
+      example:
+    </p><pre class="programlisting">GET http://couchdb:5984/_all_dbs
+Accept: application/json</pre><p>
+      The return is a JSON array:
+    </p><pre class="programlisting">[
+   "_users",
+   "contacts",
+   "docs",
+   "invoices",
+   "locations"
+]</pre></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-api-misc_active-tasks_get.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-api-misc.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-misc_log_get.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">9.2.&nbsp;<code class="literal">GET /_active_tasks</code>&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;9.4.&nbsp;<code class="literal">GET /_log</code></td></tr></table></div></body></html>

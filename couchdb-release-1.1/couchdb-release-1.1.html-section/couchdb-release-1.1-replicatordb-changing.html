@@ -1,0 +1,55 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>2.5.&nbsp;Changing the Replicator Database</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB Release 1.1 Feature Guide"><link rel="up" href="couchb-release-1.1-replicatordb.html" title="2.&nbsp;Replicator Database"><link rel="prev" href="couchdb-release-1.1-replicatordb-restart.html" title="2.4.&nbsp;Server restart"><link rel="next" href="couchdb-release-1.1-replicatordb-replicating.html" title="2.6.&nbsp;Replicating the replicator database"><meta name="date" content="2012-02-21T20:09:25+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">2.5.&nbsp;Changing the Replicator Database</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-release-1.1-replicatordb-restart.html">Prev</a>&nbsp;</td><th align="center" width="60%">2.&nbsp;Replicator Database</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-release-1.1-replicatordb-replicating.html">Next</a></td></tr></table><hr></div><div class="section" title="2.5.&nbsp;Changing the Replicator Database"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-release-1.1-replicatordb-changing"></a>2.5.&nbsp;Changing the Replicator Database</h3></div></div></div><p>
+        Imagine your replicator database (default name is _replicator)
+        has the two following documents that represent pull replications
+        from servers A and B:
+      </p><pre class="programlisting">{
+    "_id": "rep_from_A",
+    "source":  "http://aserver.com:5984/foo",
+    "target":  "foo_a",
+    "continuous":  true,
+    "_replication_id":  "c0ebe9256695ff083347cbf95f93e280",
+    "_replication_state":  "triggered",
+    "_replication_state_time":  1297971311
+}
+{
+    "_id": "rep_from_B",
+    "source":  "http://bserver.com:5984/foo",
+    "target":  "foo_b",
+    "continuous":  true,
+    "_replication_id":  "231bb3cf9d48314eaa8d48a9170570d1",
+    "_replication_state":  "triggered",
+    "_replication_state_time":  1297974122
+}</pre><p>
+        Now without stopping and restarting CouchDB, you change the name
+        of the replicator database to
+        <code class="literal">another_replicator_db</code>:
+      </p><pre class="programlisting">$ curl -X PUT http://localhost:5984/_config/replicator/db -d '"another_replicator_db"'
+"_replicator"</pre><p>
+        As soon as this is done, both pull replications defined before,
+        are stopped. This is explicitly mentioned in CouchDB's log:
+      </p><pre class="programlisting">[Fri, 11 Mar 2011 07:44:20 GMT] [info] [&lt;0.104.0&gt;] Stopping all ongoing replications because the replicator database was deleted or changed
+[Fri, 11 Mar 2011 07:44:20 GMT] [info] [&lt;0.127.0&gt;] 127.0.0.1 - - PUT /_config/replicator/db 200</pre><p>
+        Imagine now you add a replication document to the new replicator
+        database named <code class="literal">another_replicator_db</code>:
+      </p><pre class="programlisting">{
+    "_id": "rep_from_X",
+    "source":  "http://xserver.com:5984/foo",
+    "target":  "foo_x",
+    "continuous":  true
+}</pre><p>
+        From now own you have a single replication going on in your
+        system: a pull replication pulling from server X. Now you change
+        back the replicator database to the original one
+        <code class="literal">_replicator</code>:
+      </p><pre class="programlisting">$ curl -X PUT http://localhost:5984/_config/replicator/db -d '"_replicator"'
+"another_replicator_db"</pre><p>
+        Immediately after this operation, the replication pulling from
+        server X will be stopped and the replications defined in the
+        _replicator database (pulling from servers A and B) will be
+        resumed.
+      </p><p>
+        Changing again the replicator database to
+        <code class="literal">another_replicator_db</code> will stop the pull
+        replications pulling from servers A and B, and resume the pull
+        replication pulling from server X.
+      </p></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-release-1.1-replicatordb-restart.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchb-release-1.1-replicatordb.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-release-1.1-replicatordb-replicating.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">2.4.&nbsp;Server restart&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;2.6.&nbsp;Replicating the replicator database</td></tr></table></div></body></html>

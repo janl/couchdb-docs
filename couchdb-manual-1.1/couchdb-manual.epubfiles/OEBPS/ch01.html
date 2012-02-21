@@ -1,0 +1,357 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Chapter&nbsp;1.&nbsp;Introduction</title>
+<link href="epub.css" type="text/css" rel="stylesheet" />
+<meta content="DocBook XSL Stylesheets V1.76.1" name="generator" />
+</head>
+<body>
+<div class="chapter" title="Chapter&nbsp;1.&nbsp;Introduction">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-single-introduction" />Chapter&nbsp;1.&nbsp;Introduction</h1>
+</div>
+</div>
+</div>
+<p>
+    There are two interfaces to CouchDB, the built-in
+    Futon web-based interface and the CouchDB API accessed through the
+    HTTP REST interface. The former is the simplest way to view and
+    monitor your CouchDB installation and perform a
+    number of basic database and system operations. More information on
+    using the Futon interface can be found in
+    <a class="xref" href="ch01.html#couchdb-single-introduction-futon" title="1.1.&nbsp;Using Futon">Section&nbsp;1.1, &ldquo;Using Futon&rdquo;</a>.
+  </p>
+<p>
+    The primary way to interact with the CouchDB API is to use a client
+    library or other interface that provides access to the underlying
+    functionality through your chosen language or platform. However,
+    since the API is supported through HTTP REST, you can interact with
+    your CouchDB with any solution that supports the
+    HTTP protocol.
+  </p>
+<p>
+    There are a number of different tools that talk the HTTP protocol
+    and allow you to set and configure the necessary information. One
+    tool for this that allows for access from the command-line is
+    <span class="command">
+<strong>curl</strong>
+</span>. See
+    <a class="xref" href="ch01s02.html" title="1.2.&nbsp;Using curl">Section&nbsp;1.2, &ldquo;Using <span class="command">
+<strong>curl</strong>
+</span>&rdquo;</a>.
+  </p>
+<div class="section" title="1.1.&nbsp;Using Futon">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-single-introduction-futon" />1.1.&nbsp;Using Futon</h1>
+</div>
+</div>
+</div>
+<p>
+      Futon is a native web-based interface built into CouchDB. It provides a basic interface to the majority of the
+      functionality, including the ability to create, update, delete and
+      view documents and views, provides access to the configuration
+      parameters, and an interface for initiating replication.
+    </p>
+<p>
+      The default view is the <span class="guilabel">Overview</span> page which
+      provides you with a list of the databases. The basic structure of
+      the page is consistent regardless of the section you are in. The
+      main panel on the left provides the main interface to the
+      databases, configuration or replication systems. The side panel on
+      the right provides navigation to the main areas of Futon
+      interface:
+    </p>
+<div class="figure">
+<a id="fig-ccouchdb-single-introduction-futon-overview" />
+<p class="title">
+<strong>Figure&nbsp;1.1.&nbsp;Futon Overview</strong>
+</p>
+<div class="figure-contents">
+<div class="mediaobject">
+<img width="100%" src="images/futon-overview.png" height="100%" alt="Futon Overview" />
+</div>
+</div>
+</div>
+<p>
+      The main sections are:
+    </p>
+<div class="itemizedlist">
+<ul class="itemizedlist">
+<li class="listitem">
+<p>
+          <span class="guibutton">Overview</span>
+        </p>
+<p>
+          The main overview page, which provides a list of the databases
+          and provides the interface for querying the database and
+          creating and updating documents. See
+          <a class="xref" href="ch01.html#couchdb-single-introduction-futon-dbdocs" title="1.1.1.&nbsp;Managing Databases and Documents">Section&nbsp;1.1.1, &ldquo;Managing Databases and Documents&rdquo;</a>.
+        </p>
+</li>
+<li class="listitem">
+<p>
+          <span class="guibutton">Configuration</span>
+        </p>
+<p>
+          An interface into the configuration of your CouchDB installation. The interface allows you to edit the
+          different configurable parameters. For more details on
+          configuration, see
+          <a class="xref" href="ch12.html" title="Chapter&nbsp;12.&nbsp;Configuring CouchDB">Chapter&nbsp;12, <em>Configuring CouchDB</em>
+</a>.
+        </p>
+</li>
+<li class="listitem">
+<p>
+          <span class="guibutton">Replicator</span>
+        </p>
+<p>
+          An interface to the replication system, enabling you to
+          initiate replication between local and remote databases. See
+          <a class="xref" href="ch01.html#couchdb-single-introduction-futon-replication" title="1.1.2.&nbsp;Configuring Replication">Section&nbsp;1.1.2, &ldquo;Configuring Replication&rdquo;</a>.
+        </p>
+</li>
+<li class="listitem">
+<p>
+          <span class="guibutton">Status</span>
+        </p>
+<p>
+          Displays a list of the running background tasks on the server.
+          Background tasks include view index building, compaction and
+          replication. The <span class="guibutton">Status</span> page is an
+          interface to the
+          <a class="link" href="ch09s02.html" title="9.2.&nbsp;GET /_active_tasks">Active
+          Tasks</a> API call. See
+          <a class="xref" href="ch09s02.html" title="9.2.&nbsp;GET /_active_tasks">Section&nbsp;9.2, &ldquo;<code class="literal">GET /_active_tasks</code>&rdquo;</a>.
+        </p>
+</li>
+<li class="listitem">
+<p>
+          <span class="guibutton">Verify Installation</span>
+        </p>
+<p>
+          The <span class="guibutton">Verify Installation</span> allows you to
+          check whether all of the components of your CouchDB installation are correctly installed.
+        </p>
+</li>
+<li class="listitem">
+<p>
+          <span class="guibutton">Test Suite</span>
+        </p>
+<p>
+          The <span class="guibutton">Test Suite</span> section allows you to
+          run the built-in test suite. This executes a number of test
+          routines entirely within your browser to test the API and
+          functionality of your CouchDB installation. If
+          you select this page, you can run the tests by using the
+          <span class="guibutton">Run All</span> button. This will execute all
+          the tests, which may take some time.
+        </p>
+</li>
+</ul>
+</div>
+<div class="section" title="1.1.1.&nbsp;Managing Databases and Documents">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="couchdb-single-introduction-futon-dbdocs" />1.1.1.&nbsp;Managing Databases and Documents</h2>
+</div>
+</div>
+</div>
+<p>
+        You can manage databases and documents within Futon using the
+        main <span class="guibutton">Overview</span> section of the Futon
+        interface.
+      </p>
+<p>
+        To create a new database, click the <span class="guibutton">Create Database
+        &hellip;</span> button. You will be prompted for the
+        database name, as shown in the figure below.
+      </p>
+<div class="figure">
+<a id="fig-ccouchdb-single-introduction-futon-dbdocs-createdb" />
+<p class="title">
+<strong>Figure&nbsp;1.2.&nbsp;Creating a Database</strong>
+</p>
+<div class="figure-contents">
+<div class="mediaobject">
+<img width="100%" src="images/futon-createdb.png" height="100%" alt="Creating a Database" />
+</div>
+</div>
+</div>
+<p>
+        Once you have created the database (or selected an existing
+        one), you will be shown a list of the current documents. If you
+        create a new document, or select an existing document, you will
+        be presented with the edit document display.
+      </p>
+<p>
+        Editing documents within Futon requires selecting the document
+        and then editing (and setting) the fields for the document
+        individually before saving the document back into the database.
+      </p>
+<p>
+        For example, the figure below shows the editor for a single
+        document, a newly created document with a single ID, the
+        document <code class="literal">_id</code> field.
+      </p>
+<div class="figure">
+<a id="fig-ccouchdb-single-introduction-futon-dbdocs-editdoc" />
+<p class="title">
+<strong>Figure&nbsp;1.3.&nbsp;Editing a Document</strong>
+</p>
+<div class="figure-contents">
+<div class="mediaobject">
+<img width="100%" src="images/futon-editdoc.png" height="100%" alt="Editing a Document" />
+</div>
+</div>
+</div>
+<p>
+        To add a field to the document:
+      </p>
+<div class="orderedlist">
+<ol class="orderedlist">
+<li class="listitem">
+<p>
+            Click <span class="guibutton">Add Field</span>.
+          </p>
+</li>
+<li class="listitem">
+<p>
+            In the fieldname box, enter the name of the field you want
+            to create. For example, <span class="quote">&ldquo;<span class="quote">company</span>&rdquo;</span>.
+          </p>
+</li>
+<li class="listitem">
+<p>
+            Click the green tick next to the field name to confirm the
+            field name change.
+          </p>
+</li>
+<li class="listitem">
+<p>
+            Double-click the corresponding <span class="guilabel">Value</span>
+            cell.
+          </p>
+</li>
+<li class="listitem">
+<p>
+            Enter a company name, for example <span class="quote">&ldquo;<span class="quote">Example</span>&rdquo;</span>.
+          </p>
+</li>
+<li class="listitem">
+<p>
+            Click the green tick next to the field value to confirm the
+            field value.
+          </p>
+</li>
+<li class="listitem">
+<p>
+            The document is still not saved as this point. You must
+            explicitly save the document by clicking the <span class="guibutton">Save
+            Document</span> button at the top of the page. This
+            will save the document, and then display the new document
+            with the saved revision information (the
+            <code class="literal">_rev</code> field).
+          </p>
+<div class="figure">
+<a id="fig-ccouchdb-single-introduction-futon-dbdocs-finaldoc" />
+<p class="title">
+<strong>Figure&nbsp;1.4.&nbsp;Edited Document</strong>
+</p>
+<div class="figure-contents">
+<div class="mediaobject">
+<img width="100%" src="images/futon-editeddoc.png" height="100%" alt="Edited Document" />
+</div>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<p>
+        The same basic interface is used for all editng operations
+        within Futon. You <span class="emphasis">
+<em>must</em>
+</span> rememmbr to save the
+        individual element (fieldname, value) using the green tick
+        button, before then saving the document.
+      </p>
+</div>
+<div class="section" title="1.1.2.&nbsp;Configuring Replication">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="couchdb-single-introduction-futon-replication" />1.1.2.&nbsp;Configuring Replication</h2>
+</div>
+</div>
+</div>
+<p>
+        When you click the <span class="guibutton">Replicator</span> option
+        within the <span class="guilabel">Tools</span> menu you are presented
+        with the Replicator screen. This allows you to start replication
+        between two databases by filling in or select the appropriate
+        options within the form provided.
+      </p>
+<div class="figure">
+<a id="fig-ccouchdb-single-introduction-futon-replication-form" />
+<p class="title">
+<strong>Figure&nbsp;1.5.&nbsp;Replication Form</strong>
+</p>
+<div class="figure-contents">
+<div class="mediaobject">
+<img width="100%" src="images/futon-replform.png" height="100%" alt="Replication Form" />
+</div>
+</div>
+</div>
+<p>
+        To start a replication process, either the select the local
+        database or enter a remote database name into the corresponding
+        areas of the form. Replication occurs from the database on the
+        left to the database on the right.
+      </p>
+<p>
+        If you are specifying a remote database name, you must specify
+        the full URL of the remote database (including the host, port
+        number and database name). If the remote instance requires
+        authentication, you can specify the username and password as
+        part of the URL, for example
+        <code class="literal">http://username:pass@remotehost:5984/demo</code>.
+      </p>
+<p>
+        To enable continuous replication, click the
+        <span class="guilabel">Continuous</span> checkbox.
+      </p>
+<p>
+        To start the replication process, click the
+        <span class="guibutton">Replicate</span> button. The replication process
+        should start and will continue in the background. If the
+        replication process will take a long time, you can monitor the
+        status of the replication using the
+        <span class="guibutton">Status</span> option under the
+        <span class="guilabel">Tools</span> menu.
+      </p>
+<p>
+        Once replication has been completed, the page will show the
+        information returned when the replication process completes by
+        the API.
+      </p>
+<p>
+        The <span class="guilabel">Replicator</span> tool is an interface to the
+        underlying replication API. For more information, see
+        <a class="xref" href="ch09s05.html" title="9.5.&nbsp;POST /_replicate">Section&nbsp;9.5, &ldquo;<code class="literal">POST /_replicate</code>&rdquo;</a>.
+        For more information on replication, see
+        <a class="xref" href="ch03.html" title="Chapter&nbsp;3.&nbsp;Replication">Chapter&nbsp;3, <em>Replication</em>
+</a>.
+      </p>
+</div>
+</div>
+</div>
+</body>
+</html>

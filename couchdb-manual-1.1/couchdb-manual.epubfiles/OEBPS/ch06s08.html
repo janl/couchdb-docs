@@ -1,0 +1,294 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>6.8.&nbsp;PUT /db/doc/attachment</title>
+<link href="epub.css" type="text/css" rel="stylesheet" />
+<meta content="DocBook XSL Stylesheets V1.76.1" name="generator" />
+</head>
+<body>
+<div class="section" title="6.8.&nbsp;PUT /db/doc/attachment">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-api-dbdoc_db-doc-attachment_put" />6.8.&nbsp;<code class="literal">PUT /db/doc/attachment</code>
+</h1>
+</div>
+</div>
+</div>
+<div class="informaltable">
+<table summary="URL API PUT /db/doc/attachment" border="1">
+<colgroup>
+<col class="field" width="33%" />
+<col class="info" width="33%" />
+<col class="addinfo" width="34%" />
+</colgroup>
+<tbody>
+<tr>
+<td>
+<span class="bold">
+<strong>Method</strong>
+</span>
+</td>
+<td colspan="2">
+<code class="literal">PUT /db/doc/attachment</code>
+</td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Request</strong>
+</span>
+</td>
+<td colspan="2">
+ Raw document data
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Response</strong>
+</span>
+</td>
+<td colspan="2">
+ JSON document status
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Admin Privileges Required</strong>
+</span>
+</td>
+<td colspan="2">no</td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Query Arguments</strong>
+</span>
+</td>
+<td>
+<span class="bold">
+<strong>Argument</strong>
+</span>
+</td>
+<td>
+<code class="literal">rev</code>
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Description</strong>
+</span>
+</td>
+<td>
+ Current document revision
+ </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Optional</strong>
+</span>
+</td>
+<td>no</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Type</strong>
+</span>
+</td>
+<td>string</td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>HTTP Headers</strong>
+</span>
+</td>
+<td>
+<span class="bold">
+<strong>Header</strong>
+</span>
+</td>
+<td>
+<code class="literal">Content-Length</code>
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Description</strong>
+</span>
+</td>
+<td>Length (bytes) of the attachment being uploaded</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Optional</strong>
+</span>
+</td>
+<td>no</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Header</strong>
+</span>
+</td>
+<td>
+<code class="literal">Content-Type</code>
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Description</strong>
+</span>
+</td>
+<td>MIME type for the uploaded attachment</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Optional</strong>
+</span>
+</td>
+<td>no</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Header</strong>
+</span>
+</td>
+<td>
+<code class="literal">If-Match</code>
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Description</strong>
+</span>
+</td>
+<td>Current revision of the document for validation</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Optional</strong>
+</span>
+</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td colspan="3">
+<span class="bold">
+<strong>Return Codes</strong>
+</span>
+</td>
+</tr>
+<tr>
+<td>201</td>
+<td colspan="2">
+ Attachment has been accepted
+ </td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+      Upload the supplied content as an attachment to the specified
+      document (<code class="literal">doc</code>). The
+      <code class="literal">attachment</code> name provided must be a URL encoded
+      string. You must also supply either the <code class="literal">rev</code>
+      query argument or the <code class="literal">If-Match</code> HTTP header for
+      validation, and the HTTP headers (to set the attacment content
+      type). The content type is used when the attachment is requested
+      as the corresponding content-type in the returned document header.
+    </p>
+<p>
+      For example, you could upload a simple text document using the
+      following request:
+    </p>
+<pre class="programlisting">PUT http://couchdb:5984/recipes/FishStew/basic?rev=8-a94cb7e50ded1e06f943be5bfbddf8ca
+Content-Length: 10
+Content-Type: text/plain
+
+Roast it</pre>
+<p>
+      Or by using the <code class="literal">If-Match</code> HTTP header:
+    </p>
+<pre class="programlisting">PUT http://couchdb:5984/recipes/FishStew/basic
+If-Match: 8-a94cb7e50ded1e06f943be5bfbddf8ca
+Content-Length: 10
+Content-Type: text/plain
+
+Roast it</pre>
+<p>
+      The returned JSON contains the new document information:
+    </p>
+<pre class="programlisting">{
+   "id" : "FishStew",
+   "ok" : true,
+   "rev" : "9-247bb19a41bfd9bfdaf5ee6e2e05be74"
+}</pre>
+<div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Note</h3>
+<p>
+        Uploading an attachment updates the corresponding document
+        revision. Revisions are tracked for the parent document, not
+        individual attachments.
+      </p>
+</div>
+<div class="section" title="6.8.1.&nbsp;Updating an Existing Attachment">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="couchdb-api-dbdoc_db-doc-attachment_put-existing" />6.8.1.&nbsp;Updating an Existing Attachment</h2>
+</div>
+</div>
+</div>
+<p>
+        Uploading an attachment using an existing attachment name will
+        update the corresponding stored content of the database. Since
+        you must supply the revision information to add an attachment to
+        a document, this serves as validation to update the existing
+        attachment.
+      </p>
+</div>
+</div>
+</body>
+</html>

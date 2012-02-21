@@ -1,0 +1,35 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>6.4.1.&nbsp;Updating an Existing Document</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-api-dbdoc_db-doc_put.html" title="6.4.&nbsp;PUT /db/doc"><link rel="prev" href="couchdb-api-dbdoc_db-doc_put.html" title="6.4.&nbsp;PUT /db/doc"><link rel="next" href="couchdb-api-dbdoc_db-doc_delete.html" title="6.5.&nbsp;DELETE /db/doc"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">6.4.1.&nbsp;Updating an Existing Document</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-api-dbdoc_db-doc_put.html">Prev</a>&nbsp;</td><th align="center" width="60%">6.4.&nbsp;<code class="literal">PUT /db/doc</code></th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-dbdoc_db-doc_delete.html">Next</a></td></tr></table><hr></div><div class="section" title="6.4.1.&nbsp;Updating an Existing Document"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-api-dbdoc_db-doc_put-update"></a>6.4.1.&nbsp;Updating an Existing Document</h3></div></div></div><p>
+        To update an existing document you must specify the current
+        revision number within the <code class="literal">_rev</code> parameter.
+        For example:
+      </p><pre class="programlisting">PUT http://couchdb:5984/recipes/FishStew
+Content-Type: application/json
+
+{
+  "_rev" : "1-9c65296036141e575d32ba9c034dd3ee",
+  "servings" : 4,
+  "subtitle" : "Delicious with fresh salad",
+  "title" : "Fish Stew"
+}</pre><p>
+        Alternatively, you can supply the current revision number in the
+        <code class="literal">If-Match</code> HTTP header of the request. For
+        example:
+      </p><pre class="programlisting">PUT http://couchdb:5984/recipes/FishStew
+If-Match: 2-d953b18035b76f2a5b1d1d93f25d3aea
+Content-Type: application/json
+
+{
+   "servings" : 4,
+   "subtitle" : "Delicious with fresh salad",
+   "title" : "Fish Stew"
+}</pre><p>
+        The JSON returned will include the updated revision number:
+      </p><pre class="programlisting">{
+   "id" : "FishStew99",
+   "ok" : true,
+   "rev" : "2-d953b18035b76f2a5b1d1d93f25d3aea"
+}</pre><p>
+        For information on batched writes, which can provide improved
+        performance, see
+        <a class="xref" href="couchdb-api-dbdoc_db_batchmode.html" title="6.1.2.&nbsp;Batch Mode Writes">Section&nbsp;6.1.2, &ldquo;Batch Mode Writes&rdquo;</a>.
+      </p></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-api-dbdoc_db-doc_put.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-api-dbdoc_db-doc_put.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-dbdoc_db-doc_delete.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">6.4.&nbsp;<code class="literal">PUT /db/doc</code>&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;6.5.&nbsp;<code class="literal">DELETE /db/doc</code></td></tr></table></div></body></html>

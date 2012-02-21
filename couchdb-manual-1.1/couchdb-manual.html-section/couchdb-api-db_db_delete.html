@@ -1,0 +1,21 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>5.3.&nbsp;DELETE /db</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-api-db.html" title="Chapter&nbsp;5.&nbsp;CouchDB API Server Database Methods"><link rel="prev" href="couchdb-api-db_db_put.html" title="5.2.&nbsp;PUT /db"><link rel="next" href="couchdb-api-db_db-changes_get.html" title="5.4.&nbsp;GET /db/_changes"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">5.3.&nbsp;<code class="literal">DELETE /db</code></th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-api-db_db_put.html">Prev</a>&nbsp;</td><th align="center" width="60%">Chapter&nbsp;5.&nbsp;CouchDB API Server Database Methods</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-db_db-changes_get.html">Next</a></td></tr></table><hr></div><div class="section" title="5.3.&nbsp;DELETE /db"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-api-db_db_delete"></a>5.3.&nbsp;<code class="literal">DELETE /db</code></h2></div></div></div><div class="informaltable"><table summary="URL API DELETE /db" border="1"><colgroup><col class="field" width="33%"><col class="info" width="33%"><col class="addinfo" width="34%"></colgroup><tbody><tr><td><span class="bold"><strong>Method</strong></span></td><td colspan="2"><code class="literal">DELETE /db</code></td></tr><tr><td><span class="bold"><strong>Request</strong></span></td><td colspan="2">
+ None
+ </td></tr><tr><td><span class="bold"><strong>Response</strong></span></td><td colspan="2">
+ JSON success statement
+ </td></tr><tr><td><span class="bold"><strong>Admin Privileges Required</strong></span></td><td colspan="2">no</td></tr><tr><td colspan="3"><span class="bold"><strong>Return Codes</strong></span></td></tr><tr><td>200</td><td colspan="2">
+ Database has been deleted
+ </td></tr><tr><td>404</td><td colspan="2">
+ The requested content could not be found. The returned content
+ will include further information, as a JSON object, if available.
+ </td></tr></tbody></table></div><p>
+      Deletes the specified database, and all the documents and
+      attachments contained within it.
+    </p><p>
+      To delete the database <code class="literal">recipes</code> you would send
+      the request:
+    </p><pre class="programlisting">DELETE http://couchdb:5984/recipes
+Content-Type: application/json</pre><p>
+      If successful, the returned JSON will indicate success
+    </p><pre class="programlisting">{
+   "ok" : true
+}</pre></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-api-db_db_put.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-api-db.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-db_db-changes_get.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">5.2.&nbsp;<code class="literal">PUT /db</code>&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;5.4.&nbsp;<code class="literal">GET /db/_changes</code></td></tr></table></div></body></html>

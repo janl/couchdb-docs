@@ -1,0 +1,265 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Chapter&nbsp;9.&nbsp;CouchDB API Server Miscellaneous Methods</title>
+<link href="epub.css" type="text/css" rel="stylesheet" />
+<meta content="DocBook XSL Stylesheets V1.76.1" name="generator" />
+</head>
+<body>
+<div class="chapter" title="Chapter&nbsp;9.&nbsp;CouchDB API Server Miscellaneous Methods">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-api-misc" />Chapter&nbsp;9.&nbsp;CouchDB API Server Miscellaneous Methods</h1>
+</div>
+</div>
+</div>
+<p>
+    The CouchDB Miscellaneous interface provides the basic interface to
+    a CouchDB server for obtaining CouchDB information and getting and
+    setting configuration information.
+  </p>
+<p>
+    A list of the available methods and URL paths are provided below:
+  </p>
+<div class="table">
+<a id="table-couchdb-api-misc-summary" />
+<p class="title">
+<strong>Table&nbsp;9.1.&nbsp;Miscellaneous API Calls</strong>
+</p>
+<div class="table-contents">
+<table summary="Miscellaneous API Calls" border="1">
+<colgroup>
+<col class="method" width="33%" />
+<col class="path" width="33%" />
+<col class="desc" width="34%" />
+</colgroup>
+<thead>
+<tr>
+<th>Method</th>
+<th>Path</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="literal">GET</code>
+</td>
+<td>
+<code class="literal">/</code>
+</td>
+<td>
+<a class="link" href="ch09.html#couchdb-api-misc_root_get" title="9.1.&nbsp;GET /">
+ Get the welcome message and version information
+ </a>
+</td>
+</tr>
+<tr>
+<td>
+<code class="literal">GET</code>
+</td>
+<td>
+<code class="literal">/_active_tasks</code>
+</td>
+<td>
+<a class="link" href="ch09s02.html" title="9.2.&nbsp;GET /_active_tasks">
+ Obtain a list of the tasks running in the server
+ </a>
+</td>
+</tr>
+<tr>
+<td>
+<code class="literal">GET</code>
+</td>
+<td>
+<code class="literal">/_all_dbs</code>
+</td>
+<td>
+<a class="link" href="ch09s03.html" title="9.3.&nbsp;GET /_all_dbs">
+ Get a list of all the DBs
+ </a>
+</td>
+</tr>
+<tr>
+<td>
+<code class="literal">GET</code>
+</td>
+<td>
+<code class="literal">/_log</code>
+</td>
+<td>
+<a class="link" href="ch09s04.html" title="9.4.&nbsp;GET /_log">
+ Return the server log file
+ </a>
+</td>
+</tr>
+<tr>
+<td>
+<code class="literal">POST</code>
+</td>
+<td>
+<code class="literal">/_replicate</code>
+</td>
+<td>
+<a class="link" href="ch09s05.html" title="9.5.&nbsp;POST /_replicate">
+ Set or cancel replication
+ </a>
+</td>
+</tr>
+<tr>
+<td>
+<code class="literal">POST</code>
+</td>
+<td>
+<code class="literal">/_restart</code>
+</td>
+<td>
+<a class="link" href="ch09s06.html" title="9.6.&nbsp;POST /_restart">
+ Restart the server
+ </a>
+</td>
+</tr>
+<tr>
+<td>
+<code class="literal">GET</code>
+</td>
+<td>
+<code class="literal">/_stats</code>
+</td>
+<td>
+<a class="link" href="ch09s07.html" title="9.7.&nbsp;GET /_stats">
+ Return server statistics
+ </a>
+</td>
+</tr>
+<tr>
+<td>
+<code class="literal">GET</code>
+</td>
+<td>
+<code class="literal">/_utils</code>
+</td>
+<td>
+<a class="link" href="ch09s08.html" title="9.8.&nbsp;GET /_utils">
+ CouchDB administration interface (Futon)
+ </a>
+</td>
+</tr>
+<tr>
+<td>
+<code class="literal">GET</code>
+</td>
+<td>
+<code class="literal">/_uuids</code>
+</td>
+<td>
+<a class="link" href="ch09s09.html" title="9.9.&nbsp;GET /_uuids">
+ Get generated UUIDs from the server
+ </a>
+</td>
+</tr>
+<tr>
+<td>
+<code class="literal">GET</code>
+</td>
+<td>
+<code class="literal">/favicon.ico</code>
+</td>
+<td>
+<a class="link" href="ch09s10.html" title="9.10.&nbsp;GET /favicon.ico">
+ Get the site icon
+ </a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" title="9.1.&nbsp;GET /">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-api-misc_root_get" />9.1.&nbsp;<code class="literal">GET /</code>
+</h1>
+</div>
+</div>
+</div>
+<div class="informaltable">
+<table summary="URL API GET /" border="1">
+<colgroup>
+<col class="field" width="33%" />
+<col class="info" width="33%" />
+<col class="addinfo" width="34%" />
+</colgroup>
+<tbody>
+<tr>
+<td>
+<span class="bold">
+<strong>Method</strong>
+</span>
+</td>
+<td colspan="2">
+<code class="literal">GET /</code>
+</td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Request</strong>
+</span>
+</td>
+<td colspan="2">
+ None
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Response</strong>
+</span>
+</td>
+<td colspan="2">
+ Welcome message and version
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Admin Privileges Required</strong>
+</span>
+</td>
+<td colspan="2">no</td>
+</tr>
+<tr>
+<td colspan="3">
+<span class="bold">
+<strong>Return Codes</strong>
+</span>
+</td>
+</tr>
+<tr>
+<td>200</td>
+<td colspan="2">
+ Request completed successfully.
+ </td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+      Accessing the root of a CouchDB instance returns meta information
+      about the instance. The response is a JSON structure containing
+      information about the server, including a welcome message and the
+      version of the server.
+    </p>
+<pre class="programlisting">{
+   "couchdb" : "Welcome",
+   "version" : "1.0.1"
+}</pre>
+</div>
+</div>
+</body>
+</html>

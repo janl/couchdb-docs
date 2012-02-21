@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>5.5.&nbsp;POST /db/_compact</title>
+<link href="epub.css" type="text/css" rel="stylesheet" />
+<meta content="DocBook XSL Stylesheets V1.76.1" name="generator" />
+</head>
+<body>
+<div class="section" title="5.5.&nbsp;POST /db/_compact">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-api-db_db-compact_post" />5.5.&nbsp;<code class="literal">POST /db/_compact</code>
+</h1>
+</div>
+</div>
+</div>
+<div class="informaltable">
+<table summary="URL API POST /db/_compact" border="1">
+<colgroup>
+<col class="field" width="33%" />
+<col class="info" width="33%" />
+<col class="addinfo" width="34%" />
+</colgroup>
+<tbody>
+<tr>
+<td>
+<span class="bold">
+<strong>Method</strong>
+</span>
+</td>
+<td colspan="2">
+<code class="literal">POST /db/_compact</code>
+</td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Request</strong>
+</span>
+</td>
+<td colspan="2">
+ None
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Response</strong>
+</span>
+</td>
+<td colspan="2">
+ JSON success statement
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Admin Privileges Required</strong>
+</span>
+</td>
+<td colspan="2">no</td>
+</tr>
+<tr>
+<td colspan="3">
+<span class="bold">
+<strong>Return Codes</strong>
+</span>
+</td>
+</tr>
+<tr>
+<td>202</td>
+<td colspan="2">
+ Compaction request has been accepted
+ </td>
+</tr>
+<tr>
+<td>404</td>
+<td colspan="2">
+ The requested content could not be found. The returned content
+ will include further information, as a JSON object, if available.
+ </td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+      Request compaction of the specified database. Compaction
+      compresses the disk database file by performing the following
+      operations:
+    </p>
+<div class="itemizedlist">
+<ul class="itemizedlist">
+<li class="listitem">
+<p>
+          Writes a new version of the database file, removing any unused
+          sections from the new version during write. Because a new file
+          is temporary created for this purpose, you will need twice the
+          current storage space of the specified database in order for
+          the compaction routine to complete.
+        </p>
+</li>
+<li class="listitem">
+<p>
+          Removes old revisions of documents from the database, up to
+          the per-database limit specified by the
+          <code class="literal">_revs_limit</code> database parameter. See
+          <a class="xref" href="ch05.html#couchdb-api-db_db_get" title="5.1.&nbsp;GET /db">Section&nbsp;5.1, &ldquo;<code class="literal">GET /db</code>&rdquo;</a> .
+        </p>
+</li>
+</ul>
+</div>
+<p>
+      Compaction can only be requested on an individual database; you
+      cannot compact all the databases for a CouchDB instance. The
+      compaction process runs as a background process.
+    </p>
+<p>
+      You can determine if the compaction process is operating on a
+      database by obtaining the database meta information, the
+      <code class="literal">compact_running</code> value of the returned database
+      structure will be set to true. See
+      <a class="xref" href="ch05.html#couchdb-api-db_db_get" title="5.1.&nbsp;GET /db">Section&nbsp;5.1, &ldquo;<code class="literal">GET /db</code>&rdquo;</a> .
+    </p>
+<p>
+      You can also obtain a list of running processes to determine
+      whether compaction is currently running. See
+      <a class="xref" href="ch09s02.html" title="9.2.&nbsp;GET /_active_tasks">Section&nbsp;9.2, &ldquo;<code class="literal">GET /_active_tasks</code>&rdquo;</a>.
+    </p>
+</div>
+</body>
+</html>

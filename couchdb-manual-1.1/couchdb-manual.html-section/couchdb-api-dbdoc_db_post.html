@@ -1,0 +1,36 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>6.1.&nbsp;POST /db</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-api-dbdoc.html" title="Chapter&nbsp;6.&nbsp;CouchDB API Server Document Methods"><link rel="prev" href="couchdb-api-dbdoc.html" title="Chapter&nbsp;6.&nbsp;CouchDB API Server Document Methods"><link rel="next" href="couchdb-api-dbdoc_db_post-docid.html" title="6.1.1.&nbsp;Specifying the Document ID"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">6.1.&nbsp;<code class="literal">POST /db</code></th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-api-dbdoc.html">Prev</a>&nbsp;</td><th align="center" width="60%">Chapter&nbsp;6.&nbsp;CouchDB API Server Document Methods</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-dbdoc_db_post-docid.html">Next</a></td></tr></table><hr></div><div class="section" title="6.1.&nbsp;POST /db"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-api-dbdoc_db_post"></a>6.1.&nbsp;<code class="literal">POST /db</code></h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="couchdb-api-dbdoc_db_post-docid.html">6.1.1. Specifying the Document ID</a></span></dt><dt><span class="section"><a href="couchdb-api-dbdoc_db_batchmode.html">6.1.2. Batch Mode Writes</a></span></dt><dt><span class="section"><a href="couchdb-api-dbdoc_db-doc-attachments.html">6.1.3. Including Attachments</a></span></dt></dl></div><div class="informaltable"><table summary="URL API POST /db" border="1"><colgroup><col class="field" width="33%"><col class="info" width="33%"><col class="addinfo" width="34%"></colgroup><tbody><tr><td><span class="bold"><strong>Method</strong></span></td><td colspan="2"><code class="literal">POST /db</code></td></tr><tr><td><span class="bold"><strong>Request</strong></span></td><td colspan="2">
+ JSON of the new document
+ </td></tr><tr><td><span class="bold"><strong>Response</strong></span></td><td colspan="2">
+ JSON with the committed document information
+ </td></tr><tr><td><span class="bold"><strong>Admin Privileges Required</strong></span></td><td colspan="2">no</td></tr><tr><td><span class="bold"><strong>Query Arguments</strong></span></td><td><span class="bold"><strong>Argument</strong></span></td><td><code class="literal">batch</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>
+ Allow document store request to be batched with others
+ </td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>yes</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Type</strong></span></td><td>string</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Supported Values</strong></span></td><td class="auto-generated">&nbsp;</td></tr><tr><td>&nbsp;</td><td><code class="literal">ok</code></td><td>Enable</td></tr><tr><td colspan="3"><span class="bold"><strong>Return Codes</strong></span></td></tr><tr><td>201</td><td colspan="2">
+ Document has been created successfully
+ </td></tr><tr><td>409</td><td colspan="2">
+ Conflict - a document with the specified document ID already
+ exists
+ </td></tr></tbody></table></div><p>
+      Create a new document in the specified database, using the
+      supplied JSON document structure. If the JSON structure includes
+      the <code class="literal">_id</code> field, then the document will be
+      created with the specified document ID. If the
+      <code class="literal">_id</code> field is not specified, a new unique ID
+      will be generated.
+    </p><p>
+      For example, you can generate a new document with a generated UUID
+      using the following request:
+    </p><pre class="programlisting">POST http://couchdb:5984/recipes/
+Content-Type: application/json
+
+{
+   "servings" : 4,
+   "subtitle" : "Delicious with fresh bread",
+   "title" : "Fish Stew"
+}</pre><p>
+      The return JSON will specify the automatically enerated ID and
+      revision information:
+    </p><pre class="programlisting">{
+   "id" : "64575eef70ab90a2b8d55fc09e00440d",
+   "ok" : true,
+   "rev" : "1-9c65296036141e575d32ba9c034dd3ee"
+}</pre></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-api-dbdoc.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-api-dbdoc.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-dbdoc_db_post-docid.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">Chapter&nbsp;6.&nbsp;CouchDB API Server Document Methods&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;6.1.1.&nbsp;Specifying the Document ID</td></tr></table></div></body></html>

@@ -1,0 +1,131 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>5.9.3.&nbsp;Bulk Documents Transaction Semantics</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-api-db_db-bulk-docs_post.html" title="5.9.&nbsp;POST /db/_bulk_docs"><link rel="prev" href="couchdb-api-db_db-bulk-docs_post-update.html" title="5.9.2.&nbsp;Updating Documents in Bulk"><link rel="next" href="couchdb-api-db_db-bulk-docs_post-errors.html" title="5.9.4.&nbsp;Bulk Document Validation and Conflict Errors"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">5.9.3.&nbsp;Bulk Documents Transaction Semantics</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-api-db_db-bulk-docs_post-update.html">Prev</a>&nbsp;</td><th align="center" width="60%">5.9.&nbsp;<code class="literal">POST /db/_bulk_docs</code></th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-db_db-bulk-docs_post-errors.html">Next</a></td></tr></table><hr></div><div class="section" title="5.9.3.&nbsp;Bulk Documents Transaction Semantics"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-api-db_db-bulk-docs_post-commit"></a>5.9.3.&nbsp;Bulk Documents Transaction Semantics</h3></div></div></div><p>
+        CouchDB supports two different modes for updating (or inserting)
+        documents using the bulk documentation system. Each mode affects
+        both the state of the documents in the event of system failure,
+        and the level of conflict checking performed on each document.
+        The two modes are:
+      </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+            <code class="literal">non-atomic</code>
+          </p><p>
+            The default mode is non-atomic, that is, CouchDB will only
+            guarantee that some of the documents will be saved when you
+            send the request. The response will contain the list of
+            documents successfully inserted or updated during the
+            process. In the event of a crash, some of the documents may
+            have been successfully saved, and some will have been lost.
+          </p><p>
+            In this mode, the response structure will indicate whether
+            the document was updated by supplying the new
+            <code class="literal">_rev</code> parameter indicating a new document
+            revision was created. If the update failed, then you will
+            get an <code class="literal">error</code> of type
+            <code class="literal">conflict</code>. For example:
+          </p><pre class="programlisting">[
+   {
+      "id" : "FishStew",
+      "error" : "conflict",
+      "reason" : "Document update conflict."
+   },
+   {
+      "id" : "LambStew",
+      "error" : "conflict",
+      "reason" : "Document update conflict."
+   },
+   {
+      "id" : "7f7638c86173eb440b8890839ff35433",
+      "error" : "conflict",
+      "reason" : "Document update conflict."
+   }
+]</pre><p>
+            In this case no new revision has been created and you will
+            need to submit the document update, with the correct
+            revision tag, to update the document.
+          </p></li><li class="listitem"><p>
+            <code class="literal">all-or-nothing</code>
+          </p><p>
+            In all-or-nothing mode, either all documents are written to
+            the database, or no documents are written to the database,
+            in the event of a system failure during commit.
+          </p><p>
+            In addition, the per-document conflict checking is not
+            performed. Instead a new revision of the document is
+            created, even if the new revision is in conflict with the
+            current revision in the database. The returned structure
+            contains the list of documents with new revisions:
+          </p><pre class="programlisting">[
+   {
+      "id" : "FishStew",
+      "rev" : "2-e7af4c4e9981d960ecf78605d79b06d1"
+   },
+   {
+      "id" : "LambStew",
+      "rev" : "2-0786321986194c92dd3b57dfbfc741ce"
+   },
+   {
+      "id" : "7f7638c86173eb440b8890839ff35433",
+      "rev" : "2-bdd3bf3563bee516b96885a66c743f8e"
+   }
+]</pre><p>
+            When updating documents using this mode the revision of a
+            document included in views will be arbitrary. You can check
+            the conflict status for a document by using the
+            <code class="literal">conflicts=true</code> query argument when
+            accessing the view. Conflicts should be handled individually
+            to ensure the consistency of your database.
+          </p><p>
+            To use this mode, you must include the
+            <code class="literal">all_or_nothing</code> field (set to true) within
+            the main body of the JSON of the request.
+          </p></li></ul></div><p>
+        The effects of different database operations on the different
+        modes are summarized in the table below:
+      </p><div class="table"><a name="table-couchdb-api-db_db-bulk-docs_post-commit"></a><p class="title"><b>Table&nbsp;5.5.&nbsp;Conflicts on Bulk Inserts</b></p><div class="table-contents"><table summary="Conflicts on Bulk Inserts" border="1"><colgroup><col width="25%"><col width="25%"><col width="25%"><col width="25%"></colgroup><thead><tr><th>
+                Transaction Mode
+              </th><th>
+                Transaction
+              </th><th>
+                Cause
+              </th><th>
+                Resolution
+              </th></tr></thead><tbody><tr><td>
+                Non-atomic
+              </td><td>
+                Insert
+              </td><td>
+                Requested document ID already exists
+              </td><td>
+                Resubmit with different document ID, or update the
+                existing document
+              </td></tr><tr><td>
+                Non-atomic
+              </td><td>
+                Update
+              </td><td>
+                Revision missing or incorrect
+              </td><td>
+                Resubmit with correct revision
+              </td></tr><tr><td>
+                All-or-nothing
+              </td><td>
+                Insert
+              </td><td>
+                Additional revision inserted
+              </td><td>
+                Resolve conflicted revisions
+              </td></tr><tr><td>
+                All-or-nothing
+              </td><td>
+                Update
+              </td><td>
+                Additional revision inserted
+              </td><td>
+                Resolve conflicted revisions
+              </td></tr></tbody></table></div></div><br class="table-break"><p>
+        Replication of documents is independent of the type of insert or
+        update. The documents and revisions created during a bulk insert
+        or update are replicated in the same way as any other document.
+        This can mean that if you make use of the all-or-nothing mode
+        the exact list of documents, revisions (and their conflict
+        state) may or may not be replicated to other databases
+        correctly.
+      </p></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-api-db_db-bulk-docs_post-update.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-api-db_db-bulk-docs_post.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-db_db-bulk-docs_post-errors.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">5.9.2.&nbsp;Updating Documents in Bulk&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;5.9.4.&nbsp;Bulk Document Validation and Conflict Errors</td></tr></table></div></body></html>

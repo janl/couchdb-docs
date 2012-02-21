@@ -1,0 +1,79 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>9.5.3.&nbsp;Single Replication</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-api-misc_replicate_post.html" title="9.5.&nbsp;POST /_replicate"><link rel="prev" href="couchdb-api-misc_replicate_post-sourcetarget.html" title="9.5.2.&nbsp;Specifying the Source and Target Database"><link rel="next" href="couchdb-api-misc_replicate_post-continuous.html" title="9.5.4.&nbsp;Continuous Replication"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">9.5.3.&nbsp;Single Replication</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-api-misc_replicate_post-sourcetarget.html">Prev</a>&nbsp;</td><th align="center" width="60%">9.5.&nbsp;<code class="literal">POST /_replicate</code></th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-misc_replicate_post-continuous.html">Next</a></td></tr></table><hr></div><div class="section" title="9.5.3.&nbsp;Single Replication"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-api-misc_replicate_post-single"></a>9.5.3.&nbsp;Single Replication</h3></div></div></div><p>
+        You can request replication of a database so that the two
+        databases can be synchronized. By default, the replication
+        process occurs one time and synchronizes the two databases
+        together. For example, you can request a single synchronization
+        between two databases by supplying the <code class="literal">source</code>
+        and <code class="literal">target</code> fields within the request JSON
+        content.
+      </p><pre class="programlisting">POST http://couchdb:5984/_replicate
+Content-Type: application/json
+Accept: application/json
+
+{
+   "source" : "recipes",
+   "target" : "recipes-snapshot",
+}</pre><p>
+        In the above example, the databases <code class="literal">recipes</code>
+        and <code class="literal">recipes-snapshot</code> will be synchronized.
+        These databases are local to the CouchDB instance where the
+        request was made. The response will be a JSON structure
+        containing the success (or failure) of the synchronization
+        process, and statistics about the process:
+      </p><pre class="programlisting">{
+   "ok" : true,
+   "history" : [
+      {
+         "docs_read" : 1000,
+         "session_id" : "52c2370f5027043d286daca4de247db0",
+         "recorded_seq" : 1000,
+         "end_last_seq" : 1000,
+         "doc_write_failures" : 0,
+         "start_time" : "Thu, 28 Oct 2010 10:24:13 GMT",
+         "start_last_seq" : 0,
+         "end_time" : "Thu, 28 Oct 2010 10:24:14 GMT",
+         "missing_checked" : 0,
+         "docs_written" : 1000,
+         "missing_found" : 1000
+      }
+   ],
+   "session_id" : "52c2370f5027043d286daca4de247db0",
+   "source_last_seq" : 1000
+}</pre><p>
+        The structure defines the replication status, as described in
+        the table below:
+      </p><div class="table"><a name="table-couchdb-api-misc-json-replication-status"></a><p class="title"><b>Table&nbsp;9.4.&nbsp;
+ Replication Status
+ </b></p><div class="table-contents"><table summary="
+ Replication Status
+ " border="1"><colgroup><col class="item" width="30%"><col class="desc" width="70%"></colgroup><tbody><tr><td><span class="bold"><strong>Field</strong></span></td><td><span class="bold"><strong>Description</strong></span></td></tr><tr><td><code class="literal">history</code> <code class="literal">[array]</code> </td><td>
+ Replication History
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">doc_write_failures</code>  </td><td>
+ Number of document write failures
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">docs_read</code>  </td><td>
+ Number of documents read
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">docs_written</code>  </td><td>
+ Number of documents written to target
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">end_last_seq</code>  </td><td>
+ Last sequence number in changes stream
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">end_time</code>  </td><td>
+ Date/Time replication operation completed
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">missing_checked</code>  </td><td>
+ Number of missing documents checked
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">missing_found</code>  </td><td>
+ Number of missing documents found
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">recorded_seq</code>  </td><td>
+ Last recorded sequence number
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">session_id</code>  </td><td>
+ Session ID for this replication operation
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">start_last_seq</code>  </td><td>
+ First sequence number in changes stream
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">start_time</code>  </td><td>
+ Date/Time replication operation started
+ </td></tr><tr><td><code class="literal">ok</code>  </td><td>
+ Replication status
+ </td></tr><tr><td><code class="literal">session_id</code>  </td><td>
+ Unique session ID
+ </td></tr><tr><td><code class="literal">source_last_seq</code>  </td><td>
+ Last sequence number read from source database
+ </td></tr></tbody></table></div></div><br class="table-break"></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-api-misc_replicate_post-sourcetarget.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-api-misc_replicate_post.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-misc_replicate_post-continuous.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">9.5.2.&nbsp;Specifying the Source and Target Database&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;9.5.4.&nbsp;Continuous Replication</td></tr></table></div></body></html>

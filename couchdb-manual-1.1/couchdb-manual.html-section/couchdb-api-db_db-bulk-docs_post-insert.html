@@ -1,0 +1,62 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>5.9.1.&nbsp;Inserting Documents in Bulk</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-api-db_db-bulk-docs_post.html" title="5.9.&nbsp;POST /db/_bulk_docs"><link rel="prev" href="couchdb-api-db_db-bulk-docs_post.html" title="5.9.&nbsp;POST /db/_bulk_docs"><link rel="next" href="couchdb-api-db_db-bulk-docs_post-update.html" title="5.9.2.&nbsp;Updating Documents in Bulk"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">5.9.1.&nbsp;Inserting Documents in Bulk</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-api-db_db-bulk-docs_post.html">Prev</a>&nbsp;</td><th align="center" width="60%">5.9.&nbsp;<code class="literal">POST /db/_bulk_docs</code></th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-db_db-bulk-docs_post-update.html">Next</a></td></tr></table><hr></div><div class="section" title="5.9.1.&nbsp;Inserting Documents in Bulk"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-api-db_db-bulk-docs_post-insert"></a>5.9.1.&nbsp;Inserting Documents in Bulk</h3></div></div></div><p>
+        To insert documents in bulk into a database you need to supply a
+        JSON structure with the array of documents that you want to add
+        to the database. Using this method you can either include a
+        document ID, or allow the document ID to be automatically
+        generated.
+      </p><p>
+        For example, the following inserts three new documents, two with
+        the supplied document IDs, and one which will have a document ID
+        generated:
+      </p><pre class="programlisting">{
+   "docs" : [
+      {
+         "_id" : "FishStew",
+         "servings" : 4,
+         "subtitle" : "Delicious with fresh bread",
+         "title" : "Fish Stew"
+      },
+      {
+         "_id" : "LambStew",
+         "servings" : 6,
+         "subtitle" : "Delicious with scone topping",
+         "title" : "Lamb Stew"
+      },
+      {
+         "servings" : 8,
+         "subtitle" : "Delicious with suet dumplings",
+         "title" : "Beef Stew"
+      },
+   ]
+}</pre><p>
+        The return type from a bulk insertion will be 201, with the
+        content of the returned structure indicating specific success or
+        otherwise messages on a per-document basis.
+      </p><p>
+        The return structure from the example above contains a list of
+        the documents created, here with the combination and their
+        revision IDs:
+      </p><pre class="programlisting">POST http://couchdb:5984/recipes/_bulk_docs
+Content-Type: application/json
+
+[
+   {
+      "id" : "FishStew",
+      "rev" : "1-9c65296036141e575d32ba9c034dd3ee",
+   },
+   {
+      "id" : "LambStew",
+      "rev" : "1-34c318924a8f327223eed702ddfdc66d",
+   },
+   {
+      "id" : "7f7638c86173eb440b8890839ff35433",
+      "rev" : "1-857c7cbeb6c8dd1dd34a0c73e8da3c44",
+   }
+]</pre><p>
+        The content and structure of the returned JSON will depend on
+        the transaction semantics being used for the bulk update; see
+        <a class="xref" href="couchdb-api-db_db-bulk-docs_post-commit.html" title="5.9.3.&nbsp;Bulk Documents Transaction Semantics">Section&nbsp;5.9.3, &ldquo;Bulk Documents Transaction Semantics&rdquo;</a>
+        for more information. Conflicts and validation errors when
+        updating documents in bulk must be handled separately; see
+        <a class="xref" href="couchdb-api-db_db-bulk-docs_post-errors.html" title="5.9.4.&nbsp;Bulk Document Validation and Conflict Errors">Section&nbsp;5.9.4, &ldquo;Bulk Document Validation and Conflict Errors&rdquo;</a>.
+      </p></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-api-db_db-bulk-docs_post.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-api-db_db-bulk-docs_post.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-db_db-bulk-docs_post-update.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">5.9.&nbsp;<code class="literal">POST /db/_bulk_docs</code>&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;5.9.2.&nbsp;Updating Documents in Bulk</td></tr></table></div></body></html>

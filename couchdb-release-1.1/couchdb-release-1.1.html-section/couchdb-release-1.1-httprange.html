@@ -1,0 +1,38 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>4.&nbsp;HTTP Range Requests</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB Release 1.1 Feature Guide"><link rel="up" href="index.html" title="CouchDB Release 1.1 Feature Guide"><link rel="prev" href="couchdb-release-1.1-ssl.html" title="3.&nbsp;Native SSL Support"><link rel="next" href="couchdb-release-1.1-proxying.html" title="5.&nbsp;HTTP Proxying"><meta name="date" content="2012-02-21T20:09:25+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">4.&nbsp;HTTP Range Requests</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-release-1.1-ssl.html">Prev</a>&nbsp;</td><th align="center" width="60%">&nbsp;</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-release-1.1-proxying.html">Next</a></td></tr></table><hr></div><div class="section" title="4.&nbsp;HTTP Range Requests"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-release-1.1-httprange"></a>4.&nbsp;HTTP Range Requests</h2></div></div></div><p>
+      HTTP allows you to specify byte ranges for requests. This allows
+      the implementation of resumable downloads and skippable audio and
+      video streams alike. Now this is available for all attachments
+      inside CouchDB.
+    </p><p>
+      This is just a real quick run through how this looks under the
+      hood. Usually, you will have larger binary files to serve from
+      CouchDB, like MP3s and videos, but to make things a little more
+      obvious, I use a text file here (Note that I use the
+      <code class="literal">application/octet-stream</code> Content-Type instead
+      of <code class="literal">text/plain</code>).
+    </p><pre class="programlisting">shell&gt; <strong class="userinput"><code>cat file.txt </code></strong>
+My hovercraft is full of eels!</pre><p>
+      Now lets store this text file as an attachment in CouchDB. First,
+      we create a database:
+    </p><pre class="programlisting">shell&gt; <strong class="userinput"><code>curl -X PUT http://127.0.0.1:5984/test</code></strong>
+{"ok":true}</pre><p>
+      Then we create a new document and the file attachment in one go:
+    </p><pre class="programlisting">shell&gt; <strong class="userinput"><code>curl -X PUT http://127.0.0.1:5984/test/doc/file.txt -H "Content-Type: application/octet-stream" -d@file.txt</code></strong>
+{"ok":true,"id":"doc","rev":"1-287a28fa680ae0c7fb4729bf0c6e0cf2"}</pre><p>
+      Now we can request the whole file easily:
+    </p><pre class="programlisting">shell&gt; <strong class="userinput"><code>curl -X GET http://127.0.0.1:5984/test/doc/file.txt</code></strong>
+My hovercraft is full of eels!</pre><p>
+      But say we only want the first 13 bytes:
+    </p><pre class="programlisting">shell&gt; <strong class="userinput"><code>curl -X GET http://127.0.0.1:5984/test/doc/file.txt -H "Range: bytes=0-12"</code></strong>
+My hovercraft</pre><p>
+      HTTP supports many ways to specify single and even multiple byte
+      rangers. Read all about it in
+      <a class="ulink" href="http://tools.ietf.org/html/rfc2616#section-14.27" target="_top">RFC
+      2616</a>.
+    </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+        Databases that have been created with CouchDB 1.0.2 or earlier
+        will support range requests in 1.1.0, but they are using a
+        less-optimal algorithm. If you plan to make heavy use of this
+        feature, make sure to compact your database with CouchDB 1.1.0
+        to take advantage of a better algorithm to find byte ranges.
+      </p></div></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-release-1.1-ssl.html">Prev</a>&nbsp;</td><td align="center" width="20%">&nbsp;</td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-release-1.1-proxying.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">3.&nbsp;Native SSL Support&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;5.&nbsp;HTTP Proxying</td></tr></table></div></body></html>

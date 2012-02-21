@@ -1,0 +1,52 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>1.1.1.&nbsp;Managing Databases and Documents</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-single-introduction-futon.html" title="1.1.&nbsp;Using Futon"><link rel="prev" href="couchdb-single-introduction-futon.html" title="1.1.&nbsp;Using Futon"><link rel="next" href="couchdb-single-introduction-futon-replication.html" title="1.1.2.&nbsp;Configuring Replication"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">1.1.1.&nbsp;Managing Databases and Documents</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-single-introduction-futon.html">Prev</a>&nbsp;</td><th align="center" width="60%">1.1.&nbsp;Using Futon</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-single-introduction-futon-replication.html">Next</a></td></tr></table><hr></div><div class="section" title="1.1.1.&nbsp;Managing Databases and Documents"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-single-introduction-futon-dbdocs"></a>1.1.1.&nbsp;Managing Databases and Documents</h3></div></div></div><p>
+        You can manage databases and documents within Futon using the
+        main <span class="guibutton">Overview</span> section of the Futon
+        interface.
+      </p><p>
+        To create a new database, click the <span class="guibutton">Create Database
+        &hellip;</span> button. You will be prompted for the
+        database name, as shown in the figure below.
+      </p><div class="figure"><a name="fig-ccouchdb-single-introduction-futon-dbdocs-createdb"></a><p class="title"><b>Figure&nbsp;1.2.&nbsp;Creating a Database</b></p><div class="figure-contents"><div class="mediaobject"><table cellpadding="0" cellspacing="0" summary="manufactured viewport for HTML img" border="0" width="100%"><tr><td><img width="100%" src="images/futon-createdb.png" height="100%" alt="Creating a Database"></td></tr></table></div></div></div><br class="figure-break"><p>
+        Once you have created the database (or selected an existing
+        one), you will be shown a list of the current documents. If you
+        create a new document, or select an existing document, you will
+        be presented with the edit document display.
+      </p><p>
+        Editing documents within Futon requires selecting the document
+        and then editing (and setting) the fields for the document
+        individually before saving the document back into the database.
+      </p><p>
+        For example, the figure below shows the editor for a single
+        document, a newly created document with a single ID, the
+        document <code class="literal">_id</code> field.
+      </p><div class="figure"><a name="fig-ccouchdb-single-introduction-futon-dbdocs-editdoc"></a><p class="title"><b>Figure&nbsp;1.3.&nbsp;Editing a Document</b></p><div class="figure-contents"><div class="mediaobject"><table cellpadding="0" cellspacing="0" summary="manufactured viewport for HTML img" border="0" width="100%"><tr><td><img width="100%" src="images/futon-editdoc.png" height="100%" alt="Editing a Document"></td></tr></table></div></div></div><br class="figure-break"><p>
+        To add a field to the document:
+      </p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>
+            Click <span class="guibutton">Add Field</span>.
+          </p></li><li class="listitem"><p>
+            In the fieldname box, enter the name of the field you want
+            to create. For example, <span class="quote">&ldquo;<span class="quote">company</span>&rdquo;</span>.
+          </p></li><li class="listitem"><p>
+            Click the green tick next to the field name to confirm the
+            field name change.
+          </p></li><li class="listitem"><p>
+            Double-click the corresponding <span class="guilabel">Value</span>
+            cell.
+          </p></li><li class="listitem"><p>
+            Enter a company name, for example <span class="quote">&ldquo;<span class="quote">Example</span>&rdquo;</span>.
+          </p></li><li class="listitem"><p>
+            Click the green tick next to the field value to confirm the
+            field value.
+          </p></li><li class="listitem"><p>
+            The document is still not saved as this point. You must
+            explicitly save the document by clicking the <span class="guibutton">Save
+            Document</span> button at the top of the page. This
+            will save the document, and then display the new document
+            with the saved revision information (the
+            <code class="literal">_rev</code> field).
+          </p><div class="figure"><a name="fig-ccouchdb-single-introduction-futon-dbdocs-finaldoc"></a><p class="title"><b>Figure&nbsp;1.4.&nbsp;Edited Document</b></p><div class="figure-contents"><div class="mediaobject"><table cellpadding="0" cellspacing="0" summary="manufactured viewport for HTML img" border="0" width="100%"><tr><td><img width="100%" src="images/futon-editeddoc.png" height="100%" alt="Edited Document"></td></tr></table></div></div></div><br class="figure-break"></li></ol></div><p>
+        The same basic interface is used for all editng operations
+        within Futon. You <span class="emphasis"><em>must</em></span> rememmbr to save the
+        individual element (fieldname, value) using the green tick
+        button, before then saving the document.
+      </p></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-single-introduction-futon.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-single-introduction-futon.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-single-introduction-futon-replication.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">1.1.&nbsp;Using Futon&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;1.1.2.&nbsp;Configuring Replication</td></tr></table></div></body></html>

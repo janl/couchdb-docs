@@ -1,0 +1,49 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>5.11.&nbsp;POST /db/_purge</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-api-db.html" title="Chapter&nbsp;5.&nbsp;CouchDB API Server Database Methods"><link rel="prev" href="couchdb-api-db_db-temp-view_post.html" title="5.10.&nbsp;POST /db/_temp_view"><link rel="next" href="couchdb-api-db_db-purge_post-indexrebuild.html" title="5.11.1.&nbsp;Updating Indexes"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">5.11.&nbsp;<code class="literal">POST /db/_purge</code></th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-api-db_db-temp-view_post.html">Prev</a>&nbsp;</td><th align="center" width="60%">Chapter&nbsp;5.&nbsp;CouchDB API Server Database Methods</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-db_db-purge_post-indexrebuild.html">Next</a></td></tr></table><hr></div><div class="section" title="5.11.&nbsp;POST /db/_purge"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-api-db_db-purge_post"></a>5.11.&nbsp;<code class="literal">POST /db/_purge</code></h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="couchdb-api-db_db-purge_post-indexrebuild.html">5.11.1. Updating Indexes</a></span></dt></dl></div><div class="informaltable"><table summary="URL API POST /db/_purge" border="1"><colgroup><col class="field" width="33%"><col class="info" width="33%"><col class="addinfo" width="34%"></colgroup><tbody><tr><td><span class="bold"><strong>Method</strong></span></td><td colspan="2"><code class="literal">POST /db/_purge</code></td></tr><tr><td><span class="bold"><strong>Request</strong></span></td><td colspan="2">
+ JSON of the document IDs/revisions to be purged
+ </td></tr><tr><td><span class="bold"><strong>Response</strong></span></td><td colspan="2">
+ JSON structure with purged documents and purge sequence
+ </td></tr><tr><td><span class="bold"><strong>Admin Privileges Required</strong></span></td><td colspan="2">no</td></tr></tbody></table></div><p>
+      A database purge permanently removes the references to deleted
+      documents from the database. Deleting a document within CouchDB
+      does not actually remove the documen from the database, instead,
+      the document is marked as a deleted (and a new revision is
+      created). This is to ensure that deleted documents are replicated
+      to other databases as having been deleted. This also means that
+      you can check the status of a document and identify that the
+      document has been deleted.
+    </p><p>
+      The purge operation removes the refernces to the deleted documents
+      from the database. The purging of old documents is not replicated
+      to other databases. If you are replicating between databases and
+      have deleted a large number of documents you should run purge on
+      each database.
+    </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+        Purging documents does not remove the space used by them on
+        disk. To reclaim disk space, you should run a database compact
+        (see <a class="xref" href="couchdb-api-db_db-compact_post.html" title="5.5.&nbsp;POST /db/_compact">Section&nbsp;5.5, &ldquo;<code class="literal">POST /db/_compact</code>&rdquo;</a>, and
+        compact views (see
+        <a class="xref" href="couchdb-api-db_db-compact-design-doc_post.html" title="5.6.&nbsp;POST /db/_compact/design-doc">Section&nbsp;5.6, &ldquo;<code class="literal">POST /db/_compact/design-doc</code>&rdquo;</a>).
+      </p></div><p>
+      To perform a purge operation you must send a request including the
+      JSON of the document IDs that you want to purge. For example:
+    </p><pre class="programlisting">POST http://couchdb:5984/recipes/_purge
+Content-Type: application/json
+
+{
+  "FishStew" : [
+    "17-b3eb5ac6fbaef4428d712e66483dcb79"
+    ]
+}</pre><p>
+      The format of the request must include the document ID and one or
+      more revisions that must be purged.
+    </p><p>
+      The response will contain the purge sequence number, and a list of
+      the document IDs and revisions successfully purged.
+    </p><pre class="programlisting">{
+   "purged" : {
+      "FishStew" : [
+         "17-b3eb5ac6fbaef4428d712e66483dcb79"
+      ]
+   },
+   "purge_seq" : 11
+}</pre></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-api-db_db-temp-view_post.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-api-db.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-db_db-purge_post-indexrebuild.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">5.10.&nbsp;<code class="literal">POST /db/_temp_view</code>&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;5.11.1.&nbsp;Updating Indexes</td></tr></table></div></body></html>

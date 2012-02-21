@@ -1,0 +1,47 @@
+<!DOCTYPE package PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<package xmlns="http://www.idpf.org/2007/opf" version="2.0" unique-identifier="articleid">
+<metadata>
+<dc:identifier xmlns:dc="http://purl.org/dc/elements/1.1/" id="articleid">_couchdb-release-1.1</dc:identifier>
+<dc:title xmlns:dc="http://purl.org/dc/elements/1.1/">CouchDB Release 1.1 Feature Guide</dc:title>
+    <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Apache, Inc.</dc:creator>
+<dc:description xmlns:dc="http://purl.org/dc/elements/1.1/">This document provides details on the new features introduced in the CouchDB 1.1 release from the CouchDB 1.0.x release series. Last document update: 25 Jan 2012 14:44; Document built: 21 Feb 2012 20:8.</dc:description>
+<dc:language xmlns:dc="http://purl.org/dc/elements/1.1/">en</dc:language>
+</metadata>
+<manifest>
+      <item id="cover-image" href="images/epub-logo.png" media-type="image/png"/>
+<item id="ncxtoc" media-type="application/x-dtbncx+xml" href="toc.ncx" />
+<item media-type="text/css" id="css" href="epub.css" />
+<item id="N10001" href="index.html" media-type="application/xhtml+xml" />
+<item id="N10020" href="ar01s02.html" media-type="application/xhtml+xml" />
+<item id="N101A5" href="ar01s03.html" media-type="application/xhtml+xml" />
+<item id="N101FC" href="ar01s04.html" media-type="application/xhtml+xml" />
+<item id="N10234" href="ar01s05.html" media-type="application/xhtml+xml" />
+<item id="N10291" href="ar01s06.html" media-type="application/xhtml+xml" />
+<item id="N102BA" href="ar01s07.html" media-type="application/xhtml+xml" />
+<item id="N102C5" href="ar01s08.html" media-type="application/xhtml+xml" />
+<item id="N102E0" href="ar01s09.html" media-type="application/xhtml+xml" />
+<item id="N102EC" href="ar01s10.html" media-type="application/xhtml+xml" />
+<item id="N10314" href="ar01s11.html" media-type="application/xhtml+xml" />
+<item id="N10327" href="ar01s12.html" media-type="application/xhtml+xml" />
+<item id="N1033B" href="ar01s13.html" media-type="application/xhtml+xml" />
+<item id="N1034C" href="ar01s14.html" media-type="application/xhtml+xml" />
+<item id="N10360" href="ar01s15.html" media-type="application/xhtml+xml" />
+</manifest>
+<spine toc="ncxtoc">
+<itemref idref="N10001" />
+<itemref idref="N10020" />
+<itemref idref="N101A5" />
+<itemref idref="N101FC" />
+<itemref idref="N10234" />
+<itemref idref="N10291" />
+<itemref idref="N102BA" />
+<itemref idref="N102C5" />
+<itemref idref="N102E0" />
+<itemref idref="N102EC" />
+<itemref idref="N10314" />
+<itemref idref="N10327" />
+<itemref idref="N1033B" />
+<itemref idref="N1034C" />
+<itemref idref="N10360" />
+</spine>
+</package>

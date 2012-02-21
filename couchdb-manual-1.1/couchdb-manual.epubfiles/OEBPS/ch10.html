@@ -1,0 +1,290 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Chapter&nbsp;10.&nbsp;CouchDB API Server Configuration Methods</title>
+<link href="epub.css" type="text/css" rel="stylesheet" />
+<meta content="DocBook XSL Stylesheets V1.76.1" name="generator" />
+</head>
+<body>
+<div class="chapter" title="Chapter&nbsp;10.&nbsp;CouchDB API Server Configuration Methods">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-api-config" />Chapter&nbsp;10.&nbsp;CouchDB API Server Configuration Methods</h1>
+</div>
+</div>
+</div>
+<p>
+    The CouchDB API Server Configuration Methods provide an interface to
+    query and update the various configuration values within a running
+    CouchDB instance.
+  </p>
+<p>
+    A list of the available methods and URL paths are provided below:
+  </p>
+<div class="table">
+<a id="table-couchdb-api-config-summary" />
+<p class="title">
+<strong>Table&nbsp;10.1.&nbsp;Configuration API Calls</strong>
+</p>
+<div class="table-contents">
+<table summary="Configuration API Calls" border="1">
+<colgroup>
+<col class="method" width="33%" />
+<col class="path" width="33%" />
+<col class="desc" width="34%" />
+</colgroup>
+<thead>
+<tr>
+<th>Method</th>
+<th>Path</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="literal">GET</code>
+</td>
+<td>
+<code class="literal">/_config</code>
+</td>
+<td>
+<a class="link" href="ch10.html#couchdb-api-config_config_get" title="10.1.&nbsp;GET /_config">
+ Obtain a list of the entire server configuration
+ </a>
+</td>
+</tr>
+<tr>
+<td>
+<code class="literal">GET</code>
+</td>
+<td>
+<code class="literal">/_config/section</code>
+</td>
+<td>
+<a class="link" href="ch10s02.html" title="10.2.&nbsp;GET /_config/section">
+ Get all the configuration values for the specified section
+ </a>
+</td>
+</tr>
+<tr>
+<td>
+<code class="literal">GET</code>
+</td>
+<td>
+<code class="literal">/_config/section/key</code>
+</td>
+<td>
+<a class="link" href="ch10s03.html" title="10.3.&nbsp;GET /_config/section/key">
+ Get a specific section/configuration value
+ </a>
+</td>
+</tr>
+<tr>
+<td>
+<code class="literal">PUT</code>
+</td>
+<td>
+<code class="literal">/_config/section/key</code>
+</td>
+<td>
+<a class="link" href="ch10s04.html" title="10.4.&nbsp;PUT /_config/section/key">
+ Set the specified configuration value
+ </a>
+</td>
+</tr>
+<tr>
+<td>
+<code class="literal">DELETE</code>
+</td>
+<td>
+<code class="literal">/_config/section/key</code>
+</td>
+<td>
+<a class="link" href="ch10s05.html" title="10.5.&nbsp;DELETE /_config/section/key">
+ Delete the current setting
+ </a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" title="10.1.&nbsp;GET /_config">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-api-config_config_get" />10.1.&nbsp;<code class="literal">GET /_config</code>
+</h1>
+</div>
+</div>
+</div>
+<div class="informaltable">
+<table summary="URL API GET /_config" border="1">
+<colgroup>
+<col class="field" width="33%" />
+<col class="info" width="33%" />
+<col class="addinfo" width="34%" />
+</colgroup>
+<tbody>
+<tr>
+<td>
+<span class="bold">
+<strong>Method</strong>
+</span>
+</td>
+<td colspan="2">
+<code class="literal">GET /_config</code>
+</td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Request</strong>
+</span>
+</td>
+<td colspan="2">
+ None
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Response</strong>
+</span>
+</td>
+<td colspan="2">
+ Returns a structure configuration name and value pairs,
+ organized by section
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Admin Privileges Required</strong>
+</span>
+</td>
+<td colspan="2">no</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+      Returns the entire CouchDB server configuration as a JSON
+      structure. The structure is organized by different configuration
+      sections, with individual values.
+    </p>
+<p>
+      For example, to get the configuration for a server:
+    </p>
+<pre class="programlisting">GET http://couchdb:5984/_config
+Accept: application/json</pre>
+<p>
+      The response is the JSON structure:
+    </p>
+<pre class="programlisting">{
+   "query_server_config" : {
+      "reduce_limit" : "true"
+   },
+   "couchdb" : {
+      "os_process_timeout" : "5000",
+      "max_attachment_chunk_size" : "4294967296",
+      "max_document_size" : "4294967296",
+      "uri_file" : "/var/lib/couchdb/couch.uri",
+      "max_dbs_open" : "100",
+      "view_index_dir" : "/var/lib/couchdb",
+      "util_driver_dir" : "/usr/lib64/couchdb/erlang/lib/couch-1.0.1/priv/lib",
+      "database_dir" : "/var/lib/couchdb",
+      "delayed_commits" : "true"
+   },
+   "attachments" : {
+      "compressible_types" : "text/*, application/javascript, application/json,  application/xml",
+      "compression_level" : "8"
+   },
+   "uuids" : {
+      "algorithm" : "utc_random"
+   },
+   "daemons" : {
+      "view_manager" : "{couch_view, start_link, []}",
+      "auth_cache" : "{couch_auth_cache, start_link, []}",
+      "uuids" : "{couch_uuids, start, []}",
+      "stats_aggregator" : "{couch_stats_aggregator, start, []}",
+      "query_servers" : "{couch_query_servers, start_link, []}",
+      "httpd" : "{couch_httpd, start_link, []}",
+      "stats_collector" : "{couch_stats_collector, start, []}",
+      "db_update_notifier" : "{couch_db_update_notifier_sup, start_link, []}",
+      "external_manager" : "{couch_external_manager, start_link, []}"
+   },
+   "stats" : {
+      "samples" : "[0, 60, 300, 900]",
+      "rate" : "1000"
+   },
+   "httpd" : {
+      "vhost_global_handlers" : "_utils, _uuids, _session, _oauth, _users",
+      "secure_rewrites" : "true",
+      "authentication_handlers" : "{couch_httpd_oauth, oauth_authentication_handler},
+                                   {couch_httpd_auth, cookie_authentication_handler},
+                                   {couch_httpd_auth, default_authentication_handler}",
+      "port" : "5984",
+      "default_handler" : "{couch_httpd_db, handle_request}",
+      "allow_jsonp" : "false",
+      "bind_address" : "192.168.0.2",
+      "max_connections" : "2048"
+   },
+   "query_servers" : {
+      "javascript" : "/usr/bin/couchjs /usr/share/couchdb/server/main.js"
+   },
+   "couch_httpd_auth" : {
+      "authentication_db" : "_users",
+      "require_valid_user" : "false",
+      "authentication_redirect" : "/_utils/session.html",
+      "timeout" : "600",
+      "auth_cache_size" : "50"
+   },
+   "httpd_db_handlers" : {
+      "_design" : "{couch_httpd_db, handle_design_req}",
+      "_compact" : "{couch_httpd_db, handle_compact_req}",
+      "_view_cleanup" : "{couch_httpd_db, handle_view_cleanup_req}",
+      "_temp_view" : "{couch_httpd_view, handle_temp_view_req}",
+      "_changes" : "{couch_httpd_db, handle_changes_req}"
+   },
+   "replicator" : {
+      "max_http_sessions" : "10",
+      "max_http_pipeline_size" : "10"
+   },
+   "log" : {
+      "include_sasl" : "true",
+      "level" : "info",
+      "file" : "/var/log/couchdb/couch.log"
+   },
+   "httpd_design_handlers" : {
+      "_update" : "{couch_httpd_show, handle_doc_update_req}",
+      "_show" : "{couch_httpd_show, handle_doc_show_req}",
+      "_info" : "{couch_httpd_db,   handle_design_info_req}",
+      "_list" : "{couch_httpd_show, handle_view_list_req}",
+      "_view" : "{couch_httpd_view, handle_view_req}",
+      "_rewrite" : "{couch_httpd_rewrite, handle_rewrite_req}"
+   },
+   "httpd_global_handlers" : {
+      "_replicate" : "{couch_httpd_misc_handlers, handle_replicate_req}",
+      "/" : "{couch_httpd_misc_handlers, handle_welcome_req, &lt;&lt;\"Welcome\"&gt;&gt;}",
+      "_config" : "{couch_httpd_misc_handlers, handle_config_req}",
+      "_utils" : "{couch_httpd_misc_handlers, handle_utils_dir_req, \"/usr/share/couchdb/www\"}",
+      "_active_tasks" : "{couch_httpd_misc_handlers, handle_task_status_req}",
+      "_session" : "{couch_httpd_auth, handle_session_req}",
+      "_log" : "{couch_httpd_misc_handlers, handle_log_req}",
+      "favicon.ico" : "{couch_httpd_misc_handlers, handle_favicon_req, \"/usr/share/couchdb/www\"}",
+      "_all_dbs" : "{couch_httpd_misc_handlers, handle_all_dbs_req}",
+      "_oauth" : "{couch_httpd_oauth, handle_oauth_req}",
+      "_restart" : "{couch_httpd_misc_handlers, handle_restart_req}",
+      "_uuids" : "{couch_httpd_misc_handlers, handle_uuids_req}",
+      "_stats" : "{couch_httpd_stats_handlers, handle_stats_req}"
+   }
+}</pre>
+</div>
+</div>
+</body>
+</html>

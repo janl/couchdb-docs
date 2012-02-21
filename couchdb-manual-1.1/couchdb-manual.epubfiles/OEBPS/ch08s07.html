@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>8.7.&nbsp;DELETE /db/_design/design-doc/attachment</title>
+<link href="epub.css" type="text/css" rel="stylesheet" />
+<meta content="DocBook XSL Stylesheets V1.76.1" name="generator" />
+</head>
+<body>
+<div class="section" title="8.7.&nbsp;DELETE /db/_design/design-doc/attachment">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-api-design_db-design-designdoc-attachment_delete" />8.7.&nbsp;<code class="literal">DELETE /db/_design/design-doc/attachment</code>
+</h1>
+</div>
+</div>
+</div>
+<div class="informaltable">
+<table summary="URL API DELETE /db/_design/design-doc/attachment" border="1">
+<colgroup>
+<col class="field" width="33%" />
+<col class="info" width="33%" />
+<col class="addinfo" width="34%" />
+</colgroup>
+<tbody>
+<tr>
+<td>
+<span class="bold">
+<strong>Method</strong>
+</span>
+</td>
+<td colspan="2">
+<code class="literal">DELETE /db/_design/design-doc/attachment</code>
+</td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Request</strong>
+</span>
+</td>
+<td colspan="2">
+ None
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Response</strong>
+</span>
+</td>
+<td colspan="2">
+ JSON of the deleted revision
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Admin Privileges Required</strong>
+</span>
+</td>
+<td colspan="2">no</td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Query Arguments</strong>
+</span>
+</td>
+<td>
+<span class="bold">
+<strong>Argument</strong>
+</span>
+</td>
+<td>
+<code class="literal">rev</code>
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Description</strong>
+</span>
+</td>
+<td>
+ Current revision of the document for validation
+ </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Optional</strong>
+</span>
+</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Type</strong>
+</span>
+</td>
+<td>string</td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>HTTP Headers</strong>
+</span>
+</td>
+<td>
+<span class="bold">
+<strong>Header</strong>
+</span>
+</td>
+<td>
+<code class="literal">If-Match</code>
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Description</strong>
+</span>
+</td>
+<td>Current revision of the document for validation</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Optional</strong>
+</span>
+</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td colspan="3">
+<span class="bold">
+<strong>Return Codes</strong>
+</span>
+</td>
+</tr>
+<tr>
+<td>409</td>
+<td colspan="2">
+ Supplied revision is incorrect or missing
+ </td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+      Deletes the attachment <code class="literal">attachment</code> to the
+      specified <code class="literal">_design/design-doc</code>. You must supply
+      the <code class="literal">rev</code> argument with the current revision to
+      delete the attachment.
+    </p>
+<p>
+      For example to delete the attachment <code class="literal">view.css</code>
+      from the design document <code class="literal">recipes</code>:
+    </p>
+<pre class="programlisting">DELETE http://couchdb:5984/recipes/_design/recipes/view.css?rev=9-3db559f13a845c7751d407404cdeaa4a</pre>
+<p>
+      The returned JSON contains the updated revision information for
+      the parent document:
+    </p>
+<pre class="programlisting">{
+   "id" : "_design/recipes"
+   "ok" : true,
+   "rev" : "10-f3b15bb408961f8dcc3d86c7d3b54c4c",
+}</pre>
+</div>
+</body>
+</html>

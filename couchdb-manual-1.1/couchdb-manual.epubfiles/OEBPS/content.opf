@@ -1,0 +1,206 @@
+<!DOCTYPE package PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<package xmlns="http://www.idpf.org/2007/opf" version="2.0" unique-identifier="bookid">
+<metadata>
+<dc:identifier xmlns:dc="http://purl.org/dc/elements/1.1/" id="bookid">_couchdb-1-1</dc:identifier>
+<dc:title xmlns:dc="http://purl.org/dc/elements/1.1/">CouchDB 1.1 Manual</dc:title>
+    <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Apache, Inc.</dc:creator>
+<dc:description xmlns:dc="http://purl.org/dc/elements/1.1/">This manual documents the CouchDB 1.1 database system, including the installation, functionality, and CouchDB API. Last document update: 21 Feb 2012 20:09; Document built: 21 Feb 2012 20:9.</dc:description>
+<dc:language xmlns:dc="http://purl.org/dc/elements/1.1/">en</dc:language>
+</metadata>
+<manifest>
+<item id="ncxtoc" media-type="application/x-dtbncx+xml" href="toc.ncx" />
+<item id="htmltoc" media-type="application/xhtml+xml" href="bk01-toc.html" />
+<item media-type="text/css" id="css" href="epub.css" />
+<item id="N10001" href="index.html" media-type="application/xhtml+xml" />
+<item id="N10013" href="ch01.html" media-type="application/xhtml+xml" />
+<item id="N1003A" href="images/futon-overview.png" media-type="image/png" />
+<item id="N100B5" href="images/futon-createdb.png" media-type="image/png" />
+<item id="N100D1" href="images/futon-editdoc.png" media-type="image/png" />
+<item id="N10113" href="images/futon-editeddoc.png" media-type="image/png" />
+<item id="N10138" href="images/futon-replform.png" media-type="image/png" />
+<item id="N1016D" href="ch01s02.html" media-type="application/xhtml+xml" />
+<item id="N101E7" href="ch02.html" media-type="application/xhtml+xml" />
+<item id="N1022A" href="ch02s02.html" media-type="application/xhtml+xml" />
+<item id="N1029A" href="ch02s03.html" media-type="application/xhtml+xml" />
+<item id="N102D6" href="ch02s04.html" media-type="application/xhtml+xml" />
+<item id="N102E2" href="ch03.html" media-type="application/xhtml+xml" />
+<item id="N104C8" href="ch04.html" media-type="application/xhtml+xml" />
+<item id="N10549" href="ch04s02.html" media-type="application/xhtml+xml" />
+<item id="N1060B" href="ch04s03.html" media-type="application/xhtml+xml" />
+<item id="N10647" href="ch04s04.html" media-type="application/xhtml+xml" />
+<item id="N10704" href="ch04s05.html" media-type="application/xhtml+xml" />
+<item id="N10761" href="ch05.html" media-type="application/xhtml+xml" />
+<item id="N10976" href="ch05s02.html" media-type="application/xhtml+xml" />
+<item id="N10A18" href="ch05s03.html" media-type="application/xhtml+xml" />
+<item id="N10A85" href="ch05s04.html" media-type="application/xhtml+xml" />
+<item id="N10D4E" href="ch05s05.html" media-type="application/xhtml+xml" />
+<item id="N10DCB" href="ch05s06.html" media-type="application/xhtml+xml" />
+<item id="N10E38" href="ch05s07.html" media-type="application/xhtml+xml" />
+<item id="N10E8A" href="ch05s08.html" media-type="application/xhtml+xml" />
+<item id="N10EF5" href="ch05s09.html" media-type="application/xhtml+xml" />
+<item id="N110E2" href="ch05s10.html" media-type="application/xhtml+xml" />
+<item id="N1113B" href="ch05s11.html" media-type="application/xhtml+xml" />
+<item id="N111A6" href="ch05s12.html" media-type="application/xhtml+xml" />
+<item id="N114CE" href="ch05s13.html" media-type="application/xhtml+xml" />
+<item id="N11533" href="ch05s14.html" media-type="application/xhtml+xml" />
+<item id="N1157B" href="ch05s15.html" media-type="application/xhtml+xml" />
+<item id="N115C3" href="ch05s16.html" media-type="application/xhtml+xml" />
+<item id="N11687" href="ch05s17.html" media-type="application/xhtml+xml" />
+<item id="N116DA" href="ch05s18.html" media-type="application/xhtml+xml" />
+<item id="N1172F" href="ch05s19.html" media-type="application/xhtml+xml" />
+<item id="N11788" href="ch06.html" media-type="application/xhtml+xml" />
+<item id="N119A9" href="ch06s02.html" media-type="application/xhtml+xml" />
+<item id="N11C57" href="ch06s03.html" media-type="application/xhtml+xml" />
+<item id="N11D46" href="ch06s04.html" media-type="application/xhtml+xml" />
+<item id="N11E2E" href="ch06s05.html" media-type="application/xhtml+xml" />
+<item id="N11EE1" href="ch06s06.html" media-type="application/xhtml+xml" />
+<item id="N11FCB" href="ch06s07.html" media-type="application/xhtml+xml" />
+<item id="N1201E" href="ch06s08.html" media-type="application/xhtml+xml" />
+<item id="N12121" href="ch06s09.html" media-type="application/xhtml+xml" />
+<item id="N121E1" href="ch07.html" media-type="application/xhtml+xml" />
+<item id="N1233C" href="ch07s02.html" media-type="application/xhtml+xml" />
+<item id="N12394" href="ch07s03.html" media-type="application/xhtml+xml" />
+<item id="N12432" href="ch07s04.html" media-type="application/xhtml+xml" />
+<item id="N124C2" href="ch08.html" media-type="application/xhtml+xml" />
+<item id="N126DF" href="ch08s02.html" media-type="application/xhtml+xml" />
+<item id="N1278B" href="ch08s03.html" media-type="application/xhtml+xml" />
+<item id="N12839" href="ch08s04.html" media-type="application/xhtml+xml" />
+<item id="N12914" href="ch08s05.html" media-type="application/xhtml+xml" />
+<item id="N1296A" href="ch08s06.html" media-type="application/xhtml+xml" />
+<item id="N12A20" href="ch08s07.html" media-type="application/xhtml+xml" />
+<item id="N12ADC" href="ch08s08.html" media-type="application/xhtml+xml" />
+<item id="N12BC0" href="ch08s09.html" media-type="application/xhtml+xml" />
+<item id="N12F95" href="ch08s10.html" media-type="application/xhtml+xml" />
+<item id="N132AA" href="ch08s11.html" media-type="application/xhtml+xml" />
+<item id="N1333B" href="ch08s12.html" media-type="application/xhtml+xml" />
+<item id="N13381" href="ch08s13.html" media-type="application/xhtml+xml" />
+<item id="N133C6" href="ch08s14.html" media-type="application/xhtml+xml" />
+<item id="N1340B" href="ch08s15.html" media-type="application/xhtml+xml" />
+<item id="N13450" href="ch08s16.html" media-type="application/xhtml+xml" />
+<item id="N13495" href="ch08s17.html" media-type="application/xhtml+xml" />
+<item id="N134DA" href="ch08s18.html" media-type="application/xhtml+xml" />
+<item id="N1351F" href="ch08s19.html" media-type="application/xhtml+xml" />
+<item id="N13564" href="ch09.html" media-type="application/xhtml+xml" />
+<item id="N1366D" href="ch09s02.html" media-type="application/xhtml+xml" />
+<item id="N13743" href="ch09s03.html" media-type="application/xhtml+xml" />
+<item id="N137A3" href="ch09s04.html" media-type="application/xhtml+xml" />
+<item id="N13879" href="ch09s05.html" media-type="application/xhtml+xml" />
+<item id="N13AA6" href="ch09s06.html" media-type="application/xhtml+xml" />
+<item id="N13B07" href="ch09s07.html" media-type="application/xhtml+xml" />
+<item id="N13D2A" href="ch09s08.html" media-type="application/xhtml+xml" />
+<item id="N13D71" href="ch09s09.html" media-type="application/xhtml+xml" />
+<item id="N13E0F" href="ch09s10.html" media-type="application/xhtml+xml" />
+<item id="N13E73" href="ch10.html" media-type="application/xhtml+xml" />
+<item id="N13F2E" href="ch10s02.html" media-type="application/xhtml+xml" />
+<item id="N13F7D" href="ch10s03.html" media-type="application/xhtml+xml" />
+<item id="N13FCF" href="ch10s04.html" media-type="application/xhtml+xml" />
+<item id="N1403A" href="ch10s05.html" media-type="application/xhtml+xml" />
+<item id="N140DD" href="ch11.html" media-type="application/xhtml+xml" />
+<item id="N14161" href="ch12.html" media-type="application/xhtml+xml" />
+<item id="N1416D" href="ch12s02.html" media-type="application/xhtml+xml" />
+<item id="N141AF" href="ch12s03.html" media-type="application/xhtml+xml" />
+<item id="N141C4" href="ch12s04.html" media-type="application/xhtml+xml" />
+<item id="N141F3" href="ch12s05.html" media-type="application/xhtml+xml" />
+<item id="N141F9" href="ch12s06.html" media-type="application/xhtml+xml" />
+<item id="N14210" href="ch12s07.html" media-type="application/xhtml+xml" />
+<item id="N14221" href="ch12s08.html" media-type="application/xhtml+xml" />
+<item id="N14287" href="ch12s09.html" media-type="application/xhtml+xml" />
+<item id="N1470A" href="apa.html" media-type="application/xhtml+xml" />
+</manifest>
+<spine toc="ncxtoc">
+<itemref idref="htmltoc" linear="yes" />
+<itemref idref="N10001" />
+<itemref idref="N10013" />
+<itemref idref="N1016D" />
+<itemref idref="N101E7" />
+<itemref idref="N1022A" />
+<itemref idref="N1029A" />
+<itemref idref="N102D6" />
+<itemref idref="N102E2" />
+<itemref idref="N104C8" />
+<itemref idref="N10549" />
+<itemref idref="N1060B" />
+<itemref idref="N10647" />
+<itemref idref="N10704" />
+<itemref idref="N10761" />
+<itemref idref="N10976" />
+<itemref idref="N10A18" />
+<itemref idref="N10A85" />
+<itemref idref="N10D4E" />
+<itemref idref="N10DCB" />
+<itemref idref="N10E38" />
+<itemref idref="N10E8A" />
+<itemref idref="N10EF5" />
+<itemref idref="N110E2" />
+<itemref idref="N1113B" />
+<itemref idref="N111A6" />
+<itemref idref="N114CE" />
+<itemref idref="N11533" />
+<itemref idref="N1157B" />
+<itemref idref="N115C3" />
+<itemref idref="N11687" />
+<itemref idref="N116DA" />
+<itemref idref="N1172F" />
+<itemref idref="N11788" />
+<itemref idref="N119A9" />
+<itemref idref="N11C57" />
+<itemref idref="N11D46" />
+<itemref idref="N11E2E" />
+<itemref idref="N11EE1" />
+<itemref idref="N11FCB" />
+<itemref idref="N1201E" />
+<itemref idref="N12121" />
+<itemref idref="N121E1" />
+<itemref idref="N1233C" />
+<itemref idref="N12394" />
+<itemref idref="N12432" />
+<itemref idref="N124C2" />
+<itemref idref="N126DF" />
+<itemref idref="N1278B" />
+<itemref idref="N12839" />
+<itemref idref="N12914" />
+<itemref idref="N1296A" />
+<itemref idref="N12A20" />
+<itemref idref="N12ADC" />
+<itemref idref="N12BC0" />
+<itemref idref="N12F95" />
+<itemref idref="N132AA" />
+<itemref idref="N1333B" />
+<itemref idref="N13381" />
+<itemref idref="N133C6" />
+<itemref idref="N1340B" />
+<itemref idref="N13450" />
+<itemref idref="N13495" />
+<itemref idref="N134DA" />
+<itemref idref="N1351F" />
+<itemref idref="N13564" />
+<itemref idref="N1366D" />
+<itemref idref="N13743" />
+<itemref idref="N137A3" />
+<itemref idref="N13879" />
+<itemref idref="N13AA6" />
+<itemref idref="N13B07" />
+<itemref idref="N13D2A" />
+<itemref idref="N13D71" />
+<itemref idref="N13E0F" />
+<itemref idref="N13E73" />
+<itemref idref="N13F2E" />
+<itemref idref="N13F7D" />
+<itemref idref="N13FCF" />
+<itemref idref="N1403A" />
+<itemref idref="N140DD" />
+<itemref idref="N14161" />
+<itemref idref="N1416D" />
+<itemref idref="N141AF" />
+<itemref idref="N141C4" />
+<itemref idref="N141F3" />
+<itemref idref="N141F9" />
+<itemref idref="N14210" />
+<itemref idref="N14221" />
+<itemref idref="N14287" />
+<itemref idref="N1470A" />
+</spine>
+<guide>
+<reference href="bk01-toc.html" type="toc" title="Table of Contents" />
+</guide>
+</package>

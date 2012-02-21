@@ -1,0 +1,89 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Chapter&nbsp;7.&nbsp;CouchDB API Server Local (non-replicating) Document Methods</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="index.html" title="CouchDB 1.1 Manual"><link rel="prev" href="couchdb-api-dbdoc.html" title="Chapter&nbsp;6.&nbsp;CouchDB API Server Document Methods"><link rel="next" href="couchdb-api-design.html" title="Chapter&nbsp;8.&nbsp;CouchDB API Server Design Document Methods"><meta name="date" content="2012-02-21T20:10:18+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter&nbsp;7.&nbsp;CouchDB API Server Local (non-replicating) Document Methods</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-api-dbdoc.html">Prev</a>&nbsp;</td><th align="center" width="60%">&nbsp;</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-design.html">Next</a></td></tr></table><hr></div><div class="chapter" title="Chapter&nbsp;7.&nbsp;CouchDB API Server Local (non-replicating) Document Methods"><div class="titlepage"><div><div><h2 class="title"><a name="couchdb-api-localdb"></a>Chapter&nbsp;7.&nbsp;CouchDB API Server Local (non-replicating) Document Methods</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="couchdb-api-localdb.html#couchdb-api-localdb_db-local-localdoc_get">7.1. <code class="literal">GET /db/_local/local-doc</code></a></span></dt><dt><span class="section"><a href="couchdb-api-localdb.html#couchdb-api-localdb_db-local-localdoc_put">7.2. <code class="literal">PUT /db/_local/local-doc</code></a></span></dt><dt><span class="section"><a href="couchdb-api-localdb.html#couchdb-api-localdb_db-local-localdoc_delete">7.3. <code class="literal">DELETE /db/_local/local-doc</code></a></span></dt><dt><span class="section"><a href="couchdb-api-localdb.html#couchdb-api-localdb_db-local-localdoc_copy">7.4. <code class="literal">COPY /db/_local/local-doc</code></a></span></dt></dl></div><p>
+    The Local (non-replicating) document interface allows you to create
+    local documents that are not replicated to other databases. These
+    documents can be used to hold configuration or other information
+    that is required specifically on the local CouchDB instance.
+  </p><p>
+    Local documents have the following limitations:
+  </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+        Local documents are not replicated to other databases.
+      </p></li><li class="listitem"><p>
+        The ID of the local document must be known for the document to
+        accessed. You cannot obtain a list of local documents from the
+        database.
+      </p></li><li class="listitem"><p>
+        Local documents are not output by views, or the
+        <code class="literal">_all_docs</code> view.
+      </p></li></ul></div><p>
+    Local documents can be used when you want to store configuration or
+    other information for the curent (local) instance of a given
+    database.
+  </p><p>
+    A list of the available methods and URL paths are provided below:
+  </p><div class="table"><a name="table-couchdb-api-localdb-summary"></a><p class="title"><b>Table&nbsp;7.1.&nbsp;Local (non-replicating) Document API
+    Calls</b></p><div class="table-contents"><table summary="Local (non-replicating) Document API
+    Calls" border="1"><colgroup><col class="method" width="33%"><col class="path" width="33%"><col class="desc" width="34%"></colgroup><thead><tr><th>Method</th><th>Path</th><th>Description</th></tr></thead><tbody><tr><td><code class="literal">GET</code></td><td><code class="literal">/db/_local/local-doc</code></td><td><a class="link" href="couchdb-api-localdb.html#couchdb-api-localdb_db-local-localdoc_get" title="7.1.&nbsp;GET /db/_local/local-doc">
+ Returns the latest revision of the non-replicated document
+ </a></td></tr><tr><td><code class="literal">PUT</code></td><td><code class="literal">/db/_local/local-doc</code></td><td><a class="link" href="couchdb-api-localdb.html#couchdb-api-localdb_db-local-localdoc_put" title="7.2.&nbsp;PUT /db/_local/local-doc">
+ Inserts a new version of the non-replicated document
+ </a></td></tr><tr><td><code class="literal">DELETE</code></td><td><code class="literal">/db/_local/local-doc</code></td><td><a class="link" href="couchdb-api-localdb.html#couchdb-api-localdb_db-local-localdoc_delete" title="7.3.&nbsp;DELETE /db/_local/local-doc">
+ Deletes the non-replicated document
+ </a></td></tr><tr><td><code class="literal">COPY</code></td><td><code class="literal">/db/_local/local-doc</code></td><td><a class="link" href="couchdb-api-localdb.html#couchdb-api-localdb_db-local-localdoc_copy" title="7.4.&nbsp;COPY /db/_local/local-doc">
+ Copies the non-replicated document
+ </a></td></tr></tbody></table></div></div><br class="table-break"><div class="section" title="7.1.&nbsp;GET /db/_local/local-doc"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-api-localdb_db-local-localdoc_get"></a>7.1.&nbsp;<code class="literal">GET /db/_local/local-doc</code></h2></div></div></div><div class="informaltable"><table summary="URL API GET /db/_local/local-doc" border="1"><colgroup><col class="field" width="33%"><col class="info" width="33%"><col class="addinfo" width="34%"></colgroup><tbody><tr><td><span class="bold"><strong>Method</strong></span></td><td colspan="2"><code class="literal">GET /db/_local/local-doc</code></td></tr><tr><td><span class="bold"><strong>Request</strong></span></td><td colspan="2">
+ None
+ </td></tr><tr><td><span class="bold"><strong>Response</strong></span></td><td colspan="2">
+ JSON of the returned document
+ </td></tr><tr><td><span class="bold"><strong>Admin Privileges Required</strong></span></td><td colspan="2">no</td></tr><tr><td><span class="bold"><strong>Query Arguments</strong></span></td><td><span class="bold"><strong>Argument</strong></span></td><td><code class="literal">rev</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>
+ Specify the revision to return
+ </td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>yes</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Type</strong></span></td><td>string</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Supported Values</strong></span></td><td class="auto-generated">&nbsp;</td></tr><tr><td>&nbsp;</td><td><code class="literal">true</code></td><td>Includes the revisions</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Argument</strong></span></td><td><code class="literal">revs</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>
+ Return a list of the revisions for the document
+ </td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>yes</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Type</strong></span></td><td>boolean</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Argument</strong></span></td><td><code class="literal">revs_info</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>
+ Return a list of detailed revision information for the
+ document
+ </td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>yes</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Type</strong></span></td><td>boolean</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Supported Values</strong></span></td><td class="auto-generated">&nbsp;</td></tr><tr><td>&nbsp;</td><td><code class="literal">true</code></td><td>Includes the revisions</td></tr><tr><td colspan="3"><span class="bold"><strong>Return Codes</strong></span></td></tr><tr><td>400</td><td colspan="2">
+ The format of the request or revision was invalid
+ </td></tr><tr><td>404</td><td colspan="2">
+ The specified document or revision cannot be found, or has been
+ deleted
+ </td></tr></tbody></table></div><p>
+      Gets the specified local document. The semantics are identical to
+      accessing a standard document in the specified database, except
+      that the document is not replicated. See
+      <a class="xref" href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db-doc_get" title="6.2.&nbsp;GET /db/doc">Section&nbsp;6.2, &ldquo;<code class="literal">GET /db/doc</code>&rdquo;</a>.
+    </p></div><div class="section" title="7.2.&nbsp;PUT /db/_local/local-doc"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-api-localdb_db-local-localdoc_put"></a>7.2.&nbsp;<code class="literal">PUT /db/_local/local-doc</code></h2></div></div></div><div class="informaltable"><table summary="URL API PUT /db/_local/local-doc" border="1"><colgroup><col class="field" width="33%"><col class="info" width="33%"><col class="addinfo" width="34%"></colgroup><tbody><tr><td><span class="bold"><strong>Method</strong></span></td><td colspan="2"><code class="literal">PUT /db/_local/local-doc</code></td></tr><tr><td><span class="bold"><strong>Request</strong></span></td><td colspan="2">
+ JSON of the document
+ </td></tr><tr><td><span class="bold"><strong>Response</strong></span></td><td colspan="2">
+ JSON with the committed document information
+ </td></tr><tr><td><span class="bold"><strong>Admin Privileges Required</strong></span></td><td colspan="2">no</td></tr><tr><td colspan="3"><span class="bold"><strong>Return Codes</strong></span></td></tr><tr><td>201</td><td colspan="2">
+ Document has been created successfully
+ </td></tr></tbody></table></div><p>
+      Stores the specified local document. The semantics are identical
+      to storing a standard document in the specified database, except
+      that the document is not replicated. See
+      <a class="xref" href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db-doc_put" title="6.4.&nbsp;PUT /db/doc">Section&nbsp;6.4, &ldquo;<code class="literal">PUT /db/doc</code>&rdquo;</a>.
+    </p></div><div class="section" title="7.3.&nbsp;DELETE /db/_local/local-doc"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-api-localdb_db-local-localdoc_delete"></a>7.3.&nbsp;<code class="literal">DELETE /db/_local/local-doc</code></h2></div></div></div><div class="informaltable"><table summary="URL API DELETE /db/_local/local-doc" border="1"><colgroup><col class="field" width="33%"><col class="info" width="33%"><col class="addinfo" width="34%"></colgroup><tbody><tr><td><span class="bold"><strong>Method</strong></span></td><td colspan="2"><code class="literal">DELETE /db/_local/local-doc</code></td></tr><tr><td><span class="bold"><strong>Request</strong></span></td><td colspan="2">
+ None
+ </td></tr><tr><td><span class="bold"><strong>Response</strong></span></td><td colspan="2">
+ JSON with the deleted document information
+ </td></tr><tr><td><span class="bold"><strong>Admin Privileges Required</strong></span></td><td colspan="2">no</td></tr><tr><td><span class="bold"><strong>Query Arguments</strong></span></td><td><span class="bold"><strong>Argument</strong></span></td><td><code class="literal">rev</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>
+ Current revision of the document for validation
+ </td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>yes</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Type</strong></span></td><td>string</td></tr><tr><td><span class="bold"><strong>HTTP Headers</strong></span></td><td><span class="bold"><strong>Header</strong></span></td><td><code class="literal">If-Match</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>Current revision of the document for validation</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>yes</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td colspan="3"><span class="bold"><strong>Return Codes</strong></span></td></tr><tr><td>409</td><td colspan="2">
+ Supplied revision is incorrect or missing
+ </td></tr></tbody></table></div><p>
+      Deletes the specified local document. The semantics are identical
+      to deleting a standard document in the specified database, except
+      that the document is not replicated. See
+      <a class="xref" href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db-doc_delete" title="6.5.&nbsp;DELETE /db/doc">Section&nbsp;6.5, &ldquo;<code class="literal">DELETE /db/doc</code>&rdquo;</a>.
+    </p></div><div class="section" title="7.4.&nbsp;COPY /db/_local/local-doc"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-api-localdb_db-local-localdoc_copy"></a>7.4.&nbsp;<code class="literal">COPY /db/_local/local-doc</code></h2></div></div></div><div class="informaltable"><table summary="URL API COPY /db/_local/local-doc" border="1"><colgroup><col class="field" width="33%"><col class="info" width="33%"><col class="addinfo" width="34%"></colgroup><tbody><tr><td><span class="bold"><strong>Method</strong></span></td><td colspan="2"><code class="literal">COPY /db/_local/local-doc</code></td></tr><tr><td><span class="bold"><strong>Request</strong></span></td><td colspan="2">
+ None
+ </td></tr><tr><td><span class="bold"><strong>Response</strong></span></td><td colspan="2">
+ JSON of the copied document
+ </td></tr><tr><td><span class="bold"><strong>Admin Privileges Required</strong></span></td><td colspan="2">no</td></tr><tr><td><span class="bold"><strong>Query Arguments</strong></span></td><td><span class="bold"><strong>Argument</strong></span></td><td><code class="literal">rev</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>
+ Revision to copy from
+ </td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>yes</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Type</strong></span></td><td>string</td></tr><tr><td><span class="bold"><strong>HTTP Headers</strong></span></td><td><span class="bold"><strong>Header</strong></span></td><td><code class="literal">Destination</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>Destination document (and optional revision)</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>no</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr></tbody></table></div><p>
+      Copies the specified local document. The semantics are identical
+      to copying a standard document in the specified database, except
+      that the document is not replicated. See
+      <a class="xref" href="couchdb-api-dbdoc.html#couchdb-api-dbdoc_db-doc_copy" title="6.6.&nbsp;COPY /db/doc">Section&nbsp;6.6, &ldquo;<code class="literal">COPY /db/doc</code>&rdquo;</a>.
+    </p></div></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-api-dbdoc.html">Prev</a>&nbsp;</td><td align="center" width="20%">&nbsp;</td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-design.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">Chapter&nbsp;6.&nbsp;CouchDB API Server Document Methods&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;Chapter&nbsp;8.&nbsp;CouchDB API Server Design Document Methods</td></tr></table></div></body></html>

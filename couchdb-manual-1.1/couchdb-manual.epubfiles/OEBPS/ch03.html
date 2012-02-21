@@ -1,0 +1,501 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Chapter&nbsp;3.&nbsp;Replication</title>
+<link href="epub.css" type="text/css" rel="stylesheet" />
+<meta content="DocBook XSL Stylesheets V1.76.1" name="generator" />
+</head>
+<body>
+<div class="chapter" title="Chapter&nbsp;3.&nbsp;Replication">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-single-replication" />Chapter&nbsp;3.&nbsp;Replication</h1>
+</div>
+</div>
+</div>
+<p>
+    &nbsp;
+  </p>
+<div class="section" title="3.1.&nbsp;Replicator Database">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-single-replication-replicatordb" />3.1.&nbsp;Replicator Database</h1>
+</div>
+</div>
+</div>
+<p>
+      A database where you
+      <code class="literal">PUT</code>/<code class="literal">POST</code> documents to
+      trigger replications and you <code class="literal">DELETE</code> to cancel
+      ongoing replications. These documents have exactly the same
+      content as the JSON objects we used to <code class="literal">POST</code> to
+      <code class="literal">_replicate</code> (fields <code class="literal">source</code>,
+      <code class="literal">target</code>, <code class="literal">create_target</code>,
+      <code class="literal">continuous</code>, <code class="literal">doc_ids</code>,
+      <code class="literal">filter</code>, <code class="literal">query_params</code>.
+    </p>
+<p>
+      Replication documents can have a user defined
+      <code class="literal">_id</code>. Design documents (and
+      <code class="literal">_local</code> documents) added to the replicator
+      database are ignored.
+    </p>
+<p>
+      The default name of this database is
+      <code class="literal">_replicator</code>. The name can be changed in the
+      <code class="filename">local.ini</code> configuration, section
+      <code class="literal">[replicator]</code>, parameter <code class="literal">db</code>.
+    </p>
+<div class="section" title="3.1.1.&nbsp;Basics">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="couchdb-single-replication-replicatordb-basics" />3.1.1.&nbsp;Basics</h2>
+</div>
+</div>
+</div>
+<p>
+        Let's say you PUT the following document into _replicator:
+      </p>
+<pre class="programlisting">{
+    "_id": "my_rep",
+    "source":  "http://myserver.com:5984/foo",
+    "target":  "bar",
+    "create_target":  true
+}</pre>
+<p>
+        In the couch log you'll see 2 entries like these:
+      </p>
+<pre class="programlisting">[Thu, 17 Feb 2011 19:43:59 GMT] [info] [&lt;0.291.0&gt;] Document `my_rep` triggered replication `c0ebe9256695ff083347cbf95f93e280+create_target`
+[Thu, 17 Feb 2011 19:44:37 GMT] [info] [&lt;0.124.0&gt;] Replication `c0ebe9256695ff083347cbf95f93e280+create_target` finished (triggered by document `my_rep`)</pre>
+<p>
+        As soon as the replication is triggered, the document will be
+        updated by CouchDB with 3 new fields:
+      </p>
+<pre class="programlisting">{
+    "_id": "my_rep",
+    "source":  "http://myserver.com:5984/foo",
+    "target":  "bar",
+    "create_target":  true,
+    "_replication_id":  "c0ebe9256695ff083347cbf95f93e280",
+    "_replication_state":  "triggered",
+    "_replication_state_time":  1297974122
+}</pre>
+<p>
+        Special fields set by the replicator start with the prefix
+        <code class="literal">_replication_</code>.
+      </p>
+<div class="itemizedlist">
+<ul class="itemizedlist">
+<li class="listitem">
+<p>
+            <code class="literal">_replication_id</code>
+          </p>
+<p>
+            The ID internally assigned to the replication. This is also
+            the ID exposed by <code class="literal">/_active_tasks</code>.
+          </p>
+</li>
+<li class="listitem">
+<p>
+            <code class="literal">_replication_state</code>
+          </p>
+<p>
+            The current state of the replication.
+          </p>
+</li>
+<li class="listitem">
+<p>
+            <code class="literal">_replication_state_time</code>
+          </p>
+<p>
+            A Unix timestamp (number of seconds since 1 Jan 1970) that
+            tells us when the current replication state (marked in
+            <code class="literal">_replication_state</code>) was set.
+          </p>
+</li>
+</ul>
+</div>
+<p>
+        When the replication finishes, it will update the
+        <code class="literal">_replication_state</code> field (and
+        <code class="literal">_replication_state_time</code>) with the value
+        <code class="literal">completed</code>, so the document will look like:
+      </p>
+<pre class="programlisting">{
+    "_id": "my_rep",
+    "source":  "http://myserver.com:5984/foo",
+    "target":  "bar",
+    "create_target":  true,
+    "_replication_id":  "c0ebe9256695ff083347cbf95f93e280",
+    "_replication_state":  "completed",
+    "_replication_state_time":  1297974122
+}</pre>
+<p>
+        When an error happens during replication, the
+        <code class="literal">_replication_state</code> field is set to
+        <code class="literal">error</code> (and
+        <code class="literal">_replication_state</code> gets updated of course).
+      </p>
+<p>
+        When you PUT/POST a document to the
+        <code class="literal">_replicator</code> database, CouchDB will attempt to
+        start the replication up to 10 times (configurable under
+        <code class="literal">[replicator]</code>, parameter
+        <code class="literal">max_replication_retry_count</code>). If it fails on
+        the first attempt, it waits 5 seconds before doing a second
+        attempt. If the second attempt fails, it waits 10 seconds before
+        doing a third attempt. If the third attempt fails, it waits 20
+        seconds before doing a fourth attempt (each attempt doubles the
+        previous wait period). When an attempt fails, the Couch log will
+        show you something like:
+      </p>
+<pre class="programlisting">[error] [&lt;0.149.0&gt;] Error starting replication `67c1bb92010e7abe35d7d629635f18b6+create_target` (document `my_rep_2`): {db_not_found,&lt;&lt;"could not open http://myserver:5986/foo/"&gt;&gt;</pre>
+<div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Note</h3>
+<p>
+          The <code class="literal">_replication_state</code> field is only set to
+          <code class="literal">error</code> when all the attempts were
+          unsuccessful.
+        </p>
+</div>
+<p>
+        There are only 3 possible values for the
+        <code class="literal">_replication_state</code> field:
+        <code class="literal">triggered</code>, <code class="literal">completed</code> and
+        <code class="literal">error</code>. Continuous replications never get
+        their state set to <code class="literal">completed</code>.
+      </p>
+</div>
+<div class="section" title="3.1.2.&nbsp;Documents describing the same replication">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="couchdb-single-replication-replicatordb-docsame" />3.1.2.&nbsp;Documents describing the same replication</h2>
+</div>
+</div>
+</div>
+<p>
+        Lets suppose 2 documents are added to the
+        <code class="literal">_replicator</code> database in the following order:
+      </p>
+<pre class="programlisting">{
+    "_id": "doc_A",
+    "source":  "http://myserver.com:5984/foo",
+    "target":  "bar"
+}</pre>
+<p>
+        and
+      </p>
+<pre class="programlisting">{
+    "_id": "doc_B",
+    "source":  "http://myserver.com:5984/foo",
+    "target":  "bar"
+}</pre>
+<p>
+        Both describe exactly the same replication (only their
+        <code class="literal">_ids</code> differ). In this case document
+        <code class="literal">doc_A</code> triggers the replication, getting
+        updated by CouchDB with the fields
+        <code class="literal">_replication_state</code>,
+        <code class="literal">_replication_state_time</code> and
+        <code class="literal">_replication_id</code>, just like it was described
+        before. Document <code class="literal">doc_B</code> however, is only
+        updated with one field, the <code class="literal">_replication_id</code>
+        so it will look like this:
+      </p>
+<pre class="programlisting">{
+    "_id": "doc_B",
+    "source":  "http://myserver.com:5984/foo",
+    "target":  "bar",
+    "_replication_id":  "c0ebe9256695ff083347cbf95f93e280"
+}</pre>
+<p>
+        While document <code class="literal">doc_A</code> will look like this:
+      </p>
+<pre class="programlisting">{
+    "_id": "doc_A",
+    "source":  "http://myserver.com:5984/foo",
+    "target":  "bar",
+    "_replication_id":  "c0ebe9256695ff083347cbf95f93e280",
+    "_replication_state":  "triggered",
+    "_replication_state_time":  1297974122
+}</pre>
+<p>
+        Note that both document get exactly the same value for the
+        <code class="literal">_replication_id</code> field. This way you can
+        identify which documents refer to the same replication - you can
+        for example define a view which maps replication IDs to document
+        IDs.
+      </p>
+</div>
+<div class="section" title="3.1.3.&nbsp;Canceling replications">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="couchdb-single-replication-replicatordb-cancel" />3.1.3.&nbsp;Canceling replications</h2>
+</div>
+</div>
+</div>
+<p>
+        To cancel a replication simply <code class="literal">DELETE</code> the
+        document which triggered the replication. The Couch log will
+        show you an entry like the following:
+      </p>
+<pre class="programlisting">[Thu, 17 Feb 2011 20:16:29 GMT] [info] [&lt;0.125.0&gt;] Stopped replication `c0ebe9256695ff083347cbf95f93e280+continuous+create_target` because replication document `doc_A` was deleted</pre>
+<div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Note</h3>
+<p>
+          You need to <code class="literal">DELETE</code> the document that
+          triggered the replication. <code class="literal">DELETE</code>ing
+          another document that describes the same replication but did
+          not trigger it, will not cancel the replication.
+        </p>
+</div>
+</div>
+<div class="section" title="3.1.4.&nbsp;Server restart">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="couchdb-single-replication-replicatordb-restart" />3.1.4.&nbsp;Server restart</h2>
+</div>
+</div>
+</div>
+<p>
+        When CouchDB is restarted, it checks its
+        <code class="literal">_replicator</code> database and restarts any
+        replication that is described by a document that either has its
+        <code class="literal">_replication_state</code> field set to
+        <code class="literal">triggered</code> or it doesn't have yet the
+        <code class="literal">_replication_state</code> field set.
+      </p>
+<div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Note</h3>
+<p>
+          Continuous replications always have a
+          <code class="literal">_replication_state</code> field with the value
+          <code class="literal">triggered</code>, therefore they're always
+          restarted when CouchDB is restarted.
+        </p>
+</div>
+</div>
+<div class="section" title="3.1.5.&nbsp;Changing the Replicator Database">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="couchdb-single-replication-replicatordb-changing" />3.1.5.&nbsp;Changing the Replicator Database</h2>
+</div>
+</div>
+</div>
+<p>
+        Imagine your replicator database (default name is _replicator)
+        has the two following documents that represent pull replications
+        from servers A and B:
+      </p>
+<pre class="programlisting">{
+    "_id": "rep_from_A",
+    "source":  "http://aserver.com:5984/foo",
+    "target":  "foo_a",
+    "continuous":  true,
+    "_replication_id":  "c0ebe9256695ff083347cbf95f93e280",
+    "_replication_state":  "triggered",
+    "_replication_state_time":  1297971311
+}
+{
+    "_id": "rep_from_B",
+    "source":  "http://bserver.com:5984/foo",
+    "target":  "foo_b",
+    "continuous":  true,
+    "_replication_id":  "231bb3cf9d48314eaa8d48a9170570d1",
+    "_replication_state":  "triggered",
+    "_replication_state_time":  1297974122
+}</pre>
+<p>
+        Now without stopping and restarting CouchDB, you change the name
+        of the replicator database to
+        <code class="literal">another_replicator_db</code>:
+      </p>
+<pre class="programlisting">$ curl -X PUT http://localhost:5984/_config/replicator/db -d '"another_replicator_db"'
+"_replicator"</pre>
+<p>
+        As soon as this is done, both pull replications defined before,
+        are stopped. This is explicitly mentioned in CouchDB's log:
+      </p>
+<pre class="programlisting">[Fri, 11 Mar 2011 07:44:20 GMT] [info] [&lt;0.104.0&gt;] Stopping all ongoing replications because the replicator database was deleted or changed
+[Fri, 11 Mar 2011 07:44:20 GMT] [info] [&lt;0.127.0&gt;] 127.0.0.1 - - PUT /_config/replicator/db 200</pre>
+<p>
+        Imagine now you add a replication document to the new replicator
+        database named <code class="literal">another_replicator_db</code>:
+      </p>
+<pre class="programlisting">{
+    "_id": "rep_from_X",
+    "source":  "http://xserver.com:5984/foo",
+    "target":  "foo_x",
+    "continuous":  true
+}</pre>
+<p>
+        From now own you have a single replication going on in your
+        system: a pull replication pulling from server X. Now you change
+        back the replicator database to the original one
+        <code class="literal">_replicator</code>:
+      </p>
+<pre class="programlisting">$ curl -X PUT http://localhost:5984/_config/replicator/db -d '"_replicator"'
+"another_replicator_db"</pre>
+<p>
+        Immediately after this operation, the replication pulling from
+        server X will be stopped and the replications defined in the
+        _replicator database (pulling from servers A and B) will be
+        resumed.
+      </p>
+<p>
+        Changing again the replicator database to
+        <code class="literal">another_replicator_db</code> will stop the pull
+        replications pulling from servers A and B, and resume the pull
+        replication pulling from server X.
+      </p>
+</div>
+<div class="section" title="3.1.6.&nbsp;Replicating the replicator database">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="couchdb-single-replication-replicatordb-replicating" />3.1.6.&nbsp;Replicating the replicator database</h2>
+</div>
+</div>
+</div>
+<p>
+        Imagine you have in server C a replicator database with the two
+        following pull replication documents in it:
+      </p>
+<pre class="programlisting">{
+     "_id": "rep_from_A",
+     "source":  "http://aserver.com:5984/foo",
+     "target":  "foo_a",
+     "continuous":  true,
+     "_replication_id":  "c0ebe9256695ff083347cbf95f93e280",
+     "_replication_state":  "triggered",
+     "_replication_state_time":  1297971311
+}
+{
+     "_id": "rep_from_B",
+     "source":  "http://bserver.com:5984/foo",
+     "target":  "foo_b",
+     "continuous":  true,
+     "_replication_id":  "231bb3cf9d48314eaa8d48a9170570d1",
+     "_replication_state":  "triggered",
+     "_replication_state_time":  1297974122
+}</pre>
+<p>
+        Now you would like to have the same pull replications going on
+        in server D, that is, you would like to have server D pull
+        replicating from servers A and B. You have two options:
+      </p>
+<div class="itemizedlist">
+<ul class="itemizedlist">
+<li class="listitem">
+<p>
+            Explicitly add two documents to server's D replicator
+            database
+          </p>
+</li>
+<li class="listitem">
+<p>
+            Replicate server's C replicator database into server's D
+            replicator database
+          </p>
+</li>
+</ul>
+</div>
+<p>
+        Both alternatives accomplish exactly the same goal.
+      </p>
+</div>
+<div class="section" title="3.1.7.&nbsp;Delegations">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="couchdb-single-replication-replicatordb-delegations" />3.1.7.&nbsp;Delegations</h2>
+</div>
+</div>
+</div>
+<p>
+        Replication documents can have a custom
+        <code class="literal">user_ctx</code> property. This property defines the
+        user context under which a replication runs. For the old way of
+        triggering replications (POSTing to
+        <code class="literal">/_replicate/</code>), this property was not needed
+        (it didn't exist in fact) - this is because at the moment of
+        triggering the replication it has information about the
+        authenticated user. With the replicator database, since it's a
+        regular database, the information about the authenticated user
+        is only present at the moment the replication document is
+        written to the database - the replicator database implementation
+        is like a _changes feed consumer (with
+        <code class="literal">?include_docs=true</code>) that reacts to what was
+        written to the replicator database - in fact this feature could
+        be implemented with an external script/program. This
+        implementation detail implies that for non admin users, a
+        <code class="literal">user_ctx</code> property, containing the user's name
+        and a subset of his/her roles, must be defined in the
+        replication document. This is ensured by the document update
+        validation function present in the default design document of
+        the replicator database. This validation function also ensure
+        that a non admin user can set a user name property in the
+        <code class="literal">user_ctx</code> property that doesn't match his/her
+        own name (same principle applies for the roles).
+      </p>
+<p>
+        For admins, the <code class="literal">user_ctx</code> property is
+        optional, and if it's missing it defaults to a user context with
+        name null and an empty list of roles - this mean design
+        documents will not be written to local targets. If writing
+        design documents to local targets is desired, the a user context
+        with the roles <code class="literal">_admin</code> must be set explicitly.
+      </p>
+<p>
+        Also, for admins the <code class="literal">user_ctx</code> property can be
+        used to trigger a replication on behalf of another user. This is
+        the user context that will be passed to local target database
+        document validation functions.
+      </p>
+<div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Note</h3>
+<p>
+          The <code class="literal">user_ctx</code> property only has effect for
+          local endpoints.
+        </p>
+</div>
+<p>
+        Example delegated replication document:
+      </p>
+<pre class="programlisting">{
+     "_id": "my_rep",
+     "source":  "http://bserver.com:5984/foo",
+     "target":  "bar",
+     "continuous":  true,
+     "user_ctx": {
+          "name": "joe",
+          "roles": ["erlanger", "researcher"]
+     }
+}</pre>
+<p>
+        As stated before, for admins the user_ctx property is optional,
+        while for regular (non admin) users it's mandatory. When the
+        roles property of <code class="literal">user_ctx</code> is missing, it
+        defaults to the empty list <code class="literal">[ ]</code>.
+      </p>
+</div>
+</div>
+</div>
+</body>
+</html>

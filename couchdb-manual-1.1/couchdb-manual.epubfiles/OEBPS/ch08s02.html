@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>8.2.&nbsp;PUT /db/_design/design-doc</title>
+<link href="epub.css" type="text/css" rel="stylesheet" />
+<meta content="DocBook XSL Stylesheets V1.76.1" name="generator" />
+</head>
+<body>
+<div class="section" title="8.2.&nbsp;PUT /db/_design/design-doc">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-api-design_db-design-designdoc_put" />8.2.&nbsp;<code class="literal">PUT /db/_design/design-doc</code>
+</h1>
+</div>
+</div>
+</div>
+<div class="informaltable">
+<table summary="URL API PUT /db/_design/design-doc" border="1">
+<colgroup>
+<col class="field" width="33%" />
+<col class="info" width="33%" />
+<col class="addinfo" width="34%" />
+</colgroup>
+<tbody>
+<tr>
+<td>
+<span class="bold">
+<strong>Method</strong>
+</span>
+</td>
+<td colspan="2">
+<code class="literal">PUT /db/_design/design-doc</code>
+</td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Request</strong>
+</span>
+</td>
+<td colspan="2">
+ JSON of the design document
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Response</strong>
+</span>
+</td>
+<td colspan="2">
+ JSON status
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Admin Privileges Required</strong>
+</span>
+</td>
+<td colspan="2">no</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+      Upload the specified design document,
+      <code class="literal">design-doc</code>, to the specified database. The
+      design document should follow the definition of a design document,
+      as summarised in the following table.
+    </p>
+<div class="table">
+<a id="table-couchdb-api-json-designdoc" />
+<p class="title">
+<strong>Table&nbsp;8.2.&nbsp;
+ Design Document
+ </strong>
+</p>
+<div class="table-contents">
+<table summary="
+ Design Document
+ " border="1">
+<colgroup>
+<col class="item" width="30%" />
+<col class="desc" width="70%" />
+</colgroup>
+<tbody>
+<tr>
+<td>
+<span class="bold">
+<strong>Field</strong>
+</span>
+</td>
+<td>
+<span class="bold">
+<strong>Description</strong>
+</span>
+</td>
+</tr>
+<tr>
+<td>
+<code class="literal">_id</code>  </td>
+<td>
+ Design Document ID
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">_rev</code>  </td>
+<td>
+ Design Document Revision
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">views</code>  </td>
+<td>
+ View
+ </td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">viewname</code>  </td>
+<td>
+ View Definition
+ </td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">map</code>  </td>
+<td>
+ Map Function for View
+ </td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">reduce</code> (optional) </td>
+<td>
+ Reduce Function for View
+ </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>
+      For more information on writing views, see
+      <a class="xref" href="">???</a>.
+    </p>
+</div>
+</body>
+</html>

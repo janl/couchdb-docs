@@ -1,0 +1,45 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>2.2.&nbsp;Documents describing the same replication</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB Release 1.1 Feature Guide"><link rel="up" href="couchb-release-1.1-replicatordb.html" title="2.&nbsp;Replicator Database"><link rel="prev" href="couchdb-release-1.1-replicatordb-basics.html" title="2.1.&nbsp;Basics"><link rel="next" href="couchdb-release-1.1-replicatordb-cancel.html" title="2.3.&nbsp;Canceling replications"><meta name="date" content="2012-02-21T20:09:25+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">2.2.&nbsp;Documents describing the same replication</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-release-1.1-replicatordb-basics.html">Prev</a>&nbsp;</td><th align="center" width="60%">2.&nbsp;Replicator Database</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-release-1.1-replicatordb-cancel.html">Next</a></td></tr></table><hr></div><div class="section" title="2.2.&nbsp;Documents describing the same replication"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-release-1.1-replicatordb-docsame"></a>2.2.&nbsp;Documents describing the same replication</h3></div></div></div><p>
+        Lets suppose 2 documents are added to the
+        <code class="literal">_replicator</code> database in the following order:
+      </p><pre class="programlisting">{
+    "_id": "doc_A",
+    "source":  "http://myserver.com:5984/foo",
+    "target":  "bar"
+}</pre><p>
+        and
+      </p><pre class="programlisting">{
+    "_id": "doc_B",
+    "source":  "http://myserver.com:5984/foo",
+    "target":  "bar"
+}</pre><p>
+        Both describe exactly the same replication (only their
+        <code class="literal">_ids</code> differ). In this case document
+        <code class="literal">doc_A</code> triggers the replication, getting
+        updated by CouchDB with the fields
+        <code class="literal">_replication_state</code>,
+        <code class="literal">_replication_state_time</code> and
+        <code class="literal">_replication_id</code>, just like it was described
+        before. Document <code class="literal">doc_B</code> however, is only
+        updated with one field, the <code class="literal">_replication_id</code>
+        so it will look like this:
+      </p><pre class="programlisting">{
+    "_id": "doc_B",
+    "source":  "http://myserver.com:5984/foo",
+    "target":  "bar",
+    "_replication_id":  "c0ebe9256695ff083347cbf95f93e280"
+}</pre><p>
+        While document <code class="literal">doc_A</code> will look like this:
+      </p><pre class="programlisting">{
+    "_id": "doc_A",
+    "source":  "http://myserver.com:5984/foo",
+    "target":  "bar",
+    "_replication_id":  "c0ebe9256695ff083347cbf95f93e280",
+    "_replication_state":  "triggered",
+    "_replication_state_time":  1297974122
+}</pre><p>
+        Note that both document get exactly the same value for the
+        <code class="literal">_replication_id</code> field. This way you can
+        identify which documents refer to the same replication - you can
+        for example define a view which maps replication IDs to document
+        IDs.
+      </p></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-release-1.1-replicatordb-basics.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchb-release-1.1-replicatordb.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-release-1.1-replicatordb-cancel.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">2.1.&nbsp;Basics&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;2.3.&nbsp;Canceling replications</td></tr></table></div></body></html>

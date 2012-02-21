@@ -1,0 +1,21 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>2.&nbsp;Replicator Database</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB Release 1.1 Feature Guide"><link rel="up" href="index.html" title="CouchDB Release 1.1 Feature Guide"><link rel="prev" href="couchdb-release-1.1-upgrading.html" title="1.&nbsp;Upgrading to CouchDB 1.1"><link rel="next" href="couchdb-release-1.1-replicatordb-basics.html" title="2.1.&nbsp;Basics"><meta name="date" content="2012-02-21T20:09:25+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">2.&nbsp;Replicator Database</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-release-1.1-upgrading.html">Prev</a>&nbsp;</td><th align="center" width="60%">&nbsp;</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-release-1.1-replicatordb-basics.html">Next</a></td></tr></table><hr></div><div class="section" title="2.&nbsp;Replicator Database"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchb-release-1.1-replicatordb"></a>2.&nbsp;Replicator Database</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="couchdb-release-1.1-replicatordb-basics.html">2.1. Basics</a></span></dt><dt><span class="section"><a href="couchdb-release-1.1-replicatordb-docsame.html">2.2. Documents describing the same replication</a></span></dt><dt><span class="section"><a href="couchdb-release-1.1-replicatordb-cancel.html">2.3. Canceling replications</a></span></dt><dt><span class="section"><a href="couchdb-release-1.1-replicatordb-restart.html">2.4. Server restart</a></span></dt><dt><span class="section"><a href="couchdb-release-1.1-replicatordb-changing.html">2.5. Changing the Replicator Database</a></span></dt><dt><span class="section"><a href="couchdb-release-1.1-replicatordb-replicating.html">2.6. Replicating the replicator database</a></span></dt><dt><span class="section"><a href="couchdb-release-1.1-replicatordb-delegations.html">2.7. Delegations</a></span></dt></dl></div><p>
+      A database where you
+      <code class="literal">PUT</code>/<code class="literal">POST</code> documents to
+      trigger replications and you <code class="literal">DELETE</code> to cancel
+      ongoing replications. These documents have exactly the same
+      content as the JSON objects we used to <code class="literal">POST</code> to
+      <code class="literal">_replicate</code> (fields <code class="literal">source</code>,
+      <code class="literal">target</code>, <code class="literal">create_target</code>,
+      <code class="literal">continuous</code>, <code class="literal">doc_ids</code>,
+      <code class="literal">filter</code>, <code class="literal">query_params</code>.
+    </p><p>
+      Replication documents can have a user defined
+      <code class="literal">_id</code>. Design documents (and
+      <code class="literal">_local</code> documents) added to the replicator
+      database are ignored.
+    </p><p>
+      The default name of this database is
+      <code class="literal">_replicator</code>. The name can be changed in the
+      <code class="filename">local.ini</code> configuration, section
+      <code class="literal">[replicator]</code>, parameter <code class="literal">db</code>.
+    </p></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-release-1.1-upgrading.html">Prev</a>&nbsp;</td><td align="center" width="20%">&nbsp;</td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-release-1.1-replicatordb-basics.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">1.&nbsp;Upgrading to CouchDB 1.1&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;2.1.&nbsp;Basics</td></tr></table></div></body></html>

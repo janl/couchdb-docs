@@ -1,0 +1,43 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>2.3.&nbsp;CommonJS support for map functions</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-single-features.html" title="Chapter&nbsp;2.&nbsp;Features and Functionality"><link rel="prev" href="couchdb-single-features-proxying.html" title="2.2.&nbsp;HTTP Proxying"><link rel="next" href="couchdb-single-features-etag.html" title="2.4.&nbsp;Granular ETag support"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">2.3.&nbsp;CommonJS support for map functions</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-single-features-proxying.html">Prev</a>&nbsp;</td><th align="center" width="60%">Chapter&nbsp;2.&nbsp;Features and Functionality</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-single-features-etag.html">Next</a></td></tr></table><hr></div><div class="section" title="2.3.&nbsp;CommonJS support for map functions"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-single-features-commonjs"></a>2.3.&nbsp;CommonJS support for map functions</h2></div></div></div><p>
+      CommonJS support allows you to use CommonJS notation inside
+      <code class="methodname">map</code> and <code class="methodname">reduce</code>
+      functions, but only of libraries that are stored inside the views
+      part of the design doc.
+    </p><p>
+      So you could continue to access CommonJS code in design_doc.foo,
+      from your list functions etc, but we'd add the ability to require
+      CommonJS modules within map and reduce, but only from
+      <code class="filename">design_doc.views.lib</code>.
+    </p><p>
+      There's no worry here about namespace collisions, as Couch just
+      plucks <code class="literal">views.*.map</code> and
+      <code class="literal">views.*.reduce</code> out of the design doc. So you
+      could have a view called <code class="literal">lib</code> if you wanted, and
+      still have CommonJS stored in <code class="literal">views.lib.sha1</code>
+      and <code class="literal">views.lib.stemmer</code> if you wanted.
+    </p><p>
+      The implementation is simplified by enforcing that CommonJS
+      modules to be used in <code class="methodname">map</code> functions be
+      stored in views.lib.
+    </p><p>
+      A sample design doc (taken from the test suite in Futon) is below:
+    </p><pre class="programlisting">{
+   "views" : {
+      "lib" : {
+         "baz" : "exports.baz = 'bam';",
+         "foo" : {
+            "zoom" : "exports.zoom = 'yeah';",
+            "boom" : "exports.boom = 'ok';",
+            "foo" : "exports.foo = 'bar';"
+         }
+      },
+      "commonjs" : {
+         "map" : "function(doc) { emit(null, require('views/lib/foo/boom').boom)}"
+      }
+   },
+   "_id" : "_design/test"
+}</pre><p>
+      The <code class="literal">require()</code> statement is relative to the
+      design document, but anything loaded form outside of
+      <code class="literal">views/lib</code> will fail.
+    </p></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-single-features-proxying.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-single-features.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-single-features-etag.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">2.2.&nbsp;HTTP Proxying&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;2.4.&nbsp;Granular ETag support</td></tr></table></div></body></html>

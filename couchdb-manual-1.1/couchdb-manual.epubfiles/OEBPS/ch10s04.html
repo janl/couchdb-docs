@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>10.4.&nbsp;PUT /_config/section/key</title>
+<link href="epub.css" type="text/css" rel="stylesheet" />
+<meta content="DocBook XSL Stylesheets V1.76.1" name="generator" />
+</head>
+<body>
+<div class="section" title="10.4.&nbsp;PUT /_config/section/key">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-api-config_config-section-key_put" />10.4.&nbsp;<code class="literal">PUT /_config/section/key</code>
+</h1>
+</div>
+</div>
+</div>
+<div class="informaltable">
+<table summary="URL API PUT /_config/section/key" border="1">
+<colgroup>
+<col class="field" width="33%" />
+<col class="info" width="33%" />
+<col class="addinfo" width="34%" />
+</colgroup>
+<tbody>
+<tr>
+<td>
+<span class="bold">
+<strong>Method</strong>
+</span>
+</td>
+<td colspan="2">
+<code class="literal">PUT /_config/section/key</code>
+</td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Request</strong>
+</span>
+</td>
+<td colspan="2">
+ Value structure
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Response</strong>
+</span>
+</td>
+<td colspan="2">
+ Previous value
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Admin Privileges Required</strong>
+</span>
+</td>
+<td colspan="2">no</td>
+</tr>
+<tr>
+<td colspan="3">
+<span class="bold">
+<strong>Return Codes</strong>
+</span>
+</td>
+</tr>
+<tr>
+<td>200</td>
+<td colspan="2">
+ Configuration option updated successfully
+ </td>
+</tr>
+<tr>
+<td>500</td>
+<td colspan="2">
+ Error setting configuration
+ </td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+      Updates a configuration value. The new value should be supplied in
+      the request body in the corresponding JSON format. For example, if
+      you are setting a string value, you must supply a valid JSON
+      string.
+    </p>
+<p>
+      For example, to set the function used to generate UUIDs by the
+      <code class="literal">GET /_uuids</code> API call to use the
+      <code class="literal">utc_random</code> generator:
+    </p>
+<pre class="programlisting">PUT http://couchdb:5984/_config/uuids/algorithm
+Content-Type: application/json
+
+"utc_random"</pre>
+<p>
+      The return value will be empty, with the response code indicating
+      the success or failure of the configuration setting.
+    </p>
+</div>
+</body>
+</html>

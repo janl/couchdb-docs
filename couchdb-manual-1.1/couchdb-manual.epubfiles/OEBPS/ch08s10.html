@@ -1,0 +1,1004 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>8.10.&nbsp;POST /db/_design/design-doc/_view/view-name</title>
+<link href="epub.css" type="text/css" rel="stylesheet" />
+<meta content="DocBook XSL Stylesheets V1.76.1" name="generator" />
+</head>
+<body>
+<div class="section" title="8.10.&nbsp;POST /db/_design/design-doc/_view/view-name">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-api-design_db-design-designdoc-view-viewname_post" />8.10.&nbsp;<code class="literal">POST /db/_design/design-doc/_view/view-name</code>
+</h1>
+</div>
+</div>
+</div>
+<div class="informaltable">
+<table summary="URL API POST /db/_design/design-doc/_view/view-name" border="1">
+<colgroup>
+<col class="field" width="33%" />
+<col class="info" width="33%" />
+<col class="addinfo" width="34%" />
+</colgroup>
+<tbody>
+<tr>
+<td>
+<span class="bold">
+<strong>Method</strong>
+</span>
+</td>
+<td colspan="2">
+<code class="literal">POST /db/_design/design-doc/_view/view-name</code>
+</td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Request</strong>
+</span>
+</td>
+<td colspan="2">
+ List of keys to be returned from specified view
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Response</strong>
+</span>
+</td>
+<td colspan="2">
+ JSON of the documents returned by the view
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Admin Privileges Required</strong>
+</span>
+</td>
+<td colspan="2">no</td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Query Arguments</strong>
+</span>
+</td>
+<td>
+<span class="bold">
+<strong>Argument</strong>
+</span>
+</td>
+<td>
+<code class="literal">descending</code>
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Description</strong>
+</span>
+</td>
+<td>
+ Return the documents in descending by key order
+ </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Optional</strong>
+</span>
+</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Type</strong>
+</span>
+</td>
+<td>boolean</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Default</strong>
+</span>
+</td>
+<td>false</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Argument</strong>
+</span>
+</td>
+<td>
+<code class="literal">endkey</code>
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Description</strong>
+</span>
+</td>
+<td>
+ Stop returning records when the specified key is reached
+ </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Optional</strong>
+</span>
+</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Type</strong>
+</span>
+</td>
+<td>string</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Argument</strong>
+</span>
+</td>
+<td>
+<code class="literal">endkey_docid</code>
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Description</strong>
+</span>
+</td>
+<td>
+ Stop returning records when the specified document ID is
+ reached
+ </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Optional</strong>
+</span>
+</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Type</strong>
+</span>
+</td>
+<td>string</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Argument</strong>
+</span>
+</td>
+<td>
+<code class="literal">group</code>
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Description</strong>
+</span>
+</td>
+<td>
+ Group the results using the reduce function to a group or
+ single row
+ </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Optional</strong>
+</span>
+</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Type</strong>
+</span>
+</td>
+<td>boolean</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Default</strong>
+</span>
+</td>
+<td>false</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Argument</strong>
+</span>
+</td>
+<td>
+<code class="literal">group_level</code>
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Description</strong>
+</span>
+</td>
+<td>
+ Specify the group level to be used
+ </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Optional</strong>
+</span>
+</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Type</strong>
+</span>
+</td>
+<td>numeric</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Argument</strong>
+</span>
+</td>
+<td>
+<code class="literal">include_docs</code>
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Description</strong>
+</span>
+</td>
+<td>
+ Include the full content of the documents in the return
+ </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Optional</strong>
+</span>
+</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Type</strong>
+</span>
+</td>
+<td>boolean</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Default</strong>
+</span>
+</td>
+<td>false</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Argument</strong>
+</span>
+</td>
+<td>
+<code class="literal">inclusive_end</code>
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Description</strong>
+</span>
+</td>
+<td>
+ Specifies whether the specified end key should be included
+ in the result
+ </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Optional</strong>
+</span>
+</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Type</strong>
+</span>
+</td>
+<td>boolean</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Default</strong>
+</span>
+</td>
+<td>true</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Argument</strong>
+</span>
+</td>
+<td>
+<code class="literal">key</code>
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Description</strong>
+</span>
+</td>
+<td>
+ Return only documents that match the specified key
+ </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Optional</strong>
+</span>
+</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Type</strong>
+</span>
+</td>
+<td>string</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Argument</strong>
+</span>
+</td>
+<td>
+<code class="literal">limit</code>
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Description</strong>
+</span>
+</td>
+<td>
+ Limit the number of the returned documents to the specified
+ number
+ </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Optional</strong>
+</span>
+</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Type</strong>
+</span>
+</td>
+<td>numeric</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Argument</strong>
+</span>
+</td>
+<td>
+<code class="literal">reduce</code>
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Description</strong>
+</span>
+</td>
+<td>
+ Use the reduction function
+ </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Optional</strong>
+</span>
+</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Type</strong>
+</span>
+</td>
+<td>boolean</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Default</strong>
+</span>
+</td>
+<td>true</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Argument</strong>
+</span>
+</td>
+<td>
+<code class="literal">skip</code>
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Description</strong>
+</span>
+</td>
+<td>
+ Skip this number of records before starting to return the
+ results
+ </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Optional</strong>
+</span>
+</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Type</strong>
+</span>
+</td>
+<td>numeric</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Default</strong>
+</span>
+</td>
+<td>0</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Argument</strong>
+</span>
+</td>
+<td>
+<code class="literal">stale</code>
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Description</strong>
+</span>
+</td>
+<td>
+ Allow the results from a stale view to be used
+ </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Optional</strong>
+</span>
+</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Type</strong>
+</span>
+</td>
+<td>string</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Default</strong>
+</span>
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Supported Values</strong>
+</span>
+</td>
+<td class="auto-generated">&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<code class="literal">ok</code>
+</td>
+<td>Allow stale views</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Argument</strong>
+</span>
+</td>
+<td>
+<code class="literal">startkey</code>
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Description</strong>
+</span>
+</td>
+<td>
+ Return records starting with the specified key
+ </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Optional</strong>
+</span>
+</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Type</strong>
+</span>
+</td>
+<td>string</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Argument</strong>
+</span>
+</td>
+<td>
+<code class="literal">startkey_docid</code>
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Description</strong>
+</span>
+</td>
+<td>
+ Return records starting with the specified document ID
+ </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Optional</strong>
+</span>
+</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Type</strong>
+</span>
+</td>
+<td>string</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Argument</strong>
+</span>
+</td>
+<td>
+<code class="literal">update_seq</code>
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Description</strong>
+</span>
+</td>
+<td>
+ Include the update sequence in the generated results
+ </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Optional</strong>
+</span>
+</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Type</strong>
+</span>
+</td>
+<td>boolean</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Default</strong>
+</span>
+</td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+      Executes the specified <code class="literal">view-name</code> from the
+      specified <code class="literal">design-doc</code> design document. Unlike
+      the <code class="literal">GET</code> method for accessing views, the
+      <code class="literal">POST</code> method supports the specification of
+      explicit keys to be retrieved from the view results. The remainder
+      of the <code class="literal">POST</code> view functionality is identical to
+      the
+      <a class="xref" href="ch08s09.html" title="8.9.&nbsp;GET /db/_design/design-doc/_view/view-name">Section&nbsp;8.9, &ldquo;<code class="literal">GET /db/_design/design-doc/_view/view-name</code>&rdquo;</a>
+      fun
+    </p>
+<p>
+      For example, the request below will return all the recipes where
+      the key for the view matches either <span class="quote">&ldquo;<span class="quote">claret</span>&rdquo;</span> or
+      <span class="quote">&ldquo;<span class="quote">clear apple cider</span>&rdquo;</span> :
+    </p>
+<pre class="programlisting">POST http://couchdb:5984/recipes/_design/recipes/_view/by_ingredient
+Content-Type: application/json
+
+{
+   "keys" : [
+      "claret",
+      "clear apple juice"
+   ]
+}</pre>
+<p>
+      The returned view data contains the standard view information, but
+      only where the keys match.
+    </p>
+<pre class="programlisting">{
+   "total_rows" : 26484,
+   "rows" : [
+      {
+         "value" : [
+            "Scotch collops"
+         ],
+         "id" : "Scotchcollops",
+         "key" : "claret"
+      },
+      {
+         "value" : [
+            "Stand pie"
+         ],
+         "id" : "Standpie",
+         "key" : "clear apple juice"
+      }
+   ],
+   "offset" : 6324
+}</pre>
+<div class="section" title="8.10.1.&nbsp;Multi-document Fetching">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="couchdb-api-design_db-design-designdoc-view-viewname_post-multidoc" />8.10.1.&nbsp;Multi-document Fetching</h2>
+</div>
+</div>
+</div>
+<p>
+        By combining the <code class="literal">POST</code> method to a given view
+        with the <code class="literal">include_docs=true</code> query argument you
+        can obtain multiple documents from a database. The result is
+        more efficient than using multiple
+        <a class="xref" href="ch06s02.html" title="6.2.&nbsp;GET /db/doc">Section&nbsp;6.2, &ldquo;<code class="literal">GET /db/doc</code>&rdquo;</a>
+        requests.
+      </p>
+<p>
+        For example, sending the following request for ingredients
+        matching <span class="quote">&ldquo;<span class="quote">claret</span>&rdquo;</span> and <span class="quote">&ldquo;<span class="quote">clear apple
+        juice</span>&rdquo;</span>:
+      </p>
+<pre class="programlisting">POST http://couchdb:5984/recipes/_design/recipes/_view/by_ingredient?include_docs=true
+Content-Type: application/json
+
+{
+   "keys" : [
+      "claret",
+      "clear apple juice"
+   ]
+}</pre>
+<p>
+        Returns the full document for each recipe:
+      </p>
+<pre class="programlisting">{
+   "offset" : 6324,
+   "rows" : [
+      {
+         "doc" : {
+            "_id" : "Scotchcollops",
+            "_rev" : "1-bcbdf724f8544c89697a1cbc4b9f0178",
+            "cooktime" : "8",
+            "ingredients" : [
+               {
+                  "ingredient" : "onion",
+                  "ingredtext" : "onion, peeled and chopped",
+                  "meastext" : "1"
+               },
+            ...
+            ],
+            "keywords" : [
+               "cook method.hob, oven, grill@hob",
+               "diet@wheat-free",
+               "diet@peanut-free",
+               "special collections@classic recipe",
+               "cuisine@british traditional",
+               "diet@corn-free",
+               "diet@citrus-free",
+               "special collections@very easy",
+               "diet@shellfish-free",
+               "main ingredient@meat",
+               "occasion@christmas",
+               "meal type@main",
+               "diet@egg-free",
+               "diet@gluten-free"
+            ],
+            "preptime" : "10",
+            "servings" : "4",
+            "subtitle" : "This recipe comes from an old recipe book of 1683 called 'The Gentlewoman's Kitchen'. This is an excellent way of making a rich and full-flavoured meat dish in a very short time.",
+            "title" : "Scotch collops",
+            "totaltime" : "18"
+         },
+         "id" : "Scotchcollops",
+         "key" : "claret",
+         "value" : [
+            "Scotch collops"
+         ]
+      },
+      {
+         "doc" : {
+            "_id" : "Standpie",
+            "_rev" : "1-bff6edf3ca2474a243023f2dad432a5a",
+            "cooktime" : "92",
+            "ingredients" : [
+...            ],
+            "keywords" : [
+               "diet@dairy-free",
+               "diet@peanut-free",
+               "special collections@classic recipe",
+               "cuisine@british traditional",
+               "diet@corn-free",
+               "diet@citrus-free",
+               "occasion@buffet party",
+               "diet@shellfish-free",
+               "occasion@picnic",
+               "special collections@lunchbox",
+               "main ingredient@meat",
+               "convenience@serve with salad for complete meal",
+               "meal type@main",
+               "cook method.hob, oven, grill@hob / oven",
+               "diet@cow dairy-free"
+            ],
+            "preptime" : "30",
+            "servings" : "6",
+            "subtitle" : "Serve this pie with pickled vegetables and potato salad.",
+            "title" : "Stand pie",
+            "totaltime" : "437"
+         },
+         "id" : "Standpie",
+         "key" : "clear apple juice",
+         "value" : [
+            "Stand pie"
+         ]
+      }
+   ],
+   "total_rows" : 26484
+}</pre>
+</div>
+</div>
+</body>
+</html>

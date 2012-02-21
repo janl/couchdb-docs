@@ -1,0 +1,33 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Chapter&nbsp;4.&nbsp;CouchDB API</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="index.html" title="CouchDB 1.1 Manual"><link rel="prev" href="couchdb-single-replication-replicatordb-delegations.html" title="3.1.7.&nbsp;Delegations"><link rel="next" href="couchdb-api-introduction-requests.html" title="4.1.&nbsp;Request Format and Responses"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter&nbsp;4.&nbsp;CouchDB API</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-single-replication-replicatordb-delegations.html">Prev</a>&nbsp;</td><th align="center" width="60%">&nbsp;</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-introduction-requests.html">Next</a></td></tr></table><hr></div><div class="chapter" title="Chapter&nbsp;4.&nbsp;CouchDB API"><div class="titlepage"><div><div><h2 class="title"><a name="couchdb-api-basics"></a>Chapter&nbsp;4.&nbsp;CouchDB API</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="couchdb-api-introduction-requests.html">4.1. Request Format and Responses</a></span></dt><dt><span class="section"><a href="couchdb-api-introduction-request-header.html">4.2. HTTP Headers</a></span></dt><dd><dl><dt><span class="section"><a href="couchdb-api-introduction-request-header-request.html">4.2.1. Request Headers</a></span></dt><dt><span class="section"><a href="couchdb-api-introduction-request-header-response.html">4.2.2. Response Headers</a></span></dt></dl></dd><dt><span class="section"><a href="couchdb-api-introduction-json.html">4.3. JSON Basics</a></span></dt><dt><span class="section"><a href="couchdb-api-introduction-returncodes.html">4.4. HTTP Status Codes</a></span></dt><dt><span class="section"><a href="couchdb-api-overview.html">4.5. CouchDB API Overview</a></span></dt></dl></div><p>
+    The CouchDB API is the primary method of interfacing to a CouchDB
+    instance. Requests are made using HTTP and requests are used to
+    request information from the database, store new data, and perform
+    views and formatting of the information stored within the documents.
+  </p><p>
+    Requests to the API can be categorised by the different areas of the
+    CouchDB system that you are accessing, and the HTTP method used to
+    send the request. Different methods imply different operations, for
+    example retrieval of information from the database is typically
+    handled by the <code class="literal">GET</code> operation, while updates are
+    handled by either a <code class="literal">POST</code> or
+    <code class="literal">PUT</code> request. There are some differences between
+    the information that must be supplied for the different methods. For
+    a guide to the basic HTTP methods and request structure, see
+    <a class="xref" href="couchdb-api-introduction-requests.html" title="4.1.&nbsp;Request Format and Responses">Section&nbsp;4.1, &ldquo;Request Format and Responses&rdquo;</a>.
+  </p><p>
+    For nearly all operations, the submitted data, and the returned data
+    structure, is defined within a JavaScript Object Notation (JSON)
+    object. Basic information on the content and data types for JSON are
+    provided in <a class="xref" href="couchdb-api-introduction-json.html" title="4.3.&nbsp;JSON Basics">Section&nbsp;4.3, &ldquo;JSON Basics&rdquo;</a>.
+  </p><p>
+    Errors when accessing the CouchDB API are reported using standard
+    HTTP Status Codes. A guide to the generic codes returned by CouchDB
+    are provided in
+    <a class="xref" href="couchdb-api-introduction-returncodes.html" title="4.4.&nbsp;HTTP Status Codes">Section&nbsp;4.4, &ldquo;HTTP Status Codes&rdquo;</a>.
+  </p><p>
+    When accessing specific areas of the CouchDB API, specific
+    information and examples on the HTTP methods and request, JSON
+    structures, and error codes are provided. For a guide to the
+    different areas of the API, see
+    <a class="xref" href="couchdb-api-overview.html" title="4.5.&nbsp;CouchDB API Overview">Section&nbsp;4.5, &ldquo;CouchDB API Overview&rdquo;</a>.
+  </p></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-single-replication-replicatordb-delegations.html">Prev</a>&nbsp;</td><td align="center" width="20%">&nbsp;</td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-introduction-requests.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">3.1.7.&nbsp;Delegations&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;4.1.&nbsp;Request Format and Responses</td></tr></table></div></body></html>

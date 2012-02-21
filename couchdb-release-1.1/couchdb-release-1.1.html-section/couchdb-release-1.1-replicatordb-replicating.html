@@ -1,0 +1,33 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>2.6.&nbsp;Replicating the replicator database</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB Release 1.1 Feature Guide"><link rel="up" href="couchb-release-1.1-replicatordb.html" title="2.&nbsp;Replicator Database"><link rel="prev" href="couchdb-release-1.1-replicatordb-changing.html" title="2.5.&nbsp;Changing the Replicator Database"><link rel="next" href="couchdb-release-1.1-replicatordb-delegations.html" title="2.7.&nbsp;Delegations"><meta name="date" content="2012-02-21T20:09:25+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">2.6.&nbsp;Replicating the replicator database</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-release-1.1-replicatordb-changing.html">Prev</a>&nbsp;</td><th align="center" width="60%">2.&nbsp;Replicator Database</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-release-1.1-replicatordb-delegations.html">Next</a></td></tr></table><hr></div><div class="section" title="2.6.&nbsp;Replicating the replicator database"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-release-1.1-replicatordb-replicating"></a>2.6.&nbsp;Replicating the replicator database</h3></div></div></div><p>
+        Imagine you have in server C a replicator database with the two
+        following pull replication documents in it:
+      </p><pre class="programlisting">{
+     "_id": "rep_from_A",
+     "source":  "http://aserver.com:5984/foo",
+     "target":  "foo_a",
+     "continuous":  true,
+     "_replication_id":  "c0ebe9256695ff083347cbf95f93e280",
+     "_replication_state":  "triggered",
+     "_replication_state_time":  1297971311
+}
+{
+     "_id": "rep_from_B",
+     "source":  "http://bserver.com:5984/foo",
+     "target":  "foo_b",
+     "continuous":  true,
+     "_replication_id":  "231bb3cf9d48314eaa8d48a9170570d1",
+     "_replication_state":  "triggered",
+     "_replication_state_time":  1297974122
+}</pre><p>
+        Now you would like to have the same pull replications going on
+        in server D, that is, you would like to have server D pull
+        replicating from servers A and B. You have two options:
+      </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+            Explicitly add two documents to server's D replicator
+            database
+          </p></li><li class="listitem"><p>
+            Replicate server's C replicator database into server's D
+            replicator database
+          </p></li></ul></div><p>
+        Both alternatives accomplish exactly the same goal.
+      </p></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-release-1.1-replicatordb-changing.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchb-release-1.1-replicatordb.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-release-1.1-replicatordb-delegations.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">2.5.&nbsp;Changing the Replicator Database&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;2.7.&nbsp;Delegations</td></tr></table></div></body></html>

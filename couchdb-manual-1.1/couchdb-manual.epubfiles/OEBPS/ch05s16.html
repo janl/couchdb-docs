@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>5.16.&nbsp;GET /db/_security</title>
+<link href="epub.css" type="text/css" rel="stylesheet" />
+<meta content="DocBook XSL Stylesheets V1.76.1" name="generator" />
+</head>
+<body>
+<div class="section" title="5.16.&nbsp;GET /db/_security">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-api-db_db-security_get" />5.16.&nbsp;<code class="literal">GET /db/_security</code>
+</h1>
+</div>
+</div>
+</div>
+<div class="informaltable">
+<table summary="URL API GET /db/_security" border="1">
+<colgroup>
+<col class="field" width="33%" />
+<col class="info" width="33%" />
+<col class="addinfo" width="34%" />
+</colgroup>
+<tbody>
+<tr>
+<td>
+<span class="bold">
+<strong>Method</strong>
+</span>
+</td>
+<td colspan="2">
+<code class="literal">GET /db/_security</code>
+</td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Request</strong>
+</span>
+</td>
+<td colspan="2">
+ None
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Response</strong>
+</span>
+</td>
+<td colspan="2">
+ JSON of the security object
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Admin Privileges Required</strong>
+</span>
+</td>
+<td colspan="2">no</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+      Gets the current secrity object from the specified database. The
+      security object consists of two compulsory elements,
+      <code class="literal">admins</code> and <code class="literal">readers</code>, which
+      are used to specify the list of users and/or roles that have admin
+      and reader rights to the database respectively. Any additional
+      fields in the security object are optional. The entire security
+      object is made available to validation and other internal
+      functions so that the database can control and limit
+      functionality.
+    </p>
+<p>
+      To get the existing security object you would send the following
+      request:
+    </p>
+<pre class="programlisting">{
+   "admins" : {
+      "roles" : [],
+      "names" : [
+         "mc",
+         "slp"
+      ]
+   },
+   "readers" : {
+      "roles" : [],
+      "names" : [
+         "tim",
+         "brian"
+      ]
+   }
+}</pre>
+<div class="table">
+<a id="table-couchdb-api-db-json-security" />
+<p class="title">
+<strong>Table&nbsp;5.8.&nbsp;
+ Security Object
+ </strong>
+</p>
+<div class="table-contents">
+<table summary="
+ Security Object
+ " border="1">
+<colgroup>
+<col class="item" width="30%" />
+<col class="desc" width="70%" />
+</colgroup>
+<tbody>
+<tr>
+<td>
+<span class="bold">
+<strong>Field</strong>
+</span>
+</td>
+<td>
+<span class="bold">
+<strong>Description</strong>
+</span>
+</td>
+</tr>
+<tr>
+<td>
+<code class="literal">admins</code>  </td>
+<td>
+ Roles/Users with admin privileges
+ </td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">roles</code> <code class="literal">[array]</code> </td>
+<td>
+ List of roles with parent privilege
+ </td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">users</code> <code class="literal">[array]</code> </td>
+<td>
+ List of users with parent privilege
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">readers</code>  </td>
+<td>
+ Roles/Users with reader privileges
+ </td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">roles</code> <code class="literal">[array]</code> </td>
+<td>
+ List of roles with parent privilege
+ </td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">users</code> <code class="literal">[array]</code> </td>
+<td>
+ List of users with parent privilege
+ </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Note</h3>
+<p>
+        If the security object for a database has never beent set, then
+        the value returned will be empty.
+      </p>
+</div>
+</div>
+</body>
+</html>

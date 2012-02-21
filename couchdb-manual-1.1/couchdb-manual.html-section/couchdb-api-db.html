@@ -1,0 +1,61 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Chapter&nbsp;5.&nbsp;CouchDB API Server Database Methods</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="index.html" title="CouchDB 1.1 Manual"><link rel="prev" href="couchdb-api-overview.html" title="4.5.&nbsp;CouchDB API Overview"><link rel="next" href="couchdb-api-db_db_get.html" title="5.1.&nbsp;GET /db"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter&nbsp;5.&nbsp;CouchDB API Server Database Methods</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-api-overview.html">Prev</a>&nbsp;</td><th align="center" width="60%">&nbsp;</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-db_db_get.html">Next</a></td></tr></table><hr></div><div class="chapter" title="Chapter&nbsp;5.&nbsp;CouchDB API Server Database Methods"><div class="titlepage"><div><div><h2 class="title"><a name="couchdb-api-db"></a>Chapter&nbsp;5.&nbsp;CouchDB API Server Database Methods</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="couchdb-api-db_db_get.html">5.1. <code class="literal">GET /db</code></a></span></dt><dt><span class="section"><a href="couchdb-api-db_db_put.html">5.2. <code class="literal">PUT /db</code></a></span></dt><dt><span class="section"><a href="couchdb-api-db_db_delete.html">5.3. <code class="literal">DELETE /db</code></a></span></dt><dt><span class="section"><a href="couchdb-api-db_db-changes_get.html">5.4. <code class="literal">GET /db/_changes</code></a></span></dt><dd><dl><dt><span class="section"><a href="couchdb-api-db_db-changes_get-filters.html">5.4.1. Filtering</a></span></dt></dl></dd><dt><span class="section"><a href="couchdb-api-db_db-compact_post.html">5.5. <code class="literal">POST /db/_compact</code></a></span></dt><dt><span class="section"><a href="couchdb-api-db_db-compact-design-doc_post.html">5.6. <code class="literal">POST /db/_compact/design-doc</code></a></span></dt><dt><span class="section"><a href="couchdb-api-db_db-view-cleanup_post.html">5.7. <code class="literal">POST /db/_view_cleanup</code></a></span></dt><dt><span class="section"><a href="couchdb-api-db_db-ensure-full-commit_post.html">5.8. <code class="literal">POST /db/_ensure_full_commit</code></a></span></dt><dt><span class="section"><a href="couchdb-api-db_db-bulk-docs_post.html">5.9. <code class="literal">POST /db/_bulk_docs</code></a></span></dt><dd><dl><dt><span class="section"><a href="couchdb-api-db_db-bulk-docs_post-insert.html">5.9.1. Inserting Documents in Bulk</a></span></dt><dt><span class="section"><a href="couchdb-api-db_db-bulk-docs_post-update.html">5.9.2. Updating Documents in Bulk</a></span></dt><dt><span class="section"><a href="couchdb-api-db_db-bulk-docs_post-commit.html">5.9.3. Bulk Documents Transaction Semantics</a></span></dt><dt><span class="section"><a href="couchdb-api-db_db-bulk-docs_post-errors.html">5.9.4. Bulk Document Validation and Conflict Errors</a></span></dt></dl></dd><dt><span class="section"><a href="couchdb-api-db_db-temp-view_post.html">5.10. <code class="literal">POST /db/_temp_view</code></a></span></dt><dt><span class="section"><a href="couchdb-api-db_db-purge_post.html">5.11. <code class="literal">POST /db/_purge</code></a></span></dt><dd><dl><dt><span class="section"><a href="couchdb-api-db_db-purge_post-indexrebuild.html">5.11.1. Updating Indexes</a></span></dt></dl></dd><dt><span class="section"><a href="couchdb-api-db_db-all-docs_get.html">5.12. <code class="literal">GET /db/_all_docs</code></a></span></dt><dt><span class="section"><a href="couchdb-api-db_db-all-docs_post.html">5.13. <code class="literal">POST /db/_all_docs</code></a></span></dt><dt><span class="section"><a href="couchdb-api-db_db-missing-revs_post.html">5.14. <code class="literal">POST /db/_missing_revs</code></a></span></dt><dt><span class="section"><a href="couchdb-api-db_db-revs-diff_post.html">5.15. <code class="literal">POST /db/_revs_diff</code></a></span></dt><dt><span class="section"><a href="couchdb-api-db_db-security_get.html">5.16. <code class="literal">GET /db/_security</code></a></span></dt><dt><span class="section"><a href="couchdb-api-db_db-security_put.html">5.17. <code class="literal">PUT /db/_security</code></a></span></dt><dt><span class="section"><a href="couchdb-api-db_db-revs-limit_get.html">5.18. <code class="literal">GET /db/_revs_limit</code></a></span></dt><dt><span class="section"><a href="couchdb-api-db_db-revs-limit_put.html">5.19. <code class="literal">PUT /db/_revs_limit</code></a></span></dt></dl></div><p>
+    The Database methods provide an interface to an entire database
+    withing CouchDB. These are database, rather than document, level
+    requests.
+  </p><p>
+    A list of the available methods and URL paths are provided below:
+  </p><div class="table"><a name="table-couchdb-api-db-summary"></a><p class="title"><b>Table&nbsp;5.1.&nbsp;Database API Calls</b></p><div class="table-contents"><table summary="Database API Calls" border="1"><colgroup><col class="method" width="33%"><col class="path" width="33%"><col class="desc" width="34%"></colgroup><thead><tr><th>Method</th><th>Path</th><th>Description</th></tr></thead><tbody><tr><td><code class="literal">GET</code></td><td><code class="literal">/db</code></td><td><a class="link" href="couchdb-api-db_db_get.html" title="5.1.&nbsp;GET /db">
+ Returns database information
+ </a></td></tr><tr><td><code class="literal">PUT</code></td><td><code class="literal">/db</code></td><td><a class="link" href="couchdb-api-db_db_put.html" title="5.2.&nbsp;PUT /db">
+ Create a new database
+ </a></td></tr><tr><td><code class="literal">DELETE</code></td><td><code class="literal">/db</code></td><td><a class="link" href="couchdb-api-db_db_delete.html" title="5.3.&nbsp;DELETE /db">
+ Delete an existing database
+ </a></td></tr><tr><td><code class="literal">GET</code></td><td><code class="literal">/db/_all_docs</code></td><td><a class="link" href="couchdb-api-db_db-all-docs_get.html" title="5.12.&nbsp;GET /db/_all_docs">
+ Returns a built-in view of all documents in this database
+ </a></td></tr><tr><td><code class="literal">POST</code></td><td><code class="literal">/db/_all_docs</code></td><td><a class="link" href="couchdb-api-db_db-all-docs_post.html" title="5.13.&nbsp;POST /db/_all_docs">
+ Returns certain rows from the built-in view of all documents
+ </a></td></tr><tr><td><code class="literal">POST</code></td><td><code class="literal">/db/_bulk_docs</code></td><td><a class="link" href="couchdb-api-db_db-bulk-docs_post.html" title="5.9.&nbsp;POST /db/_bulk_docs">
+ Insert multiple documents in to the database in a single request
+ </a></td></tr><tr><td><code class="literal">GET</code></td><td><code class="literal">/db/_changes</code></td><td><a class="link" href="couchdb-api-db_db-changes_get.html" title="5.4.&nbsp;GET /db/_changes">
+ Returns changes for the given database
+ </a></td></tr><tr><td><code class="literal">POST</code></td><td><code class="literal">/db/_compact</code></td><td><a class="link" href="couchdb-api-db_db-compact_post.html" title="5.5.&nbsp;POST /db/_compact">
+ Starts a compaction for the database
+ </a></td></tr><tr><td><code class="literal">POST</code></td><td><code class="literal">/db/_compact/design-doc</code></td><td><a class="link" href="couchdb-api-db_db-compact-design-doc_post.html" title="5.6.&nbsp;POST /db/_compact/design-doc">
+ Starts a compaction for all the views in the selected design
+ document
+ </a></td></tr><tr><td><code class="literal">POST</code></td><td><code class="literal">/db/_ensure_full_commit</code></td><td><a class="link" href="couchdb-api-db_db-ensure-full-commit_post.html" title="5.8.&nbsp;POST /db/_ensure_full_commit">
+ Makes sure all uncommitted changes are written and synchronized
+ to the disk
+ </a></td></tr><tr><td><code class="literal">POST</code></td><td><code class="literal">/db/_missing_revs</code></td><td><a class="link" href="couchdb-api-db_db-missing-revs_post.html" title="5.14.&nbsp;POST /db/_missing_revs">
+ Given a list of document revisions, returns the document
+ revisions that do not exist in the database
+ </a></td></tr><tr><td><code class="literal">POST</code></td><td><code class="literal">/db/_purge</code></td><td><a class="link" href="couchdb-api-db_db-purge_post.html" title="5.11.&nbsp;POST /db/_purge">
+ Purge some historical documents entirely from database history
+ </a></td></tr><tr><td><code class="literal">POST</code></td><td><code class="literal">/db/_revs_diff</code></td><td><a class="link" href="couchdb-api-db_db-revs-diff_post.html" title="5.15.&nbsp;POST /db/_revs_diff">
+ Given a list of document revisions, returns differences between
+ the given revisions and ones that are in the database
+ </a></td></tr><tr><td><code class="literal">GET</code></td><td><code class="literal">/db/_revs_limit</code></td><td><a class="link" href="couchdb-api-db_db-revs-limit_get.html" title="5.18.&nbsp;GET /db/_revs_limit">
+ Gets the limit of historical revisions to store for a single
+ document in the database
+ </a></td></tr><tr><td><code class="literal">PUT</code></td><td><code class="literal">/db/_revs_limit</code></td><td><a class="link" href="couchdb-api-db_db-revs-limit_put.html" title="5.19.&nbsp;PUT /db/_revs_limit">
+ Sets the limit of historical revisions to store for a single
+ document in the database
+ </a></td></tr><tr><td><code class="literal">GET</code></td><td><code class="literal">/db/_security</code></td><td><a class="link" href="couchdb-api-db_db-security_get.html" title="5.16.&nbsp;GET /db/_security">
+ Returns the special security object for the database
+ </a></td></tr><tr><td><code class="literal">PUT</code></td><td><code class="literal">/db/_security</code></td><td><a class="link" href="couchdb-api-db_db-security_put.html" title="5.17.&nbsp;PUT /db/_security">
+ Sets the special security object for the database
+ </a></td></tr><tr><td><code class="literal">POST</code></td><td><code class="literal">/db/_temp_view</code></td><td><a class="link" href="couchdb-api-db_db-temp-view_post.html" title="5.10.&nbsp;POST /db/_temp_view">
+ Execute a given view function for all documents and return the
+ result
+ </a></td></tr><tr><td><code class="literal">POST</code></td><td><code class="literal">/db/_view_cleanup</code></td><td><a class="link" href="couchdb-api-db_db-view-cleanup_post.html" title="5.7.&nbsp;POST /db/_view_cleanup">
+ Removes view files that are not used by any design document
+ </a></td></tr></tbody></table></div></div><br class="table-break"><p>
+    For all the database methods, the database name within the URL path
+    should be the database name that you wish to perform the operation
+    on. For example, to obtain the meta information for the database
+    <code class="literal">recipes</code>, you would use the HTTP request:
+  </p><pre class="programlisting">GET /recipes</pre><p>
+    For clarity, the form below is used in the URL paths:
+  </p><pre class="programlisting">GET /db</pre><p>
+    Where <code class="literal">db</code> is the name of any database.
+  </p></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-api-overview.html">Prev</a>&nbsp;</td><td align="center" width="20%">&nbsp;</td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-db_db_get.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">4.5.&nbsp;CouchDB API Overview&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;5.1.&nbsp;<code class="literal">GET /db</code></td></tr></table></div></body></html>

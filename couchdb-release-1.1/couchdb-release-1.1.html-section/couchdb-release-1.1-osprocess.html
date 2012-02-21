@@ -1,0 +1,33 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>10.&nbsp;OS Daemons</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB Release 1.1 Feature Guide"><link rel="up" href="index.html" title="CouchDB Release 1.1 Feature Guide"><link rel="prev" href="couchdb-release-1.1-wildcards.html" title="9.&nbsp;Allow wildcards in vhosts definitions"><link rel="next" href="coudhdb-release-1.1-updateafter.html" title="11.&nbsp;Stale views and update_after"><meta name="date" content="2012-02-21T20:09:25+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">10.&nbsp;OS Daemons</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-release-1.1-wildcards.html">Prev</a>&nbsp;</td><th align="center" width="60%">&nbsp;</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="coudhdb-release-1.1-updateafter.html">Next</a></td></tr></table><hr></div><div class="section" title="10.&nbsp;OS Daemons"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-release-1.1-osprocess"></a>10.&nbsp;OS Daemons</h2></div></div></div><p>
+      CouchDB now supports starting external processes. The support is
+      simple and enables CouchDB to start each configured OS daemon. If
+      the daemon stops at any point, CouchDB will restart it (with
+      protection to ensure regularly failing daemons are not repeatedly
+      restarted).
+    </p><p>
+      The daemon starting process is one-to-one; for each each
+      configured daemon in the configuration file, CouchDB will start
+      exactly one instance. If you need to run multiple instances, then
+      you must create separate individual configurations. Daemons are
+      configured within the <code class="literal">[os_daemons]</code> section of
+      your configuration file (<code class="filename">local.ini</code>). The
+      format of each configured daemon is:
+    </p><pre class="programlisting">NAME = PATH ARGS</pre><p>
+      Where <code class="literal">NAME</code> is an arbitrary (and unique) name to
+      identify the daemon; <code class="literal">PATH</code> is the full path to
+      the daemon to be executed; <code class="literal">ARGS</code> are any
+      required arguments to the daemon.
+    </p><p>
+      For example:
+    </p><pre class="programlisting">[os_daemons]
+basic_responder = /usr/local/bin/responsder.js</pre><p>
+      There is no interactivity between CouchDB and the running process,
+      but you can use the OS Daemons service to create new HTTP servers
+      and responders and then use the new proxy service to redirect
+      requests and output to the CouchDB managed service. For more
+      information on proxying, see
+      <a class="xref" href="couchdb-release-1.1-proxying.html" title="5.&nbsp;HTTP Proxying">Section&nbsp;5, &ldquo;HTTP Proxying&rdquo;</a>. For further
+      background on the OS Daemon service, see
+      <a class="ulink" href="http://davispj.com/2010/09/26/new-couchdb-externals-api.html" target="_top">CouchDB
+      Externals API</a>
+    </p></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-release-1.1-wildcards.html">Prev</a>&nbsp;</td><td align="center" width="20%">&nbsp;</td><td align="right" width="40%">&nbsp;<a accesskey="n" href="coudhdb-release-1.1-updateafter.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">9.&nbsp;Allow wildcards in vhosts definitions&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;11.&nbsp;Stale views and <code class="literal">update_after</code></td></tr></table></div></body></html>

@@ -1,0 +1,40 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>1.1.2.&nbsp;Configuring Replication</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-single-introduction-futon.html" title="1.1.&nbsp;Using Futon"><link rel="prev" href="couchdb-single-introduction-futon-dbdocs.html" title="1.1.1.&nbsp;Managing Databases and Documents"><link rel="next" href="couchdb-single-introduction-curl.html" title="1.2.&nbsp;Using curl"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">1.1.2.&nbsp;Configuring Replication</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-single-introduction-futon-dbdocs.html">Prev</a>&nbsp;</td><th align="center" width="60%">1.1.&nbsp;Using Futon</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-single-introduction-curl.html">Next</a></td></tr></table><hr></div><div class="section" title="1.1.2.&nbsp;Configuring Replication"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-single-introduction-futon-replication"></a>1.1.2.&nbsp;Configuring Replication</h3></div></div></div><p>
+        When you click the <span class="guibutton">Replicator</span> option
+        within the <span class="guilabel">Tools</span> menu you are presented
+        with the Replicator screen. This allows you to start replication
+        between two databases by filling in or select the appropriate
+        options within the form provided.
+      </p><div class="figure"><a name="fig-ccouchdb-single-introduction-futon-replication-form"></a><p class="title"><b>Figure&nbsp;1.5.&nbsp;Replication Form</b></p><div class="figure-contents"><div class="mediaobject"><table cellpadding="0" cellspacing="0" summary="manufactured viewport for HTML img" border="0" width="100%"><tr><td><img width="100%" src="images/futon-replform.png" height="100%" alt="Replication Form"></td></tr></table></div></div></div><br class="figure-break"><p>
+        To start a replication process, either the select the local
+        database or enter a remote database name into the corresponding
+        areas of the form. Replication occurs from the database on the
+        left to the database on the right.
+      </p><p>
+        If you are specifying a remote database name, you must specify
+        the full URL of the remote database (including the host, port
+        number and database name). If the remote instance requires
+        authentication, you can specify the username and password as
+        part of the URL, for example
+        <code class="literal">http://username:pass@remotehost:5984/demo</code>.
+      </p><p>
+        To enable continuous replication, click the
+        <span class="guilabel">Continuous</span> checkbox.
+      </p><p>
+        To start the replication process, click the
+        <span class="guibutton">Replicate</span> button. The replication process
+        should start and will continue in the background. If the
+        replication process will take a long time, you can monitor the
+        status of the replication using the
+        <span class="guibutton">Status</span> option under the
+        <span class="guilabel">Tools</span> menu.
+      </p><p>
+        Once replication has been completed, the page will show the
+        information returned when the replication process completes by
+        the API.
+      </p><p>
+        The <span class="guilabel">Replicator</span> tool is an interface to the
+        underlying replication API. For more information, see
+        <a class="xref" href="couchdb-api-misc_replicate_post.html" title="9.5.&nbsp;POST /_replicate">Section&nbsp;9.5, &ldquo;<code class="literal">POST /_replicate</code>&rdquo;</a>.
+        For more information on replication, see
+        <a class="xref" href="couchdb-single-replication.html" title="Chapter&nbsp;3.&nbsp;Replication">Chapter&nbsp;3, <i>Replication</i></a>.
+      </p></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-single-introduction-futon-dbdocs.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-single-introduction-futon.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-single-introduction-curl.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">1.1.1.&nbsp;Managing Databases and Documents&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;1.2.&nbsp;Using <span class="command"><strong>curl</strong></span></td></tr></table></div></body></html>

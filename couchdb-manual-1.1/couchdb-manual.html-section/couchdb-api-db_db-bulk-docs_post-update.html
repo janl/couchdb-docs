@@ -1,0 +1,67 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>5.9.2.&nbsp;Updating Documents in Bulk</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-api-db_db-bulk-docs_post.html" title="5.9.&nbsp;POST /db/_bulk_docs"><link rel="prev" href="couchdb-api-db_db-bulk-docs_post-insert.html" title="5.9.1.&nbsp;Inserting Documents in Bulk"><link rel="next" href="couchdb-api-db_db-bulk-docs_post-commit.html" title="5.9.3.&nbsp;Bulk Documents Transaction Semantics"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">5.9.2.&nbsp;Updating Documents in Bulk</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-api-db_db-bulk-docs_post-insert.html">Prev</a>&nbsp;</td><th align="center" width="60%">5.9.&nbsp;<code class="literal">POST /db/_bulk_docs</code></th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-db_db-bulk-docs_post-commit.html">Next</a></td></tr></table><hr></div><div class="section" title="5.9.2.&nbsp;Updating Documents in Bulk"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-api-db_db-bulk-docs_post-update"></a>5.9.2.&nbsp;Updating Documents in Bulk</h3></div></div></div><p>
+        The bulk document update procedure is similar to the insertion
+        procedure, except that you must specify the document ID and
+        current revision for every document in the bulk update JSON
+        string.
+      </p><p>
+        For example, you could send the following request:
+      </p><pre class="programlisting">POST http://couchdb:5984/recipes/_bulk_docs
+Content-Type: application/json
+
+{
+   "docs" : [
+      {
+         "_id" : "FishStew",
+         "_rev" : "1-9c65296036141e575d32ba9c034dd3ee",
+         "servings" : 4,
+         "subtitle" : "Delicious with freshly baked bread",
+         "title" : "Fish Stew"
+      },
+      {
+         "_id" : "LambStew",
+         "_rev" : "1-34c318924a8f327223eed702ddfdc66d",
+         "servings" : 6,
+         "subtitle" : "Serve with a wholemeal scone topping",
+         "title" : "Lamb Stew"
+      },
+      {
+         "_id" : "7f7638c86173eb440b8890839ff35433"
+         "_rev" : "1-857c7cbeb6c8dd1dd34a0c73e8da3c44",
+         "servings" : 8,
+         "subtitle" : "Hand-made dumplings make a great accompaniment",
+         "title" : "Beef Stew"
+      }
+   ]
+}</pre><p>
+        The return structure is the JSON of the updated documents, with
+        the new revision and ID information:
+      </p><pre class="programlisting">[
+   {
+      "id" : "FishStew",
+      "rev" : "2-e7af4c4e9981d960ecf78605d79b06d1"
+   },
+   {
+      "id" : "LambStew",
+      "rev" : "2-0786321986194c92dd3b57dfbfc741ce"
+   },
+   {
+      "id" : "7f7638c86173eb440b8890839ff35433",
+      "rev" : "2-bdd3bf3563bee516b96885a66c743f8e"
+   }
+]</pre><p>
+        You can optionally delete documents during a bulk update by
+        adding the <code class="literal">_deleted</code> field with a value of
+        <code class="literal">true</code> to each docment ID/revision combination
+        within the submitted JSON structure.
+      </p><p>
+        The return type from a bulk insertion will be 201, with the
+        content of the returned structure indicating specific success or
+        otherwise messages on a per-document basis.
+      </p><p>
+        The content and structure of the returned JSON will depend on
+        the transaction semantics being used for the bulk update; see
+        <a class="xref" href="couchdb-api-db_db-bulk-docs_post-commit.html" title="5.9.3.&nbsp;Bulk Documents Transaction Semantics">Section&nbsp;5.9.3, &ldquo;Bulk Documents Transaction Semantics&rdquo;</a>
+        for more information. Conflicts and validation errors when
+        updating documents in bulk must be handled separately; see
+        <a class="xref" href="couchdb-api-db_db-bulk-docs_post-errors.html" title="5.9.4.&nbsp;Bulk Document Validation and Conflict Errors">Section&nbsp;5.9.4, &ldquo;Bulk Document Validation and Conflict Errors&rdquo;</a>.
+      </p></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-api-db_db-bulk-docs_post-insert.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-api-db_db-bulk-docs_post.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-db_db-bulk-docs_post-commit.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">5.9.1.&nbsp;Inserting Documents in Bulk&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;5.9.3.&nbsp;Bulk Documents Transaction Semantics</td></tr></table></div></body></html>

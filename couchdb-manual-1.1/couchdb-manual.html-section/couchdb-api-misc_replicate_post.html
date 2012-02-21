@@ -1,0 +1,38 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>9.5.&nbsp;POST /_replicate</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-api-misc.html" title="Chapter&nbsp;9.&nbsp;CouchDB API Server Miscellaneous Methods"><link rel="prev" href="couchdb-api-misc_log_get.html" title="9.4.&nbsp;GET /_log"><link rel="next" href="couchdb-api-misc_replicate_post-operation.html" title="9.5.1.&nbsp;Replication Operation"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">9.5.&nbsp;<code class="literal">POST /_replicate</code></th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-api-misc_log_get.html">Prev</a>&nbsp;</td><th align="center" width="60%">Chapter&nbsp;9.&nbsp;CouchDB API Server Miscellaneous Methods</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-misc_replicate_post-operation.html">Next</a></td></tr></table><hr></div><div class="section" title="9.5.&nbsp;POST /_replicate"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-api-misc_replicate_post"></a>9.5.&nbsp;<code class="literal">POST /_replicate</code></h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="couchdb-api-misc_replicate_post-operation.html">9.5.1. Replication Operation</a></span></dt><dt><span class="section"><a href="couchdb-api-misc_replicate_post-sourcetarget.html">9.5.2. Specifying the Source and Target Database</a></span></dt><dt><span class="section"><a href="couchdb-api-misc_replicate_post-single.html">9.5.3. Single Replication</a></span></dt><dt><span class="section"><a href="couchdb-api-misc_replicate_post-continuous.html">9.5.4. Continuous Replication</a></span></dt><dt><span class="section"><a href="couchdb-api-misc_replicate_post-cancel.html">9.5.5. Canceling Continuous Replication</a></span></dt></dl></div><div class="informaltable"><table summary="URL API POST /_replicate" border="1"><colgroup><col class="field" width="33%"><col class="info" width="33%"><col class="addinfo" width="34%"></colgroup><tbody><tr><td><span class="bold"><strong>Method</strong></span></td><td colspan="2"><code class="literal">POST /_replicate</code></td></tr><tr><td><span class="bold"><strong>Request</strong></span></td><td colspan="2">
+ Replication specification
+ </td></tr><tr><td><span class="bold"><strong>Response</strong></span></td><td colspan="2">
+ Welcome message and version
+ </td></tr><tr><td><span class="bold"><strong>Admin Privileges Required</strong></span></td><td colspan="2">no</td></tr><tr><td colspan="3"><span class="bold"><strong>Return Codes</strong></span></td></tr><tr><td>200</td><td colspan="2">
+ Replication request successfully completed
+ </td></tr><tr><td>202</td><td colspan="2">
+ Continuous replication request has been accepted
+ </td></tr><tr><td>404</td><td colspan="2">
+ Either the source or target DB is not found
+ </td></tr><tr><td>500</td><td colspan="2">
+ JSON specification was invalid
+ </td></tr></tbody></table></div><p>
+      Request, configure, or stop, a replication operation.
+    </p><p>
+      The specification of the replication request is controlled through
+      the JSON content of the request. The JSON should be an object with
+      the fields defining the source, target and other options. The
+      fields of the JSON request are shown in the table below:
+    </p><div class="table"><a name="table-couchdb-api-misc-json-replication"></a><p class="title"><b>Table&nbsp;9.3.&nbsp;
+ Replication Settings
+ </b></p><div class="table-contents"><table summary="
+ Replication Settings
+ " border="1"><colgroup><col class="item" width="30%"><col class="desc" width="70%"></colgroup><tbody><tr><td><span class="bold"><strong>Field</strong></span></td><td><span class="bold"><strong>Description</strong></span></td></tr><tr><td><code class="literal">cancel</code> (optional) </td><td>
+ Cancels the replication
+ </td></tr><tr><td><code class="literal">continuous</code> (optional) </td><td>
+ Configure the replication to be continuous
+ </td></tr><tr><td><code class="literal">create_target</code> (optional) </td><td>
+ Creates the target database
+ </td></tr><tr><td><code class="literal">doc_ids</code> (optional) </td><td>
+ Array of document IDs to be synchronized
+ </td></tr><tr><td><code class="literal">proxy</code> (optional) </td><td>
+ Address of a proxy server through which replication should occur
+ </td></tr><tr><td><code class="literal">source</code>  </td><td>
+ Source database name or URL
+ </td></tr><tr><td><code class="literal">target</code>  </td><td>
+ Target database name or URL
+ </td></tr></tbody></table></div></div><br class="table-break"></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-api-misc_log_get.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-api-misc.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-misc_replicate_post-operation.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">9.4.&nbsp;<code class="literal">GET /_log</code>&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;9.5.1.&nbsp;Replication Operation</td></tr></table></div></body></html>

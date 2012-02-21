@@ -1,0 +1,203 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>4.4.&nbsp;HTTP Status Codes</title>
+<link href="epub.css" type="text/css" rel="stylesheet" />
+<meta content="DocBook XSL Stylesheets V1.76.1" name="generator" />
+</head>
+<body>
+<div class="section" title="4.4.&nbsp;HTTP Status Codes">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-api-introduction-returncodes" />4.4.&nbsp;HTTP Status Codes</h1>
+</div>
+</div>
+</div>
+<p>
+      With the interface to CouchDB working through HTTP, error codes
+      and statuses are reported using a combination of the HTTP status
+      code number, and corresponding data in the body of the response
+      data.
+    </p>
+<p>
+      A list of the error codes returned by CouchDB, and generic
+      descriptions of the related errors are provided below. The meaning
+      of different status codes for specific request types are provided
+      in the corresponding API call reference.
+    </p>
+<div class="itemizedlist">
+<ul class="itemizedlist">
+<li class="listitem">
+<p>
+<a id="couchdb-api-introduction-returncode-200" />
+          <code class="literal">200 - OK</code>
+        </p>
+<p>
+          Request completed successfully.
+        </p>
+</li>
+<li class="listitem">
+<p>
+<a id="couchdb-api-introduction-returncode-201" />
+          <code class="literal">201 - Created</code>
+        </p>
+<p>
+          Document created successfully.
+        </p>
+</li>
+<li class="listitem">
+<p>
+<a id="couchdb-api-introduction-returncode-202" />
+          <code class="literal">202 - Accepted</code>
+        </p>
+<p>
+          Request has been accepted, but the corresponding operation may
+          not have completed. This is used for background operations,
+          such as database compaction.
+        </p>
+</li>
+<li class="listitem">
+<p>
+<a id="couchdb-api-introduction-returncode-304" />
+          <code class="literal">304 - Not Modified</code>
+        </p>
+<p>
+          The additional content requested has not been modified. This
+          is used with the ETag system to identify the version of
+          information returned.
+        </p>
+</li>
+<li class="listitem">
+<p>
+<a id="couchdb-api-introduction-returncode-400" />
+          <code class="literal">400 - Bad Request</code>
+        </p>
+<p>
+          Bad request structure. The error can indicate an error with
+          the request URL, path or headers. Differences in the supplied
+          MD5 hash and content also trigger this error, as this may
+          indicate message corruption.
+        </p>
+</li>
+<li class="listitem">
+<p>
+<a id="couchdb-api-introduction-returncode-401" />
+          <code class="literal">401 - Unauthorized</code>
+        </p>
+<p>
+          The item requested was not available using the supplied
+          authorization, or authorization was not supplied.
+        </p>
+</li>
+<li class="listitem">
+<p>
+<a id="couchdb-api-introduction-returncode-403" />
+          <code class="literal">403 - Forbidden</code>
+        </p>
+<p>
+          The requested item or operation is forbidden.
+        </p>
+</li>
+<li class="listitem">
+<p>
+<a id="couchdb-api-introduction-returncode-404" />
+          <code class="literal">404 - Not Found</code>
+        </p>
+<p>
+          The requested content could not be found. The content will
+          include further information, as a JSON object, if available.
+          The structure will contain two keys, <code class="literal">error</code>
+          and <code class="literal">reason</code>. For example:
+        </p>
+<pre class="programlisting">{"error":"not_found","reason":"no_db_file"}</pre>
+</li>
+<li class="listitem">
+<p>
+<a id="couchdb-api-introduction-returncode-405" />
+          <code class="literal">405 - Resource Not Allowed</code>
+        </p>
+<p>
+          A request was made using an invalid HTTP request type for the
+          URL requested. For example, you have requested a
+          <code class="literal">PUT</code> when a <code class="literal">POST</code> is
+          required. Errors of this type can also triggered by invalid
+          URL strings.
+        </p>
+</li>
+<li class="listitem">
+<p>
+<a id="couchdb-api-introduction-returncode-406" />
+          <code class="literal">406 - Not Acceptable</code>
+        </p>
+<p>
+          The requested content type is not supported by the server.
+        </p>
+</li>
+<li class="listitem">
+<p>
+<a id="couchdb-api-introduction-returncode-409" />
+          <code class="literal">409 - Conflict</code>
+        </p>
+<p>
+          Request resulted in an update conflict.
+        </p>
+</li>
+<li class="listitem">
+<p>
+<a id="couchdb-api-introduction-returncode-412" />
+          <code class="literal">412 - Precondition Failed</code>
+        </p>
+<p>
+          The request headers from the client and the capabilities of
+          the server do not match.
+        </p>
+</li>
+<li class="listitem">
+<p>
+<a id="couchdb-api-introduction-returncode-415" />
+          <code class="literal">415 - Bad Content Type</code>
+        </p>
+<p>
+          The content types supported, and the content type of the
+          information being requested or submitted indicate that the
+          content type is not supported.
+        </p>
+</li>
+<li class="listitem">
+<p>
+<a id="couchdb-api-introduction-returncode-416" />
+          <code class="literal">416 - Requested Range Not Satisfiable</code>
+        </p>
+<p>
+          The range specified in the request header cannot be satisfied
+          by the server.
+        </p>
+</li>
+<li class="listitem">
+<p>
+<a id="couchdb-api-introduction-returncode-417" />
+          <code class="literal">417 - Expectation Failed</code>
+        </p>
+<p>
+          When sending documents in bulk, the bulk load operation
+          failed.
+        </p>
+</li>
+<li class="listitem">
+<p>
+<a id="couchdb-api-introduction-returncode-500" />
+          <code class="literal">500 - Internal Server Error</code>
+        </p>
+<p>
+          The request was invalid, either because the supplied JSON was
+          invalid, or invalid information was supplied as part of the
+          request.
+        </p>
+</li>
+</ul>
+</div>
+</div>
+</body>
+</html>

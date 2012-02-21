@@ -1,0 +1,1207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>12.9.&nbsp;CouchDB Configuration Options</title>
+<link href="epub.css" type="text/css" rel="stylesheet" />
+<meta content="DocBook XSL Stylesheets V1.76.1" name="generator" />
+</head>
+<body>
+<div class="section" title="12.9.&nbsp;CouchDB Configuration Options">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-single-config-options" />12.9.&nbsp;CouchDB Configuration Options</h1>
+</div>
+</div>
+</div>
+<p>
+    &nbsp;
+  </p>
+<div class="table">
+<a id="table-couchdb-single-config-options-summary" />
+<p class="title">
+<strong>Table&nbsp;12.1.&nbsp;Configuration Groups</strong>
+</p>
+<div class="table-contents">
+<table summary="Configuration Groups" border="1">
+<colgroup>
+<col class="section" width="50%" />
+<col class="desc" width="50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Section</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="literal">attachments</code>
+</td>
+<td>
+ Attachment options
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">couchdb</code>
+</td>
+<td>
+ CouchDB specific options
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">daemons</code>
+</td>
+<td>
+ Daemons and background processes
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">httpd_db_handlers</code>
+</td>
+<td>
+ Database Operation handlers
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">couch_httpd_auth</code>
+</td>
+<td>
+ HTTPD Authentication options
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">httpd</code>
+</td>
+<td>
+ HTTPD Server options
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">httpd_design_handlers</code>
+</td>
+<td>
+ Handlers for design document operations
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">httpd_global_handlers</code>
+</td>
+<td>
+ Handlers for global operations
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">log</code>
+</td>
+<td>
+ Logging options
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">query_servers</code>
+</td>
+<td>
+ Query Server options
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">query_server_config</code>
+</td>
+<td>
+ Query server options
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">replicator</code>
+</td>
+<td>
+ Replicator Options
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">ssl</code>
+</td>
+<td>
+ SSL (Secure Sockets Layer) Options
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">stats</code>
+</td>
+<td>
+ Statistics options
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">uuids</code>
+</td>
+<td>
+ UUID generation options
+ </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" title="12.9.1.&nbsp;attachments Configuration Options">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="couchdb-single-config-options_attachments" />12.9.1.&nbsp;<code class="literal">attachments</code> Configuration Options</h2>
+</div>
+</div>
+</div>
+<p>
+      &nbsp;
+    </p>
+<div class="table">
+<a id="table-couchdb-single-config-options-attachments-summary" />
+<p class="title">
+<strong>Table&nbsp;12.2.&nbsp;Configuration Groups</strong>
+</p>
+<div class="table-contents">
+<table summary="Configuration Groups" border="1">
+<colgroup>
+<col class="option" width="50%" />
+<col class="desc" width="50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="literal">compressible_types</code>
+</td>
+<td>
+ compressible_types
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">compression_level</code>
+</td>
+<td>
+ compression_level
+ </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="section" title="12.9.2.&nbsp;couchdb Configuration Options">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="couchdb-single-config-options_couchdb" />12.9.2.&nbsp;<code class="literal">couchdb</code> Configuration Options</h2>
+</div>
+</div>
+</div>
+<p>
+      &nbsp;
+    </p>
+<div class="table">
+<a id="table-couchdb-single-config-options-couchdb-summary" />
+<p class="title">
+<strong>Table&nbsp;12.3.&nbsp;Configuration Groups</strong>
+</p>
+<div class="table-contents">
+<table summary="Configuration Groups" border="1">
+<colgroup>
+<col class="option" width="50%" />
+<col class="desc" width="50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="literal">database_dir</code>
+</td>
+<td>
+ database_dir
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">delayed_commits</code>
+</td>
+<td>
+ delayed_commits
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">max_attachment_chunk_size</code>
+</td>
+<td>
+ max_attachment_chunk_size
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">max_dbs_open</code>
+</td>
+<td>
+ max_dbs_open
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">max_document_size</code>
+</td>
+<td>
+ max_document_size
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">os_process_timeout</code>
+</td>
+<td>
+ os_process_timeout
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">uri_file</code>
+</td>
+<td>
+ uri_file
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">util_driver_dir</code>
+</td>
+<td>
+ util_driver_dir
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">view_index_dir</code>
+</td>
+<td>
+ view_index_dir
+ </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="section" title="12.9.3.&nbsp;daemons Configuration Options">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="couchdb-single-config-options_daemons" />12.9.3.&nbsp;<code class="literal">daemons</code> Configuration Options</h2>
+</div>
+</div>
+</div>
+<p>
+      &nbsp;
+    </p>
+<div class="table">
+<a id="table-couchdb-single-config-options-daemons-summary" />
+<p class="title">
+<strong>Table&nbsp;12.4.&nbsp;Configuration Groups</strong>
+</p>
+<div class="table-contents">
+<table summary="Configuration Groups" border="1">
+<colgroup>
+<col class="option" width="50%" />
+<col class="desc" width="50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="literal">httpsd</code>
+</td>
+<td>
+ Enabled HTTPS service
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">auth_cache</code>
+</td>
+<td>
+ auth_cache
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">db_update_notifier</code>
+</td>
+<td>
+ db_update_notifier
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">external_manager</code>
+</td>
+<td>
+ external_manager
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">httpd</code>
+</td>
+<td>
+ httpd
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">query_servers</code>
+</td>
+<td>
+ query_servers
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">stats_aggregator</code>
+</td>
+<td>
+ stats_aggregator
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">stats_collector</code>
+</td>
+<td>
+ stats_collector
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">uuids</code>
+</td>
+<td>
+ uuids
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">view_manager</code>
+</td>
+<td>
+ view_manager
+ </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="section" title="12.9.4.&nbsp;httpd_db_handlers Configuration Options">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="couchdb-single-config-options_httpd_db_handlers" />12.9.4.&nbsp;<code class="literal">httpd_db_handlers</code> Configuration Options</h2>
+</div>
+</div>
+</div>
+<p>
+      &nbsp;
+    </p>
+<div class="table">
+<a id="table-couchdb-single-config-options-httpd_db_handlers-summary" />
+<p class="title">
+<strong>Table&nbsp;12.5.&nbsp;Configuration Groups</strong>
+</p>
+<div class="table-contents">
+<table summary="Configuration Groups" border="1">
+<colgroup>
+<col class="option" width="50%" />
+<col class="desc" width="50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="literal">_changes</code>
+</td>
+<td>
+ _changes
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">_compact</code>
+</td>
+<td>
+ _compact
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">_design</code>
+</td>
+<td>
+ _design
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">_temp_view</code>
+</td>
+<td>
+ _temp_view
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">_view_cleanup</code>
+</td>
+<td>
+ _view_cleanup
+ </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="section" title="12.9.5.&nbsp;couch_httpd_auth Configuration Options">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="couchdb-single-config-options_couch_httpd_auth" />12.9.5.&nbsp;<code class="literal">couch_httpd_auth</code> Configuration Options</h2>
+</div>
+</div>
+</div>
+<p>
+      &nbsp;
+    </p>
+<div class="table">
+<a id="table-couchdb-single-config-options-couch_httpd_auth-summary" />
+<p class="title">
+<strong>Table&nbsp;12.6.&nbsp;Configuration Groups</strong>
+</p>
+<div class="table-contents">
+<table summary="Configuration Groups" border="1">
+<colgroup>
+<col class="option" width="50%" />
+<col class="desc" width="50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="literal">auth_cache_size</code>
+</td>
+<td>
+ auth_cache_size
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">authentication_db</code>
+</td>
+<td>
+ authentication_db
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">authentication_redirect</code>
+</td>
+<td>
+ authentication_redirect
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">require_valid_user</code>
+</td>
+<td>
+ require_valid_user
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">timeout</code>
+</td>
+<td>
+ timeout
+ </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="section" title="12.9.6.&nbsp;httpd Configuration Options">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="couchdb-single-config-options_httpd" />12.9.6.&nbsp;<code class="literal">httpd</code> Configuration Options</h2>
+</div>
+</div>
+</div>
+<p>
+      &nbsp;
+    </p>
+<div class="table">
+<a id="table-couchdb-single-config-options-httpd-summary" />
+<p class="title">
+<strong>Table&nbsp;12.7.&nbsp;Configuration Groups</strong>
+</p>
+<div class="table-contents">
+<table summary="Configuration Groups" border="1">
+<colgroup>
+<col class="option" width="50%" />
+<col class="desc" width="50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="literal">nodelay</code>
+</td>
+<td>
+ Enable TCP_NODELAY
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">allow_jsonp</code>
+</td>
+<td>
+ allow_jsonp
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">authentication_handlers</code>
+</td>
+<td>
+ authentication_handlers
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">bind_address</code>
+</td>
+<td>
+ bind_address
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">default_handler</code>
+</td>
+<td>
+ default_handler
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">max_connections</code>
+</td>
+<td>
+ max_connections
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">port</code>
+</td>
+<td>
+ port
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">secure_rewrites</code>
+</td>
+<td>
+ secure_rewrites
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">vhost_global_handlers</code>
+</td>
+<td>
+ vhost_global_handlers
+ </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="section" title="12.9.7.&nbsp;httpd_design_handlers Configuration Options">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="couchdb-single-config-options_httpd_design_handlers" />12.9.7.&nbsp;<code class="literal">httpd_design_handlers</code> Configuration Options</h2>
+</div>
+</div>
+</div>
+<p>
+      &nbsp;
+    </p>
+<div class="table">
+<a id="table-couchdb-single-config-options-httpd_design_handlers-summary" />
+<p class="title">
+<strong>Table&nbsp;12.8.&nbsp;Configuration Groups</strong>
+</p>
+<div class="table-contents">
+<table summary="Configuration Groups" border="1">
+<colgroup>
+<col class="option" width="50%" />
+<col class="desc" width="50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="literal">_info</code>
+</td>
+<td>
+ _info
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">_list</code>
+</td>
+<td>
+ _list
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">_rewrite</code>
+</td>
+<td>
+ _rewrite
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">_show</code>
+</td>
+<td>
+ _show
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">_update</code>
+</td>
+<td>
+ _update
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">_view</code>
+</td>
+<td>
+ _view
+ </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="section" title="12.9.8.&nbsp;httpd_global_handlers Configuration Options">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="couchdb-single-config-options_httpd_global_handlers" />12.9.8.&nbsp;<code class="literal">httpd_global_handlers</code> Configuration Options</h2>
+</div>
+</div>
+</div>
+<p>
+      &nbsp;
+    </p>
+<div class="table">
+<a id="table-couchdb-single-config-options-httpd_global_handlers-summary" />
+<p class="title">
+<strong>Table&nbsp;12.9.&nbsp;Configuration Groups</strong>
+</p>
+<div class="table-contents">
+<table summary="Configuration Groups" border="1">
+<colgroup>
+<col class="option" width="50%" />
+<col class="desc" width="50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="literal">/</code>
+</td>
+<td>
+ /
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">_active_tasks</code>
+</td>
+<td>
+ _active_tasks
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">_all_dbs</code>
+</td>
+<td>
+ _all_dbs
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">_config</code>
+</td>
+<td>
+ _config
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">_log</code>
+</td>
+<td>
+ _log
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">_oauth</code>
+</td>
+<td>
+ _oauth
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">_replicate</code>
+</td>
+<td>
+ _replicate
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">_restart</code>
+</td>
+<td>
+ _restart
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">_session</code>
+</td>
+<td>
+ _session
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">_stats</code>
+</td>
+<td>
+ _stats
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">_utils</code>
+</td>
+<td>
+ _utils
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">_uuids</code>
+</td>
+<td>
+ _uuids
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">favicon.ico</code>
+</td>
+<td>
+ favicon.ico
+ </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="section" title="12.9.9.&nbsp;log Configuration Options">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="couchdb-single-config-options_log" />12.9.9.&nbsp;<code class="literal">log</code> Configuration Options</h2>
+</div>
+</div>
+</div>
+<p>
+      &nbsp;
+    </p>
+<div class="table">
+<a id="table-couchdb-single-config-options-log-summary" />
+<p class="title">
+<strong>Table&nbsp;12.10.&nbsp;Configuration Groups</strong>
+</p>
+<div class="table-contents">
+<table summary="Configuration Groups" border="1">
+<colgroup>
+<col class="option" width="50%" />
+<col class="desc" width="50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="literal">file</code>
+</td>
+<td>
+ file
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">include_sasl</code>
+</td>
+<td>
+ include_sasl
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">level</code>
+</td>
+<td>
+ level
+ </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="section" title="12.9.10.&nbsp;query_servers Configuration Options">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="couchdb-single-config-options_query_servers" />12.9.10.&nbsp;<code class="literal">query_servers</code> Configuration Options</h2>
+</div>
+</div>
+</div>
+<p>
+      &nbsp;
+    </p>
+<div class="table">
+<a id="table-couchdb-single-config-options-query_servers-summary" />
+<p class="title">
+<strong>Table&nbsp;12.11.&nbsp;Configuration Groups</strong>
+</p>
+<div class="table-contents">
+<table summary="Configuration Groups" border="1">
+<colgroup>
+<col class="option" width="50%" />
+<col class="desc" width="50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="literal">javascript</code>
+</td>
+<td>
+ javascript
+ </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="section" title="12.9.11.&nbsp;query_server_config Configuration Options">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="couchdb-single-config-options_query_server_config" />12.9.11.&nbsp;<code class="literal">query_server_config</code> Configuration Options</h2>
+</div>
+</div>
+</div>
+<p>
+      &nbsp;
+    </p>
+<div class="table">
+<a id="table-couchdb-single-config-options-query_server_config-summary" />
+<p class="title">
+<strong>Table&nbsp;12.12.&nbsp;Configuration Groups</strong>
+</p>
+<div class="table-contents">
+<table summary="Configuration Groups" border="1">
+<colgroup>
+<col class="option" width="50%" />
+<col class="desc" width="50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="literal">reduce_limit</code>
+</td>
+<td>
+ reduce_limit
+ </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="section" title="12.9.12.&nbsp;replicator Configuration Options">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="couchdb-single-config-options_replicator" />12.9.12.&nbsp;<code class="literal">replicator</code> Configuration Options</h2>
+</div>
+</div>
+</div>
+<p>
+      &nbsp;
+    </p>
+<div class="table">
+<a id="table-couchdb-single-config-options-replicator-summary" />
+<p class="title">
+<strong>Table&nbsp;12.13.&nbsp;Configuration Groups</strong>
+</p>
+<div class="table-contents">
+<table summary="Configuration Groups" border="1">
+<colgroup>
+<col class="option" width="50%" />
+<col class="desc" width="50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="literal">max_http_pipeline_size</code>
+</td>
+<td>
+ max_http_pipeline_size
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">max_http_sessions</code>
+</td>
+<td>
+ max_http_sessions
+ </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="section" title="12.9.13.&nbsp;stats Configuration Options">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="couchdb-single-config-options_stats" />12.9.13.&nbsp;<code class="literal">stats</code> Configuration Options</h2>
+</div>
+</div>
+</div>
+<p>
+      &nbsp;
+    </p>
+<div class="table">
+<a id="table-couchdb-single-config-options-stats-summary" />
+<p class="title">
+<strong>Table&nbsp;12.14.&nbsp;Configuration Groups</strong>
+</p>
+<div class="table-contents">
+<table summary="Configuration Groups" border="1">
+<colgroup>
+<col class="option" width="50%" />
+<col class="desc" width="50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="literal">rate</code>
+</td>
+<td>
+ rate
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">samples</code>
+</td>
+<td>
+ samples
+ </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="section" title="12.9.14.&nbsp;uuids Configuration Options">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="couchdb-single-config-options_uuids" />12.9.14.&nbsp;<code class="literal">uuids</code> Configuration Options</h2>
+</div>
+</div>
+</div>
+<p>
+      &nbsp;
+    </p>
+<div class="table">
+<a id="table-couchdb-single-config-options-uuids-summary" />
+<p class="title">
+<strong>Table&nbsp;12.15.&nbsp;Configuration Groups</strong>
+</p>
+<div class="table-contents">
+<table summary="Configuration Groups" border="1">
+<colgroup>
+<col class="option" width="50%" />
+<col class="desc" width="50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="literal">algorithm</code>
+</td>
+<td>
+ algorithm
+ </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>12.6.&nbsp;Socket Options Configuration Setting</title>
+<link href="epub.css" type="text/css" rel="stylesheet" />
+<meta content="DocBook XSL Stylesheets V1.76.1" name="generator" />
+</head>
+<body>
+<div class="section" title="12.6.&nbsp;Socket Options Configuration Setting">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-single-configuration-socketoptions" />12.6.&nbsp;Socket Options Configuration Setting</h1>
+</div>
+</div>
+</div>
+<p>
+      The socket options for the listening socket in CouchDB can now be
+      set within the CouchDB configuration file. The setting should be
+      added to the <code class="literal">[httpd]</code> section of the file using
+      the option name <code class="literal">socket_options</code>. The
+      specification is as a list of tuples. For example:
+    </p>
+<pre class="programlisting">[httpd]
+socket_options = [{recbuf, 262144}, {sndbuf, 262144}, {nodelay, true}]</pre>
+<p>
+      The options supported are a subset of full options supported by
+      the TCP/IP stack. A list of the supported options are provided in
+      the
+      <a class="ulink" href="http://www.erlang.org/doc/man/inet.html#setopts-2">Erlang
+      inet</a> documentation.
+    </p>
+</div>
+</body>
+</html>

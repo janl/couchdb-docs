@@ -1,0 +1,18 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>8.4.1.&nbsp;Copying a Design Document</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-api-design_db-design-designdoc_copy.html" title="8.4.&nbsp;COPY /db/_design/design-doc"><link rel="prev" href="couchdb-api-design_db-design-designdoc_copy.html" title="8.4.&nbsp;COPY /db/_design/design-doc"><link rel="next" href="couchdb-api-design_db-design-designdoc_copy-specrev.html" title="8.4.2.&nbsp;Copying from a Specific Revision"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">8.4.1.&nbsp;Copying a Design Document</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-api-design_db-design-designdoc_copy.html">Prev</a>&nbsp;</td><th align="center" width="60%">8.4.&nbsp;<code class="literal">COPY /db/_design/design-doc</code></th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-design_db-design-designdoc_copy-specrev.html">Next</a></td></tr></table><hr></div><div class="section" title="8.4.1.&nbsp;Copying a Design Document"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-api-design_db-design-designdoc_copy-simple"></a>8.4.1.&nbsp;Copying a Design Document</h3></div></div></div><p>
+        To copy the latest version of a design document to a new
+        document you specify the base document and target document:
+      </p><pre class="programlisting">COPY http://couchdb:5984/recipes/_design/recipes
+Content-Type: application/json
+Destination: /recipes/_design/recipelist</pre><p>
+        The above request copies the design document
+        <code class="literal">recipes</code> to the new design document
+        <code class="literal">recipelist</code>. The response is the ID and
+        revision of the new document.
+      </p><pre class="programlisting">{
+   "id" : "recipes/_design/recipelist"
+   "rev" : "1-9c65296036141e575d32ba9c034dd3ee",
+}</pre><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+          Copying a design document does automatically reconstruct the
+          view indexes. These will be recreated, as with other views,
+          the first time the new view is accessed.
+        </p></div></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-api-design_db-design-designdoc_copy.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-api-design_db-design-designdoc_copy.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-design_db-design-designdoc_copy-specrev.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">8.4.&nbsp;<code class="literal">COPY /db/_design/design-doc</code>&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;8.4.2.&nbsp;Copying from a Specific Revision</td></tr></table></div></body></html>

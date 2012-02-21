@@ -1,0 +1,35 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>9.5.5.&nbsp;Canceling Continuous Replication</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-api-misc_replicate_post.html" title="9.5.&nbsp;POST /_replicate"><link rel="prev" href="couchdb-api-misc_replicate_post-continuous.html" title="9.5.4.&nbsp;Continuous Replication"><link rel="next" href="couchdb-api-misc_restart_post.html" title="9.6.&nbsp;POST /_restart"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">9.5.5.&nbsp;Canceling Continuous Replication</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-api-misc_replicate_post-continuous.html">Prev</a>&nbsp;</td><th align="center" width="60%">9.5.&nbsp;<code class="literal">POST /_replicate</code></th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-misc_restart_post.html">Next</a></td></tr></table><hr></div><div class="section" title="9.5.5.&nbsp;Canceling Continuous Replication"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-api-misc_replicate_post-cancel"></a>9.5.5.&nbsp;Canceling Continuous Replication</h3></div></div></div><p>
+        You can cancel continuous replication by adding the
+        <code class="literal">cancel</code> field to the JSON request object and
+        setting the value to true. Note that the structure of the
+        request must be identical to the original for the cancelation
+        request to be honoured. For example, if you requested continuous
+        replication, the cancellation request must also contain the
+        <code class="literal">continuous</code> field.
+      </p><p>
+        For example, the replication request:
+      </p><pre class="programlisting">POST http://couchdb:5984/_replicate
+Content-Type: application/json
+Accept: application/json
+
+{
+   "source" : "recipes",
+   "target" : "http://couchdb-remote:5984/recipes",
+   "create_target" : true,
+   "continuous" : true
+}</pre><p>
+        Must be canceled using the request:
+      </p><pre class="programlisting">POST http://couchdb:5984/_replicate
+Content-Type: application/json
+Accept: application/json
+
+{
+    "cancel" : true,
+    "continuous" : true
+    "create_target" : true,
+    "source" : "recipes",
+    "target" : "http://couchdb-remote:5984/recipes",
+}</pre><p>
+        Requesting cancellation of a replication that does not exist
+        results in a 404 error.
+      </p></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-api-misc_replicate_post-continuous.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-api-misc_replicate_post.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-misc_restart_post.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">9.5.4.&nbsp;Continuous Replication&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;9.6.&nbsp;<code class="literal">POST /_restart</code></td></tr></table></div></body></html>

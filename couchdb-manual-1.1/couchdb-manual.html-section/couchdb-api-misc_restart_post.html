@@ -1,0 +1,20 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>9.6.&nbsp;POST /_restart</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-api-misc.html" title="Chapter&nbsp;9.&nbsp;CouchDB API Server Miscellaneous Methods"><link rel="prev" href="couchdb-api-misc_replicate_post-cancel.html" title="9.5.5.&nbsp;Canceling Continuous Replication"><link rel="next" href="couchdb-api-misc_stats_get.html" title="9.7.&nbsp;GET /_stats"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">9.6.&nbsp;<code class="literal">POST /_restart</code></th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-api-misc_replicate_post-cancel.html">Prev</a>&nbsp;</td><th align="center" width="60%">Chapter&nbsp;9.&nbsp;CouchDB API Server Miscellaneous Methods</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-misc_stats_get.html">Next</a></td></tr></table><hr></div><div class="section" title="9.6.&nbsp;POST /_restart"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-api-misc_restart_post"></a>9.6.&nbsp;<code class="literal">POST /_restart</code></h2></div></div></div><div class="informaltable"><table summary="URL API POST /_restart" border="1"><colgroup><col class="field" width="33%"><col class="info" width="33%"><col class="addinfo" width="34%"></colgroup><tbody><tr><td><span class="bold"><strong>Method</strong></span></td><td colspan="2"><code class="literal">POST /_restart</code></td></tr><tr><td><span class="bold"><strong>Request</strong></span></td><td colspan="2">
+ None
+ </td></tr><tr><td><span class="bold"><strong>Response</strong></span></td><td colspan="2">
+ JSON status message
+ </td></tr><tr><td><span class="bold"><strong>Admin Privileges Required</strong></span></td><td colspan="2">yes</td></tr><tr><td colspan="3"><span class="bold"><strong>Return Codes</strong></span></td></tr><tr><td>201</td><td colspan="2">
+ Document created successfully.
+ </td></tr></tbody></table></div><p>
+      Restarts the CouchDB instance. You must be authenticated as a user
+      with administration privileges for this to work.
+    </p><p>
+      For example:
+    </p><pre class="programlisting">POST http://admin:password@couchdb:5984/_restart</pre><p>
+      The return value (if the server has not already restarted) is a
+      JSON status object indicating that the request has been received:
+    </p><pre class="programlisting">{
+   "ok" : true,
+}</pre><p>
+      If the server has already restarted, the header may be returned,
+      but no actual data is contained in the response.
+    </p></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-api-misc_replicate_post-cancel.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-api-misc.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-misc_stats_get.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">9.5.5.&nbsp;Canceling Continuous Replication&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;9.7.&nbsp;<code class="literal">GET /_stats</code></td></tr></table></div></body></html>

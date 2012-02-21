@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>7.2.&nbsp;PUT /db/_local/local-doc</title>
+<link href="epub.css" type="text/css" rel="stylesheet" />
+<meta content="DocBook XSL Stylesheets V1.76.1" name="generator" />
+</head>
+<body>
+<div class="section" title="7.2.&nbsp;PUT /db/_local/local-doc">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-api-localdb_db-local-localdoc_put" />7.2.&nbsp;<code class="literal">PUT /db/_local/local-doc</code>
+</h1>
+</div>
+</div>
+</div>
+<div class="informaltable">
+<table summary="URL API PUT /db/_local/local-doc" border="1">
+<colgroup>
+<col class="field" width="33%" />
+<col class="info" width="33%" />
+<col class="addinfo" width="34%" />
+</colgroup>
+<tbody>
+<tr>
+<td>
+<span class="bold">
+<strong>Method</strong>
+</span>
+</td>
+<td colspan="2">
+<code class="literal">PUT /db/_local/local-doc</code>
+</td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Request</strong>
+</span>
+</td>
+<td colspan="2">
+ JSON of the document
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Response</strong>
+</span>
+</td>
+<td colspan="2">
+ JSON with the committed document information
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Admin Privileges Required</strong>
+</span>
+</td>
+<td colspan="2">no</td>
+</tr>
+<tr>
+<td colspan="3">
+<span class="bold">
+<strong>Return Codes</strong>
+</span>
+</td>
+</tr>
+<tr>
+<td>201</td>
+<td colspan="2">
+ Document has been created successfully
+ </td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+      Stores the specified local document. The semantics are identical
+      to storing a standard document in the specified database, except
+      that the document is not replicated. See
+      <a class="xref" href="ch06s04.html" title="6.4.&nbsp;PUT /db/doc">Section&nbsp;6.4, &ldquo;<code class="literal">PUT /db/doc</code>&rdquo;</a>.
+    </p>
+</div>
+</body>
+</html>

@@ -1,0 +1,348 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Chapter&nbsp;12.&nbsp;Configuring CouchDB</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="index.html" title="CouchDB 1.1 Manual"><link rel="prev" href="couchdb-api-auth.html" title="Chapter&nbsp;11.&nbsp;CouchDB API Server Authentication Methods"><link rel="next" href="couchdb-api-json.html" title="Appendix&nbsp;A.&nbsp;JSON Structure Reference"><meta name="date" content="2012-02-21T20:10:18+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter&nbsp;12.&nbsp;Configuring CouchDB</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-api-auth.html">Prev</a>&nbsp;</td><th align="center" width="60%">&nbsp;</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-json.html">Next</a></td></tr></table><hr></div><div class="chapter" title="Chapter&nbsp;12.&nbsp;Configuring CouchDB"><div class="titlepage"><div><div><h2 class="title"><a name="couchdb-single-configuration"></a>Chapter&nbsp;12.&nbsp;Configuring CouchDB</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="couchdb-single-configuration.html#couchdb-single-configuration-files">12.1. CouchDB Configuration Files</a></span></dt><dt><span class="section"><a href="couchdb-single-configuration.html#couchdb-single-configuration-files-locations">12.2. Configuration File Locations</a></span></dt><dt><span class="section"><a href="couchdb-single-configuration.html#couchdb-single-configuration-mochiweb">12.3. MochiWeb Server Options</a></span></dt><dt><span class="section"><a href="couchdb-single-configuration.html#couchdb-single-configuration-osprocess">12.4. OS Daemons</a></span></dt><dt><span class="section"><a href="couchdb-single-configuration.html#couchdb-single-configuration-update_notification">12.5. Update Notifications</a></span></dt><dt><span class="section"><a href="couchdb-single-configuration.html#couchdb-single-configuration-socketoptions">12.6. Socket Options Configuration Setting</a></span></dt><dt><span class="section"><a href="couchdb-single-configuration.html#couchdb-single-configuration-vhost">12.7. <code class="literal">vhosts</code> definitions</a></span></dt><dt><span class="section"><a href="couchdb-single-configuration.html#couchdb-single-configuration-ssl">12.8. Configuring SSL Network Sockets</a></span></dt><dt><span class="section"><a href="couchdb-single-configuration.html#couchdb-single-config-options">12.9. CouchDB Configuration Options</a></span></dt><dd><dl><dt><span class="section"><a href="couchdb-single-configuration.html#couchdb-single-config-options_attachments">12.9.1. <code class="literal">attachments</code> Configuration Options</a></span></dt><dt><span class="section"><a href="couchdb-single-configuration.html#couchdb-single-config-options_couchdb">12.9.2. <code class="literal">couchdb</code> Configuration Options</a></span></dt><dt><span class="section"><a href="couchdb-single-configuration.html#couchdb-single-config-options_daemons">12.9.3. <code class="literal">daemons</code> Configuration Options</a></span></dt><dt><span class="section"><a href="couchdb-single-configuration.html#couchdb-single-config-options_httpd_db_handlers">12.9.4. <code class="literal">httpd_db_handlers</code> Configuration Options</a></span></dt><dt><span class="section"><a href="couchdb-single-configuration.html#couchdb-single-config-options_couch_httpd_auth">12.9.5. <code class="literal">couch_httpd_auth</code> Configuration Options</a></span></dt><dt><span class="section"><a href="couchdb-single-configuration.html#couchdb-single-config-options_httpd">12.9.6. <code class="literal">httpd</code> Configuration Options</a></span></dt><dt><span class="section"><a href="couchdb-single-configuration.html#couchdb-single-config-options_httpd_design_handlers">12.9.7. <code class="literal">httpd_design_handlers</code> Configuration Options</a></span></dt><dt><span class="section"><a href="couchdb-single-configuration.html#couchdb-single-config-options_httpd_global_handlers">12.9.8. <code class="literal">httpd_global_handlers</code> Configuration Options</a></span></dt><dt><span class="section"><a href="couchdb-single-configuration.html#couchdb-single-config-options_log">12.9.9. <code class="literal">log</code> Configuration Options</a></span></dt><dt><span class="section"><a href="couchdb-single-configuration.html#couchdb-single-config-options_query_servers">12.9.10. <code class="literal">query_servers</code> Configuration Options</a></span></dt><dt><span class="section"><a href="couchdb-single-configuration.html#couchdb-single-config-options_query_server_config">12.9.11. <code class="literal">query_server_config</code> Configuration Options</a></span></dt><dt><span class="section"><a href="couchdb-single-configuration.html#couchdb-single-config-options_replicator">12.9.12. <code class="literal">replicator</code> Configuration Options</a></span></dt><dt><span class="section"><a href="couchdb-single-configuration.html#couchdb-single-config-options_stats">12.9.13. <code class="literal">stats</code> Configuration Options</a></span></dt><dt><span class="section"><a href="couchdb-single-configuration.html#couchdb-single-config-options_uuids">12.9.14. <code class="literal">uuids</code> Configuration Options</a></span></dt></dl></dd></dl></div><p>
+    &nbsp;
+  </p><div class="section" title="12.1.&nbsp;CouchDB Configuration Files"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-single-configuration-files"></a>12.1.&nbsp;CouchDB Configuration Files</h2></div></div></div><p>
+      &nbsp;
+    </p></div><div class="section" title="12.2.&nbsp;Configuration File Locations"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-single-configuration-files-locations"></a>12.2.&nbsp;Configuration File Locations</h2></div></div></div><p>
+      CouchDB reads files from the following locations, in the following
+      order.
+    </p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>
+          <code class="filename">PREFIX/default.ini</code>
+        </p></li><li class="listitem"><p>
+          <code class="filename">PREFIX/default.d/*</code>
+        </p></li><li class="listitem"><p>
+          <code class="filename">PREFIX/local.ini</code>
+        </p></li><li class="listitem"><p>
+          <code class="filename">PREFIX/local.d/*</code>
+        </p></li></ol></div><p>
+      Settings in successive documents override the settings in earlier
+      entries. For example, setting the <code class="literal">bind_address</code>
+      parameter in <code class="filename">local.ini</code> would override any
+      setting in <code class="literal">default.ini</code>.
+    </p><div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Warning</h3><p>
+        The <code class="filename">default.ini</code> file may be overwritten
+        during an upgrade or re-installation, so localised changes
+        should be made to the <code class="filename">local.ini</code> file or
+        files within the <code class="filename">local.d</code> directory.
+      </p></div></div><div class="section" title="12.3.&nbsp;MochiWeb Server Options"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-single-configuration-mochiweb"></a>12.3.&nbsp;MochiWeb Server Options</h2></div></div></div><p>
+      Server options for the MochiWeb component of CouchDB can be added
+      to the configuration files. Settings should be added to the
+      <code class="literal">server_options</code> option of the
+      <code class="literal">[httpd]</code> section of
+      <code class="filename">local.ini</code>. For example:
+    </p><pre class="programlisting">[httpd]
+server_options = [{backlog, 128}, {acceptor_pool_size, 16}]</pre></div><div class="section" title="12.4.&nbsp;OS Daemons"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-single-configuration-osprocess"></a>12.4.&nbsp;OS Daemons</h2></div></div></div><p>
+      CouchDB now supports starting external processes. The support is
+      simple and enables CouchDB to start each configured OS daemon. If
+      the daemon stops at any point, CouchDB will restart it (with
+      protection to ensure regularly failing daemons are not repeatedly
+      restarted).
+    </p><p>
+      The daemon starting process is one-to-one; for each each
+      configured daemon in the configuration file, CouchDB will start
+      exactly one instance. If you need to run multiple instances, then
+      you must create separate individual configurations. Daemons are
+      configured within the <code class="literal">[os_daemons]</code> section of
+      your configuration file (<code class="filename">local.ini</code>). The
+      format of each configured daemon is:
+    </p><pre class="programlisting">NAME = PATH ARGS</pre><p>
+      Where <code class="literal">NAME</code> is an arbitrary (and unique) name to
+      identify the daemon; <code class="literal">PATH</code> is the full path to
+      the daemon to be executed; <code class="literal">ARGS</code> are any
+      required arguments to the daemon.
+    </p><p>
+      For example:
+    </p><pre class="programlisting">[os_daemons]
+basic_responder = /usr/local/bin/responsder.js</pre><p>
+      There is no interactivity between CouchDB and the running process,
+      but you can use the OS Daemons service to create new HTTP servers
+      and responders and then use the new proxy service to redirect
+      requests and output to the CouchDB managed service. For more
+      information on proxying, see
+      <a class="xref" href="couchdb-single-features.html#couchdb-single-features-proxying" title="2.2.&nbsp;HTTP Proxying">Section&nbsp;2.2, &ldquo;HTTP Proxying&rdquo;</a>. For
+      further background on the OS Daemon service, see
+      <a class="ulink" href="http://davispj.com/2010/09/26/new-couchdb-externals-api.html" target="_top">CouchDB
+      Externals API</a>
+    </p></div><div class="section" title="12.5.&nbsp;Update Notifications"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-single-configuration-update_notification"></a>12.5.&nbsp;Update Notifications</h2></div></div></div><p>
+      &nbsp;
+    </p></div><div class="section" title="12.6.&nbsp;Socket Options Configuration Setting"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-single-configuration-socketoptions"></a>12.6.&nbsp;Socket Options Configuration Setting</h2></div></div></div><p>
+      The socket options for the listening socket in CouchDB can now be
+      set within the CouchDB configuration file. The setting should be
+      added to the <code class="literal">[httpd]</code> section of the file using
+      the option name <code class="literal">socket_options</code>. The
+      specification is as a list of tuples. For example:
+    </p><pre class="programlisting">[httpd]
+socket_options = [{recbuf, 262144}, {sndbuf, 262144}, {nodelay, true}]</pre><p>
+      The options supported are a subset of full options supported by
+      the TCP/IP stack. A list of the supported options are provided in
+      the
+      <a class="ulink" href="http://www.erlang.org/doc/man/inet.html#setopts-2" target="_top">Erlang
+      inet</a> documentation.
+    </p></div><div class="section" title="12.7.&nbsp;vhosts definitions"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-single-configuration-vhost"></a>12.7.&nbsp;<code class="literal">vhosts</code> definitions</h2></div></div></div><p>
+      Similar to the rewrites section of a <code class="literal">_design</code>
+      document, the <code class="literal">vhosts</code> system uses variables in
+      the form of :varname or wildcards in the form of asterisks. The
+      variable results can be output into the resulting path as they are
+      in the rewriter.
+    </p></div><div class="section" title="12.8.&nbsp;Configuring SSL Network Sockets"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-single-configuration-ssl"></a>12.8.&nbsp;Configuring SSL Network Sockets</h2></div></div></div><p>
+      SSL configuration in CouchDB was designed to be as easy as
+      possible. All you need is two files; a certificate and a private
+      key. If you bought an official SSL certificate from a certificate
+      authority, both should be in your possession already.
+    </p><p>
+      If you just want to try this out and don't want to pay anything
+      upfront, you can create a self-signed certificate. Everything will
+      work the same, but clients will get a warning about an insecure
+      certificate.
+    </p><p>
+      You will need the OpenSSL command line tool installed. It probably
+      already is.
+    </p><pre class="programlisting">shell&gt; <strong class="userinput"><code>mkdir cert &amp;&amp; cd cert</code></strong>
+shell&gt; <strong class="userinput"><code>openssl genrsa &gt; privkey.pem</code></strong>
+shell&gt; <strong class="userinput"><code>openssl req -new -x509 -key privkey.pem -out mycert.pem -days 1095</code></strong>
+shell&gt; <strong class="userinput"><code>ls</code></strong>
+mycert.pem privkey.pem</pre><p>
+      Now, you need to edit CouchDB's configuration, either by editing
+      your <code class="filename">local.ini</code> file or using the
+      <code class="literal">/_config</code> API calls or the configuration screen
+      in Futon. Here is what you need to do in
+      <code class="filename">local.ini</code>, you can infer what needs doing in
+      the other places.
+    </p><p>
+      Be sure to make these edits. Under <code class="literal">[daemons]</code>
+      you should see:
+    </p><pre class="programlisting">; enable SSL support by uncommenting the following line and supply the PEM's below.
+; the default ssl port CouchDB listens on is 6984
+;httpsd = {couch_httpd, start_link, [https]}</pre><p>
+      Here uncomment the last line:
+    </p><pre class="programlisting">httpsd = {couch_httpd, start_link, [https]}</pre><p>
+      Next, under <code class="literal">[ssl]</code> you will see:
+    </p><pre class="programlisting">;cert_file = /full/path/to/server_cert.pem
+;key_file = /full/path/to/server_key.pem</pre><p>
+      Uncomment and adjust the paths so it matches your system's paths:
+    </p><pre class="programlisting">cert_file = /home/jan/cert/mycert.pem
+key_file = /home/jan/cert/privkey.pem</pre><p>
+      For more information please read
+      <a class="ulink" href="http://www.openssl.org/docs/HOWTO/certificates.txt" target="_top">http://www.openssl.org/docs/HOWTO/certificates.txt</a>.
+    </p><p>
+      Now start (or restart) CouchDB. You should be able to connect to
+      it using HTTPS on port 6984:
+    </p><pre class="programlisting">shell&gt; <strong class="userinput"><code>curl https://127.0.0.1:6984/</code></strong>
+curl: (60) SSL certificate problem, verify that the CA cert is OK. Details:
+error:14090086:SSL routines:SSL3_GET_SERVER_CERTIFICATE:certificate verify failed
+More details here: http://curl.haxx.se/docs/sslcerts.html
+
+curl performs SSL certificate verification by default, using a "bundle"
+of Certificate Authority (CA) public keys (CA certs). If the default
+bundle file isn't adequate, you can specify an alternate file
+using the --cacert option.
+If this HTTPS server uses a certificate signed by a CA represented in
+the bundle, the certificate verification probably failed due to a
+problem with the certificate (it might be expired, or the name might
+not match the domain name in the URL).
+If you'd like to turn off curl's verification of the certificate, use
+the -k (or --insecure) option.</pre><p>
+      Oh no what happened?! &mdash; Remember, clients will notify their
+      users that your certificate is self signed.
+      <span class="command"><strong>curl</strong></span> is the client in this case and it notifies
+      you. Luckily you trust yourself (don't you?) and you can specify
+      the <code class="option">-k</code> option as the message reads:
+    </p><pre class="programlisting">shell&gt; <strong class="userinput"><code>curl -k https://127.0.0.1:6984/</code></strong>
+{"couchdb":"Welcome","version":"1.1.0"}</pre></div><div class="section" title="12.9.&nbsp;CouchDB Configuration Options"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-single-config-options"></a>12.9.&nbsp;CouchDB Configuration Options</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="couchdb-single-configuration.html#couchdb-single-config-options_attachments">12.9.1. <code class="literal">attachments</code> Configuration Options</a></span></dt><dt><span class="section"><a href="couchdb-single-configuration.html#couchdb-single-config-options_couchdb">12.9.2. <code class="literal">couchdb</code> Configuration Options</a></span></dt><dt><span class="section"><a href="couchdb-single-configuration.html#couchdb-single-config-options_daemons">12.9.3. <code class="literal">daemons</code> Configuration Options</a></span></dt><dt><span class="section"><a href="couchdb-single-configuration.html#couchdb-single-config-options_httpd_db_handlers">12.9.4. <code class="literal">httpd_db_handlers</code> Configuration Options</a></span></dt><dt><span class="section"><a href="couchdb-single-configuration.html#couchdb-single-config-options_couch_httpd_auth">12.9.5. <code class="literal">couch_httpd_auth</code> Configuration Options</a></span></dt><dt><span class="section"><a href="couchdb-single-configuration.html#couchdb-single-config-options_httpd">12.9.6. <code class="literal">httpd</code> Configuration Options</a></span></dt><dt><span class="section"><a href="couchdb-single-configuration.html#couchdb-single-config-options_httpd_design_handlers">12.9.7. <code class="literal">httpd_design_handlers</code> Configuration Options</a></span></dt><dt><span class="section"><a href="couchdb-single-configuration.html#couchdb-single-config-options_httpd_global_handlers">12.9.8. <code class="literal">httpd_global_handlers</code> Configuration Options</a></span></dt><dt><span class="section"><a href="couchdb-single-configuration.html#couchdb-single-config-options_log">12.9.9. <code class="literal">log</code> Configuration Options</a></span></dt><dt><span class="section"><a href="couchdb-single-configuration.html#couchdb-single-config-options_query_servers">12.9.10. <code class="literal">query_servers</code> Configuration Options</a></span></dt><dt><span class="section"><a href="couchdb-single-configuration.html#couchdb-single-config-options_query_server_config">12.9.11. <code class="literal">query_server_config</code> Configuration Options</a></span></dt><dt><span class="section"><a href="couchdb-single-configuration.html#couchdb-single-config-options_replicator">12.9.12. <code class="literal">replicator</code> Configuration Options</a></span></dt><dt><span class="section"><a href="couchdb-single-configuration.html#couchdb-single-config-options_stats">12.9.13. <code class="literal">stats</code> Configuration Options</a></span></dt><dt><span class="section"><a href="couchdb-single-configuration.html#couchdb-single-config-options_uuids">12.9.14. <code class="literal">uuids</code> Configuration Options</a></span></dt></dl></div><p>
+    &nbsp;
+  </p><div class="table"><a name="table-couchdb-single-config-options-summary"></a><p class="title"><b>Table&nbsp;12.1.&nbsp;Configuration Groups</b></p><div class="table-contents"><table summary="Configuration Groups" border="1"><colgroup><col class="section" width="50%"><col class="desc" width="50%"></colgroup><thead><tr><th>Section</th><th>Description</th></tr></thead><tbody><tr><td><code class="literal">attachments</code></td><td>
+ Attachment options
+ </td></tr><tr><td><code class="literal">couchdb</code></td><td>
+ CouchDB specific options
+ </td></tr><tr><td><code class="literal">daemons</code></td><td>
+ Daemons and background processes
+ </td></tr><tr><td><code class="literal">httpd_db_handlers</code></td><td>
+ Database Operation handlers
+ </td></tr><tr><td><code class="literal">couch_httpd_auth</code></td><td>
+ HTTPD Authentication options
+ </td></tr><tr><td><code class="literal">httpd</code></td><td>
+ HTTPD Server options
+ </td></tr><tr><td><code class="literal">httpd_design_handlers</code></td><td>
+ Handlers for design document operations
+ </td></tr><tr><td><code class="literal">httpd_global_handlers</code></td><td>
+ Handlers for global operations
+ </td></tr><tr><td><code class="literal">log</code></td><td>
+ Logging options
+ </td></tr><tr><td><code class="literal">query_servers</code></td><td>
+ Query Server options
+ </td></tr><tr><td><code class="literal">query_server_config</code></td><td>
+ Query server options
+ </td></tr><tr><td><code class="literal">replicator</code></td><td>
+ Replicator Options
+ </td></tr><tr><td><code class="literal">ssl</code></td><td>
+ SSL (Secure Sockets Layer) Options
+ </td></tr><tr><td><code class="literal">stats</code></td><td>
+ Statistics options
+ </td></tr><tr><td><code class="literal">uuids</code></td><td>
+ UUID generation options
+ </td></tr></tbody></table></div></div><br class="table-break"><div class="section" title="12.9.1.&nbsp;attachments Configuration Options"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-single-config-options_attachments"></a>12.9.1.&nbsp;<code class="literal">attachments</code> Configuration Options</h3></div></div></div><p>
+      &nbsp;
+    </p><div class="table"><a name="table-couchdb-single-config-options-attachments-summary"></a><p class="title"><b>Table&nbsp;12.2.&nbsp;Configuration Groups</b></p><div class="table-contents"><table summary="Configuration Groups" border="1"><colgroup><col class="option" width="50%"><col class="desc" width="50%"></colgroup><thead><tr><th>Option</th><th>Description</th></tr></thead><tbody><tr><td><code class="literal">compressible_types</code></td><td>
+ compressible_types
+ </td></tr><tr><td><code class="literal">compression_level</code></td><td>
+ compression_level
+ </td></tr></tbody></table></div></div><br class="table-break"></div><div class="section" title="12.9.2.&nbsp;couchdb Configuration Options"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-single-config-options_couchdb"></a>12.9.2.&nbsp;<code class="literal">couchdb</code> Configuration Options</h3></div></div></div><p>
+      &nbsp;
+    </p><div class="table"><a name="table-couchdb-single-config-options-couchdb-summary"></a><p class="title"><b>Table&nbsp;12.3.&nbsp;Configuration Groups</b></p><div class="table-contents"><table summary="Configuration Groups" border="1"><colgroup><col class="option" width="50%"><col class="desc" width="50%"></colgroup><thead><tr><th>Option</th><th>Description</th></tr></thead><tbody><tr><td><code class="literal">database_dir</code></td><td>
+ database_dir
+ </td></tr><tr><td><code class="literal">delayed_commits</code></td><td>
+ delayed_commits
+ </td></tr><tr><td><code class="literal">max_attachment_chunk_size</code></td><td>
+ max_attachment_chunk_size
+ </td></tr><tr><td><code class="literal">max_dbs_open</code></td><td>
+ max_dbs_open
+ </td></tr><tr><td><code class="literal">max_document_size</code></td><td>
+ max_document_size
+ </td></tr><tr><td><code class="literal">os_process_timeout</code></td><td>
+ os_process_timeout
+ </td></tr><tr><td><code class="literal">uri_file</code></td><td>
+ uri_file
+ </td></tr><tr><td><code class="literal">util_driver_dir</code></td><td>
+ util_driver_dir
+ </td></tr><tr><td><code class="literal">view_index_dir</code></td><td>
+ view_index_dir
+ </td></tr></tbody></table></div></div><br class="table-break"></div><div class="section" title="12.9.3.&nbsp;daemons Configuration Options"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-single-config-options_daemons"></a>12.9.3.&nbsp;<code class="literal">daemons</code> Configuration Options</h3></div></div></div><p>
+      &nbsp;
+    </p><div class="table"><a name="table-couchdb-single-config-options-daemons-summary"></a><p class="title"><b>Table&nbsp;12.4.&nbsp;Configuration Groups</b></p><div class="table-contents"><table summary="Configuration Groups" border="1"><colgroup><col class="option" width="50%"><col class="desc" width="50%"></colgroup><thead><tr><th>Option</th><th>Description</th></tr></thead><tbody><tr><td><code class="literal">httpsd</code></td><td>
+ Enabled HTTPS service
+ </td></tr><tr><td><code class="literal">auth_cache</code></td><td>
+ auth_cache
+ </td></tr><tr><td><code class="literal">db_update_notifier</code></td><td>
+ db_update_notifier
+ </td></tr><tr><td><code class="literal">external_manager</code></td><td>
+ external_manager
+ </td></tr><tr><td><code class="literal">httpd</code></td><td>
+ httpd
+ </td></tr><tr><td><code class="literal">query_servers</code></td><td>
+ query_servers
+ </td></tr><tr><td><code class="literal">stats_aggregator</code></td><td>
+ stats_aggregator
+ </td></tr><tr><td><code class="literal">stats_collector</code></td><td>
+ stats_collector
+ </td></tr><tr><td><code class="literal">uuids</code></td><td>
+ uuids
+ </td></tr><tr><td><code class="literal">view_manager</code></td><td>
+ view_manager
+ </td></tr></tbody></table></div></div><br class="table-break"></div><div class="section" title="12.9.4.&nbsp;httpd_db_handlers Configuration Options"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-single-config-options_httpd_db_handlers"></a>12.9.4.&nbsp;<code class="literal">httpd_db_handlers</code> Configuration Options</h3></div></div></div><p>
+      &nbsp;
+    </p><div class="table"><a name="table-couchdb-single-config-options-httpd_db_handlers-summary"></a><p class="title"><b>Table&nbsp;12.5.&nbsp;Configuration Groups</b></p><div class="table-contents"><table summary="Configuration Groups" border="1"><colgroup><col class="option" width="50%"><col class="desc" width="50%"></colgroup><thead><tr><th>Option</th><th>Description</th></tr></thead><tbody><tr><td><code class="literal">_changes</code></td><td>
+ _changes
+ </td></tr><tr><td><code class="literal">_compact</code></td><td>
+ _compact
+ </td></tr><tr><td><code class="literal">_design</code></td><td>
+ _design
+ </td></tr><tr><td><code class="literal">_temp_view</code></td><td>
+ _temp_view
+ </td></tr><tr><td><code class="literal">_view_cleanup</code></td><td>
+ _view_cleanup
+ </td></tr></tbody></table></div></div><br class="table-break"></div><div class="section" title="12.9.5.&nbsp;couch_httpd_auth Configuration Options"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-single-config-options_couch_httpd_auth"></a>12.9.5.&nbsp;<code class="literal">couch_httpd_auth</code> Configuration Options</h3></div></div></div><p>
+      &nbsp;
+    </p><div class="table"><a name="table-couchdb-single-config-options-couch_httpd_auth-summary"></a><p class="title"><b>Table&nbsp;12.6.&nbsp;Configuration Groups</b></p><div class="table-contents"><table summary="Configuration Groups" border="1"><colgroup><col class="option" width="50%"><col class="desc" width="50%"></colgroup><thead><tr><th>Option</th><th>Description</th></tr></thead><tbody><tr><td><code class="literal">auth_cache_size</code></td><td>
+ auth_cache_size
+ </td></tr><tr><td><code class="literal">authentication_db</code></td><td>
+ authentication_db
+ </td></tr><tr><td><code class="literal">authentication_redirect</code></td><td>
+ authentication_redirect
+ </td></tr><tr><td><code class="literal">require_valid_user</code></td><td>
+ require_valid_user
+ </td></tr><tr><td><code class="literal">timeout</code></td><td>
+ timeout
+ </td></tr></tbody></table></div></div><br class="table-break"></div><div class="section" title="12.9.6.&nbsp;httpd Configuration Options"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-single-config-options_httpd"></a>12.9.6.&nbsp;<code class="literal">httpd</code> Configuration Options</h3></div></div></div><p>
+      &nbsp;
+    </p><div class="table"><a name="table-couchdb-single-config-options-httpd-summary"></a><p class="title"><b>Table&nbsp;12.7.&nbsp;Configuration Groups</b></p><div class="table-contents"><table summary="Configuration Groups" border="1"><colgroup><col class="option" width="50%"><col class="desc" width="50%"></colgroup><thead><tr><th>Option</th><th>Description</th></tr></thead><tbody><tr><td><code class="literal">nodelay</code></td><td>
+ Enable TCP_NODELAY
+ </td></tr><tr><td><code class="literal">allow_jsonp</code></td><td>
+ allow_jsonp
+ </td></tr><tr><td><code class="literal">authentication_handlers</code></td><td>
+ authentication_handlers
+ </td></tr><tr><td><code class="literal">bind_address</code></td><td>
+ bind_address
+ </td></tr><tr><td><code class="literal">default_handler</code></td><td>
+ default_handler
+ </td></tr><tr><td><code class="literal">max_connections</code></td><td>
+ max_connections
+ </td></tr><tr><td><code class="literal">port</code></td><td>
+ port
+ </td></tr><tr><td><code class="literal">secure_rewrites</code></td><td>
+ secure_rewrites
+ </td></tr><tr><td><code class="literal">vhost_global_handlers</code></td><td>
+ vhost_global_handlers
+ </td></tr></tbody></table></div></div><br class="table-break"></div><div class="section" title="12.9.7.&nbsp;httpd_design_handlers Configuration Options"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-single-config-options_httpd_design_handlers"></a>12.9.7.&nbsp;<code class="literal">httpd_design_handlers</code> Configuration Options</h3></div></div></div><p>
+      &nbsp;
+    </p><div class="table"><a name="table-couchdb-single-config-options-httpd_design_handlers-summary"></a><p class="title"><b>Table&nbsp;12.8.&nbsp;Configuration Groups</b></p><div class="table-contents"><table summary="Configuration Groups" border="1"><colgroup><col class="option" width="50%"><col class="desc" width="50%"></colgroup><thead><tr><th>Option</th><th>Description</th></tr></thead><tbody><tr><td><code class="literal">_info</code></td><td>
+ _info
+ </td></tr><tr><td><code class="literal">_list</code></td><td>
+ _list
+ </td></tr><tr><td><code class="literal">_rewrite</code></td><td>
+ _rewrite
+ </td></tr><tr><td><code class="literal">_show</code></td><td>
+ _show
+ </td></tr><tr><td><code class="literal">_update</code></td><td>
+ _update
+ </td></tr><tr><td><code class="literal">_view</code></td><td>
+ _view
+ </td></tr></tbody></table></div></div><br class="table-break"></div><div class="section" title="12.9.8.&nbsp;httpd_global_handlers Configuration Options"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-single-config-options_httpd_global_handlers"></a>12.9.8.&nbsp;<code class="literal">httpd_global_handlers</code> Configuration Options</h3></div></div></div><p>
+      &nbsp;
+    </p><div class="table"><a name="table-couchdb-single-config-options-httpd_global_handlers-summary"></a><p class="title"><b>Table&nbsp;12.9.&nbsp;Configuration Groups</b></p><div class="table-contents"><table summary="Configuration Groups" border="1"><colgroup><col class="option" width="50%"><col class="desc" width="50%"></colgroup><thead><tr><th>Option</th><th>Description</th></tr></thead><tbody><tr><td><code class="literal">/</code></td><td>
+ /
+ </td></tr><tr><td><code class="literal">_active_tasks</code></td><td>
+ _active_tasks
+ </td></tr><tr><td><code class="literal">_all_dbs</code></td><td>
+ _all_dbs
+ </td></tr><tr><td><code class="literal">_config</code></td><td>
+ _config
+ </td></tr><tr><td><code class="literal">_log</code></td><td>
+ _log
+ </td></tr><tr><td><code class="literal">_oauth</code></td><td>
+ _oauth
+ </td></tr><tr><td><code class="literal">_replicate</code></td><td>
+ _replicate
+ </td></tr><tr><td><code class="literal">_restart</code></td><td>
+ _restart
+ </td></tr><tr><td><code class="literal">_session</code></td><td>
+ _session
+ </td></tr><tr><td><code class="literal">_stats</code></td><td>
+ _stats
+ </td></tr><tr><td><code class="literal">_utils</code></td><td>
+ _utils
+ </td></tr><tr><td><code class="literal">_uuids</code></td><td>
+ _uuids
+ </td></tr><tr><td><code class="literal">favicon.ico</code></td><td>
+ favicon.ico
+ </td></tr></tbody></table></div></div><br class="table-break"></div><div class="section" title="12.9.9.&nbsp;log Configuration Options"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-single-config-options_log"></a>12.9.9.&nbsp;<code class="literal">log</code> Configuration Options</h3></div></div></div><p>
+      &nbsp;
+    </p><div class="table"><a name="table-couchdb-single-config-options-log-summary"></a><p class="title"><b>Table&nbsp;12.10.&nbsp;Configuration Groups</b></p><div class="table-contents"><table summary="Configuration Groups" border="1"><colgroup><col class="option" width="50%"><col class="desc" width="50%"></colgroup><thead><tr><th>Option</th><th>Description</th></tr></thead><tbody><tr><td><code class="literal">file</code></td><td>
+ file
+ </td></tr><tr><td><code class="literal">include_sasl</code></td><td>
+ include_sasl
+ </td></tr><tr><td><code class="literal">level</code></td><td>
+ level
+ </td></tr></tbody></table></div></div><br class="table-break"></div><div class="section" title="12.9.10.&nbsp;query_servers Configuration Options"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-single-config-options_query_servers"></a>12.9.10.&nbsp;<code class="literal">query_servers</code> Configuration Options</h3></div></div></div><p>
+      &nbsp;
+    </p><div class="table"><a name="table-couchdb-single-config-options-query_servers-summary"></a><p class="title"><b>Table&nbsp;12.11.&nbsp;Configuration Groups</b></p><div class="table-contents"><table summary="Configuration Groups" border="1"><colgroup><col class="option" width="50%"><col class="desc" width="50%"></colgroup><thead><tr><th>Option</th><th>Description</th></tr></thead><tbody><tr><td><code class="literal">javascript</code></td><td>
+ javascript
+ </td></tr></tbody></table></div></div><br class="table-break"></div><div class="section" title="12.9.11.&nbsp;query_server_config Configuration Options"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-single-config-options_query_server_config"></a>12.9.11.&nbsp;<code class="literal">query_server_config</code> Configuration Options</h3></div></div></div><p>
+      &nbsp;
+    </p><div class="table"><a name="table-couchdb-single-config-options-query_server_config-summary"></a><p class="title"><b>Table&nbsp;12.12.&nbsp;Configuration Groups</b></p><div class="table-contents"><table summary="Configuration Groups" border="1"><colgroup><col class="option" width="50%"><col class="desc" width="50%"></colgroup><thead><tr><th>Option</th><th>Description</th></tr></thead><tbody><tr><td><code class="literal">reduce_limit</code></td><td>
+ reduce_limit
+ </td></tr></tbody></table></div></div><br class="table-break"></div><div class="section" title="12.9.12.&nbsp;replicator Configuration Options"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-single-config-options_replicator"></a>12.9.12.&nbsp;<code class="literal">replicator</code> Configuration Options</h3></div></div></div><p>
+      &nbsp;
+    </p><div class="table"><a name="table-couchdb-single-config-options-replicator-summary"></a><p class="title"><b>Table&nbsp;12.13.&nbsp;Configuration Groups</b></p><div class="table-contents"><table summary="Configuration Groups" border="1"><colgroup><col class="option" width="50%"><col class="desc" width="50%"></colgroup><thead><tr><th>Option</th><th>Description</th></tr></thead><tbody><tr><td><code class="literal">max_http_pipeline_size</code></td><td>
+ max_http_pipeline_size
+ </td></tr><tr><td><code class="literal">max_http_sessions</code></td><td>
+ max_http_sessions
+ </td></tr></tbody></table></div></div><br class="table-break"></div><div class="section" title="12.9.13.&nbsp;stats Configuration Options"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-single-config-options_stats"></a>12.9.13.&nbsp;<code class="literal">stats</code> Configuration Options</h3></div></div></div><p>
+      &nbsp;
+    </p><div class="table"><a name="table-couchdb-single-config-options-stats-summary"></a><p class="title"><b>Table&nbsp;12.14.&nbsp;Configuration Groups</b></p><div class="table-contents"><table summary="Configuration Groups" border="1"><colgroup><col class="option" width="50%"><col class="desc" width="50%"></colgroup><thead><tr><th>Option</th><th>Description</th></tr></thead><tbody><tr><td><code class="literal">rate</code></td><td>
+ rate
+ </td></tr><tr><td><code class="literal">samples</code></td><td>
+ samples
+ </td></tr></tbody></table></div></div><br class="table-break"></div><div class="section" title="12.9.14.&nbsp;uuids Configuration Options"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-single-config-options_uuids"></a>12.9.14.&nbsp;<code class="literal">uuids</code> Configuration Options</h3></div></div></div><p>
+      &nbsp;
+    </p><div class="table"><a name="table-couchdb-single-config-options-uuids-summary"></a><p class="title"><b>Table&nbsp;12.15.&nbsp;Configuration Groups</b></p><div class="table-contents"><table summary="Configuration Groups" border="1"><colgroup><col class="option" width="50%"><col class="desc" width="50%"></colgroup><thead><tr><th>Option</th><th>Description</th></tr></thead><tbody><tr><td><code class="literal">algorithm</code></td><td>
+ algorithm
+ </td></tr></tbody></table></div></div><br class="table-break"></div></div></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-api-auth.html">Prev</a>&nbsp;</td><td align="center" width="20%">&nbsp;</td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-json.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">Chapter&nbsp;11.&nbsp;CouchDB API Server Authentication Methods&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;Appendix&nbsp;A.&nbsp;JSON Structure Reference</td></tr></table></div></body></html>

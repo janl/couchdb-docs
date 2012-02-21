@@ -1,0 +1,104 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>8.10.1.&nbsp;Multi-document Fetching</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-api-design_db-design-designdoc-view-viewname_post.html" title="8.10.&nbsp;POST /db/_design/design-doc/_view/view-name"><link rel="prev" href="couchdb-api-design_db-design-designdoc-view-viewname_post.html" title="8.10.&nbsp;POST /db/_design/design-doc/_view/view-name"><link rel="next" href="couchdb-api-design_db-design-designdoc-show-showname_get.html" title="8.11.&nbsp;POST /db/_design/design-doc/_show/show-name"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">8.10.1.&nbsp;Multi-document Fetching</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-api-design_db-design-designdoc-view-viewname_post.html">Prev</a>&nbsp;</td><th align="center" width="60%">8.10.&nbsp;<code class="literal">POST /db/_design/design-doc/_view/view-name</code></th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-design_db-design-designdoc-show-showname_get.html">Next</a></td></tr></table><hr></div><div class="section" title="8.10.1.&nbsp;Multi-document Fetching"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-api-design_db-design-designdoc-view-viewname_post-multidoc"></a>8.10.1.&nbsp;Multi-document Fetching</h3></div></div></div><p>
+        By combining the <code class="literal">POST</code> method to a given view
+        with the <code class="literal">include_docs=true</code> query argument you
+        can obtain multiple documents from a database. The result is
+        more efficient than using multiple
+        <a class="xref" href="couchdb-api-dbdoc_db-doc_get.html" title="6.2.&nbsp;GET /db/doc">Section&nbsp;6.2, &ldquo;<code class="literal">GET /db/doc</code>&rdquo;</a>
+        requests.
+      </p><p>
+        For example, sending the following request for ingredients
+        matching <span class="quote">&ldquo;<span class="quote">claret</span>&rdquo;</span> and <span class="quote">&ldquo;<span class="quote">clear apple
+        juice</span>&rdquo;</span>:
+      </p><pre class="programlisting">POST http://couchdb:5984/recipes/_design/recipes/_view/by_ingredient?include_docs=true
+Content-Type: application/json
+
+{
+   "keys" : [
+      "claret",
+      "clear apple juice"
+   ]
+}</pre><p>
+        Returns the full document for each recipe:
+      </p><pre class="programlisting">{
+   "offset" : 6324,
+   "rows" : [
+      {
+         "doc" : {
+            "_id" : "Scotchcollops",
+            "_rev" : "1-bcbdf724f8544c89697a1cbc4b9f0178",
+            "cooktime" : "8",
+            "ingredients" : [
+               {
+                  "ingredient" : "onion",
+                  "ingredtext" : "onion, peeled and chopped",
+                  "meastext" : "1"
+               },
+            ...
+            ],
+            "keywords" : [
+               "cook method.hob, oven, grill@hob",
+               "diet@wheat-free",
+               "diet@peanut-free",
+               "special collections@classic recipe",
+               "cuisine@british traditional",
+               "diet@corn-free",
+               "diet@citrus-free",
+               "special collections@very easy",
+               "diet@shellfish-free",
+               "main ingredient@meat",
+               "occasion@christmas",
+               "meal type@main",
+               "diet@egg-free",
+               "diet@gluten-free"
+            ],
+            "preptime" : "10",
+            "servings" : "4",
+            "subtitle" : "This recipe comes from an old recipe book of 1683 called 'The Gentlewoman's Kitchen'. This is an excellent way of making a rich and full-flavoured meat dish in a very short time.",
+            "title" : "Scotch collops",
+            "totaltime" : "18"
+         },
+         "id" : "Scotchcollops",
+         "key" : "claret",
+         "value" : [
+            "Scotch collops"
+         ]
+      },
+      {
+         "doc" : {
+            "_id" : "Standpie",
+            "_rev" : "1-bff6edf3ca2474a243023f2dad432a5a",
+            "cooktime" : "92",
+            "ingredients" : [
+...            ],
+            "keywords" : [
+               "diet@dairy-free",
+               "diet@peanut-free",
+               "special collections@classic recipe",
+               "cuisine@british traditional",
+               "diet@corn-free",
+               "diet@citrus-free",
+               "occasion@buffet party",
+               "diet@shellfish-free",
+               "occasion@picnic",
+               "special collections@lunchbox",
+               "main ingredient@meat",
+               "convenience@serve with salad for complete meal",
+               "meal type@main",
+               "cook method.hob, oven, grill@hob / oven",
+               "diet@cow dairy-free"
+            ],
+            "preptime" : "30",
+            "servings" : "6",
+            "subtitle" : "Serve this pie with pickled vegetables and potato salad.",
+            "title" : "Stand pie",
+            "totaltime" : "437"
+         },
+         "id" : "Standpie",
+         "key" : "clear apple juice",
+         "value" : [
+            "Stand pie"
+         ]
+      }
+   ],
+   "total_rows" : 26484
+}</pre></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-api-design_db-design-designdoc-view-viewname_post.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-api-design_db-design-designdoc-view-viewname_post.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-design_db-design-designdoc-show-showname_get.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">8.10.&nbsp;<code class="literal">POST /db/_design/design-doc/_view/view-name</code>&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;8.11.&nbsp;<code class="literal">POST /db/_design/design-doc/_show/show-name</code></td></tr></table></div></body></html>

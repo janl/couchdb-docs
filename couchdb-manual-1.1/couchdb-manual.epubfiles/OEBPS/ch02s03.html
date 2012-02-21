@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>2.3.&nbsp;CommonJS support for map functions</title>
+<link href="epub.css" type="text/css" rel="stylesheet" />
+<meta content="DocBook XSL Stylesheets V1.76.1" name="generator" />
+</head>
+<body>
+<div class="section" title="2.3.&nbsp;CommonJS support for map functions">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-single-features-commonjs" />2.3.&nbsp;CommonJS support for map functions</h1>
+</div>
+</div>
+</div>
+<p>
+      CommonJS support allows you to use CommonJS notation inside
+      <code class="methodname">map</code> and <code class="methodname">reduce</code>
+      functions, but only of libraries that are stored inside the views
+      part of the design doc.
+    </p>
+<p>
+      So you could continue to access CommonJS code in design_doc.foo,
+      from your list functions etc, but we'd add the ability to require
+      CommonJS modules within map and reduce, but only from
+      <code class="filename">design_doc.views.lib</code>.
+    </p>
+<p>
+      There's no worry here about namespace collisions, as Couch just
+      plucks <code class="literal">views.*.map</code> and
+      <code class="literal">views.*.reduce</code> out of the design doc. So you
+      could have a view called <code class="literal">lib</code> if you wanted, and
+      still have CommonJS stored in <code class="literal">views.lib.sha1</code>
+      and <code class="literal">views.lib.stemmer</code> if you wanted.
+    </p>
+<p>
+      The implementation is simplified by enforcing that CommonJS
+      modules to be used in <code class="methodname">map</code> functions be
+      stored in views.lib.
+    </p>
+<p>
+      A sample design doc (taken from the test suite in Futon) is below:
+    </p>
+<pre class="programlisting">{
+   "views" : {
+      "lib" : {
+         "baz" : "exports.baz = 'bam';",
+         "foo" : {
+            "zoom" : "exports.zoom = 'yeah';",
+            "boom" : "exports.boom = 'ok';",
+            "foo" : "exports.foo = 'bar';"
+         }
+      },
+      "commonjs" : {
+         "map" : "function(doc) { emit(null, require('views/lib/foo/boom').boom)}"
+      }
+   },
+   "_id" : "_design/test"
+}</pre>
+<p>
+      The <code class="literal">require()</code> statement is relative to the
+      design document, but anything loaded form outside of
+      <code class="literal">views/lib</code> will fail.
+    </p>
+</div>
+</body>
+</html>

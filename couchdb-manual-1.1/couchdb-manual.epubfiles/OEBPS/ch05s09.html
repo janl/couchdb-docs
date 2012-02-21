@@ -1,0 +1,669 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>5.9.&nbsp;POST /db/_bulk_docs</title>
+<link href="epub.css" type="text/css" rel="stylesheet" />
+<meta content="DocBook XSL Stylesheets V1.76.1" name="generator" />
+</head>
+<body>
+<div class="section" title="5.9.&nbsp;POST /db/_bulk_docs">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-api-db_db-bulk-docs_post" />5.9.&nbsp;<code class="literal">POST /db/_bulk_docs</code>
+</h1>
+</div>
+</div>
+</div>
+<div class="informaltable">
+<table summary="URL API POST /db/_bulk_docs" border="1">
+<colgroup>
+<col class="field" width="33%" />
+<col class="info" width="33%" />
+<col class="addinfo" width="34%" />
+</colgroup>
+<tbody>
+<tr>
+<td>
+<span class="bold">
+<strong>Method</strong>
+</span>
+</td>
+<td colspan="2">
+<code class="literal">POST /db/_bulk_docs</code>
+</td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Request</strong>
+</span>
+</td>
+<td colspan="2">
+ JSON of the docs and updates to be applied
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Response</strong>
+</span>
+</td>
+<td colspan="2">
+ JSON of updated documents
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Admin Privileges Required</strong>
+</span>
+</td>
+<td colspan="2">no</td>
+</tr>
+<tr>
+<td colspan="3">
+<span class="bold">
+<strong>Return Codes</strong>
+</span>
+</td>
+</tr>
+<tr>
+<td>201</td>
+<td colspan="2">
+ Document(s) have been created or updated
+ </td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+      The bulk document API allows you to create and update multiple
+      documents at the same time within a single request. The basic
+      operation is similar to creating or updating a single document,
+      except that you batch the document structure and information and .
+      When creating new documents the document ID is optional. For
+      updating existing documents, you must provide the document ID,
+      revision information, and new document values.
+    </p>
+<p>
+      For both inserts and updates the basic structure of the JSON is
+      the same:
+    </p>
+<div class="table">
+<a id="table-couchdb-api-db_db-bulk-docs-json" />
+<p class="title">
+<strong>Table&nbsp;5.4.&nbsp;
+ Bulk Documents
+ </strong>
+</p>
+<div class="table-contents">
+<table summary="
+ Bulk Documents
+ " border="1">
+<colgroup>
+<col class="item" width="30%" />
+<col class="desc" width="70%" />
+</colgroup>
+<tbody>
+<tr>
+<td>
+<span class="bold">
+<strong>Field</strong>
+</span>
+</td>
+<td>
+<span class="bold">
+<strong>Description</strong>
+</span>
+</td>
+</tr>
+<tr>
+<td>
+<code class="literal">all_or_nothing</code> (optional) </td>
+<td>
+ Sets the database commit mode to use all-or-nothing semantics
+ </td>
+</tr>
+<tr>
+<td>
+<code class="literal">docs</code> <code class="literal">[array]</code> </td>
+<td>
+ Bulk Documents Document
+ </td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">_id</code> (optional) </td>
+<td>
+ Document ID
+ </td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">_rev</code> (optional) </td>
+<td>
+ Revision ID (when updating an existing document)
+ </td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">_deleted</code> (optional) </td>
+<td>
+ Whether the document should be deleted
+ </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" title="5.9.1.&nbsp;Inserting Documents in Bulk">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="couchdb-api-db_db-bulk-docs_post-insert" />5.9.1.&nbsp;Inserting Documents in Bulk</h2>
+</div>
+</div>
+</div>
+<p>
+        To insert documents in bulk into a database you need to supply a
+        JSON structure with the array of documents that you want to add
+        to the database. Using this method you can either include a
+        document ID, or allow the document ID to be automatically
+        generated.
+      </p>
+<p>
+        For example, the following inserts three new documents, two with
+        the supplied document IDs, and one which will have a document ID
+        generated:
+      </p>
+<pre class="programlisting">{
+   "docs" : [
+      {
+         "_id" : "FishStew",
+         "servings" : 4,
+         "subtitle" : "Delicious with fresh bread",
+         "title" : "Fish Stew"
+      },
+      {
+         "_id" : "LambStew",
+         "servings" : 6,
+         "subtitle" : "Delicious with scone topping",
+         "title" : "Lamb Stew"
+      },
+      {
+         "servings" : 8,
+         "subtitle" : "Delicious with suet dumplings",
+         "title" : "Beef Stew"
+      },
+   ]
+}</pre>
+<p>
+        The return type from a bulk insertion will be 201, with the
+        content of the returned structure indicating specific success or
+        otherwise messages on a per-document basis.
+      </p>
+<p>
+        The return structure from the example above contains a list of
+        the documents created, here with the combination and their
+        revision IDs:
+      </p>
+<pre class="programlisting">POST http://couchdb:5984/recipes/_bulk_docs
+Content-Type: application/json
+
+[
+   {
+      "id" : "FishStew",
+      "rev" : "1-9c65296036141e575d32ba9c034dd3ee",
+   },
+   {
+      "id" : "LambStew",
+      "rev" : "1-34c318924a8f327223eed702ddfdc66d",
+   },
+   {
+      "id" : "7f7638c86173eb440b8890839ff35433",
+      "rev" : "1-857c7cbeb6c8dd1dd34a0c73e8da3c44",
+   }
+]</pre>
+<p>
+        The content and structure of the returned JSON will depend on
+        the transaction semantics being used for the bulk update; see
+        <a class="xref" href="ch05s09.html#couchdb-api-db_db-bulk-docs_post-commit" title="5.9.3.&nbsp;Bulk Documents Transaction Semantics">Section&nbsp;5.9.3, &ldquo;Bulk Documents Transaction Semantics&rdquo;</a>
+        for more information. Conflicts and validation errors when
+        updating documents in bulk must be handled separately; see
+        <a class="xref" href="ch05s09.html#couchdb-api-db_db-bulk-docs_post-errors" title="5.9.4.&nbsp;Bulk Document Validation and Conflict Errors">Section&nbsp;5.9.4, &ldquo;Bulk Document Validation and Conflict Errors&rdquo;</a>.
+      </p>
+</div>
+<div class="section" title="5.9.2.&nbsp;Updating Documents in Bulk">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="couchdb-api-db_db-bulk-docs_post-update" />5.9.2.&nbsp;Updating Documents in Bulk</h2>
+</div>
+</div>
+</div>
+<p>
+        The bulk document update procedure is similar to the insertion
+        procedure, except that you must specify the document ID and
+        current revision for every document in the bulk update JSON
+        string.
+      </p>
+<p>
+        For example, you could send the following request:
+      </p>
+<pre class="programlisting">POST http://couchdb:5984/recipes/_bulk_docs
+Content-Type: application/json
+
+{
+   "docs" : [
+      {
+         "_id" : "FishStew",
+         "_rev" : "1-9c65296036141e575d32ba9c034dd3ee",
+         "servings" : 4,
+         "subtitle" : "Delicious with freshly baked bread",
+         "title" : "Fish Stew"
+      },
+      {
+         "_id" : "LambStew",
+         "_rev" : "1-34c318924a8f327223eed702ddfdc66d",
+         "servings" : 6,
+         "subtitle" : "Serve with a wholemeal scone topping",
+         "title" : "Lamb Stew"
+      },
+      {
+         "_id" : "7f7638c86173eb440b8890839ff35433"
+         "_rev" : "1-857c7cbeb6c8dd1dd34a0c73e8da3c44",
+         "servings" : 8,
+         "subtitle" : "Hand-made dumplings make a great accompaniment",
+         "title" : "Beef Stew"
+      }
+   ]
+}</pre>
+<p>
+        The return structure is the JSON of the updated documents, with
+        the new revision and ID information:
+      </p>
+<pre class="programlisting">[
+   {
+      "id" : "FishStew",
+      "rev" : "2-e7af4c4e9981d960ecf78605d79b06d1"
+   },
+   {
+      "id" : "LambStew",
+      "rev" : "2-0786321986194c92dd3b57dfbfc741ce"
+   },
+   {
+      "id" : "7f7638c86173eb440b8890839ff35433",
+      "rev" : "2-bdd3bf3563bee516b96885a66c743f8e"
+   }
+]</pre>
+<p>
+        You can optionally delete documents during a bulk update by
+        adding the <code class="literal">_deleted</code> field with a value of
+        <code class="literal">true</code> to each docment ID/revision combination
+        within the submitted JSON structure.
+      </p>
+<p>
+        The return type from a bulk insertion will be 201, with the
+        content of the returned structure indicating specific success or
+        otherwise messages on a per-document basis.
+      </p>
+<p>
+        The content and structure of the returned JSON will depend on
+        the transaction semantics being used for the bulk update; see
+        <a class="xref" href="ch05s09.html#couchdb-api-db_db-bulk-docs_post-commit" title="5.9.3.&nbsp;Bulk Documents Transaction Semantics">Section&nbsp;5.9.3, &ldquo;Bulk Documents Transaction Semantics&rdquo;</a>
+        for more information. Conflicts and validation errors when
+        updating documents in bulk must be handled separately; see
+        <a class="xref" href="ch05s09.html#couchdb-api-db_db-bulk-docs_post-errors" title="5.9.4.&nbsp;Bulk Document Validation and Conflict Errors">Section&nbsp;5.9.4, &ldquo;Bulk Document Validation and Conflict Errors&rdquo;</a>.
+      </p>
+</div>
+<div class="section" title="5.9.3.&nbsp;Bulk Documents Transaction Semantics">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="couchdb-api-db_db-bulk-docs_post-commit" />5.9.3.&nbsp;Bulk Documents Transaction Semantics</h2>
+</div>
+</div>
+</div>
+<p>
+        CouchDB supports two different modes for updating (or inserting)
+        documents using the bulk documentation system. Each mode affects
+        both the state of the documents in the event of system failure,
+        and the level of conflict checking performed on each document.
+        The two modes are:
+      </p>
+<div class="itemizedlist">
+<ul class="itemizedlist">
+<li class="listitem">
+<p>
+            <code class="literal">non-atomic</code>
+          </p>
+<p>
+            The default mode is non-atomic, that is, CouchDB will only
+            guarantee that some of the documents will be saved when you
+            send the request. The response will contain the list of
+            documents successfully inserted or updated during the
+            process. In the event of a crash, some of the documents may
+            have been successfully saved, and some will have been lost.
+          </p>
+<p>
+            In this mode, the response structure will indicate whether
+            the document was updated by supplying the new
+            <code class="literal">_rev</code> parameter indicating a new document
+            revision was created. If the update failed, then you will
+            get an <code class="literal">error</code> of type
+            <code class="literal">conflict</code>. For example:
+          </p>
+<pre class="programlisting">[
+   {
+      "id" : "FishStew",
+      "error" : "conflict",
+      "reason" : "Document update conflict."
+   },
+   {
+      "id" : "LambStew",
+      "error" : "conflict",
+      "reason" : "Document update conflict."
+   },
+   {
+      "id" : "7f7638c86173eb440b8890839ff35433",
+      "error" : "conflict",
+      "reason" : "Document update conflict."
+   }
+]</pre>
+<p>
+            In this case no new revision has been created and you will
+            need to submit the document update, with the correct
+            revision tag, to update the document.
+          </p>
+</li>
+<li class="listitem">
+<p>
+            <code class="literal">all-or-nothing</code>
+          </p>
+<p>
+            In all-or-nothing mode, either all documents are written to
+            the database, or no documents are written to the database,
+            in the event of a system failure during commit.
+          </p>
+<p>
+            In addition, the per-document conflict checking is not
+            performed. Instead a new revision of the document is
+            created, even if the new revision is in conflict with the
+            current revision in the database. The returned structure
+            contains the list of documents with new revisions:
+          </p>
+<pre class="programlisting">[
+   {
+      "id" : "FishStew",
+      "rev" : "2-e7af4c4e9981d960ecf78605d79b06d1"
+   },
+   {
+      "id" : "LambStew",
+      "rev" : "2-0786321986194c92dd3b57dfbfc741ce"
+   },
+   {
+      "id" : "7f7638c86173eb440b8890839ff35433",
+      "rev" : "2-bdd3bf3563bee516b96885a66c743f8e"
+   }
+]</pre>
+<p>
+            When updating documents using this mode the revision of a
+            document included in views will be arbitrary. You can check
+            the conflict status for a document by using the
+            <code class="literal">conflicts=true</code> query argument when
+            accessing the view. Conflicts should be handled individually
+            to ensure the consistency of your database.
+          </p>
+<p>
+            To use this mode, you must include the
+            <code class="literal">all_or_nothing</code> field (set to true) within
+            the main body of the JSON of the request.
+          </p>
+</li>
+</ul>
+</div>
+<p>
+        The effects of different database operations on the different
+        modes are summarized in the table below:
+      </p>
+<div class="table">
+<a id="table-couchdb-api-db_db-bulk-docs_post-commit" />
+<p class="title">
+<strong>Table&nbsp;5.5.&nbsp;Conflicts on Bulk Inserts</strong>
+</p>
+<div class="table-contents">
+<table summary="Conflicts on Bulk Inserts" border="1">
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr>
+<th>
+                Transaction Mode
+              </th>
+<th>
+                Transaction
+              </th>
+<th>
+                Cause
+              </th>
+<th>
+                Resolution
+              </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+                Non-atomic
+              </td>
+<td>
+                Insert
+              </td>
+<td>
+                Requested document ID already exists
+              </td>
+<td>
+                Resubmit with different document ID, or update the
+                existing document
+              </td>
+</tr>
+<tr>
+<td>
+                Non-atomic
+              </td>
+<td>
+                Update
+              </td>
+<td>
+                Revision missing or incorrect
+              </td>
+<td>
+                Resubmit with correct revision
+              </td>
+</tr>
+<tr>
+<td>
+                All-or-nothing
+              </td>
+<td>
+                Insert
+              </td>
+<td>
+                Additional revision inserted
+              </td>
+<td>
+                Resolve conflicted revisions
+              </td>
+</tr>
+<tr>
+<td>
+                All-or-nothing
+              </td>
+<td>
+                Update
+              </td>
+<td>
+                Additional revision inserted
+              </td>
+<td>
+                Resolve conflicted revisions
+              </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>
+        Replication of documents is independent of the type of insert or
+        update. The documents and revisions created during a bulk insert
+        or update are replicated in the same way as any other document.
+        This can mean that if you make use of the all-or-nothing mode
+        the exact list of documents, revisions (and their conflict
+        state) may or may not be replicated to other databases
+        correctly.
+      </p>
+</div>
+<div class="section" title="5.9.4.&nbsp;Bulk Document Validation and Conflict Errors">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="couchdb-api-db_db-bulk-docs_post-errors" />5.9.4.&nbsp;Bulk Document Validation and Conflict Errors</h2>
+</div>
+</div>
+</div>
+<p>
+        The JSON returned by the <code class="literal">_bulk_docs</code> operation
+        consists of an array of JSON structures, one for each document
+        in the original submission. The returned JSON structure should
+        be examined to ensure that all of the documents submitted in the
+        original request were successfully added to the database.
+      </p>
+<p>
+        The exact structure of the returned information is shown in
+        <a class="xref" href="ch05s09.html#table-couchdb-api-db_db-bulk-docs-return-json" title="Table&nbsp;5.6.&nbsp; Bulk Document Response">Table&nbsp;5.6, &ldquo;
+ Bulk Document Response
+ &rdquo;</a>.
+      </p>
+<div class="table">
+<a id="table-couchdb-api-db_db-bulk-docs-return-json" />
+<p class="title">
+<strong>Table&nbsp;5.6.&nbsp;
+ Bulk Document Response
+ </strong>
+</p>
+<div class="table-contents">
+<table summary="
+ Bulk Document Response
+ " border="1">
+<colgroup>
+<col class="item" width="30%" />
+<col class="desc" width="70%" />
+</colgroup>
+<tbody>
+<tr>
+<td>
+<span class="bold">
+<strong>Field</strong>
+</span>
+</td>
+<td>
+<span class="bold">
+<strong>Description</strong>
+</span>
+</td>
+</tr>
+<tr>
+<td>
+<code class="literal">docs</code> <code class="literal">[array]</code> </td>
+<td>
+ Bulk Docs Returned Documents
+ </td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">error</code>  </td>
+<td>
+ Error type
+ </td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">id</code>  </td>
+<td>
+ Document ID
+ </td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">reason</code>  </td>
+<td>
+ Error string with extended reason
+ </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>
+        When a document (or document revision) is not correctly comitted
+        to the database because of an error, you should check the
+        <code class="literal">error</code> field to determine error type and
+        course of action. Errors will be one of the following type:
+      </p>
+<div class="itemizedlist">
+<ul class="itemizedlist">
+<li class="listitem">
+<p>
+            <code class="literal">conflict</code>
+          </p>
+<p>
+            The document as submitted is in conflict. If you used the
+            default bulk transaction mode then the new revision will not
+            have been created and you will need to re-submit the
+            document to the database. If you used
+            <code class="literal">all-or-nothing</code> mode then you will need to
+            manually resolve the conflicted revisions of the document.
+          </p>
+<p>
+            Conflict resolution of documents added using the bulk docs
+            interface is identical to the resolution procedures used
+            when resolving conflict errors during replication.
+          </p>
+</li>
+<li class="listitem">
+<p>
+            <code class="literal">forbidden</code>
+          </p>
+<p>
+            Entries with this error type indicate that the validation
+            routine applied to the document during submission has
+            returned an error.
+          </p>
+<p>
+            For example, if your validation routine includes the
+            following:
+          </p>
+<pre class="programlisting">throw({forbidden: 'invalid recipe ingredient'});</pre>
+<p>
+            The error returned will be:
+          </p>
+<pre class="programlisting">{
+   "id" : "7f7638c86173eb440b8890839ff35433",
+   "error" : "forbidden",
+   "reason" : "invalid recipe ingredient"
+}</pre>
+<p>
+            For more information, see
+            <a class="xref" href="">???</a>.
+          </p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</body>
+</html>

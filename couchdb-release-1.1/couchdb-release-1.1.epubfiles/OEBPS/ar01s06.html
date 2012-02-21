@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>6.&nbsp;Added CommonJS support to map functions</title>
+<link href="epub.css" type="text/css" rel="stylesheet" />
+<meta content="DocBook XSL Stylesheets V1.76.1" name="generator" />
+</head>
+<body>
+<div class="section" title="6.&nbsp;Added CommonJS support to map functions">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-release-1.1-commonjs" />6.&nbsp;Added CommonJS support to map functions</h1>
+</div>
+</div>
+</div>
+<p>
+      We didn't have CommonJS require in map functions because the
+      current CommonJS implementation is scoped to the whole design doc,
+      and giving views access to load code from anywhere in the design
+      doc would mean we'd have to blow away your view index any time you
+      changed anything. Having to rebuild views from scratch just
+      because you changed some CSS or a show function isn't fun, so we
+      avoided the issue by keeping CommonJS require out of map and
+      reduce altogether.
+    </p>
+<p>
+      The solution we came up with is to allow CommonJS inside map and
+      reduce funs, but only of libraries that are stored inside the
+      views part of the design doc.
+    </p>
+<p>
+      So you could continue to access CommonJS code in design_doc.foo,
+      from your list functions etc, but we'd add the ability to require
+      CommonJS modules within map and reduce, but only from
+      design_doc.views.lib
+    </p>
+<p>
+      There's no worry here about namespace collisions, as Couch just
+      plucks <code class="literal">views.*.map</code> and
+      <code class="literal">views.*.reduce</code> out of the design doc. So you
+      could have a view called <code class="literal">lib</code> if you wanted, and
+      still have CommonJS stored in <code class="literal">views.lib.sha1</code>
+      and <code class="literal">views.lib.stemmer</code> if you wanted.
+    </p>
+<p>
+      We simplified the implementation by enforcing that CommonJS
+      modules to be used in map functions be stored in views.lib.
+    </p>
+<p>
+      A sample design doc (taken from the test suite in Futon) is below:
+    </p>
+<pre class="programlisting">{
+   "views" : {
+      "lib" : {
+         "baz" : "exports.baz = 'bam';",
+         "foo" : {
+            "zoom" : "exports.zoom = 'yeah';",
+            "boom" : "exports.boom = 'ok';",
+            "foo" : "exports.foo = 'bar';"
+         }
+      },
+      "commonjs" : {
+         "map" : "function(doc) { emit(null, require('views/lib/foo/boom').boom)}"
+      }
+   },
+   "_id" : "_design/test"
+}</pre>
+<p>
+      The <code class="literal">require()</code> statement is relative to the
+      design document, but anything loaded form outside of
+      <code class="literal">views/lib</code> will fail.
+    </p>
+</div>
+</body>
+</html>

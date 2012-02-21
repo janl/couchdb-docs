@@ -1,0 +1,32 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>6.1.1.&nbsp;Specifying the Document ID</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-api-dbdoc_db_post.html" title="6.1.&nbsp;POST /db"><link rel="prev" href="couchdb-api-dbdoc_db_post.html" title="6.1.&nbsp;POST /db"><link rel="next" href="couchdb-api-dbdoc_db_batchmode.html" title="6.1.2.&nbsp;Batch Mode Writes"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">6.1.1.&nbsp;Specifying the Document ID</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-api-dbdoc_db_post.html">Prev</a>&nbsp;</td><th align="center" width="60%">6.1.&nbsp;<code class="literal">POST /db</code></th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-dbdoc_db_batchmode.html">Next</a></td></tr></table><hr></div><div class="section" title="6.1.1.&nbsp;Specifying the Document ID"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-api-dbdoc_db_post-docid"></a>6.1.1.&nbsp;Specifying the Document ID</h3></div></div></div><p>
+        The document ID can be specified by including the
+        <code class="literal">_id</code> field in the JSON of the submitted
+        record. The following request will create the same document with
+        the ID <code class="literal">FishStew</code>:
+      </p><pre class="programlisting">POST http://couchdb:5984/recipes/
+Content-Type: application/json
+
+{
+   "_id" : "FishStew",
+   "servings" : 4,
+   "subtitle" : "Delicious with fresh bread",
+   "title" : "Fish Stew"
+}</pre><p>
+        The structure of the submitted document is as shown in the table
+        below:
+      </p><div class="table"><a name="table-couchdb-api-json-document"></a><p class="title"><b>Table&nbsp;6.2.&nbsp;
+ CouchDB Document
+ </b></p><div class="table-contents"><table summary="
+ CouchDB Document
+ " border="1"><colgroup><col class="item" width="30%"><col class="desc" width="70%"></colgroup><tbody><tr><td><span class="bold"><strong>Field</strong></span></td><td><span class="bold"><strong>Description</strong></span></td></tr><tr><td><code class="literal">_id</code> (optional) </td><td>
+ Document ID
+ </td></tr><tr><td><code class="literal">_rev</code> (optional) </td><td>
+ Revision ID (when updating an existing document)
+ </td></tr></tbody></table></div></div><br class="table-break"><p>
+        In either case, the returned JSON will specify the document ID,
+        revision ID, and status message:
+      </p><pre class="programlisting">{
+   "id" : "FishStew",
+   "ok" : true,
+   "rev" : "1-9c65296036141e575d32ba9c034dd3ee"
+}</pre></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-api-dbdoc_db_post.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-api-dbdoc_db_post.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-dbdoc_db_batchmode.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">6.1.&nbsp;<code class="literal">POST /db</code>&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;6.1.2.&nbsp;Batch Mode Writes</td></tr></table></div></body></html>

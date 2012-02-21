@@ -1,0 +1,57 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>3.1.7.&nbsp;Delegations</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-single-replication-replicatordb.html" title="3.1.&nbsp;Replicator Database"><link rel="prev" href="couchdb-single-replication-replicatordb-replicating.html" title="3.1.6.&nbsp;Replicating the replicator database"><link rel="next" href="couchdb-api-basics.html" title="Chapter&nbsp;4.&nbsp;CouchDB API"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">3.1.7.&nbsp;Delegations</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-single-replication-replicatordb-replicating.html">Prev</a>&nbsp;</td><th align="center" width="60%">3.1.&nbsp;Replicator Database</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-basics.html">Next</a></td></tr></table><hr></div><div class="section" title="3.1.7.&nbsp;Delegations"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-single-replication-replicatordb-delegations"></a>3.1.7.&nbsp;Delegations</h3></div></div></div><p>
+        Replication documents can have a custom
+        <code class="literal">user_ctx</code> property. This property defines the
+        user context under which a replication runs. For the old way of
+        triggering replications (POSTing to
+        <code class="literal">/_replicate/</code>), this property was not needed
+        (it didn't exist in fact) - this is because at the moment of
+        triggering the replication it has information about the
+        authenticated user. With the replicator database, since it's a
+        regular database, the information about the authenticated user
+        is only present at the moment the replication document is
+        written to the database - the replicator database implementation
+        is like a _changes feed consumer (with
+        <code class="literal">?include_docs=true</code>) that reacts to what was
+        written to the replicator database - in fact this feature could
+        be implemented with an external script/program. This
+        implementation detail implies that for non admin users, a
+        <code class="literal">user_ctx</code> property, containing the user's name
+        and a subset of his/her roles, must be defined in the
+        replication document. This is ensured by the document update
+        validation function present in the default design document of
+        the replicator database. This validation function also ensure
+        that a non admin user can set a user name property in the
+        <code class="literal">user_ctx</code> property that doesn't match his/her
+        own name (same principle applies for the roles).
+      </p><p>
+        For admins, the <code class="literal">user_ctx</code> property is
+        optional, and if it's missing it defaults to a user context with
+        name null and an empty list of roles - this mean design
+        documents will not be written to local targets. If writing
+        design documents to local targets is desired, the a user context
+        with the roles <code class="literal">_admin</code> must be set explicitly.
+      </p><p>
+        Also, for admins the <code class="literal">user_ctx</code> property can be
+        used to trigger a replication on behalf of another user. This is
+        the user context that will be passed to local target database
+        document validation functions.
+      </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+          The <code class="literal">user_ctx</code> property only has effect for
+          local endpoints.
+        </p></div><p>
+        Example delegated replication document:
+      </p><pre class="programlisting">{
+     "_id": "my_rep",
+     "source":  "http://bserver.com:5984/foo",
+     "target":  "bar",
+     "continuous":  true,
+     "user_ctx": {
+          "name": "joe",
+          "roles": ["erlanger", "researcher"]
+     }
+}</pre><p>
+        As stated before, for admins the user_ctx property is optional,
+        while for regular (non admin) users it's mandatory. When the
+        roles property of <code class="literal">user_ctx</code> is missing, it
+        defaults to the empty list <code class="literal">[ ]</code>.
+      </p></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-single-replication-replicatordb-replicating.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-single-replication-replicatordb.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-basics.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">3.1.6.&nbsp;Replicating the replicator database&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;Chapter&nbsp;4.&nbsp;CouchDB API</td></tr></table></div></body></html>

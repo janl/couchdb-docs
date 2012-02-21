@@ -1,0 +1,26 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>6.9.&nbsp;DELETE /db/doc/attachment</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-api-dbdoc.html" title="Chapter&nbsp;6.&nbsp;CouchDB API Server Document Methods"><link rel="prev" href="couchdb-api-dbdoc_db-doc-attachment_put-existing.html" title="6.8.1.&nbsp;Updating an Existing Attachment"><link rel="next" href="couchdb-api-localdb.html" title="Chapter&nbsp;7.&nbsp;CouchDB API Server Local (non-replicating) Document Methods"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">6.9.&nbsp;<code class="literal">DELETE /db/doc/attachment</code></th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-api-dbdoc_db-doc-attachment_put-existing.html">Prev</a>&nbsp;</td><th align="center" width="60%">Chapter&nbsp;6.&nbsp;CouchDB API Server Document Methods</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-localdb.html">Next</a></td></tr></table><hr></div><div class="section" title="6.9.&nbsp;DELETE /db/doc/attachment"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-api-dbdoc_db-doc-attachment_delete"></a>6.9.&nbsp;<code class="literal">DELETE /db/doc/attachment</code></h2></div></div></div><div class="informaltable"><table summary="URL API DELETE /db/doc/attachment" border="1"><colgroup><col class="field" width="33%"><col class="info" width="33%"><col class="addinfo" width="34%"></colgroup><tbody><tr><td><span class="bold"><strong>Method</strong></span></td><td colspan="2"><code class="literal">DELETE /db/doc/attachment</code></td></tr><tr><td><span class="bold"><strong>Request</strong></span></td><td colspan="2">
+ None
+ </td></tr><tr><td><span class="bold"><strong>Response</strong></span></td><td colspan="2">
+ JSON status
+ </td></tr><tr><td><span class="bold"><strong>Admin Privileges Required</strong></span></td><td colspan="2">no</td></tr><tr><td><span class="bold"><strong>Query Arguments</strong></span></td><td><span class="bold"><strong>Argument</strong></span></td><td><code class="literal">rev</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>
+ Revision of the document to be deleted
+ </td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>no</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Type</strong></span></td><td>string</td></tr><tr><td><span class="bold"><strong>HTTP Headers</strong></span></td><td><span class="bold"><strong>Header</strong></span></td><td><code class="literal">If-Match</code></td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Description</strong></span></td><td>Current revision of the document for validation</td></tr><tr><td>&nbsp;</td><td><span class="bold"><strong>Optional</strong></span></td><td>yes</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td colspan="3"><span class="bold"><strong>Return Codes</strong></span></td></tr><tr><td>200</td><td colspan="2">
+ Attachment deleted successfully
+ </td></tr><tr><td>409</td><td colspan="2">
+ Supplied revision is incorrect or missing
+ </td></tr></tbody></table></div><p>
+      Deletes the attachment <code class="literal">attachment</code> to the
+      specified <code class="literal">doc</code>. You must supply the
+      <code class="literal">rev</code> argument with the current revision to
+      delete the attachment.
+    </p><p>
+      For example to delete the attachment <code class="literal">basic</code> from
+      the recipe <code class="literal">FishStew</code>:
+    </p><pre class="programlisting">DELETE http://couchdb:5984/recipes/FishStew/basic?rev=9-247bb19a41bfd9bfdaf5ee6e2e05be74
+Content-Type: application/json</pre><p>
+      The returned JSON contains the updated revision information:
+    </p><pre class="programlisting">{
+   "id" : "FishStew",
+   "ok" : true,
+   "rev" : "10-561bf6b1e27615cee83d1f48fa65dd3e"
+}</pre></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-api-dbdoc_db-doc-attachment_put-existing.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-api-dbdoc.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-localdb.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">6.8.1.&nbsp;Updating an Existing Attachment&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;Chapter&nbsp;7.&nbsp;CouchDB API Server Local (non-replicating) Document Methods</td></tr></table></div></body></html>

@@ -1,0 +1,45 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>6.1.3.&nbsp;Including Attachments</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-api-dbdoc_db_post.html" title="6.1.&nbsp;POST /db"><link rel="prev" href="couchdb-api-dbdoc_db_batchmode.html" title="6.1.2.&nbsp;Batch Mode Writes"><link rel="next" href="couchdb-api-dbdoc_db-doc_get.html" title="6.2.&nbsp;GET /db/doc"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">6.1.3.&nbsp;Including Attachments</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-api-dbdoc_db_batchmode.html">Prev</a>&nbsp;</td><th align="center" width="60%">6.1.&nbsp;<code class="literal">POST /db</code></th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-dbdoc_db-doc_get.html">Next</a></td></tr></table><hr></div><div class="section" title="6.1.3.&nbsp;Including Attachments"><div class="titlepage"><div><div><h3 class="title"><a name="couchdb-api-dbdoc_db-doc-attachments"></a>6.1.3.&nbsp;Including Attachments</h3></div></div></div><p>
+        You can include one or more attachments with a given document by
+        incorporating the attachment information within the JSON of the
+        document. This provides a simpler alternative to loading
+        documents with attachments than making a separate call (see
+        <a class="xref" href="couchdb-api-dbdoc_db-doc-attachment_put.html" title="6.8.&nbsp;PUT /db/doc/attachment">Section&nbsp;6.8, &ldquo;<code class="literal">PUT /db/doc/attachment</code>&rdquo;</a>).
+      </p><div class="table"><a name="table-couchdb-api-dbdoc-documentattachments"></a><p class="title"><b>Table&nbsp;6.3.&nbsp;
+ Document with Attachments
+ </b></p><div class="table-contents"><table summary="
+ Document with Attachments
+ " border="1"><colgroup><col class="item" width="30%"><col class="desc" width="70%"></colgroup><tbody><tr><td><span class="bold"><strong>Field</strong></span></td><td><span class="bold"><strong>Description</strong></span></td></tr><tr><td><code class="literal">_id</code> (optional) </td><td>
+ Document ID
+ </td></tr><tr><td><code class="literal">_rev</code> (optional) </td><td>
+ Revision ID (when updating an existing document)
+ </td></tr><tr><td><code class="literal">_attachments</code> (optional) </td><td>
+ Document Attachment
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">filename</code>  </td><td>
+ Attachment information
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">content_type</code>  </td><td>
+ MIME Content type string
+ </td></tr><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="literal">data</code>  </td><td>
+ File attachment content, Base64 encoded
+ </td></tr></tbody></table></div></div><br class="table-break"><p>
+        The <code class="literal">filename</code> will be the attachment name. For
+        example, when sending the JSON structure below:
+      </p><pre class="programlisting">{
+   "_id" : "FishStew",
+   "servings" : 4,
+   "subtitle" : "Delicious with fresh bread",
+   "title" : "Fish Stew"
+   "_attachments" : {
+      "styling.css" : {
+         "content-type" : "text/css",
+         "data" : "cCB7IGZvbnQtc2l6ZTogMTJwdDsgfQo=",
+         },
+   },
+}</pre><p>
+        The attachment <code class="literal">styling.css</code> can be accessed
+        using <code class="literal">/recipes/FishStew/styling.css</code>. For more
+        information on attachments, see
+        <a class="xref" href="couchdb-api-dbdoc_db-doc-attachment_get.html" title="6.7.&nbsp;GET /db/doc/attachment">Section&nbsp;6.7, &ldquo;<code class="literal">GET /db/doc/attachment</code>&rdquo;</a>.
+      </p><p>
+        The document data embedded in to the structure must be encoded
+        using base64.
+      </p></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-api-dbdoc_db_batchmode.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-api-dbdoc_db_post.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-dbdoc_db-doc_get.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">6.1.2.&nbsp;Batch Mode Writes&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;6.2.&nbsp;<code class="literal">GET /db/doc</code></td></tr></table></div></body></html>

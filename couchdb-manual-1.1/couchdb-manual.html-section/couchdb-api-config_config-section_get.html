@@ -1,0 +1,22 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>10.2.&nbsp;GET /_config/section</title><link href="html.css" type="text/css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.76.1" name="generator"><link rel="home" href="index.html" title="CouchDB 1.1 Manual"><link rel="up" href="couchdb-api-config.html" title="Chapter&nbsp;10.&nbsp;CouchDB API Server Configuration Methods"><link rel="prev" href="couchdb-api-config_config_get.html" title="10.1.&nbsp;GET /_config"><link rel="next" href="couchdb-api-config_config-section-key_get.html" title="10.3.&nbsp;GET /_config/section/key"><meta name="date" content="2012-02-21T20:12:59+00:00"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">10.2.&nbsp;<code class="literal">GET /_config/section</code></th></tr><tr><td align="left" width="20%"><a accesskey="p" href="couchdb-api-config_config_get.html">Prev</a>&nbsp;</td><th align="center" width="60%">Chapter&nbsp;10.&nbsp;CouchDB API Server Configuration Methods</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="couchdb-api-config_config-section-key_get.html">Next</a></td></tr></table><hr></div><div class="section" title="10.2.&nbsp;GET /_config/section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="couchdb-api-config_config-section_get"></a>10.2.&nbsp;<code class="literal">GET /_config/section</code></h2></div></div></div><div class="informaltable"><table summary="URL API GET /_config/section" border="1"><colgroup><col class="field" width="33%"><col class="info" width="33%"><col class="addinfo" width="34%"></colgroup><tbody><tr><td><span class="bold"><strong>Method</strong></span></td><td colspan="2"><code class="literal">GET /_config/section</code></td></tr><tr><td><span class="bold"><strong>Request</strong></span></td><td colspan="2">
+ None
+ </td></tr><tr><td><span class="bold"><strong>Response</strong></span></td><td colspan="2">
+ All the configuration values within a specified section
+ </td></tr><tr><td><span class="bold"><strong>Admin Privileges Required</strong></span></td><td colspan="2">no</td></tr></tbody></table></div><p>
+      Gets the configuration structure for a single section. For
+      example, to retrieve the CouchDB configuration section values:
+    </p><pre class="programlisting">GET http://couchdb:5984/_config/couchdb
+Accept: application/json</pre><p>
+      The returned JSON contains just the configuration values for this
+      section:
+    </p><pre class="programlisting">{
+   "os_process_timeout" : "5000",
+   "max_attachment_chunk_size" : "4294967296",
+   "max_document_size" : "4294967296",
+   "uri_file" : "/var/lib/couchdb/couch.uri",
+   "max_dbs_open" : "100",
+   "view_index_dir" : "/var/lib/couchdb",
+   "util_driver_dir" : "/usr/lib64/couchdb/erlang/lib/couch-1.0.1/priv/lib",
+   "database_dir" : "/var/lib/couchdb",
+   "delayed_commits" : "true"
+}</pre></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="couchdb-api-config_config_get.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="couchdb-api-config.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="couchdb-api-config_config-section-key_get.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">10.1.&nbsp;<code class="literal">GET /_config</code>&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;10.3.&nbsp;<code class="literal">GET /_config/section/key</code></td></tr></table></div></body></html>

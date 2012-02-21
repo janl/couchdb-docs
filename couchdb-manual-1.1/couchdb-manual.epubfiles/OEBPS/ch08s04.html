@@ -1,0 +1,246 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>8.4.&nbsp;COPY /db/_design/design-doc</title>
+<link href="epub.css" type="text/css" rel="stylesheet" />
+<meta content="DocBook XSL Stylesheets V1.76.1" name="generator" />
+</head>
+<body>
+<div class="section" title="8.4.&nbsp;COPY /db/_design/design-doc">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="couchdb-api-design_db-design-designdoc_copy" />8.4.&nbsp;<code class="literal">COPY /db/_design/design-doc</code>
+</h1>
+</div>
+</div>
+</div>
+<div class="informaltable">
+<table summary="URL API COPY /db/_design/design-doc" border="1">
+<colgroup>
+<col class="field" width="33%" />
+<col class="info" width="33%" />
+<col class="addinfo" width="34%" />
+</colgroup>
+<tbody>
+<tr>
+<td>
+<span class="bold">
+<strong>Method</strong>
+</span>
+</td>
+<td colspan="2">
+<code class="literal">COPY /db/_design/design-doc</code>
+</td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Request</strong>
+</span>
+</td>
+<td colspan="2">
+ None
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Response</strong>
+</span>
+</td>
+<td colspan="2">
+ JSON of the copied document and revision
+ </td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Admin Privileges Required</strong>
+</span>
+</td>
+<td colspan="2">no</td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>Query Arguments</strong>
+</span>
+</td>
+<td>
+<span class="bold">
+<strong>Argument</strong>
+</span>
+</td>
+<td>
+<code class="literal">rev</code>
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Description</strong>
+</span>
+</td>
+<td>
+ Revision to copy from
+ </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Optional</strong>
+</span>
+</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Type</strong>
+</span>
+</td>
+<td>string</td>
+</tr>
+<tr>
+<td>
+<span class="bold">
+<strong>HTTP Headers</strong>
+</span>
+</td>
+<td>
+<span class="bold">
+<strong>Header</strong>
+</span>
+</td>
+<td>
+<code class="literal">Destination</code>
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Description</strong>
+</span>
+</td>
+<td>Destination document (and optional revision)</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<span class="bold">
+<strong>Optional</strong>
+</span>
+</td>
+<td>no</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+      The <code class="literal">COPY</code> command (non-standard HTTP) copies an
+      existing design document to a new or existing document.
+    </p>
+<p>
+      The source design document is specified on the request line, with
+      the <code class="literal">Destination</code> HTTP Header of the request
+      specifying the target document.
+    </p>
+<div class="section" title="8.4.1.&nbsp;Copying a Design Document">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="couchdb-api-design_db-design-designdoc_copy-simple" />8.4.1.&nbsp;Copying a Design Document</h2>
+</div>
+</div>
+</div>
+<p>
+        To copy the latest version of a design document to a new
+        document you specify the base document and target document:
+      </p>
+<pre class="programlisting">COPY http://couchdb:5984/recipes/_design/recipes
+Content-Type: application/json
+Destination: /recipes/_design/recipelist</pre>
+<p>
+        The above request copies the design document
+        <code class="literal">recipes</code> to the new design document
+        <code class="literal">recipelist</code>. The response is the ID and
+        revision of the new document.
+      </p>
+<pre class="programlisting">{
+   "id" : "recipes/_design/recipelist"
+   "rev" : "1-9c65296036141e575d32ba9c034dd3ee",
+}</pre>
+<div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Note</h3>
+<p>
+          Copying a design document does automatically reconstruct the
+          view indexes. These will be recreated, as with other views,
+          the first time the new view is accessed.
+        </p>
+</div>
+</div>
+<div class="section" title="8.4.2.&nbsp;Copying from a Specific Revision">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="couchdb-api-design_db-design-designdoc_copy-specrev" />8.4.2.&nbsp;Copying from a Specific Revision</h2>
+</div>
+</div>
+</div>
+<p>
+        To copy <span class="emphasis">
+<em>from</em>
+</span> a specific version, use the
+        <code class="literal">rev</code> argument to the query string:
+      </p>
+<pre class="programlisting">COPY http://couchdb:5984/recipes/_design/recipes?rev=1-e23b9e942c19e9fb10ff1fde2e50e0f5
+Content-Type: application/json
+Destination: recipes/_design/recipelist</pre>
+<p>
+        The new design document will be created using the specified
+        revision of the source document.
+      </p>
+</div>
+<div class="section" title="8.4.3.&nbsp;Copying to an Existing Design Document">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="couchdb-api-design_db-design-designdoc_copy-existing" />8.4.3.&nbsp;Copying to an Existing Design Document</h2>
+</div>
+</div>
+</div>
+<p>
+        To copy to an existing document, you must specify the current
+        revision string for the target document, using the
+        <code class="literal">rev</code> parameter to the
+        <code class="literal">Destination</code> HTTP Header string. For example:
+      </p>
+<pre class="programlisting">COPY http://couchdb:5984/recipes/_design/recipes
+Content-Type: application/json
+Destination: recipes/_design/recipelist?rev=1-9c65296036141e575d32ba9c034dd3ee</pre>
+<p>
+        The return value will be the new revision of the copied
+        document:
+      </p>
+<pre class="programlisting">{
+   "id" : "recipes/_design/recipes"
+   "rev" : "2-55b6a1b251902a2c249b667dab1c6692",
+}</pre>
+</div>
+</div>
+</body>
+</html>
